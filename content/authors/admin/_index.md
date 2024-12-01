@@ -1,12 +1,12 @@
 ---
 # Display Name
-title: Ihab Abdelbasset Annaki, Ph.D.
+title: ihababdelbasset Annaki, Ph.D.
 
 # Name Pronunciation (optional)
-name_pronunciation: Ihab Abdelbasset Annaki
+name_pronunciation: ihabAbdelbasset Annaki
 
 # Full Name (for SEO)
-first_name: Ihab Abdelbasset
+first_name: ihababdelbasset
 last_name: Annaki
 
 # Status Emoji
