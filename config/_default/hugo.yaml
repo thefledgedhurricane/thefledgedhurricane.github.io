@@ -3,22 +3,43 @@
 # Hugo Documentation: https://gohugo.io/getting-started/configuration/#all-configuration-settings
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
+############################
+# SITE SETTINGS
+############################
+
 # Website name
-title: iannakiEducation&Research
-# Website URL
-baseURL: 'https://example.com/'
+title: "iannakiEducation&Research"
+
+# Website URL (update with your actual domain)
+baseURL: "https://example.com/"
 
 ############################
-## LANGUAGE
+# LANGUAGE
 ############################
 
-defaultContentLanguage: en
+defaultContentLanguage: "en"
 hasCJKLanguage: false
 defaultContentLanguageInSubdir: false
 removePathAccents: true
 
 ############################
-## ADVANCED
+# CONTENT & TAXONOMIES
+############################
+
+# Taxonomies for the site
+taxonomies:
+  author: "authors"
+  tag: "tags"
+  publication_type: "publication_types"
+
+# Permalinks configuration
+permalinks:
+  authors: "/author/:slug/"
+  tags: "/tags/:slug/"
+  publication_types: "/publication/:slug/"
+
+############################
+# BUILD SETTINGS
 ############################
 
 build:
@@ -27,30 +48,70 @@ enableGitInfo: false
 summaryLength: 30
 pagination:
   pagerSize: 10
-enableEmoji: true
-enableRobotsTXT: true
-footnotereturnlinkcontents: <sup>^</sup>
-ignoreFiles: [\.ipynb$, .ipynb_checkpoints$, \.Rmd$, \.Rmarkdown$, _cache$]
-permalinks:
-  authors: '/author/:slug/'
+
+# File and alias configurations
+ignoreFiles:
+  - "\\.ipynb$"
+  - "\\.ipynb_checkpoints$"
+  - "\\.Rmd$"
+  - "\\.Rmarkdown$"
+  - "_cache$"
+
 disableAliases: true
+
+############################
+# OUTPUT FORMATS
+############################
+
 outputs:
-  home: [HTML, RSS, headers, redirects, backlinks]
-  section: [HTML, RSS]
+  home: 
+    - HTML
+    - RSS
+    - headers
+    - redirects
+    - backlinks
+  section: 
+    - HTML
+    - RSS
+
+############################
+# IMAGE PROCESSING
+############################
+
 imaging:
-  resampleFilter: lanczos
+  resampleFilter: "lanczos"
   quality: 80
-  anchor: smart
-timeout: 600000
-taxonomies:
-  author: authors
-  tag: tags
-  publication_type: publication_types
+  anchor: "smart"
+
+############################
+# MARKUP SETTINGS
+############################
+
 markup:
-  _merge: deep
   highlight:
     lineNos: false
+
+############################
+# ADVANCED SETTINGS
+############################
+
+enableEmoji: true
+enableRobotsTXT: true
+footnotereturnlinkcontents: "<sup>^</sup>"
+
+# Timeout for Hugo build process (in milliseconds)
+timeout: 600000
+
+############################
+# SECURITY SETTINGS
+############################
+
 security:
-  _merge: deep
+  _merge: "deep"
+
+############################
+# SITEMAP CONFIGURATION
+############################
+
 sitemap:
-  _merge: deep
+  _merge: "deep"
