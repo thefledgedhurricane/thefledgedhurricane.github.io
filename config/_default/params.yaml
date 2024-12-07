@@ -3,58 +3,83 @@
 # Documentation: https://docs.hugoblox.com/
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
-# Appearance
-appearance:
-  mode: system
-  color: emerald
+############################
+# APPEARANCE SETTINGS
+############################
 
-# SEO
+appearance:
+  mode: system # Use the system's default theme (light/dark mode)
+  color: emerald # Use the "emerald" color scheme. You can customize it to match your branding.
+
+############################
+# SEO SETTINGS
+############################
+
 marketing:
   seo:
-    site_type: Person
+    site_type: PersonalWebsite # Changed to better match a personal academic site
     local_business_type: ''
-    org_name: ''
-    description: 'The highly-customizable Hugo Academic theme powered by Hugo Blox Builder. Easily create your personal academic website.'
-    twitter: 'GetResearchDev'
+    org_name: 'iannakiEdu&Research' # Added organization name for better branding
+    description: 'The official site of Ihababdelbasset Annaki, showcasing research, education, and academic projects.'
+    twitter: 'iannakiResearch' # Replace with your actual Twitter handle
   analytics:
-    google_analytics: ''
+    google_analytics: 'UA-XXXXX-Y' # Add your Google Analytics tracking ID
     baidu_tongji: ''
-    plausible: ''
-    fathom: ''
-    pirsch: ''
+    plausible: '' # For Plausible Analytics (optional)
+    fathom: '' # For Fathom Analytics (optional)
+    pirsch: '' # For Pirsch Analytics (optional)
   verification:
-    google: ''
-    baidu: ''
+    google: '' # Add Google Search Console verification code if applicable
+    baidu: '' # Add Baidu Search Console verification code if applicable
 
-# Site header
+############################
+# HEADER CONFIGURATION
+############################
+
 header:
   navbar:
-    enable: true
-    blox: "navbar"
-    fixed_to_top: true
-    show_search: true
-    show_theme_chooser: true
+    enable: true # Enable the navbar
+    blox: "navbar" # Use the "navbar" block from Hugo Blox
+    fixed_to_top: true # Keep the navbar fixed at the top of the page
+    show_search: true # Enable the search bar in the navbar
+    show_theme_chooser: true # Enable the theme switcher for light/dark mode
     logo:
-      text: "Your Name"
+      text: "iannakiEdu&Research" # Your site's logo text
 
-# Site footer
+############################
+# FOOTER CONFIGURATION
+############################
+
 footer:
   copyright:
-    notice: '© {year} Me. This work is licensed under {license}'
+    notice: '© {year} Ihababdelbasset Annaki. This work is licensed under {license}.' # Updated copyright to reflect your name
     license:
-      enable: true
-      allow_derivatives: false
-      share_alike: true
-      allow_commercial: false
+      enable: true # Enable licensing information in the footer
+      allow_derivatives: false # Disallow derivative works
+      share_alike: true # Require shared derivatives to have the same license
+      allow_commercial: false # Disallow commercial use of your content
 
-# Localization
+############################
+# LOCALIZATION SETTINGS
+############################
+
 locale:
-  date_format: 'Jan 2, 2006'
-  time_format: '3:04 PM'
+  date_format: '2 Jan 2006' # Updated to a common academic-friendly date format
+  time_format: '15:04' # Use 24-hour format for time
 
-# Site features
+############################
+# SITE FEATURES
+############################
+
 features:
   math:
-    enable: false
+    enable: true # Enable mathematical notation rendering (e.g., KaTeX or MathJax)
   privacy_pack:
-    enable: false
+    enable: true # Enable privacy-related features (e.g., anonymized analytics)
+
+############################
+# NOTES
+############################
+
+# Customize placeholders like "UA-XXXXX-Y" and "iannakiResearch" with actual data relevant to your site.
+# For further adjustments, you can expand blocks like "footer" or "header" as needed.
