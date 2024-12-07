@@ -9,7 +9,6 @@ tags:
 image:
   caption: 'Embed rich media such as videos and LaTeX math'
 ---
-#  Introduction à l’informatique
 
 > préparé et enseigné par Ihababdelbasset ANNAKI ( Maitre de Conférences IA et Développement Avancé)
 > 

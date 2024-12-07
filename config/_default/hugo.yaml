@@ -13,7 +13,7 @@ baseURL: "https://example.com/"
 ############################
 
 # Default language
-defaultContentLanguage: "en"
+defaultContentLanguage: "fr"
 hasCJKLanguage: false
 defaultContentLanguageInSubdir: true # Enable subdirectories for multilingual support
 
