@@ -11,7 +11,7 @@ menu:
   # English menu
   main:
     - name: Bio
-      url: /
+      url: /en/
       weight: 10
     - name: Papers
       url: /#papers
