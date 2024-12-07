@@ -28,11 +28,22 @@ abstract: In this study, We implemented a spatiotemporal clustering approach to 
   significant clusters that are associated with specific clinical groups. © 2023,
   The Author(s), under exclusive license to Springer Nature Switzerland AG.
 tags:
-- Air navigation; Deep learning; E-learning; Extraction; Feature extraction; K-means
-  clustering; Network architecture; Neural networks; Clusterings; Cognitive impairment;
-  Deep time-series clustering; Deep-learning; Features extraction; Human locomotions;
-  Multisteps; Neuropsychological assessment; Spatio-temporal clustering; Time series
-  clustering; Virtual reality
+- behavioralresearch
+- deeplearning
+- elearning
+- learningsystems
+- timeseries
+- cognitiveimpairment
+- deeptimeseriesclustering
+- humanbehaviors
+- humanbehaviourmodelling
+- humannavigation
+- navigationpatterns
+- neuropsychologicalassessment
+- temporalclustering
+- timeseriesclustering
+- virtualreality
+
 links:
 - name: URL
   url: 

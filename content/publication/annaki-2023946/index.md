@@ -33,11 +33,24 @@ abstract: In this paper, we assess human navigation in a virtual reality neurops
   distinguish between healthy and patients. © 2023, The Author(s), under exclusive
   license to Springer Nature Switzerland AG.
 tags:
-- Classification (of information); Deep learning; E-learning; Kinematics; Learning
-  systems; Multilayer neural networks; Network architecture; Topology; Characteristic
-  velocities; Clinical trial; Cognitive impairment; Deep-learning; Head velocity;
-  Kinematic characteristics; Neural network architecture; Neural-networks; Neuropsychological
-  assessment; Residual neural network; Virtual reality
+- classification
+- deeplearning
+- elearning
+- kinematics
+- learningsystems
+- multilayernetworks
+- networkarchitecture
+- topology
+- characteristicvelocities
+- clinicaltrial
+- cognitiveimpairment
+- headvelocity
+- kinematiccharacteristics
+- neuralnetworks
+- neuropsychologicalassessment
+- residualneuralnetwork
+- virtualreality
+
 links:
 - name: URL
   url: 

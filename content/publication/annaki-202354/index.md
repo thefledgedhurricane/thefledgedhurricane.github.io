@@ -29,11 +29,21 @@ abstract: In this study, We evaluated the efficiency of Multilayer perceptron fo
   more accuracy between healthy individuals and patients. © 2023, The Author(s), under
   exclusive license to Springer Nature Switzerland AG.
 tags:
-- Deep learning; E-learning; Efficiency; Multilayer neural networks; Multilayers;
-  Navigation; Network architecture; Classification tasks; Cognitive impairment; Deep-learning;
-  Multilayers perceptrons; Neural network architecture; Neuropsychological assessment;
-  Perceptron neural networks; Spatial data; Spatial navigation; Virtual-reality environment;
-  Virtual reality
+- deeplearning
+- elearning
+- efficiency
+- multilayernetworks
+- multilayers
+- navigation
+- networkarchitecture
+- classificationtasks
+- cognitiveimpairment
+- neuralnetworks
+- perceptronneural
+- spatialdata
+- spatialnavigation
+- virtualreality
+
 links:
 - name: URL
   url: 

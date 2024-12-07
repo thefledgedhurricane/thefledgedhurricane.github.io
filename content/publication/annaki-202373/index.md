@@ -28,10 +28,21 @@ abstract: In this research, we use unsupervised machine learning clustering tech
   © 2023, The Author(s), under exclusive license to Springer Nature Singapore Pte
   Ltd.
 tags:
-- E-learning; K-means clustering; Navigation; Virtual reality; Clustering techniques;
-  Cognitive impairment; Computational analysis; Human memory; Human navigation; K-means;
-  Learning clustering; Machine-learning; Neuropsychological assessment; Unsupervised
-  machine learning; Machine learning
+- elearning
+- kmeansclustering
+- navigation
+- virtualreality
+- clusteringtechniques
+- cognitiveimpairment
+- computationalanalysis
+- humanmemory
+- humannavigation
+- kmeans
+- learningclustering
+- machinelearning
+- neuropsychologicalassessment
+- unsupervisedlearning
+
 links:
 - name: URL
   url: 

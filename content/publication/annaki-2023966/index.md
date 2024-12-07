@@ -34,10 +34,22 @@ abstract: Human behavior modeling aims to extract and understand patterns of beh
   of “the Corsi block-tapping task”. © 2023, The Author(s), under exclusive license
   to Springer Nature Switzerland AG.
 tags:
-- Air navigation; Behavioral research; Deep learning; E-learning; Learning systems;
-  Time series; Cognitive impairment; Deep time-series clustering; Deep-learning; Human
-  behaviors; Human behaviour modelling; Human navigation; Navigation patterns; Neuropsychological
-  assessment; Temporal clustering; Time series clustering; Virtual reality
+- behavioralresearch
+- deeplearning
+- elearning
+- learningsystems
+- timeseries
+- cognitiveimpairment
+- deeptimeseriesclustering
+- humanbehaviors
+- humanbehaviourmodelling
+- humannavigation
+- navigationpatterns
+- neuropsychologicalassessment
+- temporalclustering
+- timeseriesclustering
+- virtualreality
+
 links:
 - name: URL
   url: 

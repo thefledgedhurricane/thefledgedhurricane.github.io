@@ -28,10 +28,22 @@ abstract: Time series data analysis is vital in numerous fields, driven by advan
   and practitioners, advancing these fields and charting paths for future exploration.
   © (2024), (Science and Information Organization). All Rights Reserved.
 tags:
-- Deep learning; Generative adversarial networks; Harmonic analysis; Learning systems;
-  Augmentation techniques; Data augmentation; Deep learning; Machine-learning; Synthetic
-  data generations; Systematic methodology; Time series data analysis; Time-series
-  analysis; Times series; Traditional approaches; Time series analysis
+- behavioralresearch
+- deeplearning
+- elearning
+- learningsystems
+- timeseries
+- cognitiveimpairment
+- deeptimeseriesclustering
+- humanbehaviors
+- humanbehaviourmodelling
+- humannavigation
+- navigationpatterns
+- neuropsychologicalassessment
+- temporalclustering
+- timeseriesclustering
+- virtualreality
+
 links:
 - name: URL
   url: 
