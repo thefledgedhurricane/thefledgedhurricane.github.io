@@ -2,23 +2,8 @@
 #   Create a section for each of your site's languages.
 #   Documentation: https://docs.hugoblox.com/reference/language/
 
-# Default language (English)
-# Reference the menus defined in menus.yaml
-menu: "menus.yaml"
-
-# Language settings
-languages:
-  en:
-    languageCode: en-us
-    contentDir: content/en
-    title: iannakiEducation&Research
-    params:
-      description: The official site of Ihababdelbasset Annaki, showcasing research, education, and academic projects.
-    menu: main # Use the main menu for English
-  fr:
-    languageCode: fr
-    contentDir: content/fr
-    title: iannakiEducation&Recherche
-    params:
-      description: Le site officiel d'Ihababdelbasset Annaki, présentant des recherches, des projets éducatifs et académiques.
-    menu: main_fr # Use the main_fr menu for French
+# Default language
+en:
+  languageCode: en-us
+  # Uncomment for multi-lingual sites, and move English content into `en` sub-folder.
+  #contentDir: content/en
