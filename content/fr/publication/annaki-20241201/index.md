@@ -4,6 +4,8 @@ authors:
 - Ihababdelbasset Annaki
 - Mohammed Rahmoune
 - Mohammed Bourhaleb
+featured: true
+
 date: '2024-01-01'
 publishDate: '2024-12-07T13:47:08.703450Z'
 publication_types:

@@ -13,7 +13,6 @@ image:
   caption: 'Schéma conceptuel des bases de données relationnelles.'
 ---
 
-# Introduction aux Bases de Données Relationnelles
 
 ## 1. Qu'est-ce qu'une Base de Données Relationnelle ?
 Une base de données relationnelle est un type de base de données qui stocke et organise les données sous forme de **tables**. Chaque table est composée de lignes (ou enregistrements) et de colonnes (ou champs).
