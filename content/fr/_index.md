@@ -1,29 +1,29 @@
 ---
-# Leave the homepage title empty to use the site title
-title: "iannakiEducation&Research"
-date: 2022-10-24
+# Laissez le titre de la page d'accueil vide pour utiliser le titre du site
+title: "iannakiÉducation&Recherche"
+date: 2024-12-07
 type: landing
 
 design:
-  # Default section spacing
+  # Espacement par défaut des sections
   spacing: "6rem"
 
 sections:
   - block: resume-biography-3
     content:
-      # Choose a user profile to display (a folder name within `content/authors/`)
+      # Choisissez un profil utilisateur à afficher (nom d'un dossier dans `content/authors/`)
       username: admin
       text: ""
-      # Show a call-to-action button under your biography? (optional)
+      # Afficher un bouton d'appel à l'action sous votre biographie ? (optionnel)
       button:
-        text: Download CV
+        text: Télécharger CV
         url: uploads/ihababdelbasset-annaki-cv.pdf
     design:
       css_class: dark
       background:
         color: black
         image:
-          # Add your image background to `assets/media/`.
+          # Ajoutez votre image d'arrière-plan dans `assets/media/`.
           filename: stacked-peaks.svg
           filters:
             brightness: 1.0
@@ -32,18 +32,18 @@ sections:
           parallax: false
   - block: markdown
     content:
-      title: '📚 My Research'
+      title: '📚 Mes Recherches'
       subtitle: ''
       text: |-
-        Welcome! I'm Ihababdelbasset Annaki, an Assistant Professor at ESEF - UMP, specializing in AI, Machine Learning, and Virtual Reality. My work focuses on neuroscience and education technologies, aiming to solve real-world problems with AI-driven solutions.
+        Bienvenue ! Je suis Ihababdelbasset Annaki, Maître de Conférences à l'ESEF - UMP, spécialisé en IA, apprentissage automatique et réalité virtuelle. Mon travail se concentre sur les neurosciences et les technologies éducatives, avec pour objectif de résoudre des problèmes concrets grâce à des solutions basées sur l'IA.
 
-        I have a passion for interdisciplinary research and collaboration. Let’s connect and explore new ideas together!
+        Je suis passionné par la recherche interdisciplinaire et la collaboration. Connectons-nous et explorons ensemble de nouvelles idées !
     design:
       columns: '1'
   - block: collection
     id: papers
     content:
-      title: Featured Publications
+      title: Publications en Vedette
       filters:
         folders:
           - publication
@@ -53,7 +53,7 @@ sections:
       columns: 2
   - block: collection
     content:
-      title: Recent Publications
+      title: Publications Récentes
       text: ""
       filters:
         folders:
@@ -64,7 +64,7 @@ sections:
   - block: collection
     id: talks
     content:
-      title: Recent & Upcoming Talks
+      title: Conférences Récentes & À Venir
       filters:
         folders:
           - event
@@ -74,14 +74,14 @@ sections:
   - block: collection
     id: news
     content:
-      title: Recent News
+      title: Actualités Récentes
       subtitle: ''
       text: ''
-      # Page type to display. E.g. post, talk, publication...
+      # Type de page à afficher. Ex. post, talk, publication...
       page_type: post
-      # Choose how many pages you would like to display (0 = all pages)
+      # Choisissez combien de pages afficher (0 = toutes les pages)
       count: 5
-      # Filter on criteria
+      # Filtres
       filters:
         author: ""
         category: ""
@@ -90,29 +90,27 @@ sections:
         exclude_future: false
         exclude_past: false
         publication_type: ""
-      # Choose how many pages you would like to offset by
+      # Décalage du nombre de pages
       offset: 0
-      # Page order: descending (desc) or ascending (asc) date.
+      # Ordre des pages : décroissant (desc) ou croissant (asc) par date.
       order: desc
     design:
-      # Choose a layout view
+      # Choisissez une disposition
       view: date-title-summary
-      # Reduce spacing
+      # Réduire l'espacement
       spacing:
         padding: [0, 0, 0, 0]
   - block: cta-card
     content:
-      title: Collaborate with Me
+      title: Collaborer avec Moi
       text: |-
-        Interested in collaborating on cutting-edge AI, neuroscience, or education technology projects? Reach out, and let's make an impact together!
-
-        Follow my journey or contact me for academic and professional opportunities.
+        Vous êtes intéressé par une collaboration sur des projets d'avant-garde en IA, neurosciences ou technologies éducatives ? Contactez-moi, et ensemble, faisons une différence !
       button:
-        text: Get in Touch
-        url: mailto:ihababdelbasset.annaki@gmail.com
+        text: Me Contacter
+        url: mailto:i.annaki@ump.ac.ma
     design:
       card:
-        # Card background color (CSS class)
+        # Couleur de fond de la carte (classe CSS)
         css_class: "bg-primary-700"
         css_style: ""
 ---
