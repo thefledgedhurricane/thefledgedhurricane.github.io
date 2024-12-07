@@ -1,4 +1,4 @@
-# Configuration of Hugo
+# Configuration of Hugo 
 # Guide: https://docs.hugoblox.com/tutorial/
 # Hugo Documentation: https://gohugo.io/getting-started/configuration/#all-configuration-settings
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
@@ -32,7 +32,7 @@ taxonomies:
   tag: "tags"
   publication_type: "publication_types"
 
-# Permalinks configuration
+# Permalinks configuration (shortened paths for tags to avoid long filenames)
 permalinks:
   authors: "/author/:slug/"
   tags: "/tags/:slug/"
@@ -57,6 +57,7 @@ ignoreFiles:
   - "\\.Rmarkdown$"
   - "_cache$"
 
+# Disable automatic alias generation to avoid unnecessary files
 disableAliases: true
 
 ############################
@@ -95,8 +96,11 @@ markup:
 # ADVANCED SETTINGS
 ############################
 
+# Enable emojis and robots.txt
 enableEmoji: true
 enableRobotsTXT: true
+
+# Footnote return link format
 footnotereturnlinkcontents: "<sup>^</sup>"
 
 # Timeout for Hugo build process (in milliseconds)
