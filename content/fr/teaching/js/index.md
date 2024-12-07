@@ -1,21 +1,23 @@
 ---
 title: Introduction à l’informatique
 summary: Introduction à l’informatique
-date: 2023-10-24
+date: 2024-12-07
 type: docs
 math: false
 tags:
   - Informatique
 image:
-  caption: 'Embed rich media such as videos and LaTeX math'
+  url: 'https://iconscout.com/illustration/computer-science-5526290'
+  caption: '"Introduction à l’informatique"'
 ---
+
 
 > préparé et enseigné par Ihababdelbasset ANNAKI ( Maitre de Conférences IA et Développement Avancé)
 > 
 
 # Histoire de l'Informatique : Des Origines Algébriques aux Innovations Modernes
 
-# Introduction
+## Introduction
 
 L'histoire de l'informatique est un voyage fascinant à travers les âges, reliant les anciennes civilisations aux technologies modernes. Ce cours explore les contributions cruciales de figures emblématiques et l'évolution des concepts mathématiques qui ont façonné notre monde numérique.
 

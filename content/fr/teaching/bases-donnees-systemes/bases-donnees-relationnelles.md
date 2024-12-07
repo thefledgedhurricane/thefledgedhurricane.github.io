@@ -1,3 +1,18 @@
+---
+title: Introduction aux Bases de Données Relationnelles
+summary: Cours sur les bases de données relationnelles pour débutants.
+date: 2024-12-07
+type: docs
+math: true
+tags:
+  - Bases de Données
+  - SQL
+  - Informatique
+image:
+  url: 'https://iconscout.com/illustration/database-system-5437168'
+  caption: 'Schéma conceptuel des bases de données relationnelles.'
+---
+
 # Introduction aux Bases de Données Relationnelles
 
 ## 1. Qu'est-ce qu'une Base de Données Relationnelle ?
