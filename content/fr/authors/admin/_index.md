@@ -2,16 +2,11 @@
 # Afficher le nom
 title: Ihababdelbasset Annaki
 
-# Prononciation du nom (facultatif)
-name_pronunciation: Ihababdelbasset Annaki
+
 
 # Nom complet (pour le SEO)
 first_name: Ihababdelbasset
 last_name: Annaki
-
-# Emoji de statut
-status:
-  icon: 🧑‍🏫
 
 # S'agit-il de l'utilisateur principal du site ?
 superuser: true
@@ -20,12 +15,12 @@ superuser: true
 highlight_name: true
 
 # Rôle/position/tagline
-role: Maître de Conférences @ESEF - UMP
+role: Maître de Conférences @ESEFO - UMP
 
 # Organisations/Affiliations à afficher dans le bloc biographique
 organizations:
-  - name: ESEF - UMP
-    url: https://www.ump.ac.ma/
+  - name: École Supérieure de l'Éducation et de la Formation (ESEF) à Oujda - Université Mohammed Premier (UMP)
+    url: http://esef.ump.ma/
 
 # Liens des réseaux sociaux
 profiles:
@@ -39,21 +34,20 @@ profiles:
 
 # Intérêts
 interests:
-  - Intelligence Artificielle
+  - Intelligence Artificielle | Machine et Deep Learning
   - Réalité Virtuelle
-  - Apprentissage Automatique
   - Neurosciences
-  - Technologies Éducatives
+  - Education | Digitalisation, didactique et pédagogie
 
 # Éducation
 education:
-  - area: Doctorat en Réalité Virtuelle, Apprentissage Automatique et Apprentissage Profond
-    institution: École Nationale des Sciences Appliquées d'Oujda (ENSAO)
+  - area: Doctorat en Sciences | Spécialité Intelligence Artificielle (ML&DL) et Réalité Virtuelle 
+    institution: Université Mohammed Premier (UMP)
     date_start: 2020-01-01
     date_end: 2024-05-15
     summary: |
       Thèse sur _l'IA et la Réalité Virtuelle dans les Applications des Neurosciences_. Focalisée sur la création d'interventions basées sur l'IA pour les troubles cognitifs et l'avancement des technologies de réalité virtuelle à des fins éducatives.
-  - area: Ingénierie en Systèmes d'Information et Décisionnels
+  - area: Ingénierie informatique |  Spécialité en Intelligence d'Affaires et Ingénierie des Données.
     institution: Institut National de Statistique et d'Économie Appliquée (INSEA)
     date_start: 2014-01-01
     date_end: 2017-07-01
@@ -67,15 +61,15 @@ education:
 # Expérience professionnelle
 work:
   - position: Maître de Conférences
-    company_name: ESEF - UMP
-    company_url: https://www.ump.ac.ma/
+    company_name: École Supérieure de l'Éducation et de la Formation (ESEF) à Oujda - Université Mohammed Premier (UMP)
+    company_url: http://esef.ump.ma/
     date_start: 2024-09-10
     date_end: ''
     summary: |
       Enseignement et recherche en Intelligence Artificielle et Développement Avancé avec des applications dans les technologies éducatives et les neurosciences.
 
-  - position: Chercheur Doctorant
-    company_name: LARSA
+  - position: Doctorant-Chercheur
+    company_name: LaRSA
     company_url: ''
     date_start: 2020-01-01
     date_end: 2024-05-15
