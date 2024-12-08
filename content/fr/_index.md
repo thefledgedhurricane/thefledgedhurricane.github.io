@@ -1,6 +1,6 @@
 ---
 # Laissez le titre de la page d'accueil vide pour utiliser le titre du site
-title: "iannakiÉducation&Recherche"
+title: "Home"
 date: 2024-12-07
 type: landing
 
@@ -13,11 +13,7 @@ sections:
     content:
       # Choisissez un profil utilisateur à afficher (nom d'un dossier dans `content/authors/`)
       username: admin
-      text: ""
-      # Afficher un bouton d'appel à l'action sous votre biographie ? (optionnel)
-      button:
-        text: Télécharger CV
-        url: uploads/ihababdelbasset-annaki-cv.pdf
+      text: ""      
     design:
       css_class: dark
       background:
@@ -35,9 +31,10 @@ sections:
       title: '📚 Mes Recherches'
       subtitle: ''
       text: |-
-        Bienvenue ! Je suis Ihababdelbasset Annaki, Maître de Conférences à l'ESEF - UMP, spécialisé en IA, apprentissage automatique et réalité virtuelle. Mon travail se concentre sur les neurosciences et les technologies éducatives, avec pour objectif de résoudre des problèmes concrets grâce à des solutions basées sur l'IA.
+        Je développe des approches basées sur l’IA, notamment l’apprentissage automatique et profond pour les séries temporelles, afin de répondre à des défis concrets dans les neurosciences et l’éducation. En explorant l'intégration des technologies avancées, mon objectif est de créer des solutions pratiques et novatrices pour améliorer les pratiques éducatives et la compréhension des mécanismes cognitifs.
 
-        Je suis passionné par la recherche interdisciplinaire et la collaboration. Connectons-nous et explorons ensemble de nouvelles idées !
+        Je suis convaincu que l’innovation naît de la collaboration entre disciplines. Si mes travaux vous interpellent, connectons-nous pour échanger et concevoir ensemble de nouvelles idées !
+
     design:
       columns: '1'
   - block: collection

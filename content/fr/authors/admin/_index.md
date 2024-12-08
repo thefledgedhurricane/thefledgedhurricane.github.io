@@ -17,11 +17,6 @@ highlight_name: true
 # Rôle/position/tagline
 role: Maître de Conférences @ESEFO - UMP
 
-# Organisations/Affiliations à afficher dans le bloc biographique
-organizations:
-  - name: École Supérieure de l'Éducation et de la Formation (ESEF) à Oujda - Université Mohammed Premier (UMP)
-    url: http://esef.ump.ma/
-
 # Liens des réseaux sociaux
 profiles:
   - icon: at-symbol
@@ -142,4 +137,6 @@ awards:
 
 ## À propos de moi
 
-Ihababdelbasset Annaki est Maître de Conférences à l'ESEF - UMP, spécialisé dans les applications de l'IA et de la Réalité Virtuelle dans les neurosciences et les technologies éducatives. Passionné par la recherche interdisciplinaire et le mentorat des futurs innovateurs en IA, Ihababdelbasset combine une expertise technique avec une vision pour des solutions d'IA impactantes.
+Ihababdelbasset Annaki, Docteur et Maître de Conférences à l’ESEF - Université Mohammed Premier, se spécialise dans l’intelligence artificielle et la réalité virtuelle. Ses recherches se concentrent sur leurs applications dans les neurosciences et les technologies éducatives. Passionné par le mentorat et la collaboration interdisciplinaire, il vise à inspirer et former les futurs innovateurs en IA tout en apportant des solutions concrètes et impactantes.
+
+
