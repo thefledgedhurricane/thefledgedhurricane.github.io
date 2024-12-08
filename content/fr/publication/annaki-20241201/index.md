@@ -8,8 +8,7 @@ featured: true
 
 date: '2024-01-01'
 publishDate: '2024-12-07T13:47:08.703450Z'
-publication_types:
-- article-journal
+publication_types:["article-journal"]
 publication: '*International Journal of Advanced Computer Science and Applications*'
 doi: 10.14569/IJACSA.2024.01501118
 abstract: Time series data analysis is vital in numerous fields, driven by advancements

@@ -11,8 +11,7 @@ authors:
 - Bernard Cohen
 date: '2023-01-01'
 publishDate: '2024-12-07T13:47:08.672687Z'
-publication_types:
-- article-journal
+publication_types:['paper-conference']
 publication: '*Lecture Notes in Networks and Systems*'
 doi: 10.1007/978-3-031-29860-8_98
 abstract: In this study, We implemented a spatiotemporal clustering approach to analyze
@@ -28,7 +27,7 @@ abstract: In this study, We implemented a spatiotemporal clustering approach to 
   significant clusters that are associated with specific clinical groups. © 2023,
   The Author(s), under exclusive license to Springer Nature Switzerland AG.
 tags:
-- behavioralresearch
+- deeptimeseriesclustering
 - deeplearning
 - elearning
 - learningsystems
