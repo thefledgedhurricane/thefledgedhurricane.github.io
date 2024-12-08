@@ -30,7 +30,7 @@ abstract: Time series data analysis is vital in numerous fields, driven by advan
   and practitioners, advancing these fields and charting paths for future exploration.
   © (2024), (Science and Information Organization). All Rights Reserved.
 tags:
-- behavioralresearch
+- timeseriesdataaugmentation
 - deeplearning
 - elearning
 - learningsystems
