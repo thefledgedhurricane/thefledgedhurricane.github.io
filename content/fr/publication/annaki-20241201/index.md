@@ -28,7 +28,7 @@ abstract: Time series data analysis is vital in numerous fields, driven by advan
   In summary, this overview illuminates data augmentation’s role in time series analysis
   within deep and machine-learning contexts. It provides valuable insights for researchers
   and practitioners, advancing these fields and charting paths for future exploration.
-  © (2024), (Science and Information Organization). All Rights Reserved.
+summary: This paper explores how data augmentation transforms time series analysis in AI, from classic methods to advanced techniques like GANs and VAEs, offering insights for tackling challenges and advancing machine learning applications.
 tags:
 - timeseriesdataaugmentation
 - deeplearning
