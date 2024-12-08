@@ -8,6 +8,7 @@ authors:
 - Alexander Castilla
 - Alain Berthoz
 - Bernard Cohen
+featured: true
 date: '2023-01-01'
 publishDate: '2024-12-07T13:47:08.672687Z'
 publication_types:
