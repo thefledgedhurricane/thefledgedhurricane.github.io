@@ -1,5 +1,5 @@
 ---
-title: Overview of Data Augmentation Techniques in Time Series Analysis
+title: 'Overview of Data Augmentation Techniques in Time Series Analysis'
 authors:
 - Ihababdelbasset Annaki
 - Mohammed Rahmoune

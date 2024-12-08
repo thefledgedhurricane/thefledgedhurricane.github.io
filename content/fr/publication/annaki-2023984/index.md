@@ -1,5 +1,5 @@
 ---
-title: Spatiotemporal Clustering of Human Locomotion Neuropsychological Assessment in Virtual Reality Using Multi-step Model
+title: 'Spatiotemporal Clustering of Human Locomotion Neuropsychological Assessment in Virtual Reality Using Multi-step Model'
 authors:
 - Ihababdelbasset Annaki
 - Mohammed Rahmoune
