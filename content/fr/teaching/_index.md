@@ -1,7 +1,7 @@
 ---
 title: Enseignement
 summary: Mes cours
-type: landing
+type: docs
 
 cascade:
   - _target:
@@ -17,10 +17,14 @@ sections:
       filters:
         folders:
           - teaching
+          - new-folder-1
+          - new-folder-2
+          - additional-folder
     design:
       view: article-grid
       columns: 2
 ---
+
 
 # Enseignement
 
