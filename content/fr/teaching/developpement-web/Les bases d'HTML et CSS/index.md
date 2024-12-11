@@ -132,8 +132,7 @@ h1 {
 
 ## 4. Exemple Complet : Une Page HTML avec CSS
 
-### HTML
-html
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -167,10 +166,11 @@ html
     </footer>
 </body>
 </html>
+```
 
 
 ### CSS (style.css)
-css
+```css
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
@@ -213,10 +213,9 @@ footer {
     padding: 10px;
     background-color: #333;
     color: #fff;
-}
+}```
 
 
----
 
 ## 5. Conclusion
 
