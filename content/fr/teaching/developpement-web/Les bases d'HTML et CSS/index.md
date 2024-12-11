@@ -1,26 +1,26 @@
 ---
-title: Introduction à ```html et CSS
-summary: les bases de ```html et CSS pour débutants.
+title: Introduction à html et CSS
+summary: les bases de html et CSS pour débutants.
 date: 2024-12-11
 type: docs
 tags:
-  - ```html
+  - html
   - CSS
   - Développement Web
 image:
-  caption: 'Introduction au développement web avec ```html et CSS.'
+  caption: 'Introduction au développement web avec html et CSS.'
 ---
 
-## 1. Qu'est-ce que ```html et CSS ?
+## 1. Qu'est-ce que html et CSS ?
 
-```html (*HyperText Markup Language*) est un langage de balisage utilisé pour structurer le contenu d'une page web.  
-CSS (*Cascading Style Sheets*) est un langage de style qui permet de mettre en forme et de styliser les éléments ```html.
+html (*HyperText Markup Language*) est un langage de balisage utilisé pour structurer le contenu d'une page web.  
+CSS (*Cascading Style Sheets*) est un langage de style qui permet de mettre en forme et de styliser les éléments html.
 
 ### Exemple d'une page web simple :
 
-```html
-<!DOCTYPE ```html>
-<```html lang="fr">
+html
+<!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,21 +39,21 @@ CSS (*Cascading Style Sheets*) est un langage de style qui permet de mettre en f
     <h1>Bienvenue sur ma première page web !</h1>
     <p>Ceci est un paragraphe stylé avec CSS.</p>
 </body>
-</```html>
+</html>
 
 ---
 
-## 2. Concepts Clés de ```html
+## 2. Concepts Clés de html
 
-### a. **Structure d'une page ```html**
-Une page ```html est structurée avec des **éléments** qui commencent et se terminent par des balises. Exemple :
-```html
+### a. **Structure d'une page html**
+Une page html est structurée avec des **éléments** qui commencent et se terminent par des balises. Exemple :
+html
 <p>Ceci est un paragraphe.</p>
 
 
-### b. **Éléments ```html de Base**
-- `<!DOCTYPE ```html>` : Indique au navigateur qu'il s'agit d'une page ```html5.
-- `<```html>` : Racine du document ```html.
+### b. **Éléments html de Base**
+- `<!DOCTYPE html>` : Indique au navigateur qu'il s'agit d'une page html5.
+- `<html>` : Racine du document html.
 - `<head>` : Contient des informations sur le document (métadonnées, styles).
 - `<body>` : Contient le contenu visible de la page.
 
@@ -65,7 +65,7 @@ Une page ```html est structurée avec des **éléments** qui commencent et se te
 - **Listes** : `<ul>` pour les listes non ordonnées, `<ol>` pour les listes ordonnées.
 
 ### Exemple :
-```html
+html
 <h1>Bonjour !</h1>
 <p>Ceci est un exemple de paragraphe.</p>
 <a href="https://example.com">Visitez notre site</a>
@@ -79,7 +79,7 @@ Une page ```html est structurée avec des **éléments** qui commencent et se te
 ### a. **Ajout de CSS**
 CSS peut être ajouté de trois manières :
 1. **Dans une balise `<style>`** (CSS interne) :
-   ```html
+   html
    <style>
        p {
            color: blue;
@@ -93,12 +93,12 @@ CSS peut être ajouté de trois manières :
        font-family: Arial, sans-serif;
    }
    
-   Puis liez-le à votre page ```html :
-   ```html
+   Puis liez-le à votre page html :
+   html
    <link rel="stylesheet" href="style.css">
    
-3. **Directement dans une balise ```html** (CSS en ligne) :
-   ```html
+3. **Directement dans une balise html** (CSS en ligne) :
+   html
    <p style="color: blue;">Texte en bleu</p>
    
 
@@ -132,7 +132,7 @@ h1 {
 
 ## 4. Exemple Complet : Une Page html avec CSS
 
-```html
+html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -165,7 +165,7 @@ h1 {
         <p>&copy; 2024 Mon Site Web</p>
     </footer>
 </body>
-</```html>
+</html>
 ```
 
 
@@ -219,4 +219,4 @@ footer {
 ---
 ## 5. Conclusion
 
-Avec ```html, vous structurez votre contenu, et avec CSS, vous le rendez visuellement attrayant. Pratiquez en créant vos propres pages, et testez différentes propriétés CSS pour explorer tout le potentiel du développement web.
+Avec html, vous structurez votre contenu, et avec CSS, vous le rendez visuellement attrayant. Pratiquez en créant vos propres pages, et testez différentes propriétés CSS pour explorer tout le potentiel du développement web.
