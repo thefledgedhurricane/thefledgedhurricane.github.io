@@ -1,13 +1,8 @@
 ---
 title: Informatique Générale
 summary: Introduction et cours fondamentaux en informatique générale.
-type: landing
+type: collection
 
-cascade:
-  - _target:
-      kind: page
-    params:
-      show_breadcrumb: true
 
 sections:
   - block: collection
