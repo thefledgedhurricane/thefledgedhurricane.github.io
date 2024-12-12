@@ -10,7 +10,7 @@ sections:
       title: Développement Web
       filters:
         folders:
-          - teaching/developpement-web
+          - teaching/
       design:
         view: article-grid
         columns: 2
