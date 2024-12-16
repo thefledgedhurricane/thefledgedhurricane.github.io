@@ -347,3 +347,211 @@ Un formulaire avec deux champs (nom et email) et un bouton pour envoyer les donn
 ---
 
 Ces balises essentielles permettent de créer des pages web structurées et interactives. Avec leur maîtrise, vous pouvez concevoir des sites simples mais fonctionnels.
+Voici une version détaillée en Markdown pour l’introduction à CSS :  
+
+# Introduction à CSS : La mise en forme du web  
+
+CSS (Cascading Style Sheets) est un langage utilisé pour mettre en forme les pages HTML. Il permet de contrôler l'apparence visuelle d'une page web, comme les couleurs, les polices, les espacements et la disposition des éléments.
+
+---
+
+## Qu'est-ce que CSS et pourquoi l'utiliser ?  
+
+### **Définition de CSS**  
+CSS est un langage de style qui s'associe au HTML pour définir la présentation des éléments sur une page web.  
+- HTML structure le contenu (exemple : un titre, un paragraphe, une image).  
+- CSS applique des styles (exemple : couleur du texte, alignement, marges).  
+
+### **Pourquoi utiliser CSS ?**  
+1. **Séparation de la structure et de la présentation**  
+   - Le HTML s'occupe du contenu et de la structure.  
+   - Le CSS gère l'apparence visuelle.  
+
+2. **Consistance et réutilisation**  
+   - Les styles CSS peuvent être appliqués à plusieurs pages d'un site pour une apparence cohérente.  
+
+3. **Maintenance facilitée**  
+   - En modifiant un fichier CSS, on peut mettre à jour l'apparence de plusieurs pages web en même temps.  
+
+4. **Création de designs modernes et professionnels**  
+   - CSS offre des outils pour créer des designs complexes : grilles, animations, transitions, etc.  
+
+**Exemple sans CSS :**  
+```html
+<h1>Bienvenue</h1>
+<p>Ceci est un paragraphe simple.</p>
+```
+
+Rendu : Texte brut sans mise en forme.
+
+**Exemple avec CSS :**  
+```html
+<style>
+    h1 {
+        color: blue;
+        text-align: center;
+    }
+    p {
+        font-size: 18px;
+        line-height: 1.5;
+    }
+</style>
+<h1>Bienvenue</h1>
+<p>Ceci est un paragraphe simple.</p>
+```
+
+Rendu :  
+- Le titre est centré et en bleu.  
+- Le paragraphe est plus lisible grâce à une taille et un espacement ajustés.
+
+---
+
+## Les sélecteurs CSS : Types, classes, IDs  
+
+### **1. Sélecteur par élément**  
+Le sélecteur le plus simple cible les balises HTML directement.  
+
+**Exemple :**  
+```css
+h1 {
+    color: red;
+}
+p {
+    font-size: 16px;
+}
+```
+- Applique du rouge à tous les `<h1>`.  
+- Définit une taille de 16 pixels pour tous les `<p>`.
+
+---
+
+### **2. Sélecteur par classe**  
+Les classes sont définies avec un point (`.`) et peuvent être appliquées à plusieurs éléments.  
+
+**Exemple dans le CSS :**  
+```css
+.important {
+    color: green;
+    font-weight: bold;
+}
+```
+
+**Exemple dans le HTML :**  
+```html
+<p class="important">Ce texte est important.</p>
+<p>Ceci est un texte standard.</p>
+```
+
+Rendu :  
+- Le premier paragraphe est en vert et gras.  
+- Le second paragraphe reste normal.  
+
+---
+
+### **3. Sélecteur par ID**  
+Les IDs, définis avec un dièse (`#`), ciblent un seul élément unique.  
+
+**Exemple dans le CSS :**  
+```css
+#header {
+    background-color: lightblue;
+    padding: 20px;
+}
+```
+
+**Exemple dans le HTML :**  
+```html
+<div id="header">Ceci est un en-tête unique.</div>
+```
+
+Rendu :  
+- L’arrière-plan de l’en-tête est bleu clair avec un espacement de 20 pixels autour du texte.  
+
+---
+
+### **Résumé : Quand utiliser quoi ?**  
+- **Élément** : Quand le style doit s’appliquer à toutes les balises d’un même type.  
+- **Classe** : Quand un style doit être partagé par plusieurs éléments spécifiques.  
+- **ID** : Quand un style doit être unique à un seul élément.  
+
+---
+
+## Ajout de styles avec CSS : Propriétés de base  
+
+CSS offre une grande variété de propriétés pour modifier l'apparence des éléments HTML. Voici les plus courantes :  
+
+### **1. Couleurs**  
+- **`color`** : Définit la couleur du texte.  
+- **`background-color`** : Définit la couleur de fond.  
+
+**Exemple :**  
+```css
+h1 {
+    color: blue;
+    background-color: yellow;
+}
+```
+
+Rendu :  
+- Le texte des titres `<h1>` est bleu avec un arrière-plan jaune.  
+
+---
+
+### **2. Polices de caractère**  
+- **`font-family`** : Définit la police.  
+- **`font-size`** : Définit la taille du texte.  
+- **`font-weight`** : Définit l'épaisseur du texte (normal, bold, etc.).  
+
+**Exemple :**  
+```css
+p {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+```
+
+Rendu :  
+- Les paragraphes utilisent la police Arial, une taille de 18 pixels, et un texte en gras.  
+
+---
+
+### **3. Marges et espacements**  
+- **`margin`** : Définit l'espace autour d'un élément.  
+- **`padding`** : Définit l'espace à l'intérieur d'un élément, entre le contenu et sa bordure.  
+
+**Exemple :**  
+```css
+div {
+    margin: 20px;
+    padding: 10px;
+    background-color: lightgrey;
+}
+```
+
+Rendu :  
+- Le bloc `<div>` a un espace de 20 pixels autour de lui et 10 pixels entre son contenu et sa bordure.  
+
+---
+
+### **4. Alignement et texte**  
+- **`text-align`** : Définit l'alignement du texte (gauche, droite, centré).  
+- **`line-height`** : Définit l'espacement vertical entre les lignes de texte.  
+
+**Exemple :**  
+```css
+h1 {
+    text-align: center;
+}
+p {
+    line-height: 1.8;
+}
+```
+
+Rendu :  
+- Le titre `<h1>` est centré.  
+- Les paragraphes ont un espacement vertical augmenté, facilitant la lecture.  
+
+---
+
+Avec CSS, il est possible de transformer une page HTML basique en un site professionnel, esthétique et fonctionnel. Ces propriétés de base constituent les fondations essentielles de tout design web.
