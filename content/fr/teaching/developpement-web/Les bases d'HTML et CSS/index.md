@@ -171,3 +171,179 @@ Un fichier HTML suit une structure standard. Voici les **éléments principaux**
 Dans cet exemple :  
 - La page a un **titre** "Exemple de page HTML" visible dans l'onglet du navigateur.  
 - La section `<body>` contient un **titre** (`<h1>`) et un **paragraphe** (`<p>`).
+
+Voici la partie en Markdown avec des explications très détaillées :  
+
+## Les balises HTML essentielles  
+
+Les balises HTML essentielles permettent de structurer et d'enrichir le contenu d'une page web. Voici une explication détaillée de ces balises :  
+
+---
+
+## Titres et paragraphes  
+
+### **Titres (`<h1>` à `<h6>`)**  
+Les balises de titre sont utilisées pour créer des en-têtes sur une page.  
+- `<h1>` est le titre principal (le plus important).  
+- `<h6>` est le titre le moins important.  
+
+**Exemple :**  
+```html
+<h1>Titre principal</h1>
+<h2>Sous-titre niveau 2</h2>
+<h3>Sous-titre niveau 3</h3>
+```
+
+Rendu :  
+- Titre principal (gros et gras).  
+- Sous-titre niveau 2 (moins grand).  
+- Sous-titre niveau 3 (encore plus petit).  
+
+### **Paragraphe (`<p>`)**  
+La balise `<p>` est utilisée pour écrire des paragraphes.  
+
+**Exemple :**  
+```html
+<p>Ceci est un paragraphe simple en HTML.</p>
+<p>Un autre paragraphe pour expliquer le contenu.</p>
+```
+
+Rendu :  
+Le contenu est affiché sous forme de texte dans des blocs distincts.  
+
+---
+
+## Liens et images  
+
+### **Liens (`<a>`)**  
+La balise `<a>` permet de créer des liens cliquables.  
+- L'attribut `href` (hypertext reference) spécifie la destination du lien.  
+
+**Exemple :**  
+```html
+<a href="https://www.google.com">Visitez Google</a>
+```
+
+Rendu :  
+Un texte cliquable "Visitez Google" renvoie à https://www.google.com.  
+
+### **Images (`<img>`)**  
+La balise `<img>` insère des images dans une page.  
+- L'attribut `src` (source) indique l'emplacement de l'image.  
+- L'attribut `alt` fournit une description en cas de problème d'affichage.  
+
+**Exemple :**  
+```html
+<img src="photo.jpg" alt="Une photo descriptive">
+```
+
+Rendu :  
+Une image est affichée avec "Une photo descriptive" en texte alternatif.  
+
+---
+
+## Listes  
+
+### **Listes non ordonnées (`<ul>` et `<li>`)**  
+Les balises `<ul>` (unordered list) et `<li>` (list item) créent une liste à puces.  
+
+**Exemple :**  
+```html
+<ul>
+    <li>Élément 1</li>
+    <li>Élément 2</li>
+    <li>Élément 3</li>
+</ul>
+```
+
+Rendu :  
+- Élément 1  
+- Élément 2  
+- Élément 3  
+
+### **Listes ordonnées (`<ol>` et `<li>`)**  
+Les balises `<ol>` (ordered list) et `<li>` créent une liste numérotée.  
+
+**Exemple :**  
+```html
+<ol>
+    <li>Premier élément</li>
+    <li>Deuxième élément</li>
+    <li>Troisième élément</li>
+</ol>
+```
+
+Rendu :  
+1. Premier élément  
+2. Deuxième élément  
+3. Troisième élément  
+
+---
+
+## Tables  
+
+Les balises de table structurent les données sous forme de tableau.  
+- `<table>` : Crée une table.  
+- `<tr>` (table row) : Définit une rangée.  
+- `<td>` (table data) : Définit une cellule.  
+- `<th>` (table header) : Définit un en-tête de colonne ou de ligne.  
+
+**Exemple :**  
+```html
+<table border="1">
+    <tr>
+        <th>Nom</th>
+        <th>Âge</th>
+    </tr>
+    <tr>
+        <td>Ali</td>
+        <td>25</td>
+    </tr>
+    <tr>
+        <td>Sara</td>
+        <td>22</td>
+    </tr>
+</table>
+```
+
+Rendu :  
+
+| Nom   | Âge |  
+|-------|-----|  
+| Ali   | 25  |  
+| Sara  | 22  |  
+
+---
+
+## Formulaires  
+
+Les balises de formulaire permettent de collecter des informations auprès des utilisateurs.  
+
+### **Formulaire (`<form>`)**  
+La balise `<form>` contient les champs de saisie et les boutons.  
+- L'attribut `action` définit la destination des données saisies.  
+- L'attribut `method` définit comment les données sont envoyées (`GET` ou `POST`).  
+
+### **Champs de saisie (`<input>`)**  
+La balise `<input>` permet de saisir des données.  
+- L'attribut `type` définit le type de champ (texte, email, mot de passe, etc.).  
+
+**Exemple :**  
+```html
+<form action="/submit" method="POST">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom">
+    <br>
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email">
+    <br>
+    <button type="submit">Envoyer</button>
+</form>
+```
+
+Rendu :  
+Un formulaire avec deux champs (nom et email) et un bouton pour envoyer les données.  
+
+---
+
+Ces balises essentielles permettent de créer des pages web structurées et interactives. Avec leur maîtrise, vous pouvez concevoir des sites simples mais fonctionnels.
