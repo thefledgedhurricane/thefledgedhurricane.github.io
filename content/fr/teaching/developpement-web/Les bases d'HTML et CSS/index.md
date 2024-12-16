@@ -708,3 +708,184 @@ La page aura l'apparence suivante :
 ## Résumé  
 
 En combinant HTML et CSS, vous pouvez créer une page web personnelle simple mais professionnelle. Cette page peut être étendue avec des fonctionnalités supplémentaires, comme des formulaires ou des animations, au fur et à mesure de votre progression en développement web.
+Voici une version détaillée en Markdown pour les bonnes pratiques en programmation web :  
+
+# Bonnes pratiques en programmation web  
+
+Suivre des bonnes pratiques en programmation web garantit que votre code est clair, maintenable et conforme aux normes actuelles. Voici les principaux aspects à considérer :  
+
+---
+
+## Organisation et lisibilité du code  
+
+### **1. Indentez votre code**  
+L’indentation rend le code plus lisible pour vous et vos collègues. Chaque niveau de hiérarchie doit être correctement décalé.  
+
+**Exemple (mauvais) :**  
+```html
+<html>
+<head><title>Page web</title></head>
+<body><h1>Titre</h1><p>Paragraphe</p></body>
+</html>
+```
+
+**Exemple (correct) :**  
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page web</title>
+    </head>
+    <body>
+        <h1>Titre</h1>
+        <p>Paragraphe</p>
+    </body>
+</html>
+```
+
+### **2. Utilisez des commentaires**  
+Ajoutez des commentaires pour expliquer les parties importantes ou complexes de votre code.  
+- En HTML :  
+  ```html
+  <!-- Ceci est un commentaire -->
+  ```
+- En CSS :  
+  ```css
+  /* Style pour le bouton principal */
+  ```
+
+**Exemple :**  
+```html
+<!-- Section de présentation -->
+<section>
+    <h1>Bienvenue</h1>
+    <p>Ceci est une section importante.</p>
+</section>
+```
+
+### **3. Utilisez des noms significatifs pour vos classes et IDs**  
+Choisissez des noms clairs et explicites pour identifier les éléments de votre page.  
+
+**Exemple (mauvais) :**  
+```html
+<div class="div1"></div>
+```
+
+**Exemple (correct) :**  
+```html
+<div class="contenu-principal"></div>
+```
+
+---
+
+## Introduction au responsive design (bases)  
+
+Le responsive design garantit que votre site s'adapte à tous les écrans : ordinateurs, tablettes, et smartphones. Voici les bases :  
+
+### **1. Utilisez la balise meta viewport**  
+Ajoutez la balise suivante dans la section `<head>` pour indiquer que votre site doit s'adapter aux différentes tailles d'écran.  
+
+**Exemple :**  
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+
+### **2. Utilisez des unités relatives**  
+Privilégiez les unités comme les pourcentages (`%`) ou `em` au lieu des pixels (`px`).  
+
+**Exemple :**  
+```css
+/* Mauvais : largeur fixe */
+.container {
+    width: 960px;
+}
+
+/* Correct : largeur flexible */
+.container {
+    width: 80%;
+}
+```
+
+### **3. Apprenez à utiliser les Media Queries**  
+Les Media Queries permettent de définir des styles spécifiques pour certaines tailles d'écran.  
+
+**Exemple :**  
+```css
+/* Styles par défaut */
+body {
+    font-size: 16px;
+}
+
+/* Styles pour les écrans de moins de 768 pixels */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+}
+```
+
+### **4. Testez votre site sur différents appareils**  
+Utilisez des outils comme l’inspecteur de votre navigateur pour simuler différents appareils et résolutions.  
+
+---
+
+## Respect des standards web et accessibilité  
+
+### **1. Utilisez un code HTML valide**  
+Validez votre code avec des outils comme le [W3C Validator](https://validator.w3.org/). Cela garantit que votre site respecte les standards du web.  
+
+### **2. Ajoutez des descriptions aux images**  
+Utilisez l’attribut `alt` pour fournir une description textuelle des images. Cela aide les personnes utilisant des lecteurs d'écran.  
+
+**Exemple :**  
+```html
+<img src="chat.jpg" alt="Photo d'un chat noir assis sur un tapis.">
+```
+
+### **3. Rendez votre site navigable au clavier**  
+Assurez-vous que tous les éléments interactifs (boutons, liens) sont accessibles via la touche **Tabulation** du clavier.  
+
+**Exemple :**  
+```html
+<a href="page.html" tabindex="0">Lien accessible</a>
+```
+
+### **4. Utilisez des contrastes suffisants**  
+Les couleurs de texte et d’arrière-plan doivent avoir un contraste élevé pour être lisibles par tous.  
+
+**Exemple (mauvais contraste) :**  
+```css
+color: #aaa;
+background-color: #ddd;
+```
+
+**Exemple (bon contraste) :**  
+```css
+color: #000;
+background-color: #fff;
+```
+
+### **5. Ajoutez des balises sémantiques**  
+Utilisez des balises HTML comme `<header>`, `<footer>`, et `<main>` pour améliorer la structure et l'accessibilité de votre site.  
+
+**Exemple :**  
+```html
+<header>
+    <h1>Titre du site</h1>
+</header>
+<main>
+    <p>Contenu principal.</p>
+</main>
+<footer>
+    <p>© 2024 Mon Site</p>
+</footer>
+```
+
+---
+
+## Résumé  
+
+En suivant ces bonnes pratiques :  
+1. Votre code sera clair, facile à maintenir et collaboratif.  
+2. Votre site sera adapté à tous les écrans grâce au responsive design.  
+3. Vous offrirez une meilleure expérience utilisateur, notamment pour les personnes ayant des besoins spécifiques en accessibilité.
