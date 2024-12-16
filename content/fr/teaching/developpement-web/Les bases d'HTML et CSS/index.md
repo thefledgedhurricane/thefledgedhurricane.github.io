@@ -889,3 +889,247 @@ En suivant ces bonnes pratiques :
 1. Votre code sera clair, facile à maintenir et collaboratif.  
 2. Votre site sera adapté à tous les écrans grâce au responsive design.  
 3. Vous offrirez une meilleure expérience utilisateur, notamment pour les personnes ayant des besoins spécifiques en accessibilité.
+Voici un fichier en Markdown très détaillé, conçu comme un projet guidé pour créer une première page web complète :  
+
+# Projet final : Votre première page web !  
+
+Dans ce projet guidé, vous allez créer une page web complète en appliquant tout ce que vous avez appris sur HTML et CSS. Cette page sera une **page de profil personnel** avec un design simple et responsive.
+
+---
+
+## Objectifs du projet  
+
+1. Construire une page web en utilisant une structure HTML bien organisée.  
+2. Appliquer des styles CSS pour améliorer l'apparence de la page.  
+3. Rendre la page responsive pour qu'elle s'affiche correctement sur différents écrans.  
+
+---
+
+## Étape 1 : Structure de la page HTML  
+
+Nous allons créer un fichier HTML qui contient :  
+- Un **en-tête** avec un titre et un menu de navigation.  
+- Une **section principale** avec une image de profil et une présentation personnelle.  
+- Une **section de contact** avec des liens vers les réseaux sociaux.  
+- Un **pied de page** avec des informations sur les droits d'auteur.  
+
+**Code HTML :**  
+```html
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Page de Profil</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <!-- En-tête -->
+        <header>
+            <h1>Mon Profil</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Section principale -->
+        <main>
+            <section id="about">
+                <h2>À propos de moi</h2>
+                <img src="profil.jpg" alt="Photo de profil" class="profile-pic">
+                <p>
+                    Bonjour ! Je m'appelle [Votre Nom]. Je suis passionné(e) par le développement web 
+                    et j'aime apprendre de nouvelles technologies. Cette page est ma première création
+                    pour mettre en pratique mes connaissances en HTML et CSS.
+                </p>
+            </section>
+
+            <!-- Section de contact -->
+            <section id="contact">
+                <h2>Me contacter</h2>
+                <p>Vous pouvez me retrouver sur :</p>
+                <ul>
+                    <li><a href="https://www.linkedin.com" target="_blank">LinkedIn</a></li>
+                    <li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
+                    <li><a href="mailto:votreemail@example.com">Email</a></li>
+                </ul>
+            </section>
+        </main>
+
+        <!-- Pied de page -->
+        <footer>
+            <p>&copy; 2024 [Votre Nom]. Tous droits réservés.</p>
+        </footer>
+    </body>
+</html>
+```
+
+---
+
+## Étape 2 : Ajouter du style avec CSS  
+
+Ajoutons maintenant un fichier CSS nommé **`styles.css`** pour styliser la page. Voici ce que nous allons faire :  
+1. Appliquer une police agréable et des couleurs modernes.  
+2. Centrer les éléments pour un design harmonieux.  
+3. Ajouter des marges et des espacements pour une meilleure lisibilité.  
+
+**Code CSS :**  
+```css
+/* Styles globaux */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* En-tête */
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Section principale */
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+#about img.profile-pic {
+    border-radius: 50%;
+    width: 150px;
+    margin: 20px 0;
+}
+
+/* Section de contact */
+#contact ul {
+    list-style: none;
+    padding: 0;
+}
+
+#contact ul li {
+    margin: 10px 0;
+}
+
+#contact ul li a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+#contact ul li a:hover {
+    color: #003399;
+}
+
+/* Pied de page */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+```
+
+---
+
+## Étape 3 : Rendre la page responsive  
+
+Pour rendre la page responsive, nous allons utiliser les **Media Queries** en CSS. Cela permettra d’ajuster les styles en fonction de la taille de l’écran.  
+
+**Ajout dans `styles.css` :**  
+```css
+/* Styles pour les petits écrans (moins de 768px) */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #about img.profile-pic {
+        width: 100px;
+    }
+
+    main {
+        padding: 10px;
+    }
+}
+```
+
+---
+
+## Étape 4 : Tester et améliorer  
+
+### **1. Tester la page**  
+- Ouvrez le fichier HTML dans un navigateur.  
+- Vérifiez si tout s'affiche correctement : le titre, l'image, les sections et les liens.  
+- Redimensionnez la fenêtre du navigateur pour voir si la page reste lisible sur différents écrans.  
+
+### **2. Ajouter des améliorations**  
+Voici quelques idées pour personnaliser davantage votre page :  
+- **Ajouter un formulaire** pour permettre aux visiteurs de vous envoyer un message.  
+- **Utiliser Google Fonts** pour ajouter une police personnalisée.  
+- **Ajouter des icônes** à côté des liens (par exemple, des icônes LinkedIn et Twitter avec FontAwesome).  
+
+---
+
+## Résultat attendu  
+
+Votre première page web devrait contenir :  
+1. Un en-tête accueillant avec un menu de navigation.  
+2. Une section "À propos" contenant une image et une description.  
+3. Une section "Contact" avec des liens vers vos réseaux sociaux.  
+4. Un pied de page avec des informations de copyright.  
+
+Cette page est fonctionnelle, esthétique et s’adapte à différents écrans. Félicitations 🎉, vous avez créé votre première page web !  
+
+```html
+<button id="exportPdf">Exporter en PDF</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+    document.getElementById('exportPdf').addEventListener('click', () => {
+        const element = document.body; // Cible l'intégralité du corps du document
+        const options = {
+            margin: 1,
+            filename: 'projet_final.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+        };
+        html2pdf().set(options).from(element).save();
+    });
+</script>
