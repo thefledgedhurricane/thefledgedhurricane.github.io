@@ -81,6 +81,10 @@ languages:
           parent: "Enseignement"
           url: "/fr/teaching/informatique-generale/"
           weight: 42
+        - name: "Developpement web"
+          parent: "Enseignement"
+          url: "/fr/teaching/developpement-web/"
+          weight: 43
 
 ############################
 # CONTENT & TAXONOMIES
