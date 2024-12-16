@@ -1,222 +1,59 @@
 ---
-title: Introduction à html et CSS
-summary: les bases de html et CSS pour débutants.
-date: 2024-12-11
+title: Introduction à la Programmation Web avec HTML et CSS
+summary: Un cours pratique et simplifié pour apprendre à créer des pages web avec HTML et CSS.
+date: 2024-12-16
 type: docs
 tags:
-  - html
+  - HTML
   - CSS
-  - Développement Web
+  - Programmation Web
+  - Débutant
 image:
-  caption: 'Introduction au développement web avec html et CSS.'
+  url: 'https://iconscout.com/illustration/web-development-basics-5634768'
+  caption: 'Illustration des bases de la programmation web avec HTML et CSS.'
 ---
 
-## 1. Qu'est-ce que html et CSS ?
-
-html (*HyperText Markup Language*) est un langage de balisage utilisé pour structurer le contenu d'une page web.  
-CSS (*Cascading Style Sheets*) est un langage de style qui permet de mettre en forme et de styliser les éléments html.
-
-### Exemple d'une page web simple :
-
-html
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ma première page web</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
-        h1 {
-            color: #333;
-        }
-    </style>
-</head>
-<body>
-    <h1>Bienvenue sur ma première page web !</h1>
-    <p>Ceci est un paragraphe stylé avec CSS.</p>
-</body>
-</html>
+### Objectifs 
+À la fin de ce cours, les étudiants seront capables de :  
+1. **Comprendre les concepts fondamentaux du web** : Structure, front-end, et back-end.  
+2. **Créer une page web simple** en utilisant HTML pour structurer le contenu et CSS pour le styliser.  
+3. **Utiliser des balises HTML** et des propriétés CSS de base pour concevoir des sites fonctionnels.  
+4. **Appliquer les bonnes pratiques** dans l'organisation du code et respecter les normes du développement web.  
+5. **Explorer l'impact de HTML et CSS** dans des projets web réels à travers des exemples pratiques.
 
 ---
 
-## 2. Concepts Clés de html
+## Table des matières
 
-### a. **Structure d'une page html**
-Une page html est structurée avec des **éléments** qui commencent et se terminent par des balises. Exemple :
-html
-<p>Ceci est un paragraphe.</p>
+1. **Introduction générale au développement web**  
+   - Qu'est-ce que le développement web ?  
+   - Différence entre front-end et back-end.  
 
+2. **Les bases de HTML : Structure du contenu web**  
+   - Introduction au HTML.  
+   - Comprendre les balises et attributs.  
+   - Création d’une structure de base : `<html>`, `<head>`, `<body>`.  
 
-### b. **Éléments html de Base**
-- `<!DOCTYPE html>` : Indique au navigateur qu'il s'agit d'une page html5.
-- `<html>` : Racine du document html.
-- `<head>` : Contient des informations sur le document (métadonnées, styles).
-- `<body>` : Contient le contenu visible de la page.
+3. **Les balises HTML essentielles**  
+   - Titres et paragraphes : `<h1>` à `<h6>`, `<p>`.  
+   - Liens et images : `<a>`, `<img>`.  
+   - Listes : `<ul>`, `<ol>`, `<li>`.  
+   - Tables : `<table>`, `<tr>`, `<td>`.  
+   - Formulaires : `<form>`, `<input>`, `<button>`.  
 
-### c. **Balises Importantes**
-- **Titres** : `<h1>` à `<h6>` pour les titres, `<h1>` étant le plus important.
-- **Paragraphe** : `<p>` pour le texte en bloc.
-- **Liens** : `<a href="url">Texte du lien</a>`.
-- **Images** : `<img src="url" alt="Description">`.
-- **Listes** : `<ul>` pour les listes non ordonnées, `<ol>` pour les listes ordonnées.
+4. **Introduction à CSS : La mise en forme du web**  
+   - Qu'est-ce que CSS et pourquoi l'utiliser ?  
+   - Les sélecteurs CSS : Types, classes, IDs.  
+   - Ajout de styles avec CSS : Propriétés de base (couleurs, polices, marges, etc.).  
 
-### Exemple :
-html
-<h1>Bonjour !</h1>
-<p>Ceci est un exemple de paragraphe.</p>
-<a href="https://example.com">Visitez notre site</a>
-<img src="image.jpg" alt="Description de l'image">
+5. **Créer une page web complète**  
+   - Développement d’une page de présentation personnelle.  
+   - Mise en page simple : Structure, texte, images et liens.  
 
+6. **Bonnes pratiques en programmation web**  
+   - Organisation et lisibilité du code.  
+   - Introduction au responsive design (bases).  
+   - Respect des standards web et accessibilité.  
 
----
-
-## 3. Concepts Clés de CSS
-
-### a. **Ajout de CSS**
-CSS peut être ajouté de trois manières :
-1. **Dans une balise `<style>`** (CSS interne) :
-   html
-   <style>
-       p {
-           color: blue;
-       }
-   </style>
-   
-2. **Dans une feuille de style externe** :
-   Créez un fichier `style.css` :
-   css
-   body {
-       font-family: Arial, sans-serif;
-   }
-   
-   Puis liez-le à votre page html :
-   html
-   <link rel="stylesheet" href="style.css">
-   
-3. **Directement dans une balise html** (CSS en ligne) :
-   html
-   <p style="color: blue;">Texte en bleu</p>
-   
-
-### b. **Sélecteurs CSS**
-Les sélecteurs indiquent les éléments à styliser :
-- `*` : Sélecteur universel (tous les éléments).
-- `tag` : Sélectionne tous les éléments avec cette balise (`p`, `h1`, etc.).
-- `.classe` : Sélectionne tous les éléments ayant une classe.
-- `#id` : Sélectionne l'élément avec cet identifiant unique.
-
-### Exemple :
-css
-h1 {
-    color: red;
-}
-.paragraphe-important {
-    font-weight: bold;
-}
-#titre-principal {
-    text-align: center;
-}
-
-
-### c. **Propriétés CSS Fréquentes**
-- **Couleurs** : `color`, `background-color`.
-- **Texte** : `font-size`, `font-weight`, `text-align`.
-- **Marges et Espacements** : `margin`, `padding`.
-- **Bordures** : `border`.
-
----
-
-## 4. Exemple Complet : Une Page html avec CSS
-
-html
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Site Web</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1 id="titre-principal">Bienvenue sur mon site</h1>
-        <nav>
-            <ul>
-                <li><a href="#section1">Section 1</a></li>
-                <li><a href="#section2">Section 2</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="section1">
-            <h2>Section 1</h2>
-            <p class="paragraphe-important">Ceci est un paragraphe important.</p>
-        </section>
-        <section id="section2">
-            <h2>Section 2</h2>
-            <p>Un autre paragraphe pour illustrer.</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Mon Site Web</p>
-    </footer>
-</body>
-</html>
-```
-
-
-### CSS (style.css)
-```css
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-}
-
-h1 {
-    text-align: center;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    text-align: center;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 10px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-section {
-    padding: 20px;
-}
-
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-}
-
-
----
-## 5. Conclusion
-
-Avec html, vous structurez votre contenu, et avec CSS, vous le rendez visuellement attrayant. Pratiquez en créant vos propres pages, et testez différentes propriétés CSS pour explorer tout le potentiel du développement web.
+7. **Projet final : Votre première page web !**  
+   - Mise en pratique des concepts appris pour développer une page web complète.
