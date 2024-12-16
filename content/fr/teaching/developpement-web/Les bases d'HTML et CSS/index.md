@@ -555,3 +555,156 @@ Rendu :
 ---
 
 Avec CSS, il est possible de transformer une page HTML basique en un site professionnel, esthétique et fonctionnel. Ces propriétés de base constituent les fondations essentielles de tout design web.
+
+Voici une version détaillée en Markdown pour créer une page web complète :  
+
+# Créer une page web complète  
+
+Dans cette section, nous allons développer une **page de présentation personnelle** avec une structure HTML simple et un style CSS basique. La page inclura du texte, des images et des liens.
+
+---
+
+## Développement d’une page de présentation personnelle  
+
+### Étape 1 : La structure HTML  
+
+Commençons par créer la structure HTML de base de notre page :  
+- Un titre principal.  
+- Une description personnelle.  
+- Une image.  
+- Un lien vers un réseau social ou un autre site.  
+
+**Code HTML :**  
+```html
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ma Présentation</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header>
+            <h1>Bienvenue sur ma page personnelle</h1>
+        </header>
+        <main>
+            <section>
+                <h2>À propos de moi</h2>
+                <p>Bonjour ! Je m'appelle [Votre Nom] et je suis passionné(e) par le développement web. J'aime créer des sites modernes et apprendre de nouvelles technologies.</p>
+                <img src="profil.jpg" alt="Photo de profil" width="200">
+            </section>
+            <section>
+                <h2>Me suivre</h2>
+                <p>Retrouvez-moi sur mes réseaux sociaux :</p>
+                <a href="https://www.linkedin.com" target="_blank">LinkedIn</a> | 
+                <a href="https://www.twitter.com" target="_blank">Twitter</a>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 [Votre Nom]. Tous droits réservés.</p>
+        </footer>
+    </body>
+</html>
+```
+
+---
+
+### Étape 2 : Mise en page avec CSS  
+
+Ajoutons du style avec un fichier CSS pour améliorer l'apparence de la page :  
+- Centrer les textes et les images.  
+- Ajouter des couleurs pour rendre la page plus attrayante.  
+- Styliser les liens pour qu'ils soient plus visibles.  
+
+**Code CSS (styles.css) :**  
+```css
+/* Styles globaux */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    text-align: center;
+}
+
+/* En-tête */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+header h1 {
+    margin: 0;
+}
+
+/* Section principale */
+main {
+    padding: 20px;
+}
+
+section {
+    margin: 20px 0;
+}
+
+section img {
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+/* Liens */
+a {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #003399;
+}
+
+/* Pied de page */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+```
+
+---
+
+## Rendu final  
+
+### **1. Structure visible de la page :**  
+- **En-tête** : Un message de bienvenue.  
+- **Corps** : Une section "À propos de moi" avec une image et une description. Une autre section avec des liens vers vos réseaux sociaux.  
+- **Pied de page** : Une mention de copyright.  
+
+### **2. Exemple visuel :**  
+
+La page aura l'apparence suivante :  
+
+```
+-------------------------------------------------
+|      Bienvenue sur ma page personnelle        |
+-------------------------------------------------
+| À propos de moi                               |
+| Bonjour ! Je m'appelle [Votre Nom].           |
+| (Photo de profil)                             |
+-------------------------------------------------
+| Me suivre                                    |
+| Retrouvez-moi sur : LinkedIn | Twitter        |
+-------------------------------------------------
+|        © 2024 [Votre Nom].                   |
+-------------------------------------------------
+```
+
+---
+
+## Résumé  
+
+En combinant HTML et CSS, vous pouvez créer une page web personnelle simple mais professionnelle. Cette page peut être étendue avec des fonctionnalités supplémentaires, comme des formulaires ou des animations, au fur et à mesure de votre progression en développement web.
