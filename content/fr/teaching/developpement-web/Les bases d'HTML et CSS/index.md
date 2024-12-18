@@ -1116,19 +1116,3 @@ Votre première page web devrait contenir :
 
 Cette page est fonctionnelle, esthétique et s’adapte à différents écrans. Félicitations 🎉, vous avez créé votre première page web !  
 
-<button id="exportPdf">Exporter en PDF</button>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script>
-    document.getElementById('exportPdf').addEventListener('click', () => {
-        const element = document.body; // Cible l'intégralité du corps du document
-        const options = {
-            margin: 1,
-            filename: 'projet_final.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-        };
-        html2pdf().set(options).from(element).save();
-    });
-</script>

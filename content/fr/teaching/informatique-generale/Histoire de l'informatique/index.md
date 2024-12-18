@@ -12,7 +12,6 @@ image:
   caption: "Une représentation visuelle de l’évolution de l’informatique"
 ---
 
-# Introduction à l’Histoire de l’Informatique
 
 L’histoire de l’informatique est un voyage fascinant qui commence avec les bases mathématiques, passe par des innovations mécaniques, et atteint aujourd'hui des sommets avec l’intelligence artificielle. Ce document est conçu pour guider le lecteur à travers les principales étapes de cette évolution.
 
