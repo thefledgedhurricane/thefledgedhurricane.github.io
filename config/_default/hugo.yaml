@@ -85,6 +85,10 @@ languages:
           parent: "Enseignement"
           url: "/fr/teaching/developpement-web/"
           weight: 43
+        - name: "Alogrithmique et programmation"
+          parent: "Enseignement"
+          url: "/fr/teaching/algorithmique-programmation/"
+          weight: 44
 
 ############################
 # CONTENT & TAXONOMIES
