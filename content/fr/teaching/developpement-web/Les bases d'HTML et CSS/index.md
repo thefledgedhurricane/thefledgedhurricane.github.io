@@ -1093,7 +1093,7 @@ Pour rendre la page responsive, nous allons utiliser les **Media Queries** en CS
 
 ## Étape 4 : Tester et améliorer  
 
-### **1. Tester la page**  
+### **1. Tester la pageweb**  
 - Ouvrez le fichier HTML dans un navigateur.  
 - Vérifiez si tout s'affiche correctement : le titre, l'image, les sections et les liens.  
 - Redimensionnez la fenêtre du navigateur pour voir si la page reste lisible sur différents écrans.  
