@@ -70,21 +70,21 @@ languages:
         - name: Projets
           url: /fr/projects/
           weight: 30
-        - name: "Ressources d'Apprentissage"
+        - name: "Apprentissage"
           url: "/fr/teaching/"
-          weight: 10
+          weight: 40
         - name: "Bases de Données"
-          parent: "Ressources d'Apprentissage"
+          parent: "Apprentissage"
           url: "/fr/teaching/bases-donnees-systemes/"
-          weight: 10
+          weight: 41
         - name: "Developpement web"
-          parent: "Ressources d'Apprentissage"
+          parent: "Apprentissage"
           url: "/fr/teaching/developpement-web/"
-          weight: 10
+          weight: 42
         - name: "Alogrithmique et programmation"
-          parent: "Ressources d'Apprentissage"
+          parent: "Apprentissage"
           url: "/fr/teaching/algorithmique-programmation/"
-          weight: 10
+          weight: 43
 
 ############################
 # CONTENT & TAXONOMIES
