@@ -74,15 +74,15 @@ languages:
           url: "/fr/teaching/"
           weight: 40
         - name: "Bases de Données"
-          parent: "Enseignement"
+          parent: "Ressources d'Apprentissage"
           url: "/fr/teaching/bases-donnees-systemes/"
           weight: 41
         - name: "Developpement web"
-          parent: "Enseignement"
+          parent: "Ressources d'Apprentissage"
           url: "/fr/teaching/developpement-web/"
           weight: 42
         - name: "Alogrithmique et programmation"
-          parent: "Enseignement"
+          parent: "Ressources d'Apprentissage"
           url: "/fr/teaching/algorithmique-programmation/"
           weight: 43
 
