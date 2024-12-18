@@ -14,4 +14,5 @@ sections:
       design:
         view: article-grid
         columns: 2
+        gap: 1.5rem # Optional: Adjusts spacing between grid items
 ---
