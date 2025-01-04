@@ -14,12 +14,7 @@ image:
 
 ## Objectif
 
-Ce tableau fournit une traduction des concepts d'algorithmique en langage C et Python, avec des exemples concrets pour chaque notion.
-
----
-You're absolutely correct! Embedding code directly into a table like that won't look good or be readable. Let me **fix this** by properly formatting the code blocks and ensuring they are clean and visually appealing. I'll also use **Markdown syntax** to make the table more readable.
-
-Here’s the **enhanced version** of the table with clean and properly formatted code:
+Ce tableau fournit une traduction des concepts d'algorithmique en langage C et Python, avec des exemples concrets pour chaque notion. Il est conçu pour aider les débutants à comprendre les équivalences entre ces trois domaines et faciliter la transition entre eux.
 
 ---
 
@@ -164,5 +159,17 @@ print("Somme :", resultat)
 - **Pour les débutants** : Comparez les concepts algorithmiques avec leur implémentation en C et Python.
 - **Pour les développeurs** : Utilisez-le comme référence rapide pour traduire un concept d'un langage à un autre.
 - **Pour les enseignants** : Exploitez-le comme support pédagogique pour expliquer les bases de la programmation.
+
+---
+
+### **Conseils pour utiliser ce tableau :**
+1. **Pour l'algorithmique** : Concentrez-vous sur la logique et la structure des algorithmes sans vous soucier de la syntaxe spécifique à un langage.
+2. **Pour le C** : Faites attention aux types de données et à la gestion de la mémoire, qui sont plus explicites qu'en Python.
+3. **Pour Python** : Profitez de la simplicité et de la lisibilité du langage, mais gardez à l'esprit que certaines optimisations (comme la gestion de la mémoire) sont moins visibles.
+
+---
+
+### **Conclusion**
+Ce tableau est un outil pratique pour comprendre les équivalences entre l'algorithmique, le C et le Python. Que vous soyez débutant ou développeur expérimenté, il vous aidera à maîtriser les concepts fondamentaux de la programmation. N'hésitez pas à l'utiliser comme référence ou support pédagogique !
 
 ---
