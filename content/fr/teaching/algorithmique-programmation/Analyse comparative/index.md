@@ -12,164 +12,87 @@ image:
   caption: "Illustration de la transition des concepts d'algorithmique vers C et Python."
 ---
 
-## Objectif
+## Introduction
 
-Ce tableau fournit une traduction des concepts d'algorithmique en langage C et Python, avec des exemples concrets pour chaque notion. Il est conçu pour aider les débutants à comprendre les équivalences entre ces trois domaines et faciliter la transition entre eux.
-
----
-
-### **Tableau de Traduction : Algorithmique → C → Python**
-
-| **Notion**               | **Description**                                                                                      | **Algorithmique**                  | **C**                                                                                       | **Python**                                    |
-|--------------------------|----------------------------------------------------------------------------------------------------|------------------------------------|-------------------------------------------------------------------------------------------|-----------------------------------------------|
-| **Déclaration de variables** | Réserver un espace mémoire pour stocker une valeur.                                              | `a : entier`                       | ```c
-#include <stdio.h>
-int main() {
-    int a;
-    return 0;
-}
-```                                                                 | ```python
-a = 0
-```                           |
-| **Affectation**           | Assigner une valeur à une variable.                                                                 | `a ← 10`                           | ```c
-#include <stdio.h>
-int main() {
-    int a;
-    a = 10;
-    return 0;
-}
-```                                                                 | ```python
-a = 10
-```                          |
-| **Constante**             | Valeur fixe qui ne peut pas être modifiée après déclaration.                                        | `PI ← 3.14`                        | ```c
-#include <stdio.h>
-#define PI 3.14
-int main() {
-    printf("%.2f", PI);
-    return 0;
-}
-```                                                                 | ```python
-PI = 3.14
-```                       |
-| **Entrée utilisateur**    | Permet de lire une valeur fournie par l'utilisateur.                                               | `lire(a)`                          | ```c
-#include <stdio.h>
-int main() {
-    int a;
-    printf("Entrez un nombre : ");
-    scanf("%d", &a);
-    return 0;
-}
-```                                                                 | ```python
-a = int(input("Entrez un nombre : "))
-``` |
-| **Sortie**                | Afficher une valeur ou un message.                                                                 | `écrire(a)`                        | ```c
-#include <stdio.h>
-int main() {
-    int a = 10;
-    printf("Valeur de a : %d\n", a);
-    return 0;
-}
-```                                                                 | ```python
-print("Valeur de a :", a)
-```       |
-| **Condition**             | Exécuter un bloc de code si une condition est vraie.                                               | `si a > 0 alors écrire("Positif")` | ```c
-#include <stdio.h>
-int main() {
-    int a = 10;
-    if (a > 0) {
-        printf("Positif\n");
-    } else {
-        printf("Négatif\n");
-    }
-    return 0;
-}
-```                                                                 | ```python
-a = 10
-if a > 0:
-    print("Positif")
-else:
-    print("Négatif")
-``` |
-| **Boucle Tant Que**       | Répéter un bloc de code tant qu'une condition est vraie.                                           | `tant que a < 5 faire a ← a + 1`   | ```c
-#include <stdio.h>
-int main() {
-    int a = 0;
-    while (a < 5) {
-        a++;
-    }
-    return 0;
-}
-```                                                                 | ```python
-a = 0
-while a < 5:
-    a += 1
-``` |
-| **Boucle Pour**           | Répéter un bloc de code pour un nombre défini d'itérations.                                        | `pour i de 1 à 5 faire écrire(i)`  | ```c
-#include <stdio.h>
-int main() {
-    for (int i = 1; i <= 5; i++) {
-        printf("%d\n", i);
-    }
-    return 0;
-}
-```                                                                 | ```python
-for i in range(1, 6):
-    print(i)
-``` |
-| **Boucle avec Pas**       | Répéter un bloc de code en incrémentant par une valeur spécifique (pas).                           | `pour i de 1 à 10 par 2 faire`     | ```c
-#include <stdio.h>
-int main() {
-    for (int i = 1; i <= 10; i += 2) {
-        printf("%d\n", i);
-    }
-    return 0;
-}
-```                                                                 | ```python
-for i in range(1, 11, 2):
-    print(i)
-``` |
-| **Fonction**              | Regrouper un bloc de code sous un nom pour le réutiliser.                                          | `fonction somme(a, b) retourner a+b` | ```c
-#include <stdio.h>
-int somme(int a, int b) {
-    return a + b;
-}
-int main() {
-    int resultat = somme(5, 3);
-    printf("Somme : %d\n", resultat);
-    return 0;
-}
-```                                                                 | ```python
-def somme(a, b):
-    return a + b
-resultat = somme(5, 3)
-print("Somme :", resultat)
-``` |
+Lors de la transition entre l'algorithmique et les langages de programmation tels que le C ou Python, il est essentiel de comprendre les similarités et différences syntaxiques. Ce tableau offre une correspondance pratique entre ces trois langages pour les concepts fondamentaux.  
 
 ---
 
-### **Améliorations apportées :**
-1. **Code propre et bien formaté** : Les blocs de code sont maintenant correctement indentés et faciles à lire.
-2. **Syntaxe Markdown** : Utilisation de blocs de code (```) pour une meilleure présentation.
-3. **Alignement du tableau** : Les colonnes sont alignées pour une meilleure lisibilité.
-4. **Exemples clairs** : Chaque exemple est concis et illustre parfaitement le concept.
+### Notes importantes :  
+
+#### 1. **Langage C : Code de départ**  
+En C, tout programme commence par inclure les bibliothèques nécessaires (comme `<stdio.h>` pour les entrées/sorties) et doit inclure une fonction `main()` comme point d'entrée.  
+
+**Exemple minimal pour le C :**
+```c
+#include <stdio.h>
+
+int main() {
+    // Code ici
+    return 0;
+}
+```
+
+#### 2. **Langage Python : Indentation stricte**  
+En Python, **l'indentation est obligatoire** pour délimiter les blocs de code (par exemple, les conditions, boucles, ou fonctions). Il est recommandé d'utiliser **4 espaces par niveau** pour une bonne lisibilité et éviter les erreurs.  
+
+**Exemple :**
+```python
+if True:
+    print("Indentation correcte")
+# Pas d'accolades comme en C, mais des espaces !
+```
 
 ---
 
-### **Comment utiliser ce tableau :**
-- **Pour les débutants** : Comparez les concepts algorithmiques avec leur implémentation en C et Python.
-- **Pour les développeurs** : Utilisez-le comme référence rapide pour traduire un concept d'un langage à un autre.
-- **Pour les enseignants** : Exploitez-le comme support pédagogique pour expliquer les bases de la programmation.
+## Tableau de traduction Algorithmique → C → Python  
+
+| **Notion**               | **Description**                                                                                      | **Algorithmique**                  | **C**                                           | **Python**                                    |
+|--------------------------|----------------------------------------------------------------------------------------------------|------------------------------------|-----------------------------------------------|-----------------------------------------------|
+| **Déclaration de variables** | Réserver un espace mémoire pour stocker une valeur.                                              | `a : entier`                       | `int a;`                                       | `a = 0`                                       |
+| **Affectation**           | Assigner une valeur à une variable.                                                                 | `a ← 10`                           | `a = 10;`                                     | `a = 10`                                      |
+| **Constante**             | Valeur fixe qui ne peut pas être modifiée après déclaration.                                        | `PI ← 3.14`                        | `#define PI 3.14`                             | `PI = 3.14`                                   |
+| **Entrée utilisateur**    | Permet de lire une valeur fournie par l'utilisateur.                                               | `lire(a)`                          | `scanf("%d", &a);`                            | `a = int(input())`                            |
+| **Sortie**                | Afficher une valeur ou un message.                                                                 | `écrire(a)`                        | `printf("%d", a);`                            | `print(a)`                                    |
+| **Condition**             | Exécuter un bloc de code si une condition est vraie.                                               | `si a > 0 alors ...`               | `if (a > 0) { ... }`                          | `if a > 0: ...`                               |
+| **Boucle Tant Que**       | Répéter un bloc de code tant qu'une condition est vraie.                                           | `tant que a < 5 faire ...`         | `while (a < 5) { ... }`                       | `while a < 5: ...`                            |
+| **Boucle Faire Tant Que** | Répéter un bloc de code **au moins une fois**, puis vérifier la condition.                         | `faire ... tant que condition`     | `do { ... } while (condition);`              | *Pas directement disponible, utilisez `while True` et `break`* |
+| **Boucle Pour**           | Répéter un bloc de code pour un nombre défini d'itérations.                                        | `pour i de 1 à 5 faire ...`        | `for (int i = 1; i <= 5; i++) { ... }`        | `for i in range(1, 6): ...`                   |
+| **Boucle avec Pas**       | Répéter un bloc de code en incrémentant par une valeur spécifique (pas).                           | `pour i de 1 à 10 par 2 faire ...` | `for (int i = 1; i <= 10; i += 2) { ... }`    | `for i in range(1, 11, 2): ...`               |
+| **Switch/Case**           | Permet de tester plusieurs cas pour une même variable.                                             | `selon valeur faire ...`           | `switch (variable) { case x: ... break; }`    | *Non disponible en Python, utilisez `if...elif...else`* |
+| **Fonction**              | Regrouper un bloc de code sous un nom pour le réutiliser.                                          | `fonction somme(a, b)`             | `int somme(int a, int b) { return a + b; }`   | `def somme(a, b): return a + b`              |
 
 ---
 
-### **Conseils pour utiliser ce tableau :**
-1. **Pour l'algorithmique** : Concentrez-vous sur la logique et la structure des algorithmes sans vous soucier de la syntaxe spécifique à un langage.
-2. **Pour le C** : Faites attention aux types de données et à la gestion de la mémoire, qui sont plus explicites qu'en Python.
-3. **Pour Python** : Profitez de la simplicité et de la lisibilité du langage, mais gardez à l'esprit que certaines optimisations (comme la gestion de la mémoire) sont moins visibles.
+## Explications des ajouts  
+
+### **Boucle Faire Tant Que (do...while)**  
+- **Algorithmique** :  
+  La boucle **faire...tant que** garantit que le bloc de code s'exécute au moins une fois avant de vérifier la condition.  
+- **C** :  
+  Cette boucle est disponible via `do { ... } while (condition);`.  
+- **Python** :  
+  Python n'a pas de boucle `do...while`. Vous pouvez simuler ce comportement avec une boucle infinie (`while True`) et un `break` pour sortir une fois la condition remplie.  
+
+### **Switch/Case**  
+- **Algorithmique** :  
+  La structure `selon` teste plusieurs cas possibles pour une variable donnée.  
+- **C** :  
+  Le `switch` permet de tester des cas multiples et d'exécuter des blocs spécifiques avec un `break` pour sortir après chaque cas.  
+- **Python** :  
+  Python n'a pas de structure équivalente. Utilisez une chaîne de `if`, `elif`, et `else` pour reproduire ce comportement.  
 
 ---
 
-### **Conclusion**
-Ce tableau est un outil pratique pour comprendre les équivalences entre l'algorithmique, le C et le Python. Que vous soyez débutant ou développeur expérimenté, il vous aidera à maîtriser les concepts fondamentaux de la programmation. N'hésitez pas à l'utiliser comme référence ou support pédagogique !
+## Utilisation pratique  
+
+Ce tableau est conçu pour :  
+1. Comprendre comment les concepts d'algorithmique se traduisent dans des langages concrets comme C et Python.  
+2. Accélérer l'apprentissage en identifiant les similitudes syntaxiques et leurs nuances spécifiques.  
+
+Pour toute question ou clarification, n’hésitez pas à demander !
+```
 
 ---
+
+
