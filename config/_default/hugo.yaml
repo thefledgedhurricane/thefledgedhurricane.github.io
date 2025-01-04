@@ -85,6 +85,7 @@ languages:
           parent: "Apprentissage"
           url: "/fr/teaching/algorithmique-programmation/"
           weight: 43
+        
 
 ############################
 # CONTENT & TAXONOMIES
