@@ -14,7 +14,7 @@ image:
 
 ## Objectif
 
-Ce tableau fournit une traduction des concepts d'algorithmique en langage C et Python, avec des exemples concrets pour chaque notion.
+Ce tableau fournit une traduction des concepts d'algorithmique en langage C et Python, avec des exemples concrets pour chaque notion. Il est conçu pour aider les débutants à comprendre les équivalences entre ces trois domaines et faciliter la transition entre eux.
 
 ---
 
@@ -22,7 +22,7 @@ Ce tableau fournit une traduction des concepts d'algorithmique en langage C et P
 |--------------------------|----------------------------------------------------------------------------------------------------|------------------------------------|-------------------------------------------------------------------------------------------|-----------------------------------------------|
 | **Déclaration de variables** | Réserver un espace mémoire pour stocker une valeur.                                              | `a : entier`                       | ```c\n#include <stdio.h>\nint main() {\n    int a;\n    return 0;\n}\n```                  | ```python\na = 0```                           |
 | **Affectation**           | Assigner une valeur à une variable.                                                                 | `a ← 10`                           | ```c\n#include <stdio.h>\nint main() {\n    int a;\n    a = 10;\n    return 0;\n}\n```     | ```python\na = 10```                          |
-| **Constante**             | Valeur fixe qui ne peut pas être modifiée après déclaration.                                        | `PI ← 3.14`                        | ```c\n#include <stdio.h>\n#define PI 3.14\nint main() {\n    printf("%.2f", PI);\n    return 0;\n}\n``` | ```python\nPI = 3.14```                       |
+| **Constante**             | Valeur fixe qui ne peut pas être modifiée après déclaration.                                        | `PI ← 3.14`                        | ```c \n#include <stdio.h>\n#define PI 3.14\nint main() {\n    printf("%.2f", PI);\n    return 0;\n}\n``` | ```python\nPI = 3.14```                       |
 | **Entrée utilisateur**    | Permet de lire une valeur fournie par l'utilisateur.                                               | `lire(a)`                          | ```c\n#include <stdio.h>\nint main() {\n    int a;\n    printf("Entrez un nombre : ");\n    scanf("%d", &a);\n    return 0;\n}\n``` | ```python\na = int(input("Entrez un nombre : "))``` |
 | **Sortie**                | Afficher une valeur ou un message.                                                                 | `écrire(a)`                        | ```c\n#include <stdio.h>\nint main() {\n    int a = 10;\n    printf("Valeur de a : %d\\n", a);\n    return 0;\n}\n``` | ```python\nprint("Valeur de a :", a)```       |
 | **Condition**             | Exécuter un bloc de code si une condition est vraie.                                               | `si a > 0 alors écrire("Positif")` | ```c\n#include <stdio.h>\nint main() {\n    int a = 10;\n    if (a > 0) {\n        printf("Positif\\n");\n    } else {\n        printf("Négatif\\n");\n    }\n    return 0;\n}\n``` | ```python\na = 10\nif a > 0:\n    print("Positif")\nelse:\n    print("Négatif")``` |
@@ -36,7 +36,13 @@ Ce tableau fournit une traduction des concepts d'algorithmique en langage C et P
 ## Explications
 
 Ce tableau peut être utilisé pour :  
-1. Aider les débutants à comprendre les concepts communs entre l’algorithmique et les langages de programmation.  
-2. Faciliter la transition entre ces langages en visualisant les équivalences syntaxiques.  
+1. **Aider les débutants** à comprendre les concepts communs entre l’algorithmique et les langages de programmation.  
+2. **Faciliter la transition** entre ces langages en visualisant les équivalences syntaxiques.  
+3. **Servir de référence rapide** pour les développeurs qui travaillent avec plusieurs langages.  
+
+### Conseils pour utiliser ce tableau :
+- **Pour l'algorithmique** : Concentrez-vous sur la logique et la structure des algorithmes sans vous soucier de la syntaxe spécifique à un langage.
+- **Pour le C** : Faites attention aux types de données et à la gestion de la mémoire, qui sont plus explicites qu'en Python.
+- **Pour Python** : Profitez de la simplicité et de la lisibilité du langage, mais gardez à l'esprit que certaines optimisations (comme la gestion de la mémoire) sont moins visibles.
 
 Pour toute question ou clarification, n’hésitez pas à demander !
