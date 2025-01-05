@@ -1,6 +1,6 @@
 ---
-title: Teaching
-summary: My courses
+title: Ressources d'Apprentissage
+summary: Mes cours
 type: landing
 
 cascade:
@@ -11,13 +11,15 @@ cascade:
 
 sections:
   - block: collection
-    id: teaching
+    id: Ressources-apprentissage
     content:
-      title: Teaching
+      title: Ressources d'Apprentissage
       filters:
         folders:
-          - teaching
+          - teaching/
     design:
       view: article-grid
       columns: 2
 ---
+
+

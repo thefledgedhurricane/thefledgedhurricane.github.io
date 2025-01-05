@@ -1,17 +1,17 @@
 ---
-# Laissez le titre de la page d'accueil vide pour utiliser le titre du site
+# Leave the homepage title empty to use the site title
 title: "Home"
 date: 2024-12-07
 type: landing
 
 design:
-  # Espacement par défaut des sections
+  # Default spacing for sections
   spacing: "6rem"
 
 sections:
   - block: resume-biography-3
     content:
-      # Choisissez un profil utilisateur à afficher (nom d'un dossier dans `content/authors/`)
+      # Choose a user profile to display (name of a folder in `content/authors/`)
       username: admin
       text: ""      
     design:
@@ -19,7 +19,7 @@ sections:
       background:
         color: black
         image:
-          # Ajoutez votre image d'arrière-plan dans `assets/media/`.
+          # Add your background image in `assets/media/`.
           filename: stacked-peaks.svg
           filters:
             brightness: 1.0
@@ -28,19 +28,19 @@ sections:
           parallax: false
   - block: markdown
     content:
-      title: '📚 Mes Recherches'
+      title: '📚 My Research'
       subtitle: ''
       text: |-
-        Je développe des approches basées sur l’IA, notamment l’apprentissage automatique et profond pour les séries temporelles, afin de répondre à des défis concrets dans les neurosciences et l’éducation. En explorant l'intégration des technologies avancées, mon objectif est de créer des solutions pratiques et novatrices pour améliorer les pratiques éducatives et la compréhension des mécanismes cognitifs.
+        I develop AI-based approaches, including machine learning and deep learning for time series, to address real-world challenges in neuroscience and education. By exploring the integration of advanced technologies, my goal is to create practical and innovative solutions to improve educational practices and understanding of cognitive mechanisms.
 
-        Je suis convaincu que l’innovation naît de la collaboration entre disciplines. Si mes travaux vous interpellent, connectons-nous pour échanger et concevoir ensemble de nouvelles idées !
+        I believe innovation emerges from collaboration between disciplines. If my work resonates with you, let's connect to exchange ideas and design new solutions together!
 
     design:
       columns: '1'
   - block: collection
     id: papers
     content:
-      title: Publications en Vedette
+      title: Featured Publications
       filters:
         folders:
           - publication
@@ -50,7 +50,7 @@ sections:
       columns: 2
   - block: collection
     content:
-      title: Publications Récentes
+      title: Recent Publications
       text: ""
       filters:
         folders:
@@ -61,7 +61,7 @@ sections:
   - block: collection
     id: talks
     content:
-      title: Conférences Récentes & À Venir
+      title: Recent & Upcoming Talks
       filters:
         folders:
           - event
@@ -71,14 +71,14 @@ sections:
   - block: collection
     id: news
     content:
-      title: Actualités Récentes
+      title: Latest News
       subtitle: ''
       text: ''
-      # Type de page à afficher. Ex. post, talk, publication...
+      # Type of pages to display. E.g., post, talk, publication...
       page_type: post
-      # Choisissez combien de pages afficher (0 = toutes les pages)
+      # Choose how many pages to display (0 = all pages)
       count: 5
-      # Filtres
+      # Filters
       filters:
         author: ""
         category: ""
@@ -87,27 +87,27 @@ sections:
         exclude_future: false
         exclude_past: false
         publication_type: ""
-      # Décalage du nombre de pages
+      # Page offset
       offset: 0
-      # Ordre des pages : décroissant (desc) ou croissant (asc) par date.
+      # Page order: descending (desc) or ascending (asc) by date.
       order: desc
     design:
-      # Choisissez une disposition
+      # Choose a layout
       view: date-title-summary
-      # Réduire l'espacement
+      # Reduce spacing
       spacing:
         padding: [0, 0, 0, 0]
   - block: cta-card
     content:
-      title: Collaborer avec Moi
+      title: Collaborate with Me
       text: |-
-        Vous êtes intéressé par une collaboration sur des projets d'avant-garde en IA, neurosciences ou technologies éducatives ? Contactez-moi, et ensemble, faisons une différence !
+        Are you interested in collaborating on cutting-edge projects in AI, neuroscience, or educational technologies? Contact me, and together, let's make a difference!
       button:
-        text: Me Contacter
+        text: Contact Me
         url: mailto:i.annaki@ump.ac.ma
     design:
       card:
-        # Couleur de fond de la carte (classe CSS)
+        # Card background color (CSS class)
         css_class: "bg-primary-700"
         css_style: ""
 ---
