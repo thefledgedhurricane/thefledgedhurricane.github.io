@@ -1,33 +1,40 @@
 ---
 # Leave the homepage title empty to use the site title
-title: "iannakiEducation&Research"
-date: 2022-10-24
+title: "Home"
+date: 2024-12-07
 type: landing
 
 design:
-  # Default section spacing
+  # Default spacing for sections
   spacing: "6rem"
 
 sections:
   - block: resume-biography-3
     content:
-      # Choose a user profile to display (a folder name within `content/authors/`)
+      # Choose a user profile to display (name of a folder in `content/authors/`)
       username: admin
-      text: ""
-      # Show a call-to-action button under your biography? (optional)
-      button:
-        text: Download CV
-        url: uploads/ihababdelbasset-annaki-cv.pdf
+      text: ""      
     design:
       css_class: dark
+      background:
+        color: black
+        image:
+          # Add your background image in `assets/media/`.
+          filename: stacked-peaks.svg
+          filters:
+            brightness: 1.0
+          size: cover
+          position: center
+          parallax: false
   - block: markdown
     content:
       title: '📚 My Research'
       subtitle: ''
       text: |-
-        Welcome! I'm Ihababdelbasset Annaki, an Assistant Professor at ESEF - UMP, specializing in AI, Machine Learning, and Virtual Reality. My work focuses on neuroscience and education technologies, aiming to solve real-world problems with AI-driven solutions.
+        I develop AI-based approaches, including machine and deep learning for time series, to address real-world challenges in neuroscience and education. By exploring the integration of advanced technologies, my goal is to create practical and innovative solutions to improve educational practices and understanding of cognitive mechanisms.
 
-        I have a passion for interdisciplinary research and collaboration. Let’s connect and explore new ideas together!
+        I firmly believe that innovation is born from interdisciplinary collaboration. If my work resonates with you, let's connect to exchange ideas and create new solutions together!
+
     design:
       columns: '1'
   - block: collection
@@ -64,14 +71,14 @@ sections:
   - block: collection
     id: news
     content:
-      title: Recent News
+      title: Latest News
       subtitle: ''
       text: ''
-      # Page type to display. E.g. post, talk, publication...
+      # Type of pages to display. E.g., post, talk, publication...
       page_type: post
-      # Choose how many pages you would like to display (0 = all pages)
+      # Choose how many pages to display (0 = all pages)
       count: 5
-      # Filter on criteria
+      # Filters
       filters:
         author: ""
         category: ""
@@ -80,12 +87,12 @@ sections:
         exclude_future: false
         exclude_past: false
         publication_type: ""
-      # Choose how many pages you would like to offset by
+      # Page offset
       offset: 0
-      # Page order: descending (desc) or ascending (asc) date.
+      # Page order: descending (desc) or ascending (asc) by date.
       order: desc
     design:
-      # Choose a layout view
+      # Choose a layout
       view: date-title-summary
       # Reduce spacing
       spacing:
@@ -94,12 +101,10 @@ sections:
     content:
       title: Collaborate with Me
       text: |-
-        Interested in collaborating on cutting-edge AI, neuroscience, or education technology projects? Reach out, and let's make an impact together!
-
-        Follow my journey or contact me for academic and professional opportunities.
+        Are you interested in collaborating on cutting-edge projects in AI, neuroscience, or educational technologies? Contact me, and together, let's make a difference!
       button:
-        text: Get in Touch
-        url: mailto:ihababdelbasset.annaki@gmail.com
+        text: Contact Me
+        url: mailto:i.annaki@ump.ac.ma
     design:
       card:
         # Card background color (CSS class)
