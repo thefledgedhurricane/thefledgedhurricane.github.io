@@ -15,6 +15,7 @@ image:
 ## Introduction
 
 Lors de la transition entre l'algorithmique et les langages de programmation tels que le C ou Python, il est essentiel de comprendre les similarités et différences syntaxiques. Ce tableau offre une correspondance pratique entre ces trois langages pour les concepts fondamentaux.  
+{{< audio src="Learning Algorithms for Beginners.mp3" >}}
 
 ---
 
