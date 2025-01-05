@@ -35,8 +35,9 @@ profiles:
     label: E-mail Me
   - icon: brands/linkedin
     url: https://www.linkedin.com/in/ihababdelbasset-annaki/
-  - icon: brands/behance
-    url: https://www.behance.net/Annakiabdelbasset
+  - icon: brands/github
+    url: https://github.com/thefledgedhurricane
+
 
 interests:
   - Artificial Intelligence

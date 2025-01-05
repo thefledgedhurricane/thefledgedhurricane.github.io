@@ -24,8 +24,8 @@ profiles:
     label: Envoyez-moi un email
   - icon: brands/linkedin
     url: https://www.linkedin.com/in/ihababdelbasset-annaki/
-  - icon: brands/behance
-    url: https://www.behance.net/Annakiabdelbasset
+  - icon: brands/github
+    url: https://github.com/thefledgedhurricane
 
 # Intérêts
 interests:
