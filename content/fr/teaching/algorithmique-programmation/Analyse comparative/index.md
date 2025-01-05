@@ -90,7 +90,7 @@ Ce tableau est conçu pour :
 1. Comprendre comment les concepts d'algorithmique se traduisent dans des langages concrets comme C et Python.  
 2. Accélérer l'apprentissage en identifiant les similitudes syntaxiques et leurs nuances spécifiques.  
 
-```
+
 Voici une méthode détaillée pour résoudre un problème algorithmique en utilisant le **tableau de correspondance** comme outil principal pour passer d'un algorithme à une implémentation en Python ou en C :  
 
 ---
@@ -147,9 +147,8 @@ Utilisez le tableau pour traduire chaque ligne de l’algorithme dans le langage
 | `somme ← somme + i`            | `somme += i;`                              |  
 | `écrire somme`                 | `printf("%d\n", somme);`                   |  
 
----
 
-### **Étape 4 : Traduire et implémenter en Python ou C**  
+### Étape 4 : Traduire et implémenter en Python ou C
 - Une fois les correspondances identifiées, écrivez le code complet dans le langage choisi.  
 
 #### Implémentation en Python :  
@@ -232,7 +231,7 @@ fin pour
    - Une fois que le code fonctionne, comparez vos versions Python et C pour identifier les similitudes et différences.  
 
 4. **Vérifiez les erreurs fréquentes**  
-   - En C : N’oubliez pas les déclarations de type et les `;`.  
+   - En C : N’oubliez pas les déclarations de type et les `;` .  
    - En Python : Vérifiez l’indentation et la syntaxe des blocs (`:`).  
 
 ---
