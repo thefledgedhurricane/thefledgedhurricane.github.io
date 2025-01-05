@@ -90,9 +90,154 @@ Ce tableau est conçu pour :
 1. Comprendre comment les concepts d'algorithmique se traduisent dans des langages concrets comme C et Python.  
 2. Accélérer l'apprentissage en identifiant les similitudes syntaxiques et leurs nuances spécifiques.  
 
-Pour toute question ou clarification, n’hésitez pas à demander !
+```
+Voici une méthode détaillée pour résoudre un problème algorithmique en utilisant le **tableau de correspondance** comme outil principal pour passer d'un algorithme à une implémentation en Python ou en C :  
+
+---
+
+## Méthode pour passer de l’algorithmique à Python ou C avec le tableau  
+
+### **Étape 1 : Comprendre le problème**  
+- **Analysez l’énoncé** :  
+  - Déterminez les **données d’entrée** et leur type (entiers, chaînes, etc.).  
+  - Identifiez les **résultats attendus**.  
+  - Écrivez en langage naturel les **étapes nécessaires** pour arriver au résultat.  
+
+**Exemple de problème :**  
+Écrire un programme qui calcule la somme des entiers de 1 à `n`, où `n` est une entrée utilisateur.  
+
+---
+
+### **Étape 2 : Écrire l’algorithme en pseudo-code**  
+- Rédigez un algorithme clair et compréhensible en vous concentrant sur les étapes logiques.  
+- Utilisez le vocabulaire algorithmique du tableau (ex. : `lire`, `tant que`, `pour`).  
+
+**Algorithme :**  
+``` 
+lire n  
+somme ← 0  
+pour i de 1 à n faire  
+    somme ← somme + i  
+fin pour  
+écrire somme  
+```  
+
+---
+
+### **Étape 3 : Identifier les correspondances dans le tableau**  
+Utilisez le tableau pour traduire chaque ligne de l’algorithme dans le langage cible (Python ou C).  
+
+#### Exemple de correspondance pour Python :  
+
+| **Concept Algorithmique**     | **Python**                                  |  
+|--------------------------------|---------------------------------------------|  
+| `lire n`                       | `n = int(input())`                         |  
+| `somme ← 0`                    | `somme = 0`                                |  
+| `pour i de 1 à n faire`        | `for i in range(1, n + 1):`                |  
+| `somme ← somme + i`            | `somme += i`                               |  
+| `écrire somme`                 | `print(somme)`                             |  
+
+#### Exemple de correspondance pour C :  
+
+| **Concept Algorithmique**     | **C**                                       |  
+|--------------------------------|---------------------------------------------|  
+| `lire n`                       | `scanf("%d", &n);`                         |  
+| `somme ← 0`                    | `int somme = 0;`                           |  
+| `pour i de 1 à n faire`        | `for (int i = 1; i <= n; i++) {`           |  
+| `somme ← somme + i`            | `somme += i;`                              |  
+| `écrire somme`                 | `printf("%d\n", somme);`                   |  
+
+---
+
+### **Étape 4 : Traduire et implémenter en Python ou C**  
+- Une fois les correspondances identifiées, écrivez le code complet dans le langage choisi.  
+
+#### Implémentation en Python :  
+```python
+n = int(input("Entrez un nombre : "))  # lire n
+somme = 0  # somme ← 0
+
+for i in range(1, n + 1):  # pour i de 1 à n faire
+    somme += i  # somme ← somme + i
+
+print("La somme est :", somme)  # écrire somme
+```
+
+#### Implémentation en C :  
+```c
+#include <stdio.h>
+
+int main() {
+    int n, somme = 0;  // lire n et somme ← 0
+
+    printf("Entrez un nombre : ");
+    scanf("%d", &n);
+
+    for (int i = 1; i <= n; i++) {  // pour i de 1 à n faire
+        somme += i;  // somme ← somme + i
+    }
+
+    printf("La somme est : %d\n", somme);  // écrire somme
+    return 0;
+}
 ```
 
 ---
+
+### **Étape 5 : Tester et Déboguer**  
+- Exécutez le code dans le langage choisi.  
+- Si le résultat est incorrect, retournez à l’algorithme pour vérifier la logique.  
+- Utilisez des tests simples (ex. : `n = 1`, `n = 5`) pour vérifier que le programme fonctionne.  
+
+---
+
+### **Exemple pas à pas avec un autre problème : Factoriel de n**  
+
+#### **Algorithme :**  
+``` 
+lire n  
+fact ← 1  
+pour i de 1 à n faire  
+    fact ← fact * i  
+fin pour  
+écrire fact  
+```
+
+#### **Correspondance Python :**  
+- `lire n` → `n = int(input())`  
+- `fact ← 1` → `fact = 1`  
+- `pour i de 1 à n faire` → `for i in range(1, n + 1):`  
+- `fact ← fact * i` → `fact *= i`  
+- `écrire fact` → `print(fact)`  
+
+#### **Correspondance C :**  
+- `lire n` → `scanf("%d", &n);`  
+- `fact ← 1` → `int fact = 1;`  
+- `pour i de 1 à n faire` → `for (int i = 1; i <= n; i++) {`  
+- `fact ← fact * i` → `fact *= i;`  
+- `écrire fact` → `printf("%d\n", fact);`  
+
+---
+
+### **Conseils pour l'étudiant :**  
+
+1. **Utilisez le tableau comme guide de traduction directe**  
+   - Pour chaque ligne de l'algorithme, cherchez son équivalent dans la colonne Python ou C.  
+   - Si une structure n’a pas d’équivalent direct (ex. : `faire...tant que` en Python), utilisez l’explication du tableau pour adapter.  
+
+2. **Travaillez sur de petits exemples**  
+   - Commencez par des problèmes simples comme les boucles ou les calculs arithmétiques avant d’aborder des structures plus complexes (fonctions, tableaux, etc.).  
+
+3. **Comparez les implémentations**  
+   - Une fois que le code fonctionne, comparez vos versions Python et C pour identifier les similitudes et différences.  
+
+4. **Vérifiez les erreurs fréquentes**  
+   - En C : N’oubliez pas les déclarations de type et les `;`.  
+   - En Python : Vérifiez l’indentation et la syntaxe des blocs (`:`).  
+
+---
+
+Cette méthode, associée à votre tableau, est un outil puissant pour aider les étudiants à structurer leur apprentissage et maîtriser la transition entre l'algorithmique et la programmation pratique.
+
 
 
