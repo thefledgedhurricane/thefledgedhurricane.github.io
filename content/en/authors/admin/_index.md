@@ -1,85 +1,73 @@
 ---
-# Display name
+# Display Name
 title: Ihababdelbasset Annaki
 
-# Name pronunciation (optional)
-name_pronunciation: Ihababdelbasset Annaki
-
-# Full name (for SEO)
+# Full Name (for SEO)
 first_name: Ihababdelbasset
 last_name: Annaki
-
-# Status emoji
-status:
-  icon: 🧑‍🏫
 
 # Is this the primary user of the site?
 superuser: true
 
-# Highlight the author in author lists? (true/false)
+# Highlight the author's name in author lists? (true/false)
 highlight_name: true
 
 # Role/position/tagline
-role: Assistant Professor @ESEF - UMP
+role: Assistant Professor @ESEFO - UMP
 
-# Organizations/Affiliations to display in Biography blox
-organizations:
-  - name: ESEF - UMP
-    url: https://www.ump.ac.ma/
-
-# Social network links
-# Need to use another icon? Simply download the SVG icon to your `assets/media/icons/` folder.
+# Social Media Links
 profiles:
   - icon: at-symbol
     url: 'mailto:ihababdelbasset.annaki@gmail.com'
-    label: E-mail Me
+    label: Send me an email
   - icon: brands/linkedin
     url: https://www.linkedin.com/in/ihababdelbasset-annaki/
   - icon: brands/github
     url: https://github.com/thefledgedhurricane
 
-
+# Interests
 interests:
-  - Artificial Intelligence
+  - Artificial Intelligence | Machine and Deep Learning
   - Virtual Reality
-  - Machine Learning
   - Neuroscience
-  - Education Technologies
+  - Education | Digitalization, Didactics, and Pedagogy
 
+# Education
 education:
-  - area: PhD Virtual Reality, Machine Learning & Deep Learning
-    institution: National School of Applied Sciences of Oujda (ENSAO)
+  - area: Ph.D. in Science | Specialization in Artificial Intelligence (ML&DL) and Virtual Reality
+    institution: Mohammed First University (UMP)
     date_start: 2020-01-01
     date_end: 2024-05-15
     summary: |
-      Thesis on _AI and Virtual Reality in Neuroscience Applications_. Focused on creating AI-driven interventions for cognitive impairments and advancing VR technologies for educational purposes.
-  - area: Engineering in Data and Decision Systems
+      Dissertation on _AI and Virtual Reality in Neuroscience Applications_. Focused on creating AI-based interventions for cognitive disorders and advancing virtual reality technologies for educational purposes.
+  - area: Computer Engineering | Specialization in Business Intelligence and Data Engineering
     institution: National Institute of Statistics and Applied Economics (INSEA)
     date_start: 2014-01-01
     date_end: 2017-07-01
     summary: |
       Specialized in Business Intelligence and Data Engineering.
   - area: Mathematics and Physics
-    institution: CPGE - Classes préparatoires aux grandes écoles
+    institution: CPGE - Preparatory Classes for Grandes Écoles
     date_start: 2012-09-01
     date_end: 2014-07-01
 
+# Professional Experience
 work:
   - position: Assistant Professor
-    company_name: ESEF - UMP
-    company_url: https://www.ump.ac.ma/
+    company_name: Higher School of Education and Training (ESEF) in Oujda - Mohammed First University (UMP)
+    company_url: http://esef.ump.ma/
     date_start: 2024-09-10
     date_end: ''
     summary: |
-      Focused on teaching and research in Artificial Intelligence and Advanced Development with applications in education technologies and neuroscience.
+      Teaching and research in Artificial Intelligence and Advanced Development with applications in educational technologies and neuroscience.
 
-  - position: PhD Researcher
-    company_name: LARSA
+  - position: Ph.D. Researcher
+    company_name: LaRSA
     company_url: ''
     date_start: 2020-01-01
     date_end: 2024-05-15
     summary: |
-      Conducted research in AI and VR with applications in healthcare and neuroscience, including projects on locomotor behavior analysis and predictive models for neurological conditions.
+      Research in AI and Virtual Reality with applications in healthcare and neuroscience, including projects on locomotor behavior analysis and predictive models for neurological disorders.
 
   - position: Developer & Decision Analyst
     company_name: Kertys
@@ -87,7 +75,7 @@ work:
     date_start: 2017-10-09
     date_end: 2019-11-10
     summary: |
-      Worked on enterprise solutions in Business Intelligence, including development and data visualization projects across multiple domains.
+      Worked on business intelligence solutions, including development and data visualization projects in various fields.
 
 # Skills
 skills:
@@ -116,6 +104,7 @@ skills:
         percent: 80
         icon: camera
 
+# Languages
 languages:
   - name: French
     percent: 90
@@ -126,7 +115,7 @@ languages:
   - name: Spanish
     percent: 50
 
-# Awards.
+# Awards
 awards:
   - title: Neural Networks and Deep Learning
     url: https://www.coursera.org/learn/neural-networks-deep-learning
@@ -134,16 +123,16 @@ awards:
     awarder: Coursera
     icon: coursera
     summary: |
-      Studied the foundational concepts of neural networks and deep learning, including applications in AI system development.
+      Study of fundamental concepts of neural networks and deep learning, including their applications in AI system development.
   - title: Blockchain Fundamentals
     url: https://www.edx.org/professional-certificate/uc-berkeleyx-blockchain-fundamentals
     date: '2023-07-01'
     awarder: edX
     icon: edx
     summary: |
-      Learned blockchain technology, including Bitcoin mechanics and smart contracts.
+      Training on blockchain technology, including Bitcoin mechanisms and smart contracts.
 ---
 
 ## About Me
 
-Ihababdelbasset Annaki is an Assistant Professor at ESEF - UMP, specializing in AI and Virtual Reality applications in neuroscience and education technologies. Passionate about interdisciplinary research and mentoring future AI innovators, Ihababdelbasset combines technical expertise with a vision for impactful AI solutions.
+Ihababdelbasset Annaki, Ph.D., and Assistant Professor at ESEF - Mohammed First University, specializes in artificial intelligence and virtual reality. His research focuses on their applications in neuroscience and educational technologies. Passionate about mentorship and interdisciplinary collaboration, he aims to inspire and train future innovators in AI while delivering impactful and practical solutions.
