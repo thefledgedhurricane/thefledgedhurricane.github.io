@@ -237,7 +237,7 @@ fin pour
 
 ---
 
-Cette méthode, associée à votre tableau, est un outil puissant pour aider les étudiants à structurer leur apprentissage et maîtriser la transition entre l'algorithmique et la programmation pratique.
+Cette méthode, associée au tableau, est un outil puissant pour structurer l'apprentissage et maîtriser la transition entre l'algorithmique et la programmation pratique.
 
 
 

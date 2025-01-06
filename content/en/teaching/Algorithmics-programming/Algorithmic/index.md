@@ -254,4 +254,3 @@ Fin
 
 ---
 
-Avec ces bases, vous êtes maintenant prêt(e) à progresser vers des concepts plus avancés, comme les boucles imbriquées et l'optimisation. Continuons pas à pas !
