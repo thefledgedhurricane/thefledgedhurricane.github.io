@@ -2,8 +2,11 @@
 #   Create a section for each of your site's languages.
 #   Documentation: https://docs.hugoblox.com/reference/language/
 
-# Default language
+# French is the primary language
+fr:
+  languageCode: fr
+  #contentDir: content/fr
+
 en:
   languageCode: en-us
-  # Uncomment for multi-lingual sites, and move English content into `en` sub-folder.
   #contentDir: content/en
