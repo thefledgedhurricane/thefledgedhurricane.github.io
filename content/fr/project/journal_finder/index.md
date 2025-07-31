@@ -1,10 +1,7 @@
 ---
 title: Journal Quality Analyzer
 date: 2024-01-15
-external_link: https://github.com/thefledgedhurricane/journal-quality-analyzer
 tags:
-  - Python
-  - Streamlit
   - Recherche Académique
   - Open Source
 ---
