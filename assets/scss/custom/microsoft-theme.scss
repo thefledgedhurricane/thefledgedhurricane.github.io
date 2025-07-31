@@ -1,0 +1,245 @@
+/* Microsoft-inspired CSS customizations */
+
+/* Import Microsoft's Segoe UI font family */
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Microsoft color palette */
+  --microsoft-blue: #0078d4;
+  --microsoft-blue-light: #40e0ff;
+  --microsoft-blue-dark: #005a9e;
+  --microsoft-gray-50: #faf9f8;
+  --microsoft-gray-100: #f3f2f1;
+  --microsoft-gray-200: #edebe9;
+  --microsoft-gray-300: #e1dfdd;
+  --microsoft-gray-400: #d2d0ce;
+  --microsoft-gray-500: #c8c6c4;
+  --microsoft-gray-600: #a19f9d;
+  --microsoft-gray-700: #797775;
+  --microsoft-gray-800: #484644;
+  --microsoft-gray-900: #323130;
+  
+  /* Fluent Design shadows */
+  --fluent-shadow-2: 0 1px 2px rgba(0, 0, 0, 0.12);
+  --fluent-shadow-4: 0 2px 4px rgba(0, 0, 0, 0.14);
+  --fluent-shadow-8: 0 4px 8px rgba(0, 0, 0, 0.14);
+  --fluent-shadow-16: 0 8px 16px rgba(0, 0, 0, 0.14);
+  --fluent-shadow-64: 0 32px 64px rgba(0, 0, 0, 0.20);
+}
+
+/* Apply Segoe UI font globally */
+body, 
+.navbar-nav,
+h1, h2, h3, h4, h5, h6,
+.btn,
+.card,
+p, a, span, div {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif !important;
+  letter-spacing: -0.01em;
+}
+
+/* Microsoft-style buttons */
+.btn {
+  border-radius: 4px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  box-shadow: var(--fluent-shadow-2);
+}
+
+.btn-primary {
+  background-color: var(--microsoft-blue);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--microsoft-blue-dark);
+  box-shadow: var(--fluent-shadow-4);
+  transform: translateY(-1px);
+}
+
+.btn-outline-primary {
+  border: 2px solid var(--microsoft-blue);
+  color: var(--microsoft-blue);
+  background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--microsoft-blue);
+  color: white;
+  box-shadow: var(--fluent-shadow-4);
+}
+
+/* Microsoft-style cards */
+.card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: var(--fluent-shadow-4);
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: var(--fluent-shadow-16);
+  transform: translateY(-2px);
+}
+
+.card-header {
+  background-color: var(--microsoft-gray-50);
+  border-bottom: 1px solid var(--microsoft-gray-200);
+}
+
+/* Navigation bar styling */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(20px);
+  box-shadow: var(--fluent-shadow-2);
+  border-bottom: 1px solid var(--microsoft-gray-200);
+}
+
+.navbar-brand {
+  font-weight: 600;
+  color: var(--microsoft-gray-900) !important;
+  font-size: 1.25rem;
+}
+
+.navbar-nav .nav-link {
+  color: var(--microsoft-gray-700) !important;
+  font-weight: 500;
+  margin: 0 8px;
+  border-radius: 4px;
+  padding: 8px 12px !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: var(--microsoft-gray-100);
+  color: var(--microsoft-blue) !important;
+}
+
+.navbar-nav .nav-link.active {
+  background-color: var(--microsoft-blue);
+  color: white !important;
+}
+
+/* Hero section styling */
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: var(--microsoft-gray-900);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.hero-lead {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--microsoft-gray-700);
+  line-height: 1.5;
+}
+
+/* Section headers */
+h1, h2, h3 {
+  color: var(--microsoft-gray-900);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+/* Links */
+a {
+  color: var(--microsoft-blue);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: var(--microsoft-blue-dark);
+  text-decoration: underline;
+}
+
+/* Form elements */
+.form-control {
+  border: 2px solid var(--microsoft-gray-300);
+  border-radius: 4px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: var(--microsoft-blue);
+  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
+  outline: none;
+}
+
+/* Footer */
+.site-footer {
+  background-color: var(--microsoft-gray-100);
+  border-top: 1px solid var(--microsoft-gray-200);
+  color: var(--microsoft-gray-700);
+}
+
+/* Project cards specific styling */
+.project-card {
+  background: linear-gradient(135deg, rgba(0, 120, 212, 0.05) 0%, rgba(64, 224, 255, 0.05) 100%);
+  border-left: 4px solid var(--microsoft-blue);
+}
+
+/* Tag styling */
+.badge {
+  background-color: var(--microsoft-blue);
+  color: white;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .navbar-nav {
+    background-color: white;
+    box-shadow: var(--fluent-shadow-8);
+    border-radius: 8px;
+    margin-top: 8px;
+    padding: 8px;
+  }
+}
+
+/* Dark mode support (optional) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --microsoft-blue: #479ef5;
+    --microsoft-gray-900: #ffffff;
+    --microsoft-gray-800: #f0f0f0;
+    --microsoft-gray-700: #e0e0e0;
+  }
+}
+
+/* Animation utilities */
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up {
+  animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}

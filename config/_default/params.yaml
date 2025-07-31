@@ -8,8 +8,10 @@
 ############################
 
 appearance:
-  mode: system # Use the system's default theme (light/dark mode)
-  color: emerald # Use the "emerald" color scheme. You can customize it to match your branding.
+  mode: light # Use light mode by default (Microsoft style)
+  color: ocean # Use a clean blue color scheme similar to Microsoft
+  font: microsoft # Custom font configuration for Microsoft look
+  font_size: L # Larger, more readable font size
 
 ############################
 # SEO SETTINGS
@@ -42,9 +44,10 @@ header:
     blox: "navbar" # Use the "navbar" block from Hugo Blox
     fixed_to_top: true # Keep the navbar fixed at the top of the page
     show_search: true # Enable the search bar in the navbar
-    show_theme_chooser: true # Enable the theme switcher for light/dark mode
+    show_theme_chooser: false # Disable theme switcher for consistent Microsoft look
+    show_translations: true # Enable language switcher
     logo:
-      text: "iannakiEdu&Research" # Your site's logo text
+      text: "Ihababdelbasset Annaki" # Clean, professional name display
 
 ############################
 # FOOTER CONFIGURATION
@@ -76,6 +79,20 @@ features:
     enable: true # Enable mathematical notation rendering (e.g., KaTeX or MathJax)
   privacy_pack:
     enable: true # Enable privacy-related features (e.g., anonymized analytics)
+
+############################
+# ICON CONFIGURATION
+############################
+
+icon:
+  pack: "custom"
+  filename: "icon"
+
+############################
+# CUSTOM CSS
+############################
+
+custom_css: ["microsoft-theme.scss"]
 
 ############################
 # NOTES

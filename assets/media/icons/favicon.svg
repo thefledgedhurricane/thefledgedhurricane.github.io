@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Microsoft-inspired design with clean squares -->
+  <rect width="32" height="32" fill="#0078d4"/>
+  
+  <!-- Top-left square -->
+  <rect x="3" y="3" width="11" height="11" fill="#ffffff"/>
+  
+  <!-- Top-right square -->
+  <rect x="18" y="3" width="11" height="11" fill="#ffffff"/>
+  
+  <!-- Bottom-left square -->
+  <rect x="3" y="18" width="11" height="11" fill="#ffffff"/>
+  
+  <!-- Bottom-right square -->
+  <rect x="18" y="18" width="11" height="11" fill="#ffffff"/>
+  
+  <!-- Center accent -->
+  <circle cx="16" cy="16" r="2" fill="#0078d4"/>
+</svg>

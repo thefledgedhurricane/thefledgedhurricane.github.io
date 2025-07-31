@@ -1,0 +1,28 @@
+<!-- Microsoft-style favicon and icons -->
+<link rel="icon" type="image/svg+xml" href="/assets/media/icons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/assets/media/icons/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/media/icons/icon.svg">
+<link rel="manifest" href="/manifest.json">
+
+<!-- Microsoft-inspired meta tags -->
+<meta name="theme-color" content="#0078d4">
+<meta name="msapplication-TileColor" content="#0078d4">
+<meta name="msapplication-config" content="/browserconfig.xml">
+
+<!-- Preload Microsoft fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Custom Microsoft-style CSS -->
+<style>
+  /* Immediate loading styles to prevent FOUC */
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif !important;
+  }
+  
+  .navbar {
+    backdrop-filter: blur(20px);
+    background-color: rgba(255, 255, 255, 0.98) !important;
+  }
+</style>

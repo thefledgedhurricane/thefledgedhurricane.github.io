@@ -1,0 +1,41 @@
+/* Microsoft Fluent Design System Quick Styles */
+
+/* Apply immediately to prevent flash of unstyled content */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif !important;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #323130;
+  background-color: #faf9f8;
+  margin: 0;
+  padding: 0;
+}
+
+/* Microsoft blue accent */
+:root {
+  --ms-blue: #0078d4;
+  --ms-blue-dark: #005a9e;
+  --ms-gray-50: #faf9f8;
+  --ms-gray-900: #323130;
+}
+
+/* Clean Microsoft-style navigation */
+.navbar-brand {
+  font-weight: 600 !important;
+  color: var(--ms-gray-900) !important;
+}
+
+/* Smooth transitions */
+a, button, .btn {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Microsoft-style focus */
+*:focus {
+  outline: 2px solid var(--ms-blue);
+  outline-offset: 2px;
+}

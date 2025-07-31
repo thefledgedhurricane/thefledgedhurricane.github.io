@@ -1,0 +1,27 @@
+{
+  "name": "Ihababdelbasset Annaki - Academic & Research",
+  "short_name": "IA Research",
+  "description": "Official website of Ihababdelbasset Annaki showcasing academic research, publications, and educational projects",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0078d4",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/media/icons/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/media/icons/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "32x32"
+    }
+  ],
+  "categories": ["education", "academic", "research"],
+  "lang": "fr",
+  "scope": "/",
+  "prefer_related_applications": false
+}

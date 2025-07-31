@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- High-resolution Microsoft-inspired icon -->
+  <rect width="512" height="512" fill="#0078d4" rx="48"/>
+  
+  <!-- Top-left square -->
+  <rect x="48" y="48" width="192" height="192" fill="#ffffff" rx="8"/>
+  
+  <!-- Top-right square -->
+  <rect x="272" y="48" width="192" height="192" fill="#ffffff" rx="8"/>
+  
+  <!-- Bottom-left square -->
+  <rect x="48" y="272" width="192" height="192" fill="#ffffff" rx="8"/>
+  
+  <!-- Bottom-right square -->
+  <rect x="272" y="272" width="192" height="192" fill="#ffffff" rx="8"/>
+  
+  <!-- Center accent with IA initials -->
+  <circle cx="256" cy="256" r="32" fill="#0078d4"/>
+  <text x="256" y="268" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#ffffff">IA</text>
+</svg>
