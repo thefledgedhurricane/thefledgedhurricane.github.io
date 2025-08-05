@@ -131,7 +131,7 @@ export default async function TeachingPage() {
               </div>
               
               {/* Featured Teaching */}
-              {teaching.some(course => course.featured) && (
+              {teaching.some((course: Teaching) => course.featured) && (
                 <section className="mb-16">
                   <h2 className="text-3xl font-bold text-gray-900 mb-8">
                     Cours en Vedette
