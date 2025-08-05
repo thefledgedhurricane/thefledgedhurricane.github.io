@@ -58,17 +58,17 @@ const portableTextComponents = {
     ),
   },
   block: {
-    h1: ({ children }: { children: React.ReactNode }) => (
-      <h1 className="text-3xl font-bold text-gray-900 mt-8 mb-4">{children}</h1>
+    h1: (props: any) => (
+      <h1 className="text-3xl font-bold text-gray-900 mt-8 mb-4">{props.children}</h1>
     ),
-    h2: ({ children }: { children: React.ReactNode }) => (
-      <h2 className="text-2xl font-bold text-gray-900 mt-6 mb-3">{children}</h2>
+    h2: (props: any) => (
+      <h2 className="text-2xl font-bold text-gray-900 mt-6 mb-3">{props.children}</h2>
     ),
-    h3: ({ children }: { children: React.ReactNode }) => (
-      <h3 className="text-xl font-bold text-gray-900 mt-4 mb-2">{children}</h3>
+    h3: (props: any) => (
+      <h3 className="text-xl font-bold text-gray-900 mt-4 mb-2">{props.children}</h3>
     ),
-    normal: ({ children }: { children: React.ReactNode }) => (
-      <p className="text-gray-700 mb-4 leading-relaxed">{children}</p>
+    normal: (props: any) => (
+      <p className="text-gray-700 mb-4 leading-relaxed">{props.children}</p>
     ),
   },
 };
