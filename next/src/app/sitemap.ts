@@ -38,12 +38,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   try {
     const projects = await getProjects();
-    projectPages = projects.map((project: Project) => ({
+    projectPages = projects.map((project: Project) => {
+      // Handle invalid or missing dates
+      let lastModified = new Date();
+      if (project._updatedAt) {
+        const updatedDate = new Date(project._updatedAt);
+        if (!isNaN(updatedDate.getTime())) {
+          lastModified = updatedDate;
+        }
+      }
+      
+      return {
         url: `${baseUrl}/projects/${project.slug.current}`,
-        lastModified: new Date(project._updatedAt),
-      changeFrequency: 'monthly' as const,
-      priority: project.featured ? 0.9 : 0.7,
-    }));
+        lastModified,
+        changeFrequency: 'monthly' as const,
+        priority: project.featured ? 0.9 : 0.7,
+      };
+    });
   } catch (error) {
     console.error('Error generating sitemap for projects:', error);
   }
