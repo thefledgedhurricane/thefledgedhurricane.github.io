@@ -39,7 +39,7 @@ jobs:
           
       - name: Install dependencies
         working-directory: ./next
-        run: npm ci
+        run: npm install
         
       - name: Run linting
         working-directory: ./next
