@@ -79,7 +79,9 @@ export default function SanityExample() {
                 <div>
                   <h4 className="font-medium text-gray-700">Author</h4>
                   <p className="text-gray-600">{settings.author.name}</p>
-                  <p className="text-sm text-gray-500">{settings.author.title}</p>
+                  {settings.author.bio && (
+                    <p className="text-sm text-gray-500">{settings.author.bio}</p>
+                  )}
                 </div>
                 <div>
                   <h4 className="font-medium text-gray-700">Contact</h4>
