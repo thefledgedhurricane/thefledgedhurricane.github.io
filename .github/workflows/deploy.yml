@@ -110,7 +110,7 @@ jobs:
           
       - name: Install dependencies
         working-directory: ./next
-        run: npm ci
+        run: npm install
         
       - name: Run security audit
         working-directory: ./next
