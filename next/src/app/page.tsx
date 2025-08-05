@@ -39,7 +39,7 @@ function HeroSection() {
         
         <div className="max-w-3xl mx-auto mb-16">
           <p className="text-2xl md:text-3xl text-gray-500 mb-8 font-light leading-relaxed">
-            Maître de Conférences en Informatique
+            Maître de Conférences en Intelligence Artificielle et Développement Avancé
           </p>
           <p className="text-lg text-gray-400 leading-relaxed">
             École Supérieure de l'Éducation et de la Formation, Université Mohammed Premier Oujda
@@ -89,37 +89,38 @@ function AboutSection() {
               </div>
               <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 mb-12 leading-tight">
                 Faire Progresser l'
-                <span className="font-bold">Avenir</span> des 
-                Neurosciences Computationnelles
+                <span className="font-bold">Intelligence</span> Artificielle et le 
+                Développement Avancé
               </h2>
             </div>
             
             <div className="space-y-8 text-lg text-gray-600 leading-relaxed mb-16">
               <p>
-                Mes recherches se situent à l'intersection de la réalité virtuelle, de l'intelligence artificielle 
-                et des neurosciences computationnelles. À travers des approches rigoureuses d'analyse de séries 
-                temporelles, j'explore les processus cognitifs et leur modélisation computationnelle.
+                Mes recherches se concentrent sur l'Intelligence Artificielle et le développement avancé, 
+                avec une expertise particulière dans l'application de techniques d'IA modernes aux défis 
+                technologiques contemporains. Mon approche combine recherche académique rigoureuse et 
+                expérience pratique en consulting.
               </p>
               
               <p>
-                Je me spécialise dans le développement de systèmes d'IA adaptatifs pour l'analyse de données 
-                neurophysiologiques, la création d'environnements de réalité virtuelle pour l'étude des processus 
-                cognitifs, et l'application de techniques d'apprentissage automatique aux neurosciences.
+                Je me spécialise dans le développement de solutions IA innovantes, l'architecture de systèmes 
+                avancés, et l'accompagnement d'entreprises dans leur transformation numérique. Mon expertise 
+                couvre 6 ans de recherche académique et 2 ans d'expérience en consulting technologique.
               </p>
             </div>
             
             <div className="grid grid-cols-3 gap-12 mb-16">
               <div>
-                <div className="text-4xl font-light text-black mb-2">50+</div>
+                <div className="text-4xl font-light text-black mb-2">10</div>
                 <div className="text-sm text-gray-400 uppercase tracking-wider">Publications</div>
               </div>
               <div>
-                <div className="text-4xl font-light text-black mb-2">12+</div>
+                <div className="text-4xl font-light text-black mb-2">6</div>
                 <div className="text-sm text-gray-400 uppercase tracking-wider">Années Recherche</div>
               </div>
               <div>
-                <div className="text-4xl font-light text-black mb-2">5</div>
-                <div className="text-sm text-gray-400 uppercase tracking-wider">Prix</div>
+                <div className="text-4xl font-light text-black mb-2">2</div>
+                <div className="text-sm text-gray-400 uppercase tracking-wider">Années Consulting</div>
               </div>
             </div>
             
