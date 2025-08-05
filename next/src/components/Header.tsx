@@ -25,9 +25,9 @@ export default function Header() {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="hidden sm:block">
-                <span className="text-xl font-light text-gray-900 tracking-wide">
-                 Ihababdelbasset ANNAKI
+              <div className="block">
+                <span className="text-lg sm:text-xl font-light text-gray-900 tracking-wide">
+                 <span className="hidden sm:inline">Ihababdelbasset </span>ANNAKI
                 </span>
                 <div className="text-xs text-gray-500 font-light tracking-wider uppercase">
                   Recherche & Éducation

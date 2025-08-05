@@ -29,7 +29,7 @@ function HeroSection() {
           </div>
         </div>
         
-        <h1 className="text-6xl md:text-8xl lg:text-9xl font-extralight text-gray-900 mb-6 tracking-tighter leading-none">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extralight text-gray-900 mb-6 tracking-tighter leading-none">
           Dr. Ihababdelbasset
           <br />
           <span className="font-bold text-black">
@@ -38,13 +38,13 @@ function HeroSection() {
         </h1>
         
         <div className="max-w-3xl mx-auto mb-16">
-          <p className="text-2xl md:text-3xl text-gray-500 mb-8 font-light leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-500 mb-8 font-light leading-relaxed">
             Maître de Conférences en Intelligence Artificielle et Développement Avancé
           </p>
-          <p className="text-lg text-gray-400 leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-400 leading-relaxed">
             École Supérieure de l'Éducation et de la Formation, Université Mohammed Premier Oujda
           </p>
-          <p className="text-base text-gray-400 leading-relaxed mt-4">
+          <p className="text-sm sm:text-base text-gray-400 leading-relaxed mt-4">
             Spécialiste en Réalité Virtuelle, Intelligence Artificielle et Séries Temporelles appliquées aux Neurosciences et Processus Cognitifs
           </p>
         </div>
@@ -65,11 +65,11 @@ function HeroSection() {
           </Link>
         </div>
         
-        <div className="flex justify-center items-center gap-12 text-xs text-gray-400 uppercase tracking-widest">
+        <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 lg:gap-12 text-xs text-gray-400 uppercase tracking-widest">
           <div>Réalité Virtuelle</div>
-          <div className="w-px h-4 bg-gray-300"></div>
+          <div className="hidden sm:block w-px h-4 bg-gray-300"></div>
           <div>Intelligence Artificielle</div>
-          <div className="w-px h-4 bg-gray-300"></div>
+          <div className="hidden sm:block w-px h-4 bg-gray-300"></div>
           <div>Neurosciences</div>
         </div>
       </div>
@@ -81,13 +81,13 @@ function AboutSection() {
   return (
     <section id="about" className="py-32 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-12 gap-16 items-start">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
           <div className="lg:col-span-7">
             <div className="mb-16">
               <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
                 À Propos
               </div>
-              <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 mb-12 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight text-gray-900 mb-8 lg:mb-12 leading-tight">
                 Faire Progresser l'
                 <span className="font-bold">Intelligence</span> Artificielle et le 
                 Développement Avancé
