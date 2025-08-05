@@ -7,9 +7,10 @@ import { usePathname } from 'next/navigation';
 
 const navigation = [
   { name: 'Recherche', href: '/#about' },
-  { name: 'Publications', href: '/#publications' },
-  { name: 'Enseignement', href: '/#teaching' },
-  { name: 'Événements', href: '/#events' },
+  { name: 'Publications', href: '/publications' },
+  { name: 'Articles', href: '/posts' },
+  { name: 'Enseignement', href: '/teaching' },
+  { name: 'Événements', href: '/events' },
   { name: 'Projets', href: '/projects' },
   { name: 'Contact', href: '/#contact' },
 ];
