@@ -53,13 +53,13 @@ export default function ContactForm() {
         throw new Error('Spam detected');
       }
 
-      const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
+      const endpoint = process.env.NEXT_PUBLIC_PREEFORM_ENDPOINT;
       
       if (!endpoint) {
-        throw new Error('Formspree endpoint not configured. Please set NEXT_PUBLIC_FORMSPREE_ENDPOINT in your environment variables.');
+        throw new Error('Preeform endpoint not configured. Please set NEXT_PUBLIC_PREEFORM_ENDPOINT in your environment variables.');
       }
 
-      // Submit to Formspree
+      // Submit to Preeform
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
