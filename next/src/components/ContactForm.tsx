@@ -55,7 +55,11 @@ export default function ContactForm() {
 
       const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
       
+      // Debug logging
+      console.log('Formspree endpoint:', endpoint);
+      
       if (!endpoint) {
+        console.error('NEXT_PUBLIC_FORMSPREE_ENDPOINT is not set');
         throw new Error('Formspree endpoint not configured. Please set NEXT_PUBLIC_FORMSPREE_ENDPOINT in your environment variables.');
       }
 
@@ -75,6 +79,11 @@ export default function ContactForm() {
       
       if (!response.ok) {
         const errorText = await response.text();
+        console.error('Formspree error response:', {
+          status: response.status,
+          statusText: response.statusText,
+          errorText: errorText
+        });
         throw new Error(`Failed to send message: ${response.status} ${response.statusText}`);
       }
 
@@ -88,6 +97,7 @@ export default function ContactForm() {
         honeypot: ''
       });
     } catch (error) {
+      console.error('Contact form submission error:', error);
       if (error instanceof z.ZodError) {
         const fieldErrors: Partial<ContactFormData> = {};
         error.errors.forEach((err) => {
