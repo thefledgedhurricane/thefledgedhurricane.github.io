@@ -45,7 +45,7 @@ function PublicationCard({ publication }: PublicationCardProps) {
       
       {publication.authors && publication.authors.length > 0 && (
         <div className="text-gray-600 mb-3">
-          <strong>Authors:</strong> {publication.authors.map(author => author.name).join(', ')}
+          <strong>Authors:</strong> {publication.authors.map(author => author?.name).filter(Boolean).join(', ')}
         </div>
       )}
       

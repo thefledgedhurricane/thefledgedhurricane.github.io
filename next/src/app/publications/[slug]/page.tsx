@@ -195,7 +195,7 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
                     <div className="space-y-1">
                       {publication.authors.map((author, index) => (
                         <div key={index} className="text-gray-600">
-                          {author.name}
+                          {author?.name || 'Auteur inconnu'}
                         </div>
                       ))}
                     </div>
@@ -360,7 +360,7 @@ export async function generateMetadata({ params }: PublicationPageProps) {
       description: publication.abstract || '',
       type: 'article',
       publishedTime: publication.publishedDate,
-      authors: publication.authors?.map(author => author.name) || ['Dr. Ihababdelbasset ANNAKI'],
+      authors: publication.authors?.map(author => author?.name).filter(Boolean) || ['Dr. Ihababdelbasset ANNAKI'],
       images: publication.featuredImage ? [{
         url: urlFor(publication.featuredImage).width(1200).height(630).url(),
         width: 1200,

@@ -289,7 +289,7 @@ export async function generateMetadata({ params }: PostPageProps) {
       description: post.excerpt || '',
       type: 'article',
       publishedTime: post.publishedAt,
-      authors: post.authors?.map(author => author.name) || ['Dr. Ihababdelbasset ANNAKI'],
+      authors: post.authors?.map(author => author?.name).filter(Boolean) || ['Dr. Ihababdelbasset ANNAKI'],
       images: post.featuredImage ? [{
         url: urlFor(post.featuredImage).width(1200).height(630).url(),
         width: 1200,
