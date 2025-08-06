@@ -252,7 +252,7 @@ export default async function EventPage({ params }: EventPageProps) {
         <article className="max-w-4xl mx-auto px-6 lg:px-8 pb-16">
           {event.content && (
             <div className="prose prose-lg max-w-none mb-12">
-              <PortableTextRenderer value={event.content} />
+              <PortableTextRenderer content={event.content} />
             </div>
           )}
           

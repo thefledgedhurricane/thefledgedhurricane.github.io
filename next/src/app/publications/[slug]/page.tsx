@@ -188,7 +188,7 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
         <article className="max-w-4xl mx-auto px-6 lg:px-8 pb-16">
           {publication.content && (
             <div className="prose prose-lg max-w-none mb-12">
-              <PortableTextRenderer value={publication.content} />
+              <PortableTextRenderer content={publication.content} />
             </div>
           )}
           
