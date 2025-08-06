@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { z } from 'zod';
+import SuccessModal from './SuccessModal';
 
 // Form validation schema
 const contactSchema = z.object({
@@ -25,6 +26,7 @@ export default function ContactForm() {
   const [errors, setErrors] = useState<Partial<ContactFormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -51,8 +53,14 @@ export default function ContactForm() {
         throw new Error('Spam detected');
       }
 
+      const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
+      
+      if (!endpoint) {
+        throw new Error('Formspree endpoint not configured. Please set NEXT_PUBLIC_FORMSPREE_ENDPOINT in your environment variables.');
+      }
+
       // Submit to Formspree
-      const response = await fetch(process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || '', {
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,12 +72,14 @@ export default function ContactForm() {
           message: validatedData.message,
         }),
       });
-
+      
       if (!response.ok) {
-        throw new Error('Failed to send message');
+        const errorText = await response.text();
+        throw new Error(`Failed to send message: ${response.status} ${response.statusText}`);
       }
 
       setSubmitStatus('success');
+      setShowSuccessModal(true);
       setFormData({
         name: '',
         email: '',
@@ -96,7 +106,7 @@ export default function ContactForm() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} method="POST" className="space-y-6">
         {/* Honeypot field - hidden from users */}
         <input
           type="text"
@@ -192,13 +202,7 @@ export default function ContactForm() {
           {isSubmitting ? 'Sending...' : 'Send Message'}
         </button>
 
-        {submitStatus === 'success' && (
-          <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
-            <p className="text-green-800 dark:text-green-200 text-center">
-              ✅ Thank you! Your message has been sent successfully. I'll get back to you soon.
-            </p>
-          </div>
-        )}
+
 
         {submitStatus === 'error' && (
           <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
@@ -208,6 +212,11 @@ export default function ContactForm() {
           </div>
         )}
       </form>
-    </div>
-  );
-}
+      
+      <SuccessModal 
+         isOpen={showSuccessModal} 
+         onClose={() => setShowSuccessModal(false)} 
+       />
+     </div>
+   );
+ }

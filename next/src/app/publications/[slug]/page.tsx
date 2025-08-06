@@ -2,9 +2,9 @@ import { notFound } from 'next/navigation';
 import { client, queries, urlFor } from '@/lib/sanity';
 import { Publication } from '@/lib/sanity-types';
 import { generateJsonLd } from '@/lib/jsonld';
-import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import PortableTextRenderer from '@/components/PortableTextRenderer';
 
 interface PublicationPageProps {
   params: {
@@ -22,85 +22,7 @@ async function getPublication(slug: string): Promise<Publication | null> {
   }
 }
 
-// Portable Text components for rich content rendering
-const portableTextComponents = {
-  types: {
-    image: ({ value }: any) => (
-      <div className="my-8">
-        <Image
-          src={urlFor(value).width(800).height(600).url()}
-          alt={value.alt || 'Publication image'}
-          width={800}
-          height={600}
-          className="rounded-lg shadow-md"
-        />
-        {value.caption && (
-          <p className="text-sm text-gray-600 text-center mt-2 italic">
-            {value.caption}
-          </p>
-        )}
-      </div>
-    ),
-    codeBlock: ({ value }: any) => (
-      <div className="my-6">
-        <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
-          <code className={`language-${value.language || 'text'}`}>
-            {value.code}
-          </code>
-        </pre>
-        {value.filename && (
-          <p className="text-sm text-gray-600 mt-2">
-            Fichier: <code className="bg-gray-100 px-1 rounded">{value.filename}</code>
-          </p>
-        )}
-      </div>
-    ),
-  },
-  block: {
-    h1: ({ children }: any) => (
-      <h1 className="text-3xl font-bold text-gray-900 mt-8 mb-4">{children}</h1>
-    ),
-    h2: ({ children }: any) => (
-      <h2 className="text-2xl font-bold text-gray-900 mt-6 mb-3">{children}</h2>
-    ),
-    h3: ({ children }: any) => (
-      <h3 className="text-xl font-semibold text-gray-900 mt-4 mb-2">{children}</h3>
-    ),
-    normal: ({ children }: any) => (
-      <p className="text-gray-700 leading-relaxed mb-4">{children}</p>
-    ),
-    blockquote: ({ children }: any) => (
-      <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-600 my-6">
-        {children}
-      </blockquote>
-    ),
-  },
-  list: {
-    bullet: ({ children }: any) => (
-      <ul className="list-disc list-inside space-y-2 mb-4 text-gray-700">{children}</ul>
-    ),
-    number: ({ children }: any) => (
-      <ol className="list-decimal list-inside space-y-2 mb-4 text-gray-700">{children}</ol>
-    ),
-  },
-  marks: {
-    strong: ({ children }: any) => <strong className="font-semibold">{children}</strong>,
-    em: ({ children }: any) => <em className="italic">{children}</em>,
-    code: ({ children }: any) => (
-      <code className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono">{children}</code>
-    ),
-    link: ({ children, value }: any) => (
-      <a
-        href={value.href}
-        target={value.blank ? '_blank' : '_self'}
-        rel={value.blank ? 'noopener noreferrer' : undefined}
-        className="text-blue-600 hover:text-blue-800 underline"
-      >
-        {children}
-      </a>
-    ),
-  },
-};
+
 
 export default async function PublicationPage({ params }: PublicationPageProps) {
   const publication = await getPublication(params.slug);
@@ -266,10 +188,7 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
         <article className="max-w-4xl mx-auto px-6 lg:px-8 pb-16">
           {publication.content && (
             <div className="prose prose-lg max-w-none mb-12">
-              <PortableText
-                value={publication.content}
-                components={portableTextComponents}
-              />
+              <PortableTextRenderer value={publication.content} />
             </div>
           )}
           

@@ -136,7 +136,9 @@ export default function ContactPage() {
                 </h3>
                 <div className="flex space-x-4">
                   <a
-                    href="#"
+                    href="https://www.linkedin.com/in/ihababdelbasset-annaki/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 bg-gray-100 hover:bg-primary-100 rounded-lg flex items-center justify-center transition-colors duration-200"
                     aria-label="LinkedIn"
                   >
@@ -145,16 +147,21 @@ export default function ContactPage() {
                     </svg>
                   </a>
                   <a
-                    href="#"
+                     href="https://www.researchgate.net/profile/Ihababdelbasset-Annaki"
+                     target="_blank"
+                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-gray-100 hover:bg-primary-100 rounded-lg flex items-center justify-center transition-colors duration-200"
-                    aria-label="Twitter"
+                    aria-label="ResearchGate"
                   >
-                    <svg className="w-5 h-5 text-gray-600 hover:text-primary-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
+                    <svg className="w-5 h-5 text-gray-600 hover:text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.5 5.5h3c1.381 0 2.5 1.119 2.5 2.5s-1.119 2.5-2.5 2.5h-1v2h-2v-7zm2 3.5h1c.276 0 .5-.224.5-.5s-.224-.5-.5-.5h-1v1zm-2 2.5h3v1h-3v-1zm0 2h4v1h-4v-1z"/>
+                      <circle cx="12" cy="18" r="1.5" fill="currentColor"/>
                     </svg>
                   </a>
                   <a
-                    href="#"
+                     href="https://github.com/thefledgedhurricane/"
+                     target="_blank"
+                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-gray-100 hover:bg-primary-100 rounded-lg flex items-center justify-center transition-colors duration-200"
                     aria-label="GitHub"
                   >

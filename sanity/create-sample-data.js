@@ -1,7 +1,7 @@
 import { createClient } from '@sanity/client'
 
 const client = createClient({
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'your-project-id',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'quz6kxvy',
   dataset: process.env.SANITY_STUDIO_DATASET || 'production',
   token: process.env.SANITY_API_TOKEN,
   useCdn: false,
@@ -153,8 +153,8 @@ async function createSampleData() {
     await Promise.all([
       client.create({
         _type: 'post',
-        title: 'Getting Started with Academic Research',
-        slug: { current: 'getting-started-academic-research' },
+        title: 'Get Started with Your Academic Journey',
+        slug: { current: 'get-started' },
         excerpt: 'A comprehensive guide for new researchers entering academia.',
         content: [
           {
@@ -165,7 +165,7 @@ async function createSampleData() {
               {
                 _type: 'span',
                 _key: 'span1',
-                text: 'Academic research can be challenging but rewarding. This guide will help you get started.',
+                text: 'Academic research can be challenging but rewarding. This guide will help you get started with your research journey.',
                 marks: [],
               },
             ],
@@ -181,9 +181,9 @@ async function createSampleData() {
       }),
       client.create({
         _type: 'post',
-        title: 'Version Française: Guide de Recherche',
-        slug: { current: 'guide-recherche-francais' },
-        excerpt: 'Un guide complet pour les nouveaux chercheurs en français.',
+        title: 'Building Your Second Brain: A Digital Knowledge System',
+        slug: { current: 'second-brain' },
+        excerpt: 'Learn how to create a digital second brain for managing knowledge and research.',
         content: [
           {
             _type: 'block',
@@ -193,19 +193,19 @@ async function createSampleData() {
               {
                 _type: 'span',
                 _key: 'span1',
-                text: 'La recherche académique peut être difficile mais enrichissante.',
+                text: 'A second brain is a digital extension of your mind that helps you capture, organize, and retrieve information efficiently.',
                 marks: [],
               },
             ],
           },
         ],
-        authors: [{ _type: 'reference', _ref: authors[1]._id }],
-        tags: ['recherche', 'académie', 'guide'],
-        language: 'fr',
-        category: 'Éducation',
-        featured: false,
-        readingTime: 6,
-        publishedAt: new Date(Date.now() - 8 * 30 * 24 * 60 * 60 * 1000).toISOString(), // 8 months ago
+        authors: [{ _type: 'reference', _ref: authors[0]._id }],
+        tags: ['productivity', 'knowledge management', 'digital tools'],
+        language: 'en',
+        category: 'Productivity',
+        featured: true,
+        readingTime: 8,
+        publishedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 3 days ago
       }),
     ])
 

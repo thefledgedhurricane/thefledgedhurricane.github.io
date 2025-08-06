@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getProject, getProjects, urlFor } from '@/lib/sanity';
 import { Project } from '@/lib/sanity-types';
-import { PortableText } from '@portabletext/react';
+import PortableTextRenderer from '@/components/PortableTextRenderer';
 
 interface ProjectPageProps {
   params: {
@@ -39,39 +39,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   };
 }
 
-const portableTextComponents = {
-  types: {
-    codeBlock: ({ value }: { value: any }) => (
-      <div className="my-6">
-        <div className="bg-gray-900 rounded-t-lg px-4 py-2 text-sm text-gray-300">
-          {value.filename && (
-            <span className="text-blue-400">{value.filename}</span>
-          )}
-          {value.language && (
-            <span className="ml-2 text-gray-500">({value.language})</span>
-          )}
-        </div>
-        <pre className="bg-gray-800 text-gray-100 p-4 rounded-b-lg overflow-x-auto">
-          <code>{value.code}</code>
-        </pre>
-      </div>
-    ),
-  },
-  block: {
-    h1: (props: any) => (
-      <h1 className="text-3xl font-bold text-gray-900 mt-8 mb-4">{props.children}</h1>
-    ),
-    h2: (props: any) => (
-      <h2 className="text-2xl font-bold text-gray-900 mt-6 mb-3">{props.children}</h2>
-    ),
-    h3: (props: any) => (
-      <h3 className="text-xl font-bold text-gray-900 mt-4 mb-2">{props.children}</h3>
-    ),
-    normal: (props: any) => (
-      <p className="text-gray-700 mb-4 leading-relaxed">{props.children}</p>
-    ),
-  },
-};
+
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const project = await getProject(params.slug);
@@ -183,10 +151,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-white rounded-xl shadow-sm p-8">
           <div className="prose prose-lg max-w-none">
-            <PortableText 
-              value={project.content} 
-              components={portableTextComponents}
-            />
+            <PortableTextRenderer content={project.content} />
           </div>
         </div>
       </div>
