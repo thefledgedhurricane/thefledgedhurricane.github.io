@@ -62,8 +62,8 @@ NEXT_PUBLIC_SITE_NAME=Dr. Your Name - Academic Portfolio
 NEXT_PUBLIC_SITE_DESCRIPTION=Academic portfolio showcasing research and achievements
 
 # Contact Form Configuration (Frontend)
-# Set up your Preeform endpoint and replace with your form endpoint
-NEXT_PUBLIC_PREEFORM_ENDPOINT=your-preeform-endpoint-url
+# Sign up at https://formspree.io and replace with your form endpoint
+NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
 
 # Optional: Analytics
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
