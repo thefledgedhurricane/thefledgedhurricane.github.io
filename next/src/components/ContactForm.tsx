@@ -3,23 +3,16 @@
 import { useState } from 'react';
 import { z } from 'zod';
 
+// Form validation schema
 const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters').max(100, 'Name is too long'),
+  name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Please enter a valid email address'),
-  subject: z.string().min(5, 'Subject must be at least 5 characters').max(200, 'Subject is too long'),
-  message: z.string().min(10, 'Message must be at least 10 characters').max(2000, 'Message is too long'),
-  honeypot: z.string().max(0, 'Bot detected'), // Honeypot field
+  subject: z.string().min(5, 'Subject must be at least 5 characters'),
+  message: z.string().min(10, 'Message must be at least 10 characters'),
+  honeypot: z.string().max(0, 'Bot detected') // Honeypot field for spam protection
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
-
-interface FormErrors {
-  name?: string;
-  email?: string;
-  subject?: string;
-  message?: string;
-  general?: string;
-}
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -27,141 +20,96 @@ export default function ContactForm() {
     email: '',
     subject: '',
     message: '',
-    honeypot: '',
+    honeypot: ''
   });
-  
-  const [errors, setErrors] = useState<FormErrors>({});
+  const [errors, setErrors] = useState<Partial<ContactFormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
     // Clear error when user starts typing
-    if (errors[name as keyof FormErrors]) {
+    if (errors[name as keyof ContactFormData]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
-    }
-  };
-
-  const validateForm = (): boolean => {
-    try {
-      contactSchema.parse(formData);
-      setErrors({});
-      return true;
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        const newErrors: FormErrors = {};
-        error.errors.forEach((err) => {
-          if (err.path[0]) {
-            newErrors[err.path[0] as keyof FormErrors] = err.message;
-          }
-        });
-        setErrors(newErrors);
-      }
-      return false;
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!validateForm()) {
-      return;
-    }
-
     setIsSubmitting(true);
     setErrors({});
+    setSubmitStatus('idle');
 
     try {
-      const response = await fetch('/api/contact', {
+      // Validate form data
+      const validatedData = contactSchema.parse(formData);
+
+      // Check honeypot (spam protection)
+      if (validatedData.honeypot) {
+        throw new Error('Spam detected');
+      }
+
+      // Submit to Formspree
+      const response = await fetch(process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || '', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: validatedData.name,
+          email: validatedData.email,
+          subject: validatedData.subject,
+          message: validatedData.message,
+        }),
       });
 
       if (!response.ok) {
         throw new Error('Failed to send message');
       }
 
-      setIsSubmitted(true);
+      setSubmitStatus('success');
       setFormData({
         name: '',
         email: '',
         subject: '',
         message: '',
-        honeypot: '',
+        honeypot: ''
       });
     } catch (error) {
-      setErrors({
-        general: 'Failed to send message. Please try again later.',
-      });
+      if (error instanceof z.ZodError) {
+        const fieldErrors: Partial<ContactFormData> = {};
+        error.errors.forEach((err) => {
+          if (err.path[0]) {
+            fieldErrors[err.path[0] as keyof ContactFormData] = err.message;
+          }
+        });
+        setErrors(fieldErrors);
+      } else {
+        setSubmitStatus('error');
+      }
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  if (isSubmitted) {
-    return (
-      <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
-        <div className="w-12 h-12 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
-          <svg
-            className="w-6 h-6 text-green-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-        </div>
-        <h3 className="text-lg font-semibold text-green-800 mb-2">
-          Message Sent Successfully!
-        </h3>
-        <p className="text-green-700">
-          Thank you for your message. I'll get back to you as soon as possible.
-        </p>
-        <button
-          onClick={() => setIsSubmitted(false)}
-          className="mt-4 text-green-600 hover:text-green-700 font-medium"
-        >
-          Send Another Message
-        </button>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-      {errors.general && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-          <p className="text-red-700">{errors.general}</p>
-        </div>
-      )}
-      
-      {/* Honeypot field - hidden from users */}
-      <div className="hidden">
-        <label htmlFor="honeypot">Leave this field empty</label>
+    <div className="max-w-2xl mx-auto">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Honeypot field - hidden from users */}
         <input
           type="text"
-          id="honeypot"
           name="honeypot"
           value={formData.honeypot}
           onChange={handleChange}
+          style={{ display: 'none' }}
           tabIndex={-1}
           autoComplete="off"
         />
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Name *
           </label>
           <input
@@ -170,19 +118,17 @@ export default function ContactForm() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className={`input-field ${
-              errors.name ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : ''
-            }`}
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+              errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+            } bg-white dark:bg-gray-800 text-gray-900 dark:text-white`}
             placeholder="Your full name"
             required
           />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-600">{errors.name}</p>
-          )}
+          {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Email *
           </label>
           <input
@@ -191,104 +137,77 @@ export default function ContactForm() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`input-field ${
-              errors.email ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : ''
-            }`}
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+              errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+            } bg-white dark:bg-gray-800 text-gray-900 dark:text-white`}
             placeholder="your.email@example.com"
             required
           />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-600">{errors.email}</p>
-          )}
+          {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
         </div>
-      </div>
 
-      <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-          Subject *
-        </label>
-        <input
-          type="text"
-          id="subject"
-          name="subject"
-          value={formData.subject}
-          onChange={handleChange}
-          className={`input-field ${
-            errors.subject ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : ''
-          }`}
-          placeholder="What's this about?"
-          required
-        />
-        {errors.subject && (
-          <p className="mt-1 text-sm text-red-600">{errors.subject}</p>
-        )}
-      </div>
+        <div>
+          <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Subject *
+          </label>
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+              errors.subject ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+            } bg-white dark:bg-gray-800 text-gray-900 dark:text-white`}
+            placeholder="What's this about?"
+            required
+          />
+          {errors.subject && <p className="mt-1 text-sm text-red-600">{errors.subject}</p>}
+        </div>
 
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-          Message *
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          rows={6}
-          value={formData.message}
-          onChange={handleChange}
-          className={`input-field resize-none ${
-            errors.message ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : ''
-          }`}
-          placeholder="Tell me about your project, question, or just say hello!"
-          required
-        />
-        {errors.message && (
-          <p className="mt-1 text-sm text-red-600">{errors.message}</p>
-        )}
-        <p className="mt-1 text-sm text-gray-500">
-          {formData.message.length}/2000 characters
-        </p>
-      </div>
+        <div>
+          <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Message *
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows={6}
+            value={formData.message}
+            onChange={handleChange}
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-vertical ${
+              errors.message ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+            } bg-white dark:bg-gray-800 text-gray-900 dark:text-white`}
+            placeholder="Tell me about your project, question, or just say hello!"
+            required
+          />
+          {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
+        </div>
 
-      <div>
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`w-full btn-primary ${
-            isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
+          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-3 px-6 rounded-lg transition-colors focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
-          {isSubmitting ? (
-            <span className="flex items-center justify-center">
-              <svg
-                className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
-              </svg>
-              Sending...
-            </span>
-          ) : (
-            'Send Message'
-          )}
+          {isSubmitting ? 'Sending...' : 'Send Message'}
         </button>
-      </div>
 
-      <p className="text-sm text-gray-600 text-center">
-        * Required fields. Your information will be kept private and secure.
-      </p>
-    </form>
+        {submitStatus === 'success' && (
+          <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+            <p className="text-green-800 dark:text-green-200 text-center">
+              ✅ Thank you! Your message has been sent successfully. I'll get back to you soon.
+            </p>
+          </div>
+        )}
+
+        {submitStatus === 'error' && (
+          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+            <p className="text-red-800 dark:text-red-200 text-center">
+              ❌ Sorry, there was an error sending your message. Please try again or contact me directly.
+            </p>
+          </div>
+        )}
+      </form>
+    </div>
   );
 }

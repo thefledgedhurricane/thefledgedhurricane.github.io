@@ -61,9 +61,9 @@ NEXT_PUBLIC_SITE_URL=https://yourusername.github.io/repository-name
 NEXT_PUBLIC_SITE_NAME=Dr. Your Name - Academic Portfolio
 NEXT_PUBLIC_SITE_DESCRIPTION=Academic portfolio showcasing research and achievements
 
-# Optional: Contact Form
-CONTACT_EMAIL=your@email.com
-EMAIL_SERVICE_API_KEY=your_email_service_key
+# Contact Form Configuration (Frontend)
+# Sign up at https://formspree.io and replace with your form endpoint
+NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
 
 # Optional: Analytics
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
@@ -95,6 +95,85 @@ npm run dev
 ```
 
 Your portfolio will be available at `http://localhost:3000`
+
+### 5. Set Up Firebase Contact Form
+
+The portfolio includes a fully frontend contact form using Firebase Firestore:
+
+1. **Create Firebase Project**:
+   - Go to [Firebase Console](https://console.firebase.google.com)
+   - Click "Create a project" or "Add project"
+   - Enter your project name (e.g., "academic-portfolio")
+   - Disable Google Analytics (optional for contact forms)
+   - Click "Create project"
+
+2. **Set up Firestore Database**:
+   - In your Firebase project, go to "Firestore Database"
+   - Click "Create database"
+   - Choose "Start in test mode" (we'll secure it later)
+   - Select your preferred location
+   - Click "Done"
+
+3. **Get Firebase Configuration**:
+   - Go to Project Settings (gear icon)
+   - Scroll down to "Your apps" section
+   - Click "Web" icon (</>) to add a web app
+   - Register your app with a nickname
+   - Copy the Firebase configuration object
+
+4. **Configure Environment Variables**:
+   Add these to your `.env.local` file:
+   ```env
+   NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key_here
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project-id.firebaseapp.com
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project-id.appspot.com
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+   ```
+
+5. **Set up Firestore Security Rules** (Important!):
+   - Go to Firestore Database → Rules
+   - Replace the default rules with:
+   ```javascript
+   rules_version = '2';
+   service cloud.firestore {
+     match /databases/{database}/documents {
+       // Allow writes to contact-messages collection
+       match /contact-messages/{document} {
+         allow create: if request.auth == null
+           && resource == null
+           && request.resource.data.keys().hasAll(['name', 'email', 'subject', 'message', 'timestamp'])
+           && request.resource.data.name is string
+           && request.resource.data.email is string
+           && request.resource.data.subject is string
+           && request.resource.data.message is string;
+         allow read: if false; // No public reading
+       }
+     }
+   }
+   ```
+   - Click "Publish"
+
+6. **Test the Contact Form**:
+   - The contact form is available at `/contact`
+   - Submit a test message
+   - Check your Firestore console to see the submitted data
+
+7. **View Contact Messages**:
+   - Go to Firestore Database in Firebase Console
+   - Navigate to the `contact-messages` collection
+   - View submitted messages with timestamps
+
+**Features**:
+- ✅ Fully frontend (no backend server required)
+- ✅ Real-time data storage with Firestore
+- ✅ Spam protection with honeypot field
+- ✅ Form validation with Zod
+- ✅ Responsive design
+- ✅ Success/error handling
+- ✅ Secure database rules
+- ✅ Free tier supports thousands of submissions
 
 ## 🎯 Features
 
