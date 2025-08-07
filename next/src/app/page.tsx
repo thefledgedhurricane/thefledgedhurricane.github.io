@@ -134,19 +134,19 @@ function AboutSection() {
           
           <div className="lg:col-span-5">
             <div className="relative">
-              <div className="aspect-[4/5] bg-gray-200 overflow-hidden">
-                {/* Placeholder for academic photo */}
-                <div className="w-full h-full flex items-center justify-center text-gray-400">
-                  <div className="text-center">
-                    <div className="w-20 h-20 bg-white mx-auto mb-4 flex items-center justify-center">
-                      <svg className="w-10 h-10 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                      </svg>
-                    </div>
-                    <p className="text-xs uppercase tracking-wider">Portrait Académique</p>
-                  </div>
-                </div>
+              <div className="aspect-[4/5] bg-gray-100 overflow-hidden shadow-sm">
+                {/* Portrait académique */}
+                <Image
+                  src="/portrait-academique.jpg"
+                  alt="Portrait académique de Dr. Ihababdelbasset Annaki"
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-500"
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+                />
               </div>
+              {/* Overlay décoratif optionnel */}
+              <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-black/5 -z-10"></div>
             </div>
           </div>
         </div>
