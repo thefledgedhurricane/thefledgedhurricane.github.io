@@ -118,7 +118,7 @@ export default async function PublicationsPage() {
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Découvrez mes travaux de recherche, articles académiques et contributions scientifiques 
-              dans les domaines de l'Intelligence Artificielle et du développement avancé.
+              dans les domaines de l&apos;Intelligence Artificielle et du d&apos;éveloppement avancé.
             </p>
           </div>
           

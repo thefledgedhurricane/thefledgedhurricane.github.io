@@ -38,7 +38,7 @@ const teachingTypeLabels: Record<string, string> = {
 
 const roleLabels: Record<string, string> = {
   instructor: 'Enseignant',
-  ta: 'Assistant d\'enseignement',
+  ta: 'Assistant d&apos;enseignement',
   guest: 'Conférencier invité',
   lab_instructor: 'Responsable TP',
   tutor: 'Tuteur',
@@ -197,7 +197,7 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
                   
                   {teaching.studentCount && (
                     <div>
-                      <span className="font-semibold text-gray-900">Nombre d'étudiants: </span>
+                      <span className="font-semibold text-gray-900">Nombre d&apos;étudiants: </span>
                       <span className="text-gray-600">{teaching.studentCount}</span>
                     </div>
                   )}
@@ -384,7 +384,7 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
               <svg className="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
-              Retour à l'enseignement
+              Retour à l&apos;enseignement
             </Link>
           </div>
         </div>

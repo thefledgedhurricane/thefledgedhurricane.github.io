@@ -117,7 +117,7 @@ export default async function TeachingPage() {
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Découvrez mes cours, formations et activités pédagogiques dans les domaines 
-              de l'Intelligence Artificielle et du développement avancé.
+              de l&apos;Intelligence Artificielle et du d&apos;éveloppement avancé.
             </p>
           </div>
           
@@ -185,7 +185,7 @@ export default async function TeachingPage() {
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">Aucun Cours</h2>
                 <p className="text-gray-600">
-                  Les cours apparaîtront ici une fois qu'ils seront ajoutés dans le CMS Sanity.
+                  Les cours apparaîtront ici une fois qu&apos;ils seront ajoutés dans le CMS Sanity.
                 </p>
               </div>
             </div>

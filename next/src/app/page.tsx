@@ -42,7 +42,7 @@ function HeroSection() {
             Maître de Conférences en Intelligence Artificielle et Développement Avancé
           </p>
           <p className="text-base sm:text-lg text-gray-400 leading-relaxed">
-            École Supérieure de l'Éducation et de la Formation, Université Mohammed Premier Oujda
+            École Supérieure de l&apos;Éducation et de la Formation, Université Mohammed Premier Oujda
           </p>
           <p className="text-sm sm:text-base text-gray-400 leading-relaxed mt-4">
             Spécialiste en Réalité Virtuelle, Intelligence Artificielle et Séries Temporelles appliquées aux Neurosciences et Processus Cognitifs
@@ -461,7 +461,7 @@ function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                     href={`/projects/${project.slug.current}`}
                     className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
                   >
-                    Voir le Projet
+                    Voir le Proj<span dangerouslySetInnerHTML={{ __html: "&apos;" }} />et
                     <svg
                       className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1"
                       fill="none"
@@ -506,7 +506,7 @@ function CTASection() {
             
             <p className="text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto">
               Intéressé par une collaboration, des partenariats de recherche ou une consultation académique ? 
-              Je suis toujours ouvert aux conversations significatives sur l'avenir de la technologie et de l'éducation.
+              Je suis toujours ouvert aux conversations significatives sur l&apos;avenir de la technologie et de l&apos;éducation.
             </p>
           </div>
           

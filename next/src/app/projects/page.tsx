@@ -95,7 +95,7 @@ export default async function ProjectsPage() {
             </div>
 
             <div className="text-sm text-gray-500">
-              {projects.length} projet{projects.length !== 1 ? 's' : ''} trouvé{projects.length !== 1 ? 's' : ''}
+              {projects.length} projet{projects.length !== 1 ? 's' : ''} trouv&eacute;{projects.length !== 1 ? 's' : ''}
             </div>
           </div>
         </div>

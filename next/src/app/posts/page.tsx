@@ -129,7 +129,7 @@ export default async function PostsPage() {
               Blog
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Découvrez mes articles, réflexions et analyses sur l'Intelligence Artificielle, 
+              Découvrez mes articles, réflexions et analyses sur l&apos;Intelligence Artificielle, 
               la technologie et la recherche académique.
             </p>
           </div>

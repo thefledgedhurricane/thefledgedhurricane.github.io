@@ -141,7 +141,7 @@ function EventCard({ event }: EventCardProps) {
               rel="noopener noreferrer"
               className="text-green-600 hover:text-green-700 text-sm font-medium"
             >
-              S'inscrire →
+              S&apos;inscrire →
             </a>
           )}
         </div>
