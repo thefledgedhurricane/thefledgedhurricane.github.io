@@ -56,7 +56,7 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
 
           <div className="mt-6">
             <p className="text-sm text-gray-600 mb-4">
-              En attendant, n'hésitez pas à me suivre sur :
+              En attendant, n&apos;hésitez pas à me suivre sur :
             </p>
             
             <div className="flex space-x-4 justify-center">

@@ -88,7 +88,7 @@ function AboutSection() {
                 À Propos
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight text-gray-900 mb-8 lg:mb-12 leading-tight">
-                Faire Progresser l'
+                Faire Progresser l&apos;
                 <span className="font-bold">Intelligence</span> Artificielle et le 
                 Développement Avancé
               </h2>
@@ -96,16 +96,16 @@ function AboutSection() {
             
             <div className="space-y-8 text-lg text-gray-600 leading-relaxed mb-16">
               <p>
-                Mes recherches se concentrent sur l'Intelligence Artificielle et le développement avancé, 
-                avec une expertise particulière dans l'application de techniques d'IA modernes aux défis 
+                Mes recherches se concentrent sur l&apos;Intelligence Artificielle et le développement avancé, 
+                avec une expertise particulière dans l&apos;application de techniques d&apos;IA modernes aux défis 
                 technologiques contemporains. Mon approche combine recherche académique rigoureuse et 
                 expérience pratique en consulting.
               </p>
               
               <p>
-                Je me spécialise dans le développement de solutions IA innovantes, l'architecture de systèmes 
-                avancés, et l'accompagnement d'entreprises dans leur transformation numérique. Mon expertise 
-                couvre 6 ans de recherche académique et 2 ans d'expérience en consulting technologique.
+                Je me spécialise dans le développement de solutions IA innovantes, l&apos;architecture de systèmes 
+                avancés, et l&apos;accompagnement d&apos;entreprises dans leur transformation numérique. Mon expertise 
+                couvre 6 ans de recherche académique et 2 ans d&apos;expérience en consulting technologique.
               </p>
             </div>
             

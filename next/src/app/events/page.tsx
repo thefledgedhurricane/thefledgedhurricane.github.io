@@ -198,7 +198,7 @@ export default async function EventsPage() {
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Découvrez mes participations aux conférences, ateliers et événements académiques 
-              dans les domaines de l'Intelligence Artificielle et de la recherche.
+              dans les domaines de l&apos;Intelligence Artificielle et de la recherche.
             </p>
           </div>
           
@@ -282,7 +282,7 @@ export default async function EventsPage() {
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">Aucun Événement</h2>
                 <p className="text-gray-600">
-                  Les événements apparaîtront ici une fois qu'ils seront ajoutés dans le CMS Sanity.
+                  Les événements apparaîtront ici une fois qu&apos;ils seront ajoutés dans le CMS Sanity.
                 </p>
               </div>
             </div>

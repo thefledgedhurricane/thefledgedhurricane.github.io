@@ -192,7 +192,7 @@ export default async function PostsPage() {
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">Aucun Article</h2>
                 <p className="text-gray-600">
-                  Les articles de blog apparaîtront ici une fois qu'ils seront publiés dans le CMS Sanity.
+                  Les articles de blog apparaîtront ici une fois qu&apos;ils seront publiés dans le CMS Sanity.
                 </p>
               </div>
             </div>
