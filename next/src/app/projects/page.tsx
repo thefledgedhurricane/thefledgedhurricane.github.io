@@ -1,20 +1,14 @@
-import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getProjects, urlFor } from '@/lib/sanity';
 import { Project } from '@/lib/sanity-types';
 
-export const metadata: Metadata = {
-  title: 'Projets | Pr. Ihababdelbasset Annaki',
-  description: 'Découvrez tous les projets de recherche et développement de Pr. Ihababdelbasset Annaki en Intelligence Artificielle, Réalité Virtuelle et Neurosciences.',
+export const metadata = {
+  title: 'Projets | Portfolio Académique',
+  description: 'Découvrez mes projets de recherche et développement en Intelligence Artificielle, Réalité Virtuelle et Neurosciences Computationnelles.',
 };
 
-interface ProjectsPageProps {
-  searchParams: {
-    category?: string;
-    status?: string;
-  };
-}
+// Metadata is handled by layout.tsx for client components
 
 const categoryLabels = {
   web: 'Web',
@@ -33,26 +27,13 @@ const statusLabels = {
   cancelled: 'Annulé'
 };
 
-export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
-  const allProjects = await getProjects();
+export default async function ProjectsPage() {
+  // Fetch all projects at build time
+  const projects = await getProjects();
   
-  // Filter projects based on search params
-  let filteredProjects = allProjects;
-  
-  if (searchParams.category) {
-    filteredProjects = filteredProjects.filter(
-      (project: Project) => project.category === searchParams.category
-    );
-  }
-  
-  if (searchParams.status) {
-    filteredProjects = filteredProjects.filter(
-      (project: Project) => project.status === searchParams.status
-    );
-  }
-
-  const categories: string[] = Array.from(new Set(allProjects.map((p: Project) => p.category).filter(Boolean))) as string[];
-  const statuses: string[] = Array.from(new Set(allProjects.map((p: Project) => p.status).filter(Boolean))) as string[];
+  // Extract unique categories and statuses for filters
+  const categories: string[] = Array.from(new Set(projects.map((p: Project) => p.category).filter(Boolean))) as string[];
+  const statuses: string[] = Array.from(new Set(projects.map((p: Project) => p.status).filter(Boolean))) as string[];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -71,7 +52,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
         </div>
       </div>
 
-      {/* Filters */}
+      {/* Filters - Static version */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -80,29 +61,17 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
               <div className="flex items-center space-x-2">
                 <span className="text-sm font-medium text-gray-700">Catégorie:</span>
                 <div className="flex flex-wrap gap-2">
-                  <Link
-                    href="/projects"
-                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
-                      !searchParams.category
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
+                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-blue-600 text-white">
                     Tous
-                  </Link>
+                  </span>
                   {categories.map((category) => (
-                     <Link
-                       key={category}
-                       href={`/projects?category=${category}${searchParams.status ? `&status=${searchParams.status}` : ''}`}
-                       className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
-                         searchParams.category === category
-                           ? 'bg-blue-600 text-white'
-                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                       }`}
-                     >
-                       {categoryLabels[category as keyof typeof categoryLabels] || category}
-                     </Link>
-                   ))}
+                    <span
+                      key={category}
+                      className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer"
+                    >
+                      {categoryLabels[category as keyof typeof categoryLabels] || category}
+                    </span>
+                  ))}
                 </div>
               </div>
 
@@ -110,35 +79,23 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
               <div className="flex items-center space-x-2">
                 <span className="text-sm font-medium text-gray-700">Statut:</span>
                 <div className="flex flex-wrap gap-2">
-                  <Link
-                    href={`/projects${searchParams.category ? `?category=${searchParams.category}` : ''}`}
-                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
-                      !searchParams.status
-                        ? 'bg-green-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
+                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-green-600 text-white">
                     Tous
-                  </Link>
+                  </span>
                   {statuses.map((status) => (
-                     <Link
-                       key={status}
-                       href={`/projects?status=${status}${searchParams.category ? `&category=${searchParams.category}` : ''}`}
-                       className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
-                         searchParams.status === status
-                           ? 'bg-green-600 text-white'
-                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                       }`}
-                     >
-                       {statusLabels[status as keyof typeof statusLabels] || status}
-                     </Link>
-                   ))}
+                    <span
+                      key={status}
+                      className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer"
+                    >
+                      {statusLabels[status as keyof typeof statusLabels] || status}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
 
             <div className="text-sm text-gray-500">
-              {filteredProjects.length} projet{filteredProjects.length !== 1 ? 's' : ''} trouvé{filteredProjects.length !== 1 ? 's' : ''}
+              {projects.length} projet{projects.length !== 1 ? 's' : ''} trouvé{projects.length !== 1 ? 's' : ''}
             </div>
           </div>
         </div>
@@ -146,25 +103,8 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
 
       {/* Projects Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {filteredProjects.length === 0 ? (
-          <div className="text-center py-16">
-            <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
-              <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Aucun projet trouvé</h3>
-            <p className="text-gray-600 mb-6">Aucun projet ne correspond aux filtres sélectionnés.</p>
-            <Link
-              href="/projects"
-              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Voir tous les projets
-            </Link>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project: Project) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project: Project) => {
               const imageUrl = project.featuredImage?.asset 
                 ? urlFor(project.featuredImage).width(400).height(300).url() 
                 : '/placeholder-project.jpg';
