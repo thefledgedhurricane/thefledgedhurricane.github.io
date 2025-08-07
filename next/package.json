@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
     "@portabletext/react": "^3.2.1",
     "@sanity/client": "^7.8.2",
     "@sanity/image-url": "^1.1.0",
@@ -18,11 +17,10 @@
     "@types/prismjs": "^1.26.5",
     "autoprefixer": "^10.4.16",
     "clsx": "^2.0.0",
-    "firebase": "^10.8.0",
     "markmap-lib": "^0.18.12",
     "markmap-view": "^0.18.12",
-    "mermaid": "^10.6.1",
-    "next": "14.0.4",
+    "mermaid": "^11.9.0",
+    "next": "^15.4.6",
     "postcss": "^8.4.32",
     "prismjs": "^1.29.0",
     "react": "^18",
