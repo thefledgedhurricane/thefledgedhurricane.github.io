@@ -7,9 +7,9 @@ import { Project } from '@/lib/sanity-types';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
 
 interface ProjectPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -20,7 +20,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const project = await getProject(params.slug);
+  const { slug } = await params;
+  const project = await getProject(slug);
   
   if (!project) {
     return {
@@ -42,7 +43,8 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-  const project = await getProject(params.slug);
+  const { slug } = await params;
+  const project = await getProject(slug);
 
   if (!project) {
     notFound();

@@ -1,11 +1,11 @@
 import { MetadataRoute } from 'next';
-import { getProjects } from '@/lib/sanity';
-import { Project } from '@/lib/sanity-types';
+
+export const dynamic = 'force-static';
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://localhost:3000';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Static pages
+export default function sitemap(): MetadataRoute.Sitemap {
+  // Static pages only for now - dynamic content will be handled differently
   const staticPages = [
     {
       url: baseUrl,
@@ -20,44 +20,36 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/posts`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/publications`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/teaching`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/events`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     },
-    {
-      url: `${baseUrl}/privacy`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.3,
-    },
   ];
 
-  // Dynamic project pages
-  let projectPages: MetadataRoute.Sitemap = [];
-  
-  try {
-    const projects = await getProjects();
-    projectPages = projects.map((project: Project) => {
-      // Handle invalid or missing dates
-      let lastModified = new Date();
-      if (project._updatedAt) {
-        const updatedDate = new Date(project._updatedAt);
-        if (!isNaN(updatedDate.getTime())) {
-          lastModified = updatedDate;
-        }
-      }
-      
-      return {
-        url: `${baseUrl}/projects/${project.slug.current}`,
-        lastModified,
-        changeFrequency: 'monthly' as const,
-        priority: project.featured ? 0.9 : 0.7,
-      };
-    });
-  } catch (error) {
-    console.error('Error generating sitemap for projects:', error);
-  }
-
-  return [...staticPages, ...projectPages];
+  return staticPages;
 }
