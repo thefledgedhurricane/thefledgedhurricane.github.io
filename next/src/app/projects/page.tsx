@@ -1,576 +1,323 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getFeaturedProjects, getFeaturedPublications, getFeaturedTeaching, getFeaturedEvents, urlFor } from '@/lib/sanity';
-import { generateJsonLd } from '@/lib/jsonld';
-import { Publication, Teaching, Event } from '@/lib/sanity-types';
-import ContactForm from '@/components/ContactForm';
-
-export const metadata: Metadata = {
-  title: 'Pr. Ihababdelbasset Annaki- Academic Portfolio',
-  description: 'Academic portfolio of Pr. Ihababdelbasset Annaki- Research in Computer Science, Publications, Teaching, and Educational Innovation.',
-};
-
-function HeroSection() {
-  return (
-    <section className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden">
-      {/* Minimal geometric background */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-1 h-32 bg-gradient-to-b from-blue-500/20 to-transparent rotate-45"></div>
-        <div className="absolute top-1/3 right-1/3 w-1 h-24 bg-gradient-to-b from-purple-500/20 to-transparent -rotate-12"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-1 h-28 bg-gradient-to-b from-green-500/20 to-transparent rotate-12"></div>
-      </div>
-      
-      <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
-        <div className="mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-full text-sm text-gray-600 mb-8">
-            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            Disponible pour Collaboration de Recherche
-          </div>
-        </div>
-        
-        <h1 className="text-6xl md:text-8xl lg:text-9xl font-extralight text-gray-900 mb-6 tracking-tighter leading-none">
-          Dr. Ihababdelbasset
-          <br />
-          <span className="font-bold text-black">
-            ANNAKI
-          </span>
-        </h1>
-        
-        <div className="max-w-3xl mx-auto mb-16">
-          <p className="text-2xl md:text-3xl text-gray-500 mb-8 font-light leading-relaxed">
-            Maître de Conférences en Intelligence Artificielle et Développement Avancé
-          </p>
-          <p className="text-lg text-gray-400 leading-relaxed">
-            École Supérieure de l'Éducation et de la Formation, Université Mohammed Premier Oujda
-          </p>
-          <p className="text-base text-gray-400 leading-relaxed mt-4">
-            Spécialiste en Réalité Virtuelle, Intelligence Artificielle et Séries Temporelles appliquées aux Neurosciences et Processus Cognitifs
-          </p>
-        </div>
-        
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20">
-          <Link
-            href="/research"
-            className="group bg-black hover:bg-gray-800 text-white font-medium py-4 px-12 transition-all duration-200 text-sm uppercase tracking-wider"
-          >
-            Portfolio Recherche
-          </Link>
-          
-          <Link
-            href="/publications"
-            className="group border border-gray-300 hover:border-black text-gray-700 hover:text-black font-medium py-4 px-12 transition-all duration-200 text-sm uppercase tracking-wider"
-          >
-            Publications
-          </Link>
-        </div>
-        
-        <div className="flex justify-center items-center gap-12 text-xs text-gray-400 uppercase tracking-widest">
-          <div>Réalité Virtuelle</div>
-          <div className="w-px h-4 bg-gray-300"></div>
-          <div>Intelligence Artificielle</div>
-          <div className="w-px h-4 bg-gray-300"></div>
-          <div>Neurosciences</div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function AboutSection() {
-  return (
-    <section id="about" className="py-32 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-12 gap-16 items-start">
-          <div className="lg:col-span-7">
-            <div className="mb-16">
-              <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
-                À Propos
-              </div>
-              <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 mb-12 leading-tight">
-                Faire Progresser l'
-                <span className="font-bold">Avenir</span> des 
-                Neurosciences Computationnelles
-              </h2>
-            </div>
-            
-            <div className="space-y-8 text-lg text-gray-600 leading-relaxed mb-16">
-              <p>
-                Mes recherches se situent à l'intersection de la réalité virtuelle, de l'intelligence artificielle 
-                et des neurosciences computationnelles. À travers des approches rigoureuses d'analyse de séries 
-                temporelles, j'explore les processus cognitifs et leur modélisation computationnelle.
-              </p>
-              
-              <p>
-                Je me spécialise dans le développement de systèmes d'IA adaptatifs pour l'analyse de données 
-                neurophysiologiques, la création d'environnements de réalité virtuelle pour l'étude des processus 
-                cognitifs, et l'application de techniques d'apprentissage automatique aux neurosciences.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-3 gap-12 mb-16">
-              <div>
-                <div className="text-4xl font-light text-black mb-2">50+</div>
-                <div className="text-sm text-gray-400 uppercase tracking-wider">Publications</div>
-              </div>
-              <div>
-                <div className="text-4xl font-light text-black mb-2">12+</div>
-                <div className="text-sm text-gray-400 uppercase tracking-wider">Années Recherche</div>
-              </div>
-              <div>
-                <div className="text-4xl font-light text-black mb-2">5</div>
-                <div className="text-sm text-gray-400 uppercase tracking-wider">Prix</div>
-              </div>
-            </div>
-            
-            <Link
-              href="/about"
-              className="inline-block border-b border-gray-300 hover:border-black text-gray-700 hover:text-black transition-all duration-200 text-sm uppercase tracking-wider pb-1"
-            >
-              Profil Complet
-            </Link>
-          </div>
-          
-          <div className="lg:col-span-5">
-            <div className="relative">
-              <div className="aspect-[4/5] bg-gray-200 overflow-hidden">
-                {/* Placeholder for academic photo */}
-                <div className="w-full h-full flex items-center justify-center text-gray-400">
-                  <div className="text-center">
-                    <div className="w-20 h-20 bg-white mx-auto mb-4 flex items-center justify-center">
-                      <svg className="w-10 h-10 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                      </svg>
-                    </div>
-                    <p className="text-xs uppercase tracking-wider">Portrait Académique</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Publications Section
-interface PublicationsSectionProps {
-  publications: Publication[];
-}
-
-function PublicationsSection({ publications }: PublicationsSectionProps) {
-  return (
-    <section id="publications" className="py-32 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-24">
-          <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
-            Recherche Récente
-          </div>
-          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 mb-12 leading-tight max-w-4xl">
-            <span className="font-bold">Publications</span> Sélectionnées
-          </h2>
-        </div>
-        
-        <div className="grid gap-12">
-          {publications.slice(0, 3).map((publication, index) => (
-            <div key={publication._id} className="group border-b border-gray-200 pb-12 last:border-b-0">
-              <div className="grid lg:grid-cols-12 gap-8 items-start">
-                <div className="lg:col-span-2">
-                  <div className="text-xs text-gray-400 uppercase tracking-[0.2em] mb-2">
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    {new Date(publication.publishedDate).getFullYear()}
-                  </div>
-                  <div className="text-xs text-gray-400 uppercase mt-2">
-                    {publication.publicationType}
-                  </div>
-                </div>
-                
-                <div className="lg:col-span-10">
-                  <h3 className="text-2xl font-light text-black mb-4 group-hover:text-gray-600 transition-colors duration-200">
-                    <Link href={`/publications/${publication.slug.current}`}>
-                      {publication.title}
-                    </Link>
-                  </h3>
-                  
-                  {publication.abstract && (
-                    <p className="text-gray-600 leading-relaxed mb-4 line-clamp-3">
-                      {publication.abstract}
-                    </p>
-                  )}
-                  
-                  <div className="flex flex-wrap items-center gap-4 text-sm">
-                    {publication.journal && (
-                      <span className="text-gray-500 italic">{publication.journal}</span>
-                    )}
-                    {publication.openAccess && (
-                      <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs uppercase tracking-wider">
-                        Accès Libre
-                      </span>
-                    )}
-                    {publication.doi && (
-                      <Link 
-                        href={`https://doi.org/${publication.doi}`}
-                        className="text-blue-600 hover:text-blue-800 transition-colors"
-                        target="_blank"
-                      >
-                        DOI
-                      </Link>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className="text-center mt-16">
-          <Link
-            href="/publications"
-            className="inline-block border-b border-gray-300 hover:border-black text-gray-700 hover:text-black transition-all duration-200 text-sm uppercase tracking-wider pb-1"
-          >
-            Voir Toutes les Publications
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Teaching Section
-interface TeachingSectionProps {
-  teaching: Teaching[];
-}
-
-function TeachingSection({ teaching }: TeachingSectionProps) {
-  return (
-    <section id="teaching" className="py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-24">
-          <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
-            Enseignement Académique
-          </div>
-          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 mb-12 leading-tight max-w-4xl">
-            Expérience <span className="font-bold">Pédagogique</span>
-          </h2>
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-x-12 gap-y-16">
-          {teaching.slice(0, 4).map((course, index) => (
-            <div key={course._id} className="group">
-              <div className="mb-6">
-                <div className="text-xs text-gray-400 uppercase tracking-[0.2em] mb-3">
-                  {String(index + 1).padStart(2, '0')}
-                </div>
-                <div className="flex items-center gap-2 mb-2">
-                  <h3 className="text-2xl font-light text-black group-hover:text-gray-600 transition-colors duration-200">
-                    {course.title}
-                  </h3>
-                  {course.current && (
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  )}
-                </div>
-                {course.courseCode && (
-                  <div className="text-sm text-gray-500 mb-2">{course.courseCode}</div>
-                )}
-                <div className="text-sm text-gray-400">
-                  {course.institution} • {course.semester}
-                </div>
-              </div>
-              
-              {course.description && (
-                <p className="text-gray-600 leading-relaxed text-sm mb-4">
-                  {course.description}
-                </p>
-              )}
-              
-              {course.technologies && course.technologies.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {course.technologies.slice(0, 3).map((tech, techIndex) => (
-                    <span key={techIndex} className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-        
-        <div className="text-center mt-16">
-          <Link
-            href="/teaching"
-            className="inline-block border-b border-gray-300 hover:border-black text-gray-700 hover:text-black transition-all duration-200 text-sm uppercase tracking-wider pb-1"
-          >
-            Voir Tous les Cours
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Events Section
-interface EventsSectionProps {
-  events: Event[];
-}
-
-function EventsSection({ events }: EventsSectionProps) {
-  return (
-    <section id="events" className="py-32 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-24">
-          <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
-            Événements Académiques
-          </div>
-          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 mb-12 leading-tight max-w-4xl">
-            Pr.nces & <span className="font-bold">Événements</span>
-          </h2>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {events.slice(0, 6).map((event, index) => (
-            <div key={event._id} className="group bg-white p-8 hover:shadow-lg transition-shadow duration-300">
-              <div className="mb-6">
-                <div className="text-xs text-gray-400 uppercase tracking-[0.2em] mb-3">
-                  {String(index + 1).padStart(2, '0')}
-                </div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className={`px-2 py-1 rounded text-xs uppercase tracking-wider ${
-                    event.status === 'upcoming' ? 'bg-blue-100 text-blue-700' :
-                    event.status === 'ongoing' ? 'bg-green-100 text-green-700' :
-                    'bg-gray-100 text-gray-600'
-                  }`}>
-                    {event.status === 'upcoming' ? 'À venir' : 
-                     event.status === 'ongoing' ? 'En cours' : 
-                     event.status === 'completed' ? 'Terminé' : event.status}
-                  </span>
-                  <span className="text-xs text-gray-400 uppercase">
-                    {event.eventType}
-                  </span>
-                </div>
-              </div>
-              
-              <h3 className="text-xl font-light text-black mb-4 group-hover:text-gray-600 transition-colors duration-200">
-                <Link href={`/events/${event.slug.current}`}>
-                  {event.title}
-                </Link>
-              </h3>
-              
-              <div className="text-sm text-gray-500 mb-4">
-                <div>{new Date(event.startDate).toLocaleDateString('en-US', { 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}</div>
-                {event.location?.venue && (
-                  <div className="mt-1">{event.location.venue}</div>
-                )}
-              </div>
-              
-              {event.description && (
-                <p className="text-gray-600 leading-relaxed text-sm line-clamp-3">
-                  {event.description}
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
-        
-        <div className="text-center mt-16">
-          <Link
-            href="/events"
-            className="inline-block border-b border-gray-300 hover:border-black text-gray-700 hover:text-black transition-all duration-200 text-sm uppercase tracking-wider pb-1"
-          >
-            Voir Tous les Événements
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
+import { getProjects, urlFor } from '@/lib/sanity';
 import { Project } from '@/lib/sanity-types';
 
-interface FeaturedProjectsProps {
-  projects: Project[];
+export const metadata: Metadata = {
+  title: 'Projets | Pr. Ihababdelbasset Annaki',
+  description: 'Découvrez tous les projets de recherche et développement de Pr. Ihababdelbasset Annaki en Intelligence Artificielle, Réalité Virtuelle et Neurosciences.',
+};
+
+interface ProjectsPageProps {
+  searchParams: {
+    category?: string;
+    status?: string;
+  };
 }
 
-function FeaturedProjects({ projects }: FeaturedProjectsProps) {
-  const featuredProjects = projects.filter((p: Project) => p.featured).slice(0, 3);
+const categoryLabels = {
+  web: 'Web',
+  mobile: 'Mobile',
+  desktop: 'Desktop',
+  ai: 'Intelligence Artificielle',
+  data: 'Science des Données',
+  other: 'Autre'
+};
 
-  if (featuredProjects.length === 0) {
-    return null;
+const statusLabels = {
+  planning: 'En planification',
+  'in-progress': 'En cours',
+  completed: 'Terminé',
+  'on-hold': 'En pause',
+  cancelled: 'Annulé'
+};
+
+export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
+  const allProjects = await getProjects();
+  
+  // Filter projects based on search params
+  let filteredProjects = allProjects;
+  
+  if (searchParams.category) {
+    filteredProjects = filteredProjects.filter(
+      (project: Project) => project.category === searchParams.category
+    );
+  }
+  
+  if (searchParams.status) {
+    filteredProjects = filteredProjects.filter(
+      (project: Project) => project.status === searchParams.status
+    );
   }
 
-  return (
-    <section className="section-padding">
-      <div className="container-max">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Projets Sélectionnés
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Une sélection de mes travaux récents qui illustrent mes compétences et ma créativité.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProjects.map((project: Project) => {
-            const imageUrl = project.featuredImage?.asset ? urlFor(project.featuredImage).width(400).height(300).url() : '/placeholder-project.jpg';
-            
-            return (
-              <article key={project._id} className="card overflow-hidden group">
-                <div className="relative aspect-video overflow-hidden">
-                  {imageUrl ? (
-                    <Image
-                      src={imageUrl}
-                      alt={project.featuredImage?.alt || project.title}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                      <span className="text-gray-500">Aucune image</span>
-                    </div>
-                  )}
-                </div>
-                
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies?.slice(0, 3).map((tech: string, index: number) => (
-                      <span
-                        key={index}
-                        className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <Link
-                    href={`/projects/${project.slug.current}`}
-                    className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
-                  >
-                    Voir le Projet
-                    <svg
-                      className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </Link>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-        
-        <div className="text-center mt-12">
-          <Link href="/projects" className="btn-primary">
-            Voir Tous les Projets
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
+  const categories: string[] = Array.from(new Set(allProjects.map((p: Project) => p.category).filter(Boolean))) as string[];
+  const statuses: string[] = Array.from(new Set(allProjects.map((p: Project) => p.status).filter(Boolean))) as string[];
 
-function CTASection() {
   return (
-    <section id="contact" className="py-32 bg-black text-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-16">
-            <h2 className="text-5xl md:text-6xl font-extralight mb-12 leading-tight">
-              Faisons Progresser 
-              <span className="font-bold">l'Informatique</span> 
-              Ensemble
-            </h2>
-            
-            <p className="text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto">
-              Intéressé par une collaboration, des partenariats de recherche ou une consultation académique ? 
-              Je suis toujours ouvert aux conversations significatives sur l'avenir de la technologie et de l'éducation.
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Mes Projets
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Une collection de mes travaux de recherche et développement en Intelligence Artificielle, 
+              Réalité Virtuelle et Neurosciences Computationnelles.
             </p>
           </div>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20">
-            <Link
-              href="/contact"
-              className="bg-white hover:bg-gray-100 text-black font-medium py-4 px-12 transition-all duration-200 text-sm uppercase tracking-wider"
-            >
-              Commencer une Conversation
-            </Link>
-            
-            <Link
-              href="/cv"
-              className="border border-gray-600 hover:border-white text-white hover:text-white font-medium py-4 px-12 transition-all duration-200 text-sm uppercase tracking-wider"
-            >
-              Télécharger CV
-            </Link>
-          </div>
-          
-          <div className="flex justify-center items-center gap-12 text-xs text-gray-500 uppercase tracking-widest">
-            <div className="flex items-center gap-2">
-              <div className="w-1 h-1 bg-green-500 rounded-full"></div>
-              Ouvert à la Collaboration
+        </div>
+      </div>
+
+      {/* Filters */}
+      <div className="bg-white border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-wrap gap-4 items-center justify-between">
+            <div className="flex flex-wrap gap-4">
+              {/* Category Filter */}
+              <div className="flex items-center space-x-2">
+                <span className="text-sm font-medium text-gray-700">Catégorie:</span>
+                <div className="flex flex-wrap gap-2">
+                  <Link
+                    href="/projects"
+                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                      !searchParams.category
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    Tous
+                  </Link>
+                  {categories.map((category) => (
+                     <Link
+                       key={category}
+                       href={`/projects?category=${category}${searchParams.status ? `&status=${searchParams.status}` : ''}`}
+                       className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                         searchParams.category === category
+                           ? 'bg-blue-600 text-white'
+                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                       }`}
+                     >
+                       {categoryLabels[category as keyof typeof categoryLabels] || category}
+                     </Link>
+                   ))}
+                </div>
+              </div>
+
+              {/* Status Filter */}
+              <div className="flex items-center space-x-2">
+                <span className="text-sm font-medium text-gray-700">Statut:</span>
+                <div className="flex flex-wrap gap-2">
+                  <Link
+                    href={`/projects${searchParams.category ? `?category=${searchParams.category}` : ''}`}
+                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                      !searchParams.status
+                        ? 'bg-green-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    Tous
+                  </Link>
+                  {statuses.map((status) => (
+                     <Link
+                       key={status}
+                       href={`/projects?status=${status}${searchParams.category ? `&category=${searchParams.category}` : ''}`}
+                       className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                         searchParams.status === status
+                           ? 'bg-green-600 text-white'
+                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                       }`}
+                     >
+                       {statusLabels[status as keyof typeof statusLabels] || status}
+                     </Link>
+                   ))}
+                </div>
+              </div>
             </div>
-            <div className="w-px h-4 bg-gray-700"></div>
-            <div>Partenariats Internationaux</div>
-            <div className="w-px h-4 bg-gray-700"></div>
-            <div>Consultation Académique</div>
+
+            <div className="text-sm text-gray-500">
+              {filteredProjects.length} projet{filteredProjects.length !== 1 ? 's' : ''} trouvé{filteredProjects.length !== 1 ? 's' : ''}
+            </div>
           </div>
         </div>
       </div>
-    </section>
-  );
-}
 
-export default async function HomePage() {
-  const [projects, publications, teaching, events] = await Promise.all([
-    getFeaturedProjects(),
-    getFeaturedPublications(),
-    getFeaturedTeaching(),
-    getFeaturedEvents()
-  ]);
-  
-  const jsonLd = generateJsonLd({
-    type: 'Person',
-    name: 'Pr. Ihababdelbasset Annaki',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://localhost:3000',
-    description: 'Academic portfolio of Pr. Ihababdelbasset Annaki- Research in Computer Science, Publications, Teaching, and Educational Innovation.',
-    jobTitle: 'Computer Science Researcher',
-  });
+      {/* Projects Grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {filteredProjects.length === 0 ? (
+          <div className="text-center py-16">
+            <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+              <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Aucun projet trouvé</h3>
+            <p className="text-gray-600 mb-6">Aucun projet ne correspond aux filtres sélectionnés.</p>
+            <Link
+              href="/projects"
+              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Voir tous les projets
+            </Link>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProjects.map((project: Project) => {
+              const imageUrl = project.featuredImage?.asset 
+                ? urlFor(project.featuredImage).width(400).height(300).url() 
+                : '/placeholder-project.jpg';
 
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      
-      <HeroSection />
-      <AboutSection />
-      <PublicationsSection publications={publications} />
-      <TeachingSection teaching={teaching} />
-      <EventsSection events={events} />
-      <FeaturedProjects projects={projects} />
-      <CTASection />
-    </>
+              return (
+                <article key={project._id} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden group">
+                  <div className="relative aspect-video overflow-hidden">
+                    {imageUrl ? (
+                      <Image
+                        src={imageUrl}
+                        alt={project.featuredImage?.alt || project.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                        <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                    )}
+                    
+                    {/* Status Badge */}
+                    <div className="absolute top-3 left-3">
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        project.status === 'completed' ? 'bg-green-100 text-green-800' :
+                        project.status === 'in-progress' ? 'bg-blue-100 text-blue-800' :
+                        project.status === 'planning' ? 'bg-yellow-100 text-yellow-800' :
+                        project.status === 'on-hold' ? 'bg-orange-100 text-orange-800' :
+                        'bg-gray-100 text-gray-800'
+                      }`}>
+                        {statusLabels[project.status as keyof typeof statusLabels] || project.status}
+                      </span>
+                    </div>
+
+                    {/* Featured Badge */}
+                    {project.featured && (
+                      <div className="absolute top-3 right-3">
+                        <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium">
+                          ⭐ En vedette
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  <div className="p-6">
+                    <div className="mb-3">
+                      <span className="inline-block px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium">
+                        {categoryLabels[project.category as keyof typeof categoryLabels] || project.category}
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                      {project.title}
+                    </h3>
+                    
+                    <p className="text-gray-600 mb-4 line-clamp-3">
+                      {project.description}
+                    </p>
+                    
+                    {/* Technologies */}
+                    <div className="flex flex-wrap gap-1 mb-4">
+                      {project.technologies?.slice(0, 4).map((tech: string, index: number) => (
+                        <span
+                          key={index}
+                          className="bg-blue-50 text-blue-700 px-2 py-1 rounded text-xs font-medium"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {project.technologies && project.technologies.length > 4 && (
+                        <span className="bg-gray-50 text-gray-600 px-2 py-1 rounded text-xs font-medium">
+                          +{project.technologies.length - 4}
+                        </span>
+                      )}
+                    </div>
+                    
+                    {/* Project Links */}
+                    <div className="flex items-center justify-between">
+                      <Link
+                        href={`/projects/${project.slug.current}`}
+                        className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+                      >
+                        Voir le projet
+                        <svg
+                          className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </Link>
+                      
+                      <div className="flex items-center space-x-2">
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                            title="Voir en direct"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                          </a>
+                        )}
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                            title="Voir sur GitHub"
+                          >
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* Back to Home */}
+      <div className="bg-white border-t">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="text-center">
+            <Link
+              href="/"
+              className="inline-flex items-center text-gray-600 hover:text-gray-900 font-medium"
+            >
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              Retour à l'accueil
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
