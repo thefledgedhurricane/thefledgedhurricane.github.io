@@ -252,7 +252,7 @@ export default async function ProjectsPage() {
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
-              Retour à l'accueil
+              Retour à l&#39;accueil
             </Link>
           </div>
         </div>

@@ -157,7 +157,7 @@ export default async function PublicationsPage() {
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">Aucune Publication</h2>
                 <p className="text-gray-600">
-                  Les publications apparaîtront ici une fois qu'elles seront ajoutées dans le CMS Sanity.
+                  Les publications apparaîtront ici une fois qu&apos;elles seront ajoutées dans le CMS Sanity.
                 </p>
               </div>
             </div>

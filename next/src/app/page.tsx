@@ -461,7 +461,7 @@ function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                     href={`/projects/${project.slug.current}`}
                     className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
                   >
-                    Voir le Proj<span dangerouslySetInnerHTML={{ __html: "&apos;" }} />et
+                    Voir le Proj&apos;et
                     <svg
                       className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1"
                       fill="none"
@@ -500,7 +500,7 @@ function CTASection() {
           <div className="mb-16">
             <h2 className="text-5xl md:text-6xl font-extralight mb-12 leading-tight">
               Faisons Progresser 
-              <span className="font-bold">l'Informatique</span> 
+              <span className="font-bold">l&apos;Informatique</span> 
               Ensemble
             </h2>
             
