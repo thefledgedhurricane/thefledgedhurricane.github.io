@@ -11,9 +11,9 @@ const nextConfig = {
         pathname: '/**',
       },
       {
-         protocol: 'http',
-         hostname: 'localhost',
-       },
+        protocol: 'http',
+        hostname: 'localhost',
+      },
     ],
   },
   env: {
