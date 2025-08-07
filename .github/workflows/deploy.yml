@@ -117,4 +117,3 @@ jobs:
       - name: Check for vulnerabilities
         working-directory: ./next
         run: npx audit-ci --config ./audit-ci.json
-        continue-on-error: true
