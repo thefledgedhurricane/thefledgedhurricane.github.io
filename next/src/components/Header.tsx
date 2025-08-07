@@ -12,7 +12,6 @@ const navigation = [
   { name: 'Enseignement', href: '/teaching' },
   { name: 'Événements', href: '/events' },
   { name: 'Projets', href: '/projects' },
-  { name: 'Contact', href: '/contact' },
 ];
 
 export default function Header() {
@@ -42,8 +41,7 @@ export default function Header() {
             {navigation.map((link) => {
               const isActive = pathname === link.href || 
                 (link.href.includes('#') && pathname === '/' && link.href !== '/') ||
-                (link.href === '/projects' && pathname === '/projects') ||
-                (link.href === '/contact' && pathname === '/contact');
+                (link.href === '/projects' && pathname === '/projects');
               
               return (
                 <Link
@@ -56,7 +54,7 @@ export default function Header() {
                   }`}
                 >
                   {link.name}
-                  {link.href !== '/projects' && link.href !== '/contact' && (
+                  {link.href !== '/projects' && (
                     <span className={`absolute -bottom-1 left-0 h-px bg-gray-900 transition-all duration-300 ${
                       isActive ? 'w-full' : 'w-0 group-hover:w-full'
                     }`} />
@@ -70,7 +68,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center space-x-4">
             <Link
                 href="/contact"
-                className="px-6 py-2 text-sm font-light text-white bg-gray-900 rounded-full hover:bg-gray-800 transition-all duration-300 hover:shadow-lg hover:shadow-gray-900/25"
+                className="px-6 py-2 text-sm font-light text-white bg-gray-900 hover:bg-gray-800 transition-all duration-300 hover:shadow-lg hover:shadow-gray-900/25"
               >
                 Me Contacter
               </Link>
@@ -103,8 +101,7 @@ export default function Header() {
             <div className="px-4 py-6 space-y-4">
               {navigation.map((link) => {
                 const isActive = pathname === link.href || 
-                  (link.href.includes('#') && pathname === '/' && link.href !== '/') ||
-                  (link.href === '/contact' && pathname === '/contact');
+                  (link.href.includes('#') && pathname === '/' && link.href !== '/');
                 
                 return (
                   <Link
@@ -124,7 +121,7 @@ export default function Header() {
               <div className="pt-4 border-t border-gray-100">
                 <Link
                   href="/contact"
-                  className="block w-full px-6 py-3 text-center text-sm font-light text-white bg-gray-900 rounded-full hover:bg-gray-800 transition-colors duration-200"
+                  className="block w-full px-6 py-3 text-center text-sm font-light text-white bg-gray-900 hover:bg-gray-800 transition-colors duration-200"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Me Contacter
