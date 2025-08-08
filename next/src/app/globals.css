@@ -14,6 +14,9 @@
   body {
     @apply bg-white text-gray-900 antialiased;
   }
+  html.dark body {
+    @apply bg-gray-950 text-gray-100;
+  }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold;
@@ -29,6 +32,47 @@
 }
 
 @layer components {
+  /* Obsidian-like preview base */
+  .obsidian-preview {
+    @apply leading-relaxed;
+  }
+
+  .obsidian-pre {
+    @apply bg-gray-900 text-gray-100 rounded-md overflow-x-auto text-sm my-4 relative pl-12 pr-4 py-4 font-mono leading-6;
+    counter-reset: line;
+  }
+  .obsidian-pre code { @apply block whitespace-pre; }
+  .obsidian-pre code span { @apply leading-6; }
+  .obsidian-pre code .line { display: block; padding-left: .25rem; }
+  .obsidian-pre code .line::before {
+    counter-increment: line;
+    content: counter(line);
+    @apply text-gray-500 pr-4 inline-block w-8 text-right select-none;
+  }
+  .obsidian-pre button.copy-btn {
+    @apply absolute top-2 right-2 text-xs px-2 py-1 rounded bg-gray-700 hover:bg-gray-600 text-gray-100 transition-colors border border-gray-600;
+  }
+  .obsidian-pre[data-error]::after {
+    content: attr(data-error);
+    @apply absolute bottom-1 right-2 text-[10px] text-red-400 opacity-70;
+  }
+
+  .obsidian-table {
+    @apply w-full text-sm;
+    border-collapse: collapse;
+  }
+  .obsidian-table th,
+  .obsidian-table td {
+    @apply border border-gray-200 dark:border-gray-700 px-3 py-2 align-top;
+  }
+  .obsidian-table thead th {
+    @apply bg-gray-50 dark:bg-gray-800 font-semibold;
+  }
+
+  .obsidian-callout {
+    @apply text-sm;
+  }
+
   .btn-primary {
     @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
   }
@@ -55,12 +99,12 @@
 
   /* Enhanced GitHub/Notion-style markdown content */
   .markdown-content {
-    @apply text-gray-700 dark:text-gray-300;
+    @apply text-gray-700 dark:text-gray-200;
   }
 
   /* Code syntax highlighting improvements */
   .markdown-content pre {
-    @apply bg-gray-50 dark:bg-gray-900 relative;
+    @apply bg-gray-50 dark:bg-gray-950 relative;
   }
 
   .markdown-content code {
@@ -144,12 +188,12 @@
 
   /* Paragraph spacing */
   .markdown-content p {
-    @apply mb-4 leading-7 text-base md:text-lg;
+    @apply mb-4 leading-7 text-base md:text-lg text-gray-800 dark:text-gray-200;
   }
 
   /* Blockquote styling */
   .markdown-content blockquote {
-    @apply border-l-4 border-gray-300 dark:border-gray-600 pl-6 py-2 my-6 bg-gray-50 dark:bg-gray-800/50 rounded-r-lg;
+    @apply border-l-4 border-gray-300 dark:border-gray-600 pl-6 py-2 my-6 bg-gray-50 dark:bg-gray-900 rounded-r-lg;
   }
 
   .markdown-content blockquote p {
@@ -168,7 +212,7 @@
 
   /* Inline code styling */
   .markdown-content :not(pre) > code {
-    @apply bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded text-sm font-mono text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700;
+    @apply bg-gray-100 dark:bg-gray-800/80 px-2 py-0.5 rounded text-sm font-mono text-gray-800 dark:text-gray-100 border border-gray-200 dark:border-gray-700;
   }
 
   /* Strong and emphasis */

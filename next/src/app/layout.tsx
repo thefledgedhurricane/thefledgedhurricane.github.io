@@ -76,7 +76,7 @@ export default function RootLayout({
   });
 
   return (
-    <html lang="en" className="scroll-smooth">
+  <html lang="en" className="scroll-smooth">
       <head>
         <script
           type="application/ld+json"
@@ -89,7 +89,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#2563eb" />
       </head>
-      <body className={`${inter.className} antialiased`}>
+  <body className={`${inter.className} antialiased transition-colors duration-300 bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100`}>
         <Header />
         <main>
           <div className="min-h-screen flex flex-col">

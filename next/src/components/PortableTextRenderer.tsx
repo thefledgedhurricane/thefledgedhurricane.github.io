@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
@@ -13,6 +13,8 @@ import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-tsx';
+// Requis pour éviter l'erreur tokenizePlaceholders avec JSX/TSX/PHP
+import 'prismjs/components/prism-markup-templating';
 import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-scss';
 import 'prismjs/components/prism-bash';
@@ -68,28 +70,22 @@ function normalizeLanguage(lang?: string): string {
 
 // Code highlighting component
 function HighlightedCode({ code, language }: { code: string; language: string }) {
-  const codeRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (codeRef.current) {
-      // Clear any existing highlighting
-      codeRef.current.className = `language-${language}`;
-      codeRef.current.removeAttribute('data-highlighted');
-      
-      // Apply Prism highlighting
-  Prism.highlightElement(codeRef.current);
-    }
-  }, [code, language]);
-
+  let html: string | null = null;
+  try {
+    const grammar = (Prism as any).languages[language] || (Prism as any).languages.plain || (Prism as any).languages.text;
+    html = (Prism as any).highlight(code, grammar, language);
+  } catch (e) {
+    html = null;
+  }
   return (
     <code
-      ref={codeRef}
       className={`language-${language}`}
-      style={{ 
+      style={{
         fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Inconsolata, "Roboto Mono", Menlo, monospace'
       }}
+      {...(html ? { dangerouslySetInnerHTML: { __html: html } } : {})}
     >
-  {code}
+      {!html ? code : null}
     </code>
   );
 }
@@ -185,7 +181,7 @@ function RenderableCodeBlock({ value }: { value: any }) {
           Copy
         </button>
       </div>
-      <pre className="p-4 overflow-x-auto text-sm leading-relaxed">
+  <pre tabIndex={0} className={`p-4 overflow-x-auto text-sm leading-relaxed language-${normalizeLanguage(value.language || 'text')}`}>
   <HighlightedCode code={value.code} language={normalizeLanguage(value.language || 'text')} />
       </pre>
     </div>
@@ -485,39 +481,37 @@ function EnhancedMarkdown({ content }: { content: string }) {
       return out.length ? out : [{ type: 'text', content }];
     };
 
-    const partsWithTables = parseTables(text);
+  const partsWithTables = parseTables(text);
 
     return partsWithTables.map((tablePart, tableIndex) => {
       if (tablePart.type === 'table') {
         return (
-          <div key={`table-${tableIndex}`} className="my-8 group">
-            <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm bg-white dark:bg-gray-900">
-              <table className="min-w-full">
-                <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+          <div key={`table-${tableIndex}`} className="my-6">
+            <div className="overflow-x-auto">
+              <table className="obsidian-table">
+                <thead>
                   <tr>
                     {(tablePart.headers || []).map((header: string, index: number) => (
-                      <th
-                        key={index}
-                        className={`px-6 py-4 text-sm font-semibold text-gray-900 dark:text-gray-100 border-r border-gray-200 dark:border-gray-700 last:border-r-0 ${
-                          (tablePart.aligns?.[index] === 'center') ? 'text-center' : (tablePart.aligns?.[index] === 'right' ? 'text-right' : 'text-left')
-                        }`}
-                      >
+                      <th key={index} className={
+                        (tablePart.aligns?.[index] === 'center')
+                          ? 'text-center'
+                          : (tablePart.aligns?.[index] === 'right' ? 'text-right' : 'text-left')
+                      }>
                         {parseInline(header)}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody>
                   {(tablePart.rows || []).map((row: string[], rowIndex: number) => (
-                    <tr key={rowIndex} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-150">
+                    <tr key={rowIndex}>
                       {row.map((cell: string, cellIndex: number) => (
-                        <td
-                          key={cellIndex}
-                          className={`px-6 py-4 text-sm text-gray-800 dark:text-gray-200 border-r border-gray-200 dark:border-gray-700 last:border-r-0 bg-gray-50 dark:bg-gray-800/30 ${
-                            (tablePart.aligns?.[cellIndex] === 'center') ? 'text-center' : (tablePart.aligns?.[cellIndex] === 'right' ? 'text-right' : 'text-left')
-                          }`}
-                        >
-                          <span className="font-mono text-sm">{parseInline(cell)}</span>
+                        <td key={cellIndex} className={
+                          (tablePart.aligns?.[cellIndex] === 'center')
+                            ? 'text-center'
+                            : (tablePart.aligns?.[cellIndex] === 'right' ? 'text-right' : 'text-left')
+                        }>
+                          {parseInline(cell)}
                         </td>
                       ))}
                     </tr>
@@ -648,7 +642,7 @@ function EnhancedMarkdown({ content }: { content: string }) {
                 </div>
                 {/* Code content */}
                 <div className="bg-gray-900 dark:bg-black">
-                  <pre className="p-4 overflow-x-auto text-sm leading-6 font-mono">
+                  <pre tabIndex={0} className={`p-4 overflow-x-auto text-sm leading-6 font-mono language-${language}`}>
                     <HighlightedCode code={cleanCode} language={language} />
                   </pre>
                 </div>
@@ -661,37 +655,37 @@ function EnhancedMarkdown({ content }: { content: string }) {
           const height = 'height' in part ? part.height : '400px';
           return <RenderableCodeBlock key={index} value={{ language: 'markmap', code: part.content, height }} />;
         } else if (part.type === 'callout') {
-          // Render Hugo callout as a Notion-style callout component
+          // Render callout as an Obsidian-like callout component
           const typeStyles = {
             note: {
-              bg: 'bg-gray-50 dark:bg-gray-800/50',
-              border: 'border-l-gray-500',
+              bg: 'bg-gray-50 dark:bg-gray-900/40',
+              border: 'border-l-4 border-gray-400',
               icon: '📝',
-              textColor: 'text-gray-900 dark:text-gray-100'
+              textColor: 'text-gray-900 dark:text-gray-100',
             },
             info: {
-              bg: 'bg-blue-50 dark:bg-blue-950/30',
-              border: 'border-l-blue-500',
+              bg: 'bg-blue-50 dark:bg-blue-900/30',
+              border: 'border-l-4 border-blue-500',
               icon: '💡',
-              textColor: 'text-blue-900 dark:text-blue-100'
+              textColor: 'text-blue-900 dark:text-blue-100',
             },
             warning: {
-              bg: 'bg-yellow-50 dark:bg-yellow-950/30',
-              border: 'border-l-yellow-500',
+              bg: 'bg-yellow-50 dark:bg-yellow-900/30',
+              border: 'border-l-4 border-yellow-500',
               icon: '⚠️',
-              textColor: 'text-yellow-900 dark:text-yellow-100'
+              textColor: 'text-yellow-900 dark:text-yellow-100',
             },
             error: {
-              bg: 'bg-red-50 dark:bg-red-950/30',
-              border: 'border-l-red-500',
+              bg: 'bg-red-50 dark:bg-red-900/30',
+              border: 'border-l-4 border-red-500',
               icon: '🚨',
-              textColor: 'text-red-900 dark:text-red-100'
+              textColor: 'text-red-900 dark:text-red-100',
             },
             success: {
-              bg: 'bg-green-50 dark:bg-green-950/30',
-              border: 'border-l-green-500',
+              bg: 'bg-green-50 dark:bg-green-900/30',
+              border: 'border-l-4 border-green-500',
               icon: '✅',
-              textColor: 'text-green-900 dark:text-green-100'
+              textColor: 'text-green-900 dark:text-green-100',
             }
           };
           
@@ -771,7 +765,7 @@ const portableTextComponents = {
               </button>
             </div>
             <div className="bg-gray-900 dark:bg-black">
-              <pre className="p-4 overflow-x-auto text-sm leading-6 font-mono">
+              <pre tabIndex={0} className={`p-4 overflow-x-auto text-sm leading-6 font-mono language-${language}`}>
                 <HighlightedCode code={cleanCode} language={language} />
               </pre>
             </div>
@@ -819,35 +813,35 @@ const portableTextComponents = {
       </div>
     ),
     // Callout/Alert blocks - Notion-style
-    callout: ({ value }: any) => {
+  callout: ({ value }: any) => {
       const typeStyles = {
         info: {
-          bg: 'bg-blue-50 dark:bg-blue-950/30',
-          border: 'border-l-blue-500',
+      bg: 'bg-blue-50 dark:bg-blue-900/30',
+      border: 'border-l-4 border-blue-500',
           icon: '💡',
           textColor: 'text-blue-900 dark:text-blue-100'
         },
         warning: {
-          bg: 'bg-yellow-50 dark:bg-yellow-950/30',
-          border: 'border-l-yellow-500',
+      bg: 'bg-yellow-50 dark:bg-yellow-900/30',
+      border: 'border-l-4 border-yellow-500',
           icon: '⚠️',
           textColor: 'text-yellow-900 dark:text-yellow-100'
         },
         error: {
-          bg: 'bg-red-50 dark:bg-red-950/30',
-          border: 'border-l-red-500',
+      bg: 'bg-red-50 dark:bg-red-900/30',
+      border: 'border-l-4 border-red-500',
           icon: '🚨',
           textColor: 'text-red-900 dark:text-red-100'
         },
         success: {
-          bg: 'bg-green-50 dark:bg-green-950/30',
-          border: 'border-l-green-500',
+      bg: 'bg-green-50 dark:bg-green-900/30',
+      border: 'border-l-4 border-green-500',
           icon: '✅',
           textColor: 'text-green-900 dark:text-green-100'
         },
         note: {
-          bg: 'bg-gray-50 dark:bg-gray-800/50',
-          border: 'border-l-gray-500',
+      bg: 'bg-gray-50 dark:bg-gray-900/40',
+      border: 'border-l-4 border-gray-400',
           icon: '📝',
           textColor: 'text-gray-900 dark:text-gray-100'
         }
@@ -856,14 +850,14 @@ const portableTextComponents = {
       const style = typeStyles[value.type as keyof typeof typeStyles] || typeStyles.info;
       
       return (
-        <div className={`my-6 p-4 rounded-lg border-l-4 ${style.bg} ${style.border} ${style.textColor}`}>
+        <div className={`my-6 p-4 rounded-md ${style.bg} ${style.textColor} obsidian-callout`}>
           {value.title && (
-            <div className="flex items-center gap-2 font-semibold mb-3 text-lg">
-              <span className="text-xl">{style.icon}</span>
+            <div className={`mb-2 ${style.border} pl-3 font-semibold flex items-center gap-2`}>
+              <span>{style.icon}</span>
               <span>{value.title}</span>
             </div>
           )}
-          <div className="prose prose-sm max-w-none">
+          <div>
             <PortableText value={value.content} components={portableTextComponents} />
           </div>
         </div>

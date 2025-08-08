@@ -3,6 +3,31 @@
   @apply text-gray-700 dark:text-gray-300;
 }
 
+/* Obsidian-like preview base */
+.obsidian-preview {
+  @apply leading-relaxed;
+}
+
+.obsidian-pre {
+  @apply bg-gray-900 text-gray-100 p-4 rounded-md overflow-x-auto text-sm my-4;
+}
+
+.obsidian-table {
+  @apply w-full text-sm;
+  border-collapse: collapse;
+}
+.obsidian-table th,
+.obsidian-table td {
+  @apply border border-gray-200 dark:border-gray-700 px-3 py-2 align-top;
+}
+.obsidian-table thead th {
+  @apply bg-gray-50 dark:bg-gray-800 font-semibold;
+}
+
+.obsidian-callout {
+  @apply text-sm;
+}
+
 /* Code syntax highlighting improvements */
 .markdown-content pre {
   @apply bg-gray-50 dark:bg-gray-900;
