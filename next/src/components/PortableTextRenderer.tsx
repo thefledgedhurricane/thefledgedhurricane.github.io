@@ -5,8 +5,6 @@ import Image from 'next/image';
 import { urlFor } from '@/lib/sanity';
 import { useEffect, useRef, ReactNode, useState } from 'react';
 import mermaid from 'mermaid';
-import { Markmap } from 'markmap-view';
-import { Transformer } from 'markmap-lib';
 import Prism from 'prismjs';
 
 // Import Prism languages (themes imported in globals.css)
@@ -129,20 +127,31 @@ function MermaidDiagram({ chart }: { chart: string }) {
 
 function MarkMapDiagram({ content, height = "400px" }: { content: string; height?: string }) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const mmRef = useRef<Markmap>();
+  const mmRef = useRef<any>();
 
   useEffect(() => {
-    if (svgRef.current) {
-      const transformer = new Transformer();
-      const { root } = transformer.transform(content);
-      
-      if (!mmRef.current) {
-        mmRef.current = Markmap.create(svgRef.current);
+    let cancelled = false;
+    (async () => {
+      try {
+        const [{ Transformer }, { Markmap }] = await Promise.all([
+          import('markmap-lib'),
+          import('markmap-view'),
+        ]);
+        if (!svgRef.current || cancelled) return;
+        const transformer = new Transformer();
+        const { root } = transformer.transform(content);
+        if (!mmRef.current) {
+          mmRef.current = Markmap.create(svgRef.current);
+        }
+        mmRef.current.setData(root);
+        mmRef.current.fit();
+      } catch (err) {
+        console.error('Markmap rendering error:', err);
       }
-      
-      mmRef.current.setData(root);
-      mmRef.current.fit();
-    }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, [content]);
 
   return (
