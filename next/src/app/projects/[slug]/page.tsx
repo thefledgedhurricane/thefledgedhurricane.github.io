@@ -6,10 +6,18 @@ import { getProject, getProjects, urlFor } from '@/lib/sanity';
 import { Project } from '@/lib/sanity-types';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
 
+type ParamsObject = { slug: string };
 interface ProjectPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+  // Dans certains états (après refactor), Next nous a fourni un Promise; on gère les deux.
+  params: ParamsObject | Promise<ParamsObject>;
+}
+
+async function resolveParams(p: ProjectPageProps['params']): Promise<ParamsObject> {
+  // Détection simple Promise vs objet
+  if (p && typeof (p as any).then === 'function') {
+    return await (p as Promise<ParamsObject>);
+  }
+  return p as ParamsObject;
 }
 
 export async function generateStaticParams() {
@@ -20,7 +28,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = await resolveParams(params);
   const project = await getProject(slug);
   
   if (!project) {
@@ -29,12 +37,29 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     };
   }
 
+  // Assainir description (si une structure portable text ou trop longue est venue remplacer la description courte)
+  const rawDescription: any = project.description;
+  let cleanDescription: string = '';
+  if (typeof rawDescription === 'string') {
+    cleanDescription = rawDescription.trim();
+  } else if (Array.isArray(rawDescription)) {
+    // PortableText blocks -> concat spans
+    cleanDescription = rawDescription
+      .filter((b: any) => b._type === 'block')
+      .map((b: any) => (b.children || []).map((c: any) => c.text || '').join(''))
+      .join(' ')
+      .trim();
+  } else if (rawDescription && typeof rawDescription === 'object') {
+    cleanDescription = JSON.stringify(rawDescription).slice(0, 140);
+  }
+  if (cleanDescription.length > 180) cleanDescription = cleanDescription.slice(0, 177) + '…';
+
   return {
     title: `${project.title} | Portfolio`,
-    description: project.description,
+    description: cleanDescription,
     openGraph: {
       title: project.title,
-      description: project.description,
+      description: cleanDescription,
       images: project.featuredImage?.asset ? [urlFor(project.featuredImage).width(1200).height(630).url()] : [],
     },
   };
@@ -43,7 +68,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { slug } = await params;
+  const { slug } = await resolveParams(params);
   const project = await getProject(slug);
 
   if (!project) {
@@ -70,7 +95,62 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               Back to Projects
             </Link>
             <h1 className="text-4xl font-bold text-gray-900 mb-4">{project.title}</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">{project.description}</p>
+            {(() => {
+              // Extraire description brute (string ou blocks) puis résumer avant markdown avancé
+              let raw = '';
+              if (typeof project.description === 'string') raw = project.description;
+              else if (Array.isArray(project.description)) {
+                raw = project.description
+                  .filter((b: any) => b._type === 'block')
+                  .map((b: any) => (b.children || []).map((c: any) => c.text || '').join(''))
+                  .join(' ');
+              }
+              // Normaliser espaces
+              raw = raw.replace(/\r\n?/g, '\n');
+              // Trouver la première occurrence d'un séparateur de structure (heading ou liste) même s'il est collé après un espace
+              const separators = [
+                /#{1,6}\s/,          // heading markdown
+                /\n[-*+]\s/,        // liste
+                /\n\d+\.\s/,      // liste numérotée
+              ];
+              let cutIndex = -1;
+              for (const re of separators) {
+                const m = re.exec(raw);
+                if (m) {
+                  const idx = m.index;
+                  if (cutIndex === -1 || idx < cutIndex) cutIndex = idx;
+                }
+              }
+              if (cutIndex > 120) { // éviter de couper trop tôt si heading très proche du début
+                raw = raw.slice(0, cutIndex).trim();
+              }
+              // Si toujours trop long, couper au premier double saut de ligne
+              if (raw.length > 260) {
+                const dbl = raw.indexOf('\n\n');
+                if (dbl !== -1 && dbl > 120) raw = raw.slice(0, dbl).trim();
+              }
+              // Nettoyer éléments markdown basiques restants
+              let summary = raw
+                .replace(/\*\*(.+?)\*\*/g, '$1')
+                .replace(/\*(.+?)\*/g, '$1')
+                .replace(/`([^`]+)`/g, '$1')
+                .replace(/\[(.+?)\]\((.*?)\)/g, '$1')
+                .replace(/\s{2,}/g, ' ')
+                .trim();
+              if (summary.length > 240) {
+                const periodIdx = summary.indexOf('. ');
+                if (periodIdx > 120 && periodIdx < 240) {
+                  summary = summary.slice(0, periodIdx + 1);
+                } else {
+                  summary = summary.slice(0, 237) + '…';
+                }
+              }
+              return (
+                <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                  {summary}
+                </p>
+              );
+            })()}
           </div>
 
           {/* Project Image */}
@@ -151,8 +231,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       {/* Content Section */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-white rounded-xl shadow-sm p-8">
-          <div className="prose prose-lg max-w-none">
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-8 border border-gray-100 dark:border-gray-800 transition-colors">
+          <div className="prose prose-lg dark:prose-invert max-w-none">
             <PortableTextRenderer content={project.content} />
           </div>
         </div>

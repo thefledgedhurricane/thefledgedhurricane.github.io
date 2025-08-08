@@ -225,6 +225,15 @@ function RenderableCodeBlock({ value }: { value: any }) {
 
 // Enhanced markdown renderer with Mermaid and Hugo shortcode support
 function EnhancedMarkdown({ content }: { content: string }) {
+  // Pré-normalisation : insérer des sauts de ligne devant des titres markdown restés inline dans un seul bloc
+  // Ex: "texte ## Titre" => "texte\n## Titre" afin que le parser de lignes détecte bien le heading.
+  let normalized = content
+    .replace(/\r\n?/g, '\n')
+    // headings collés dans un paragraphe
+    .replace(/(?<!^)\s(#{1,6}\s)/g, '\n$1')
+    // puces inline typiques " - ✅" ou " - **" (séparation bullet list)
+    .replace(/ (-(?=\s(?:✅|\*\*|\*|\+|\[)))/g, '\n$1');
+
   // Notion/Obsidian-like markdown parsing with proper code block handling
   const parseContent = (text: string) => {
     // Define all regex patterns for different block types
@@ -350,63 +359,69 @@ function EnhancedMarkdown({ content }: { content: string }) {
     const parseInline = (str: string) => {
       const parts: ReactNode[] = [];
       let lastIndex = 0;
-      const tagPatterns = [
+
+      // Order matters: strong before em to avoid overlap; we'll skip overlaps explicitly.
+      const patterns: Array<{
+        type: 'strong' | 'em' | 'link' | 'code';
+        regex: RegExp;
+        render: (content: string, key: number, url?: string) => JSX.Element;
+      }> = [
         {
-          regex: /\*\*(.*?)\*\*/g,
-          component: (content: string, key: number) => (
-            <strong key={key} className="font-bold text-gray-900 dark:text-white">{content}</strong>
+          type: 'strong',
+          regex: /\*\*(.+?)\*\*/g,
+          render: (c, k) => <strong key={k} className="font-bold text-gray-900 dark:text-white">{c}</strong>
+        },
+        {
+          type: 'link',
+          regex: /\[([^\]]+)\]\(([^)]+)\)/g,
+          render: (c, k, url) => (
+            <a key={k} href={url} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline decoration-blue-500/30 hover:decoration-blue-500 decoration-2 underline-offset-2 transition-colors duration-200 font-medium">{c}</a>
           )
         },
         {
-          regex: /\*(.*?)\*/g,
-          component: (content: string, key: number) => (
-            <em key={key} className="italic text-gray-800 dark:text-gray-200">{content}</em>
-          )
-        },
-        {
-          regex: /\[([^\]]*)\]\(([^)]*)\)/g,
-          component: (content: string, key: number, url?: string) => (
-            <a key={key} href={url} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline decoration-blue-500/30 hover:decoration-blue-500 decoration-2 underline-offset-2 transition-colors duration-200 font-medium">
-              {content}
-            </a>
-          )
-        },
-        {
+          type: 'code',
           regex: /`([^`]+)`/g,
-          component: (content: string, key: number) => (
-            <code key={key} className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md text-sm font-mono text-primary-600 dark:text-primary-400 border border-gray-200 dark:border-gray-700">{content}</code>
-          )
+          render: (c, k) => <code key={k} className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md text-sm font-mono text-primary-600 dark:text-primary-400 border border-gray-200 dark:border-gray-700">{c}</code>
+        },
+        {
+          type: 'em',
+          // Italic: single * surrounding non-*; prevent matching inside **bold**
+          regex: /(?<!\*)\*([^*]+?)\*(?!\*)/g,
+          render: (c, k) => <em key={k} className="italic text-gray-800 dark:text-gray-200">{c}</em>
         }
       ];
 
-      const allMatches: Array<{
-        index: number;
-        length: number;
-        content: string;
-        url?: string;
-        component: (content: string, key: number, url?: string) => JSX.Element;
-      }> = [];
+      interface Match { index: number; length: number; content: string; url?: string; render: (content: string, key: number, url?: string) => JSX.Element; }
+      const matches: Match[] = [];
 
-      tagPatterns.forEach((pattern) => {
-        let m;
-        const regex = new RegExp(pattern.regex.source, pattern.regex.flags);
-        while ((m = regex.exec(str)) !== null) {
-          if (pattern.regex.source.includes('\\[') && m[2]) {
-            allMatches.push({ index: m.index, length: m[0].length, content: m[1], url: m[2], component: pattern.component });
+      patterns.forEach(p => {
+        let m: RegExpExecArray | null;
+        const r = new RegExp(p.regex.source, p.regex.flags);
+        while ((m = r.exec(str)) !== null) {
+          const full = m[0];
+          const content = m[1];
+            // Skip empty content or malformed
+          if (!content) continue;
+          const start = m.index;
+          const end = start + full.length;
+          // Skip if overlaps previously stored match
+          if (matches.some(ex => !(end <= ex.index || start >= ex.index + ex.length))) continue;
+          if (p.type === 'link') {
+            matches.push({ index: start, length: full.length, content, url: m[2], render: p.render });
           } else {
-            allMatches.push({ index: m.index, length: m[0].length, content: m[1], component: pattern.component });
+            matches.push({ index: start, length: full.length, content, render: p.render });
           }
         }
       });
 
-      allMatches.sort((a, b) => a.index - b.index);
-      allMatches.forEach((m, idx) => {
+      matches.sort((a,b) => a.index - b.index);
+      matches.forEach((m, i) => {
         if (m.index > lastIndex) parts.push(str.slice(lastIndex, m.index));
-        parts.push(m.component(m.content, m.index + idx, m.url));
+        parts.push(m.render(m.content, m.index + i, m.url));
         lastIndex = m.index + m.length;
       });
       if (lastIndex < str.length) parts.push(str.slice(lastIndex));
-      return parts.length > 0 ? parts : [str];
+      return parts.length ? parts : [str];
     };
 
     // Robust table parsing: supports optional leading/trailing pipes, escaped pipes (\|), and inline code
@@ -550,6 +565,27 @@ function EnhancedMarkdown({ content }: { content: string }) {
               </h3>
             );
           }
+          if (line.startsWith('#### ')) {
+            return (
+              <h4 key={`${tableIndex}-${index}`} className="text-lg md:text-xl font-semibold mb-2 mt-4 text-gray-900 dark:text-white">
+                {parseInline(line.slice(5))}
+              </h4>
+            );
+          }
+          if (line.startsWith('##### ')) {
+            return (
+              <h5 key={`${tableIndex}-${index}`} className="text-base md:text-lg font-semibold mb-2 mt-3 text-gray-900 dark:text-white">
+                {parseInline(line.slice(6))}
+              </h5>
+            );
+          }
+          if (line.startsWith('###### ')) {
+            return (
+              <h6 key={`${tableIndex}-${index}`} className="text-sm md:text-base font-semibold mb-2 mt-3 text-gray-800 dark:text-gray-200 tracking-wide uppercase">
+                {parseInline(line.slice(7))}
+              </h6>
+            );
+          }
           
           // Horizontal rules - GitHub style
           if (line.trim().match(/^---+$/)) {
@@ -603,7 +639,7 @@ function EnhancedMarkdown({ content }: { content: string }) {
     }).flat();
   };
 
-  const parts = parseContent(content);
+  const parts = parseContent(normalized);
   
   return (
     <div className="prose prose-lg dark:prose-invert max-w-none">
