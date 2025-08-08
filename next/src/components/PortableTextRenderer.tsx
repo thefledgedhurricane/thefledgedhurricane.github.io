@@ -37,6 +37,36 @@ import 'prismjs/components/prism-matlab';
 import 'prismjs/components/prism-ruby';
 import 'prismjs/components/prism-perl';
 import 'prismjs/components/prism-powershell';
+import 'prismjs/components/prism-markup';
+
+// Language normalization for Prism aliases and custom labels
+const LANGUAGE_ALIASES: Record<string, string> = {
+  js: 'javascript',
+  jsx: 'jsx',
+  ts: 'typescript',
+  tsx: 'tsx',
+  py: 'python',
+  python3: 'python',
+  rb: 'ruby',
+  sh: 'bash',
+  zsh: 'bash',
+  shell: 'bash',
+  yml: 'yaml',
+  md: 'markdown',
+  html: 'markup',
+  xml: 'markup',
+  'c++': 'cpp',
+  'c#': 'csharp',
+  golang: 'go',
+  mermaid: 'markdown',
+  markmap: 'markdown',
+};
+
+function normalizeLanguage(lang?: string): string {
+  if (!lang) return 'text';
+  const key = lang.toLowerCase().trim();
+  return LANGUAGE_ALIASES[key] || key;
+}
 
 // Code highlighting component
 function HighlightedCode({ code, language }: { code: string; language: string }) {
@@ -49,7 +79,7 @@ function HighlightedCode({ code, language }: { code: string; language: string })
       codeRef.current.removeAttribute('data-highlighted');
       
       // Apply Prism highlighting
-      Prism.highlightElement(codeRef.current);
+  Prism.highlightElement(codeRef.current);
     }
   }, [code, language]);
 
@@ -61,7 +91,7 @@ function HighlightedCode({ code, language }: { code: string; language: string })
         fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Inconsolata, "Roboto Mono", Menlo, monospace'
       }}
     >
-      {code}
+  {code}
     </code>
   );
 }
@@ -89,6 +119,7 @@ function MermaidDiagram({ chart }: { chart: string }) {
         }
       } catch (error) {
         console.error('Mermaid rendering error:', error);
+        ref.current.innerHTML = '<p class="text-red-500">Error rendering Mermaid diagram. Please check the syntax.</p>';
       }
     }
   }, [chart]);
@@ -146,7 +177,7 @@ function RenderableCodeBlock({ value }: { value: any }) {
         </button>
       </div>
       <pre className="p-4 overflow-x-auto text-sm leading-relaxed">
-        <HighlightedCode code={value.code} language={value.language || 'text'} />
+  <HighlightedCode code={value.code} language={normalizeLanguage(value.language || 'text')} />
       </pre>
     </div>
   );
@@ -192,13 +223,14 @@ function EnhancedMarkdown({ content }: { content: string }) {
   // Notion/Obsidian-like markdown parsing with proper code block handling
   const parseContent = (text: string) => {
     // Define all regex patterns for different block types
-    const patterns = {
-      codeBlock: /```(\w+)?\n?([\s\S]*?)```/g,
-      mermaid: /```mermaid\n?([\s\S]*?)```/g,
-      markmap: /```markmap\n?([\s\S]*?)```/g,
-      markmapShortcode: /```markmap\s*\{([^}]*)\}\s*\n?([\s\S]*?)```/g,
-      callout: /\{\{%\/\*\s*callout\s+(\w+)\s*\*\/%\}\}([\s\S]*?)\{\{%\/\*\s*\/callout\s*\*\/%\}\}|\{\{%\s*callout\s+(\w+)\s*%\}\}([\s\S]*?)\{\{%\s*\/callout\s*%\}\}/g
-    };
+        const patterns = {
+          // Support both ``` and ~~~ fences with backreference to the opener, optional language then params
+          codeBlock: /(```|~~~)([a-zA-Z0-9+#-]+)?[^\n]*\n([\s\S]*?)\n\1/g,
+          mermaid: /(```|~~~)mermaid[^\n]*\n([\s\S]*?)\n\1/g,
+          markmap: /(```|~~~)markmap[^\n]*\n([\s\S]*?)\n\1/g,
+          markmapShortcode: /(```|~~~)markmap\s*\{([^}]*)\}[^\n]*\n([\s\S]*?)\n\1/g,
+          callout: /\{\{%\/\*\s*callout\s+(\w+)\s*\*\/\%\}\}([\s\S]*?)\{\{%\/\*\s*\/callout\s*\*\/\%\}\}|\{\{%\s*callout\s+(\w+)\s*%\}\}([\s\S]*?)\{\{%\s*\/callout\s*%\}\}/g
+        };
 
     const parts = [];
     let lastIndex = 0;
@@ -216,9 +248,9 @@ function EnhancedMarkdown({ content }: { content: string }) {
     }> = [];
 
     // Handle regular code blocks (not mermaid/markmap)
-    while ((match = patterns.codeBlock.exec(text)) !== null) {
-      const language = match[1] || 'text';
-      const codeContent = match[2];
+        while ((match = patterns.codeBlock.exec(text)) !== null) {
+          const language = match[2] || 'text'; // Default to 'text' if no language specified
+          const codeContent = match[3];
       
       // Skip if it's a mermaid or markmap block (they'll be handled separately)
       if (language !== 'mermaid' && language !== 'markmap') {
@@ -233,28 +265,28 @@ function EnhancedMarkdown({ content }: { content: string }) {
     }
 
     // Handle mermaid blocks
-    while ((match = patterns.mermaid.exec(text)) !== null) {
+  while ((match = patterns.mermaid.exec(text)) !== null) {
       allMatches.push({
         index: match.index,
         length: match[0].length,
         type: 'mermaid',
-        content: match[1]
+        content: match[2]
       });
     }
 
     // Handle markmap blocks
-    while ((match = patterns.markmap.exec(text)) !== null) {
+  while ((match = patterns.markmap.exec(text)) !== null) {
       allMatches.push({
         index: match.index,
         length: match[0].length,
         type: 'markmap',
-        content: match[1]
+        content: match[2]
       });
     }
 
     // Handle markmap shortcode blocks with parameters
-    while ((match = patterns.markmapShortcode.exec(text)) !== null) {
-      const params = match[1];
+  while ((match = patterns.markmapShortcode.exec(text)) !== null) {
+      const params = match[2];
       const heightMatch = params.match(/height="([^"]*)"/); 
       const height = heightMatch ? heightMatch[1] : '400px';
       
@@ -262,13 +294,13 @@ function EnhancedMarkdown({ content }: { content: string }) {
         index: match.index,
         length: match[0].length,
         type: 'markmap',
-        content: match[2],
+        content: match[3],
         height: height
       });
     }
 
     // Handle callouts
-    while ((match = patterns.callout.exec(text)) !== null) {
+  while ((match = patterns.callout.exec(text)) !== null) {
       allMatches.push({
         index: match.index,
         length: match[0].length,
@@ -309,74 +341,174 @@ function EnhancedMarkdown({ content }: { content: string }) {
   };
 
   const formatText = (text: string) => {
-    // First, let's handle tables before other processing
-    const processTable = (content: string) => {
-      const tableRegex = /\|(.+)\|\n\|[-\s|:]+\|\n((?:\|.+\|\n?)+)/g;
-      const parts = [];
+    // Inline markdown parser used in paragraphs and table cells
+    const parseInline = (str: string) => {
+      const parts: ReactNode[] = [];
       let lastIndex = 0;
-      let match;
-
-      while ((match = tableRegex.exec(content)) !== null) {
-        // Add content before table
-        if (match.index > lastIndex) {
-          parts.push({
-            type: 'text',
-            content: content.slice(lastIndex, match.index)
-          });
+      const tagPatterns = [
+        {
+          regex: /\*\*(.*?)\*\*/g,
+          component: (content: string, key: number) => (
+            <strong key={key} className="font-bold text-gray-900 dark:text-white">{content}</strong>
+          )
+        },
+        {
+          regex: /\*(.*?)\*/g,
+          component: (content: string, key: number) => (
+            <em key={key} className="italic text-gray-800 dark:text-gray-200">{content}</em>
+          )
+        },
+        {
+          regex: /\[([^\]]*)\]\(([^)]*)\)/g,
+          component: (content: string, key: number, url?: string) => (
+            <a key={key} href={url} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline decoration-blue-500/30 hover:decoration-blue-500 decoration-2 underline-offset-2 transition-colors duration-200 font-medium">
+              {content}
+            </a>
+          )
+        },
+        {
+          regex: /`([^`]+)`/g,
+          component: (content: string, key: number) => (
+            <code key={key} className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md text-sm font-mono text-primary-600 dark:text-primary-400 border border-gray-200 dark:border-gray-700">{content}</code>
+          )
         }
+      ];
 
-        // Process table
-        const headerRow = match[1].split('|').map(cell => cell.trim()).filter(cell => cell);
-        const dataRows = match[2].trim().split('\n').map(row => 
-          row.split('|').map(cell => cell.trim()).filter(cell => cell)
-        );
+      const allMatches: Array<{
+        index: number;
+        length: number;
+        content: string;
+        url?: string;
+        component: (content: string, key: number, url?: string) => JSX.Element;
+      }> = [];
 
-        parts.push({
-          type: 'table',
-          headers: headerRow,
-          rows: dataRows
-        });
+      tagPatterns.forEach((pattern) => {
+        let m;
+        const regex = new RegExp(pattern.regex.source, pattern.regex.flags);
+        while ((m = regex.exec(str)) !== null) {
+          if (pattern.regex.source.includes('\\[') && m[2]) {
+            allMatches.push({ index: m.index, length: m[0].length, content: m[1], url: m[2], component: pattern.component });
+          } else {
+            allMatches.push({ index: m.index, length: m[0].length, content: m[1], component: pattern.component });
+          }
+        }
+      });
 
-        lastIndex = match.index + match[0].length;
-      }
-
-      // Add remaining content
-      if (lastIndex < content.length) {
-        parts.push({
-          type: 'text',
-          content: content.slice(lastIndex)
-        });
-      }
-
-      return parts.length > 0 ? parts : [{ type: 'text', content }];
+      allMatches.sort((a, b) => a.index - b.index);
+      allMatches.forEach((m, idx) => {
+        if (m.index > lastIndex) parts.push(str.slice(lastIndex, m.index));
+        parts.push(m.component(m.content, m.index + idx, m.url));
+        lastIndex = m.index + m.length;
+      });
+      if (lastIndex < str.length) parts.push(str.slice(lastIndex));
+      return parts.length > 0 ? parts : [str];
     };
 
-    // Process tables first
-    const tableParts = processTable(text);
-    
-    return tableParts.map((tablePart, tableIndex) => {
+    // Robust table parsing: supports optional leading/trailing pipes, escaped pipes (\|), and inline code
+    const splitRow = (row: string): string[] => {
+      // Trim optional leading/trailing pipes without losing empties
+      let s = row.trim();
+      if (s.startsWith('|')) s = s.slice(1);
+      if (s.endsWith('|')) s = s.slice(0, -1);
+      const cells: string[] = [];
+      let buf = '';
+      let inCode = false;
+      for (let i = 0; i < s.length; i++) {
+        const ch = s[i];
+        const prev = s[i - 1];
+        if (ch === '`') {
+          // toggle inline code (do not support code blocks inside table)
+          inCode = !inCode;
+          buf += ch;
+          continue;
+        }
+        if (ch === '|' && prev !== '\\' && !inCode) {
+          cells.push(buf.trim());
+          buf = '';
+          continue;
+        }
+        buf += ch;
+      }
+      cells.push(buf.trim());
+      return cells;
+    };
+
+    const isDividerLine = (line: string) => {
+      const s = line.trim().replace(/^\|/, '').replace(/\|$/, '');
+      const parts = s.split('|').map(p => p.trim());
+      return parts.length > 0 && parts.every(p => /^:?-{3,}:?$/.test(p));
+    };
+
+    const parseTables = (content: string) => {
+      const lines = content.split(/\n/);
+      const out: any[] = [];
+      let i = 0;
+      let buffer = '';
+
+      const flushText = () => {
+        if (buffer.length) {
+          out.push({ type: 'text', content: buffer });
+          buffer = '';
+        }
+      };
+
+      while (i < lines.length) {
+        const headerLine = lines[i];
+        const dividerLine = lines[i + 1];
+        if (headerLine && dividerLine && headerLine.includes('|') && isDividerLine(dividerLine)) {
+          flushText();
+          const headers = splitRow(headerLine);
+          const alignParts = splitRow(dividerLine).map(p => p.trim());
+          const aligns = alignParts.map(p => (p.startsWith(':') && p.endsWith(':')) ? 'center' : (p.endsWith(':') ? 'right' : 'left'));
+          i += 2;
+          const rows: string[][] = [];
+          while (i < lines.length && lines[i].includes('|')) {
+            rows.push(splitRow(lines[i]));
+            i++;
+          }
+          out.push({ type: 'table', headers, rows, aligns });
+        } else {
+          buffer += (buffer ? '\n' : '') + headerLine;
+          i++;
+        }
+      }
+      flushText();
+      return out.length ? out : [{ type: 'text', content }];
+    };
+
+    const partsWithTables = parseTables(text);
+
+    return partsWithTables.map((tablePart, tableIndex) => {
       if (tablePart.type === 'table') {
         return (
           <div key={`table-${tableIndex}`} className="my-8 group">
-            <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="bg-gray-50 dark:bg-gray-800">
+            <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm bg-white dark:bg-gray-900">
+              <table className="min-w-full">
+                <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                   <tr>
                     {(tablePart.headers || []).map((header: string, index: number) => (
-                      <th key={index} className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wider">
-                        {header}
+                      <th
+                        key={index}
+                        className={`px-6 py-4 text-sm font-semibold text-gray-900 dark:text-gray-100 border-r border-gray-200 dark:border-gray-700 last:border-r-0 ${
+                          (tablePart.aligns?.[index] === 'center') ? 'text-center' : (tablePart.aligns?.[index] === 'right' ? 'text-right' : 'text-left')
+                        }`}
+                      >
+                        {parseInline(header)}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                   {(tablePart.rows || []).map((row: string[], rowIndex: number) => (
                     <tr key={rowIndex} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-150">
                       {row.map((cell: string, cellIndex: number) => (
-                        <td key={cellIndex} className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
-                          <code className="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700">
-                            {cell}
-                          </code>
+                        <td
+                          key={cellIndex}
+                          className={`px-6 py-4 text-sm text-gray-800 dark:text-gray-200 border-r border-gray-200 dark:border-gray-700 last:border-r-0 bg-gray-50 dark:bg-gray-800/30 ${
+                            (tablePart.aligns?.[cellIndex] === 'center') ? 'text-center' : (tablePart.aligns?.[cellIndex] === 'right' ? 'text-right' : 'text-left')
+                          }`}
+                        >
+                          <span className="font-mono text-sm">{parseInline(cell)}</span>
                         </td>
                       ))}
                     </tr>
@@ -390,121 +522,28 @@ function EnhancedMarkdown({ content }: { content: string }) {
 
       // Process regular text content
       const textContent = tablePart.content || '';
-      
-      // Parse HTML tags and basic markdown formatting
-      const parseHtmlTags = (str: string) => {
-        const parts = [];
-        let lastIndex = 0;
-        
-        // Define HTML tag patterns with their corresponding React components
-        const tagPatterns = [
-          {
-            regex: /\*\*(.*?)\*\*/g,
-            component: (content: string, key: number) => (
-              <strong key={key} className="font-bold text-gray-900 dark:text-white">{content}</strong>
-            )
-          },
-          {
-            regex: /\*(.*?)\*/g,
-            component: (content: string, key: number) => (
-              <em key={key} className="italic text-gray-800 dark:text-gray-200">{content}</em>
-            )
-          },
-          {
-            regex: /\[([^\]]*)\]\(([^)]*)\)/g,
-            component: (content: string, key: number, url?: string) => (
-              <a key={key} href={url} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline decoration-blue-500/30 hover:decoration-blue-500 decoration-2 underline-offset-2 transition-colors duration-200 font-medium">
-                {content}
-              </a>
-            )
-          },
-          {
-            regex: /`([^`]+)`/g,
-            component: (content: string, key: number) => (
-              <code key={key} className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md text-sm font-mono text-primary-600 dark:text-primary-400 border border-gray-200 dark:border-gray-700">{content}</code>
-            )
-          }
-        ];
-        
-        // Find all matches from all patterns
-         const allMatches: Array<{
-           index: number;
-           length: number;
-           content: string;
-           url?: string;
-           component: (content: string, key: number, url?: string) => JSX.Element;
-           patternIndex: number;
-         }> = [];
-         tagPatterns.forEach((pattern, patternIndex) => {
-           let match;
-           const regex = new RegExp(pattern.regex.source, pattern.regex.flags);
-           while ((match = regex.exec(str)) !== null) {
-             // Handle links specially (they have both content and URL)
-             if (pattern.regex.source.includes('\\[') && match[2]) {
-               allMatches.push({
-                 index: match.index,
-                 length: match[0].length,
-                 content: match[1],
-                 url: match[2],
-                 component: pattern.component,
-                 patternIndex
-               });
-             } else {
-               allMatches.push({
-                 index: match.index,
-                 length: match[0].length,
-                 content: match[1],
-                 component: pattern.component,
-                 patternIndex
-               });
-             }
-           }
-         });
-        
-        // Sort matches by index
-        allMatches.sort((a, b) => a.index - b.index);
-        
-        // Process matches in order
-        allMatches.forEach((match, matchIndex) => {
-          // Add text before the match
-          if (match.index > lastIndex) {
-            parts.push(str.slice(lastIndex, match.index));
-          }
-          // Add the matched component
-          parts.push(match.component(match.content, match.index + matchIndex, match.url));
-          lastIndex = match.index + match.length;
-        });
-        
-        // Add remaining text
-        if (lastIndex < str.length) {
-          parts.push(str.slice(lastIndex));
-        }
-        
-        return parts.length > 0 ? parts : [str];
-      };
-      
       return textContent
         .split('\n')
-        .map((line, index) => {
+        .map((line: string, index: number) => {
           // Headers - GitHub style with proper spacing
           if (line.startsWith('# ')) {
             return (
               <h1 key={`${tableIndex}-${index}`} className="text-3xl md:text-4xl font-bold mb-4 mt-8 pb-3 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white">
-                {parseHtmlTags(line.slice(2))}
+                {parseInline(line.slice(2))}
               </h1>
             );
           }
           if (line.startsWith('## ')) {
             return (
               <h2 key={`${tableIndex}-${index}`} className="text-2xl md:text-3xl font-bold mb-3 mt-6 pb-2 border-b border-gray-100 dark:border-gray-800 text-gray-900 dark:text-white">
-                {parseHtmlTags(line.slice(3))}
+                {parseInline(line.slice(3))}
               </h2>
             );
           }
           if (line.startsWith('### ')) {
             return (
               <h3 key={`${tableIndex}-${index}`} className="text-xl md:text-2xl font-semibold mb-2 mt-4 text-gray-900 dark:text-white">
-                {parseHtmlTags(line.slice(4))}
+                {parseInline(line.slice(4))}
               </h3>
             );
           }
@@ -525,7 +564,7 @@ function EnhancedMarkdown({ content }: { content: string }) {
                     {line.match(/^(\d+)\./)?.[1]}.
                   </span>
                   <div className="flex-1 text-gray-700 dark:text-gray-300 text-base md:text-lg leading-7">
-                    {parseHtmlTags(line.replace(/^\d+\.\s/, ''))}
+                    {parseInline(line.replace(/^\d+\.\s/, ''))}
                   </div>
                 </div>
               </div>
@@ -539,7 +578,7 @@ function EnhancedMarkdown({ content }: { content: string }) {
                 <div className="flex items-start gap-3">
                   <span className="text-gray-500 dark:text-gray-400 mt-1 text-lg leading-6">•</span>
                   <div className="flex-1 text-gray-700 dark:text-gray-300 text-base md:text-lg leading-7">
-                    {parseHtmlTags(line.replace(/^[-*+]\s/, ''))}
+                    {parseInline(line.replace(/^[-*+]\s/, ''))}
                   </div>
                 </div>
               </div>
@@ -553,8 +592,8 @@ function EnhancedMarkdown({ content }: { content: string }) {
           
           // Regular paragraphs with HTML tag parsing - improved GitHub/Notion style
           return (
-            <p key={`${tableIndex}-${index}`} className="mb-5 leading-7 text-gray-700 dark:text-gray-300 text-base md:text-lg">
-              {parseHtmlTags(line)}
+            <p key={`${tableIndex}-${index}`} className="mb-5 leading-7 text-gray-800 dark:text-gray-200 text-base md:text-lg">
+              {parseInline(line)}
             </p>
           );
         });
@@ -568,7 +607,7 @@ function EnhancedMarkdown({ content }: { content: string }) {
       {parts.map((part, index) => {
         if (part.type === 'codeBlock') {
           // Render code blocks with MDN-like styling
-          const language = ('language' in part ? part.language : undefined) || 'text';
+          const language = normalizeLanguage(('language' in part ? part.language : undefined) || 'text');
           // Clean up the code content by trimming excessive whitespace and empty lines
           const cleanCode = part.content
             .replace(/^\n+|\n+$/g, '') // Remove leading/trailing newlines
@@ -580,7 +619,7 @@ function EnhancedMarkdown({ content }: { content: string }) {
               <div className="relative overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm">
                 {/* MDN-style header */}
                 <div className="flex items-center justify-between bg-gray-800 dark:bg-gray-900 text-gray-300 px-4 py-2 text-sm">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3">
                     <div className="flex gap-1">
                       <div className="w-3 h-3 rounded-full bg-red-500"></div>
                       <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
@@ -693,77 +732,38 @@ const portableTextComponents = {
       </div>
     ),
     codeBlock: ({ value }: any) => {
-      // Create a toggleable component for renderable languages
-      if (value.language === 'mermaid' || value.language === 'markmap') {
-        return <RenderableCodeBlock value={value} />;
-      }
-      
       // Render code blocks with MDN-like styling
+      const language = normalizeLanguage(value.language || 'text');
+      const cleanCode = value.code
+        .replace(/^\n+|\n+$/g, '') // Remove leading/trailing newlines
+        .replace(/\n\s*\n\s*\n/g, '\n\n') // Replace multiple empty lines with double newline
+        .trim();
+
       return (
         <div className="my-8 group">
           <div className="relative overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm">
-            {/* MDN-style header with filename if available */}
-            {value.filename ? (
-              <div className="flex items-center justify-between bg-gray-800 dark:bg-gray-900 text-gray-300 px-4 py-2 text-sm border-b border-gray-700">
-                <div className="flex items-center gap-3">
-                  <div className="flex gap-1">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                  </div>
-                  <span className="flex items-center gap-2 font-mono text-gray-300">
-                    <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm1 0v12h12V4H4z" clipRule="evenodd" />
-                      <path fillRule="evenodd" d="M6 8a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zM6 12a1 1 0 011-1h3a1 1 0 110 2H7a1 1 0 01-1-1z" clipRule="evenodd" />
-                    </svg>
-                    {value.filename}
-                  </span>
+            <div className="flex items-center justify-between bg-gray-800 dark:bg-gray-900 text-gray-300 px-4 py-2 text-sm">
+              <div className="flex items-center gap-2">
+                <div className="flex gap-1">
+                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-xs px-2 py-1 bg-gray-700 rounded text-gray-400 font-mono uppercase tracking-wide">
-                    {value.language || 'text'}
-                  </span>
-                  <button 
-                    onClick={() => navigator.clipboard.writeText(value.code)}
-                    className="opacity-70 hover:opacity-100 transition-opacity text-xs px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded text-gray-300 hover:text-white border border-gray-600 font-medium"
-                    title="Copy to clipboard"
-                  >
-                    Copy
-                  </button>
-                </div>
+                <span className="ml-2 font-mono text-gray-400 uppercase tracking-wide">
+                  {language}
+                </span>
               </div>
-            ) : (
-              <div className="flex items-center justify-between bg-gray-800 dark:bg-gray-900 text-gray-300 px-4 py-2 text-sm">
-                <div className="flex items-center gap-2">
-                  <div className="flex gap-1">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                  </div>
-                  <span className="ml-2 font-mono text-gray-400 uppercase tracking-wide">
-                    {value.language || 'text'}
-                  </span>
-                </div>
-                <button 
-                  onClick={() => navigator.clipboard.writeText(value.code)}
-                  className="opacity-70 hover:opacity-100 transition-opacity text-xs px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded text-gray-300 hover:text-white border border-gray-600 font-medium"
-                  title="Copy to clipboard"
-                >
-                  Copy
-                </button>
-              </div>
-            )}
-            {/* Code content */}
+              <button 
+                onClick={() => navigator.clipboard.writeText(cleanCode)}
+                className="opacity-70 hover:opacity-100 transition-opacity text-xs px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded text-gray-300 hover:text-white border border-gray-600 font-medium"
+                title="Copy to clipboard"
+              >
+                Copy
+              </button>
+            </div>
             <div className="bg-gray-900 dark:bg-black">
               <pre className="p-4 overflow-x-auto text-sm leading-6 font-mono">
-                <HighlightedCode 
-                  code={value.code
-                    .replace(/^\n+|\n+$/g, '') // Remove leading/trailing newlines
-                    .replace(/\n\s*\n\s*\n/g, '\n\n') // Replace multiple empty lines with double newline
-                    .trim()
-                  } 
-                  language={value.language || 'text'} 
-                />
+                <HighlightedCode code={cleanCode} language={language} />
               </pre>
             </div>
           </div>
@@ -778,25 +778,25 @@ const portableTextComponents = {
         </div>
       </div>
     ),
-    // Table support - GitHub/Notion style
+    // Table support - Clean professional style
     table: ({ value }: any) => (
       <div className="my-8 group">
-        <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
-          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-            <thead className="bg-gray-50 dark:bg-gray-800">
+        <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm bg-white dark:bg-gray-900">
+          <table className="min-w-full">
+            <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
               <tr>
                 {value.rows[0]?.cells.map((cell: any, index: number) => (
-                  <th key={index} className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wider">
+                  <th key={index} className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 border-r border-gray-200 dark:border-gray-700 last:border-r-0">
                     <PortableText value={cell} components={portableTextComponents} />
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               {value.rows.slice(1).map((row: any, rowIndex: number) => (
                 <tr key={rowIndex} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-150">
                   {row.cells.map((cell: any, cellIndex: number) => (
-                    <td key={cellIndex} className="px-6 py-4 whitespace-nowrap text-sm">
+                    <td key={cellIndex} className="px-6 py-4 text-sm border-r border-gray-200 dark:border-gray-700 last:border-r-0 font-mono bg-gray-50 dark:bg-gray-800/30">
                       <div className="text-gray-700 dark:text-gray-300">
                         <PortableText value={cell} components={portableTextComponents} />
                       </div>
@@ -910,7 +910,7 @@ const portableTextComponents = {
       
       // Check if content contains markdown-like syntax, code blocks, or Hugo shortcodes
       const hasMarkdownSyntax = /^#{1,6}\s|\*\*.*?\*\*|\*[^*].*?\*|\[.*?\]\(.*?\)|^[-*+]\s|^\d+\.\s|<\/?(?:mark|strong|b|em|i|u|s|del|code|kbd|small|sub|sup)>|✅|❤️|👀|🎯|💬|---+|[✨🚀💡⚠️🔥🎉]|\|.*\|.*\n\|[-\s|:]+\|/m.test(textContent);
-      const hasCodeBlocks = /```[\w]*\n[\s\S]*?\n```/m.test(textContent);
+  const hasCodeBlocks = /(```|~~~)[\w-]*\n[\s\S]*?\n\1/m.test(textContent);
       const hasHugoShortcode = /\{\{%\/\*\s*callout\s+\w+\s*\*\/%\}\}|\{\{%\s*callout\s+\w+\s*%\}\}/m.test(textContent);
       
       if ((hasMarkdownSyntax || hasCodeBlocks || hasHugoShortcode) && textContent.length > 0) {
@@ -919,15 +919,15 @@ const portableTextComponents = {
       
       // Fallback to regular paragraph rendering - improved GitHub/Notion style
       return (
-        <p className="mb-5 leading-7 text-gray-700 dark:text-gray-300 text-base md:text-lg">
+        <p className="mb-5 leading-7 text-gray-800 dark:text-gray-200 text-base md:text-lg">
           {children}
         </p>
       );
     },
     blockquote: ({ children }: any) => (
       <div className="my-6">
-        <blockquote className="border-l-4 border-gray-300 dark:border-gray-600 pl-6 py-2 bg-gray-50 dark:bg-gray-800/50 rounded-r-lg">
-          <div className="text-gray-700 dark:text-gray-300 italic text-base md:text-lg leading-7">
+        <blockquote className="border-l-4 border-gray-400 dark:border-gray-600 pl-6 py-2 bg-gray-100 dark:bg-gray-800 rounded-r-lg">
+          <div className="text-gray-800 dark:text-gray-200 italic text-base md:text-lg leading-7">
             {children}
           </div>
         </blockquote>
