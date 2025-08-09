@@ -45,19 +45,19 @@ function PostCard({ post }: PostCardProps) {
           )}
         </div>
         
-        <h2 className="text-xl font-bold text-gray-900 mb-3 hover:text-primary-600 transition-colors">
+  <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
           <Link href={`/posts/${post.slug.current}`}>
             {post.title}
           </Link>
         </h2>
         
         {post.excerpt && (
-          <p className="text-gray-600 mb-4 line-clamp-3">
+          <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
             {post.excerpt}
           </p>
         )}
         
-        <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+        <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-4">
           <div className="flex items-center space-x-4">
             {post.authors && post.authors.length > 0 && (
               <span>Par {post.authors[0].name}</span>
@@ -80,13 +80,13 @@ function PostCard({ post }: PostCardProps) {
             {post.tags.slice(0, 3).map((tag: string, index: number) => (
               <span
                 key={index}
-                className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs"
+                className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded text-xs"
               >
                 {tag}
               </span>
             ))}
             {post.tags.length > 3 && (
-              <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">
+              <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded text-xs">
                 +{post.tags.length - 3}
               </span>
             )}
@@ -121,11 +121,11 @@ export default async function PostsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <main className="min-h-screen bg-gray-50 py-16">
+  <main className="min-h-screen bg-gray-50 dark:bg-gray-950 py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
               Blog
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -149,7 +149,7 @@ export default async function PostsPage() {
               {/* Featured Posts */}
               {featuredPosts.length > 0 && (
                 <section className="mb-16">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-8">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
                     Articles en Vedette
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -162,7 +162,7 @@ export default async function PostsPage() {
               
               {/* All Posts */}
               <section>
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
                   Tous les Articles
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -190,7 +190,7 @@ export default async function PostsPage() {
                     />
                   </svg>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Aucun Article</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Aucun Article</h2>
                 <p className="text-gray-600">
                   Les articles de blog apparaîtront ici une fois qu&apos;ils seront publiés dans le CMS Sanity.
                 </p>

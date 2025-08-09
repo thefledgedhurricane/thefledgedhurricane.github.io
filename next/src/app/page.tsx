@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   description: 'Academic portfolio of Pr. Ihababdelbasset Annaki- Research in Computer Science, Publications, Teaching, and Educational Innovation.',
 };
 
+import SmoothScroll from '@/components/SmoothScroll';
+
 function HeroSection() {
   return (
   <section className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-950 relative overflow-hidden transition-colors">
@@ -410,7 +412,7 @@ function FeaturedProjects({ projects }: FeaturedProjectsProps) {
     <section className="section-padding">
       <div className="container-max">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             Projets Sélectionnés
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -560,6 +562,7 @@ export default async function HomePage() {
 
   return (
     <>
+  <SmoothScroll />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

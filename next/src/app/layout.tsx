@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
+import CustomCursor from '@/components/CustomCursor';
+import SmoothScroll from '@/components/SmoothScroll';
 import { generateJsonLd } from '@/lib/jsonld';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -91,6 +93,8 @@ export default function RootLayout({
         <meta name="theme-color" content="#2563eb" />
       </head>
   <body className={`antialiased transition-colors duration-300 bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100`}>
+  <SmoothScroll />
+  <CustomCursor />
         <Header />
         <main>
           <div className="min-h-screen flex flex-col">

@@ -135,7 +135,7 @@ function HeroSection() {
               Parcours Académique & Professionnel
             </div>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extralight text-gray-900 mb-6 tracking-tighter leading-none">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extralight text-gray-900 dark:text-gray-100 mb-6 tracking-tighter leading-none">
               À Propos de
               <br />
               <span className="font-bold text-black">
@@ -191,7 +191,7 @@ function ExperienceSection() {
           <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
             Parcours Professionnel
           </div>
-          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 mb-12 leading-tight max-w-4xl">
+          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 dark:text-gray-100 mb-12 leading-tight max-w-4xl">
             Expérience <span className="font-bold">Professionnelle</span>
           </h2>
         </div>
@@ -263,7 +263,7 @@ function EducationSection() {
           <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
             Formation Académique
           </div>
-          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 mb-12 leading-tight max-w-4xl">
+          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 dark:text-gray-100 mb-12 leading-tight max-w-4xl">
             Parcours <span className="font-bold">Académique</span>
           </h2>
         </div>

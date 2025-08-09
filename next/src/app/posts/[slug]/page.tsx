@@ -96,7 +96,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 )}
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
                 {post.title}
               </h1>
               
@@ -111,7 +111,7 @@ export default async function PostPage({ params }: PostPageProps) {
                   {post.authors && post.authors.length > 0 && (
                     <div className="flex items-center space-x-2">
                       <span>Par</span>
-                      <span className="font-medium text-gray-900">
+                      <span className="font-medium text-gray-900 dark:text-gray-100">
                         {post.authors[0].name}
                       </span>
                     </div>
@@ -155,13 +155,13 @@ export default async function PostPage({ params }: PostPageProps) {
           
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (
-            <div className="mt-12 pt-8 border-t border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Tags</h3>
+            <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag: string, index: number) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors"
+                    className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                   >
                     #{tag}
                   </span>
