@@ -12,7 +12,7 @@
   }
   
   body {
-    @apply bg-white text-gray-900 antialiased;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   }
   html.dark body {
     @apply bg-gray-950 text-gray-100;
@@ -24,6 +24,16 @@
   
   a {
     @apply transition-colors duration-200;
+h1, h2, h3, h4, h5, h6,
+.heading, .nav, .site-title {
+  font-family: var(--font-poppins), var(--font-inter), ui-sans-serif, system-ui;
+  letter-spacing: -0.01em;
+}
+
+/* Optional: slightly lighter weight for big headings */
+h1 { font-weight: 600; }
+h2 { font-weight: 600; }
+h3 { font-weight: 500; }
   }
   
   button {

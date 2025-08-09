@@ -7,9 +7,9 @@ import Link from 'next/link';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
 
 interface EventPageProps {
-  params: Promise<{
+  params: {
     slug: string;
-  }>;
+  };
 }
 
 async function getEvent(slug: string): Promise<Event | null> {
@@ -53,7 +53,7 @@ const statusColors: Record<string, string> = {
 };
 
 export default async function EventPage({ params }: EventPageProps) {
-  const { slug } = await params;
+  const { slug } = params;
   const event = await getEvent(slug);
   
   if (!event) {
@@ -74,15 +74,15 @@ export default async function EventPage({ params }: EventPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <main className="min-h-screen bg-white">
+  <main className="min-h-screen bg-white dark:bg-gray-950 transition-colors">
         {/* Hero Section */}
-        <div className="bg-gray-50 py-16">
+        <div className="bg-gray-50 dark:bg-gray-900 py-16 transition-colors">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             {/* Breadcrumb */}
             <nav className="mb-8">
-              <ol className="flex items-center space-x-2 text-sm text-gray-500">
+              <ol className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
                 <li>
-                  <Link href="/" className="hover:text-gray-700">
+                  <Link href="/" className="hover:text-gray-700 dark:hover:text-gray-200">
                     Accueil
                   </Link>
                 </li>
@@ -92,7 +92,7 @@ export default async function EventPage({ params }: EventPageProps) {
                   </svg>
                 </li>
                 <li>
-                  <Link href="/events" className="hover:text-gray-700">
+                  <Link href="/events" className="hover:text-gray-700 dark:hover:text-gray-200">
                     Événements
                   </Link>
                 </li>
@@ -101,7 +101,7 @@ export default async function EventPage({ params }: EventPageProps) {
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                   </svg>
                 </li>
-                <li className="text-gray-900 font-medium truncate">
+                <li className="text-gray-900 dark:text-white font-medium truncate">
                   {event.title}
                 </li>
               </ol>

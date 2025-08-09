@@ -23,7 +23,7 @@ function EventCard({ event }: EventCardProps) {
   const isPast = new Date(event.endDate || event.startDate) < new Date();
   
   return (
-    <article className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100">
+  <article className="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 dark:border-gray-800">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center space-x-4">
           <div className={`px-3 py-1 rounded-full text-sm font-medium ${

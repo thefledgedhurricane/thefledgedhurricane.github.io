@@ -6,20 +6,6 @@ import { getProject, getProjects, urlFor } from '@/lib/sanity';
 import { Project } from '@/lib/sanity-types';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
 
-type ParamsObject = { slug: string };
-interface ProjectPageProps {
-  // Dans certains états (après refactor), Next nous a fourni un Promise; on gère les deux.
-  params: ParamsObject | Promise<ParamsObject>;
-}
-
-async function resolveParams(p: ProjectPageProps['params']): Promise<ParamsObject> {
-  // Détection simple Promise vs objet
-  if (p && typeof (p as any).then === 'function') {
-    return await (p as Promise<ParamsObject>);
-  }
-  return p as ParamsObject;
-}
-
 export async function generateStaticParams() {
   const projects = await getProjects();
   return projects.map((project: Project) => ({
@@ -27,8 +13,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const { slug } = await resolveParams(params);
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const { slug } = params;
   const project = await getProject(slug);
   
   if (!project) {
@@ -67,8 +53,8 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
 
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { slug } = await resolveParams(params);
+export default async function ProjectPage({ params }: { params: { slug: string } }) {
+  const { slug } = params;
   const project = await getProject(slug);
 
   if (!project) {
@@ -80,9 +66,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     : '/placeholder-project.jpg';
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors">
       {/* Hero Section */}
-      <div className="bg-white">
+  <div className="bg-white dark:bg-gray-900 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center mb-8">
             <Link 

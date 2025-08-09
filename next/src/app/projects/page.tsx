@@ -38,7 +38,7 @@ export default async function ProjectsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-white">
+  <div className="bg-white dark:bg-gray-950 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -53,7 +53,7 @@ export default async function ProjectsPage() {
       </div>
 
       {/* Filters - Static version */}
-      <div className="bg-white border-b">
+  <div className="bg-white dark:bg-gray-950 border-b border-gray-100 dark:border-gray-800 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-wrap gap-4 items-center justify-between">
             <div className="flex flex-wrap gap-4">
@@ -110,7 +110,7 @@ export default async function ProjectsPage() {
                 : '/placeholder-project.jpg';
 
               return (
-                <article key={project._id} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden group">
+                <article key={project._id} className="bg-white dark:bg-gray-900 rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden group border border-gray-100 dark:border-gray-800">
                   <div className="relative aspect-video overflow-hidden">
                     {imageUrl ? (
                       <Image
@@ -242,7 +242,7 @@ export default async function ProjectsPage() {
       </div>
 
       {/* Back to Home */}
-      <div className="bg-white border-t">
+  <div className="bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <Link

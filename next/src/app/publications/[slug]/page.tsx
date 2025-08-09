@@ -7,9 +7,9 @@ import Link from 'next/link';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
 
 interface PublicationPageProps {
-  params: Promise<{
+  params: {
     slug: string;
-  }>;
+  };
 }
 
 async function getPublication(slug: string): Promise<Publication | null> {
@@ -25,7 +25,7 @@ async function getPublication(slug: string): Promise<Publication | null> {
 
 
 export default async function PublicationPage({ params }: PublicationPageProps) {
-  const { slug } = await params;
+  const { slug } = params;
   const publication = await getPublication(slug);
   
   if (!publication) {
@@ -46,15 +46,15 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <main className="min-h-screen bg-white">
+  <main className="min-h-screen bg-white dark:bg-gray-950 transition-colors">
         {/* Hero Section */}
-        <div className="bg-gray-50 py-16">
+        <div className="bg-gray-50 dark:bg-gray-900 py-16 transition-colors">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             {/* Breadcrumb */}
             <nav className="mb-8">
-              <ol className="flex items-center space-x-2 text-sm text-gray-500">
+              <ol className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
                 <li>
-                  <Link href="/" className="hover:text-gray-700">
+                  <Link href="/" className="hover:text-gray-700 dark:hover:text-gray-200">
                     Accueil
                   </Link>
                 </li>
@@ -64,7 +64,7 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
                   </svg>
                 </li>
                 <li>
-                  <Link href="/publications" className="hover:text-gray-700">
+                  <Link href="/publications" className="hover:text-gray-700 dark:hover:text-gray-200">
                     Publications
                   </Link>
                 </li>
@@ -73,7 +73,7 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                   </svg>
                 </li>
-                <li className="text-gray-900 font-medium truncate">
+                <li className="text-gray-900 dark:text-white font-medium truncate">
                   {publication.title}
                 </li>
               </ol>

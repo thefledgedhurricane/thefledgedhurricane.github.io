@@ -21,7 +21,7 @@ interface PostCardProps {
 
 function PostCard({ post }: PostCardProps) {
   return (
-    <article className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 overflow-hidden">
+  <article className="bg-white dark:bg-gray-900 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 dark:border-gray-800 overflow-hidden">
       {post.featuredImage && (
         <div className="aspect-video relative overflow-hidden">
           <Image

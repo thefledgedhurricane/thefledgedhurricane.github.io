@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 function HeroSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden">
+  <section className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-950 relative overflow-hidden transition-colors">
       {/* Minimal geometric background */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-1 h-32 bg-gradient-to-b from-blue-500/20 to-transparent rotate-45"></div>
@@ -23,28 +23,28 @@ function HeroSection() {
       
       <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
         <div className="mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-full text-sm text-gray-600 mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 dark:bg-gray-800/70 border border-gray-200 dark:border-gray-700 rounded-full text-sm text-gray-600 dark:text-gray-300 mb-8 backdrop-blur-sm">
             <div className="w-2 h-2 bg-green-500 rounded-full"></div>
             Disponible pour Collaboration de Recherche
           </div>
         </div>
         
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extralight text-gray-900 mb-6 tracking-tighter leading-none">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extralight text-gray-900 dark:text-gray-100 mb-6 tracking-tighter leading-none">
           Dr. Ihababdelbasset
           <br />
-          <span className="font-bold text-black">
+          <span className="font-bold text-black dark:text-white">
             ANNAKI
           </span>
         </h1>
         
         <div className="max-w-3xl mx-auto mb-16">
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-500 mb-8 font-light leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-500 dark:text-gray-300 mb-8 font-light leading-relaxed">
             Maître de Conférences en Intelligence Artificielle et Développement Avancé
           </p>
-          <p className="text-base sm:text-lg text-gray-400 leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-400 dark:text-gray-400 leading-relaxed">
             École Supérieure de l&apos;Éducation et de la Formation, Université Mohammed Premier Oujda
           </p>
-          <p className="text-sm sm:text-base text-gray-400 leading-relaxed mt-4">
+          <p className="text-sm sm:text-base text-gray-400 dark:text-gray-500 leading-relaxed mt-4">
             Spécialiste en Réalité Virtuelle, Intelligence Artificielle et Séries Temporelles appliquées aux Neurosciences et Processus Cognitifs
           </p>
         </div>
@@ -52,24 +52,24 @@ function HeroSection() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20">
           <Link
             href="/research"
-            className="group bg-black hover:bg-gray-800 text-white font-medium py-4 px-12 transition-all duration-200 text-sm uppercase tracking-wider"
+            className="group bg-black dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 text-white font-medium py-4 px-12 transition-all duration-200 text-sm uppercase tracking-wider"
           >
             Portfolio Recherche
           </Link>
           
           <Link
             href="/publications"
-            className="group border border-gray-300 hover:border-black text-gray-700 hover:text-black font-medium py-4 px-12 transition-all duration-200 text-sm uppercase tracking-wider"
+            className="group border border-gray-300 dark:border-gray-600 hover:border-black dark:hover:border-white text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium py-4 px-12 transition-all duration-200 text-sm uppercase tracking-wider"
           >
             Publications
           </Link>
         </div>
         
-        <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 lg:gap-12 text-xs text-gray-400 uppercase tracking-widest">
+        <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 lg:gap-12 text-xs text-gray-400 dark:text-gray-500 uppercase tracking-widest">
           <div>Réalité Virtuelle</div>
-          <div className="hidden sm:block w-px h-4 bg-gray-300"></div>
+          <div className="hidden sm:block w-px h-4 bg-gray-300 dark:bg-gray-700"></div>
           <div>Intelligence Artificielle</div>
-          <div className="hidden sm:block w-px h-4 bg-gray-300"></div>
+          <div className="hidden sm:block w-px h-4 bg-gray-300 dark:bg-gray-700"></div>
           <div>Neurosciences</div>
         </div>
       </div>
@@ -79,22 +79,22 @@ function HeroSection() {
 
 function AboutSection() {
   return (
-    <section id="about" className="py-32 bg-gray-50">
+    <section id="about" className="py-32 bg-gray-50 dark:bg-gray-950 transition-colors">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
           <div className="lg:col-span-7">
             <div className="mb-16">
-              <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
+              <div className="text-sm text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-8">
                 À Propos
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight text-gray-900 mb-8 lg:mb-12 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight text-gray-900 dark:text-gray-100 mb-8 lg:mb-12 leading-tight">
                 Faire Progresser l&apos;
-                <span className="font-bold">Intelligence</span> Artificielle et le 
+                <span className="font-bold dark:text-white">Intelligence</span> Artificielle et le 
                 Développement Avancé
               </h2>
             </div>
             
-            <div className="space-y-8 text-lg text-gray-600 leading-relaxed mb-16">
+            <div className="space-y-8 text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-16">
               <p>
                 Mes recherches se concentrent sur l&apos;Intelligence Artificielle et le développement avancé, 
                 avec une expertise particulière dans l&apos;application de techniques d&apos;IA modernes aux défis 
@@ -111,22 +111,22 @@ function AboutSection() {
             
             <div className="grid grid-cols-3 gap-12 mb-16">
               <div>
-                <div className="text-4xl font-light text-black mb-2">10</div>
-                <div className="text-sm text-gray-400 uppercase tracking-wider">Publications</div>
+                <div className="text-4xl font-light text-black dark:text-white mb-2">10</div>
+                <div className="text-sm text-gray-400 dark:text-gray-500 uppercase tracking-wider">Publications</div>
               </div>
               <div>
-                <div className="text-4xl font-light text-black mb-2">6</div>
-                <div className="text-sm text-gray-400 uppercase tracking-wider">Années Recherche</div>
+                <div className="text-4xl font-light text-black dark:text-white mb-2">6</div>
+                <div className="text-sm text-gray-400 dark:text-gray-500 uppercase tracking-wider">Années Recherche</div>
               </div>
               <div>
-                <div className="text-4xl font-light text-black mb-2">2</div>
-                <div className="text-sm text-gray-400 uppercase tracking-wider">Années Consulting</div>
+                <div className="text-4xl font-light text-black dark:text-white mb-2">2</div>
+                <div className="text-sm text-gray-400 dark:text-gray-500 uppercase tracking-wider">Années Consulting</div>
               </div>
             </div>
             
             <Link
               href="/about"
-              className="inline-block border-b border-gray-300 hover:border-black text-gray-700 hover:text-black transition-all duration-200 text-sm uppercase tracking-wider pb-1"
+              className="inline-block border-b border-gray-300 dark:border-gray-600 hover:border-black dark:hover:border-white text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-all duration-200 text-sm uppercase tracking-wider pb-1"
             >
               Profil Complet
             </Link>
@@ -134,7 +134,7 @@ function AboutSection() {
           
           <div className="lg:col-span-5">
             <div className="relative">
-              <div className="aspect-[4/5] bg-gray-100 overflow-hidden shadow-sm">
+              <div className="aspect-[4/5] bg-gray-100 dark:bg-gray-800 overflow-hidden shadow-sm">
                 {/* Portrait académique */}
                 <Image
                   src="/portrait-academique.jpg"
@@ -146,7 +146,7 @@ function AboutSection() {
                 />
               </div>
               {/* Overlay décoratif optionnel */}
-              <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-black/5 -z-10"></div>
+              <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-black/5 dark:bg-white/10 -z-10"></div>
             </div>
           </div>
         </div>
@@ -162,59 +162,59 @@ interface PublicationsSectionProps {
 
 function PublicationsSection({ publications }: PublicationsSectionProps) {
   return (
-    <section id="publications" className="py-32 bg-gray-50">
+    <section id="publications" className="py-32 bg-gray-50 dark:bg-gray-950 transition-colors">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-24">
-          <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
+          <div className="text-sm text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-8">
             Recherche Récente
           </div>
-          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 mb-12 leading-tight max-w-4xl">
+          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 dark:text-gray-100 mb-12 leading-tight max-w-4xl">
             <span className="font-bold">Publications</span> Sélectionnées
           </h2>
         </div>
         
         <div className="grid gap-12">
           {publications.slice(0, 3).map((publication, index) => (
-            <div key={publication._id} className="group border-b border-gray-200 pb-12 last:border-b-0">
+            <div key={publication._id} className="group border-b border-gray-200 dark:border-gray-800 pb-12 last:border-b-0">
               <div className="grid lg:grid-cols-12 gap-8 items-start">
                 <div className="lg:col-span-2">
-                  <div className="text-xs text-gray-400 uppercase tracking-[0.2em] mb-2">
+                  <div className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-2">
                     {String(index + 1).padStart(2, '0')}
                   </div>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-sm text-gray-500 dark:text-gray-400">
                     {new Date(publication.publishedDate).getFullYear()}
                   </div>
-                  <div className="text-xs text-gray-400 uppercase mt-2">
+                  <div className="text-xs text-gray-400 dark:text-gray-500 uppercase mt-2">
                     {publication.publicationType}
                   </div>
                 </div>
                 
                 <div className="lg:col-span-10">
-                  <h3 className="text-2xl font-light text-black mb-4 group-hover:text-gray-600 transition-colors duration-200">
+                  <h3 className="text-2xl font-light text-black dark:text-gray-100 mb-4 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200">
                     <Link href={`/publications/${publication.slug.current}`}>
                       {publication.title}
                     </Link>
                   </h3>
                   
                   {publication.abstract && (
-                    <p className="text-gray-600 leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4 line-clamp-3">
                       {publication.abstract}
                     </p>
                   )}
                   
                   <div className="flex flex-wrap items-center gap-4 text-sm">
                     {publication.journal && (
-                      <span className="text-gray-500 italic">{publication.journal}</span>
+                      <span className="text-gray-500 dark:text-gray-400 italic">{publication.journal}</span>
                     )}
                     {publication.openAccess && (
-                      <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs uppercase tracking-wider">
+                      <span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded text-xs uppercase tracking-wider">
                         Accès Libre
                       </span>
                     )}
                     {publication.doi && (
                       <Link 
                         href={`https://doi.org/${publication.doi}`}
-                        className="text-blue-600 hover:text-blue-800 transition-colors"
+                        className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
                         target="_blank"
                       >
                         DOI
@@ -230,7 +230,7 @@ function PublicationsSection({ publications }: PublicationsSectionProps) {
         <div className="text-center mt-16">
           <Link
             href="/publications"
-            className="inline-block border-b border-gray-300 hover:border-black text-gray-700 hover:text-black transition-all duration-200 text-sm uppercase tracking-wider pb-1"
+            className="inline-block border-b border-gray-300 dark:border-gray-600 hover:border-black dark:hover:border-white text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-all duration-200 text-sm uppercase tracking-wider pb-1"
           >
             Voir Toutes les Publications
           </Link>
@@ -247,14 +247,14 @@ interface TeachingSectionProps {
 
 function TeachingSection({ teaching }: TeachingSectionProps) {
   return (
-    <section id="teaching" className="py-32 bg-white">
+  <section id="teaching" className="py-32 bg-white dark:bg-gray-950 transition-colors">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-24">
           <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
             Enseignement Académique
           </div>
-          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 mb-12 leading-tight max-w-4xl">
-            Expérience <span className="font-bold">Pédagogique</span>
+          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 dark:text-gray-100 mb-12 leading-tight max-w-4xl">
+            Expérience <span className="font-bold dark:text-white">Pédagogique</span>
           </h2>
         </div>
         
@@ -266,7 +266,7 @@ function TeachingSection({ teaching }: TeachingSectionProps) {
                   {String(index + 1).padStart(2, '0')}
                 </div>
                 <div className="flex items-center gap-2 mb-2">
-                  <h3 className="text-2xl font-light text-black group-hover:text-gray-600 transition-colors duration-200">
+                  <h3 className="text-2xl font-light text-black dark:text-gray-100 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200">
                     {course.title}
                   </h3>
                   {course.current && (
@@ -274,15 +274,15 @@ function TeachingSection({ teaching }: TeachingSectionProps) {
                   )}
                 </div>
                 {course.courseCode && (
-                  <div className="text-sm text-gray-500 mb-2">{course.courseCode}</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">{course.courseCode}</div>
                 )}
-                <div className="text-sm text-gray-400">
+                <div className="text-sm text-gray-400 dark:text-gray-500">
                   {course.institution} • {course.semester}
                 </div>
               </div>
               
               {course.description && (
-                <p className="text-gray-600 leading-relaxed text-sm mb-4">
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm mb-4">
                   {course.description}
                 </p>
               )}
@@ -290,7 +290,7 @@ function TeachingSection({ teaching }: TeachingSectionProps) {
               {course.technologies && course.technologies.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                   {course.technologies.slice(0, 3).map((tech, techIndex) => (
-                    <span key={techIndex} className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">
+                    <span key={techIndex} className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded text-xs">
                       {tech}
                     </span>
                   ))}
@@ -303,7 +303,7 @@ function TeachingSection({ teaching }: TeachingSectionProps) {
         <div className="text-center mt-16">
           <Link
             href="/teaching"
-            className="inline-block border-b border-gray-300 hover:border-black text-gray-700 hover:text-black transition-all duration-200 text-sm uppercase tracking-wider pb-1"
+            className="inline-block border-b border-gray-300 dark:border-gray-600 hover:border-black dark:hover:border-white text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-all duration-200 text-sm uppercase tracking-wider pb-1"
           >
             Voir Tous les Cours
           </Link>
@@ -320,29 +320,29 @@ interface EventsSectionProps {
 
 function EventsSection({ events }: EventsSectionProps) {
   return (
-    <section id="events" className="py-32 bg-gray-50">
+    <section id="events" className="py-32 bg-gray-50 dark:bg-gray-950 transition-colors">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-24">
-          <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
+          <div className="text-sm text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-8">
             Événements Académiques
           </div>
-          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 mb-12 leading-tight max-w-4xl">
+          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 dark:text-gray-100 mb-12 leading-tight max-w-4xl">
             Conférences & <span className="font-bold">Événements</span>
           </h2>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {events.slice(0, 6).map((event, index) => (
-            <div key={event._id} className="group bg-white p-8 hover:shadow-lg transition-shadow duration-300">
+            <div key={event._id} className="group bg-white dark:bg-gray-900 p-8 hover:shadow-lg transition-shadow duration-300 border border-gray-200 dark:border-gray-800">
               <div className="mb-6">
-                <div className="text-xs text-gray-400 uppercase tracking-[0.2em] mb-3">
+                <div className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-3">
                   {String(index + 1).padStart(2, '0')}
                 </div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className={`px-2 py-1 rounded text-xs uppercase tracking-wider ${
-                    event.status === 'upcoming' ? 'bg-blue-100 text-blue-700' :
-                    event.status === 'ongoing' ? 'bg-green-100 text-green-700' :
-                    'bg-gray-100 text-gray-600'
+                    event.status === 'upcoming' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' :
+                    event.status === 'ongoing' ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' :
+                    'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300'
                   }`}>
                     {event.status === 'upcoming' ? 'À venir' : 
                      event.status === 'ongoing' ? 'En cours' : 
@@ -354,13 +354,13 @@ function EventsSection({ events }: EventsSectionProps) {
                 </div>
               </div>
               
-              <h3 className="text-xl font-light text-black mb-4 group-hover:text-gray-600 transition-colors duration-200">
+              <h3 className="text-xl font-light text-black dark:text-gray-100 mb-4 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200">
                 <Link href={`/events/${event.slug.current}`}>
                   {event.title}
                 </Link>
               </h3>
               
-              <div className="text-sm text-gray-500 mb-4">
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">
                 <div>{new Date(event.startDate).toLocaleDateString('en-US', { 
                   year: 'numeric', 
                   month: 'long', 
@@ -372,7 +372,7 @@ function EventsSection({ events }: EventsSectionProps) {
               </div>
               
               {event.description && (
-                <p className="text-gray-600 leading-relaxed text-sm line-clamp-3">
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm line-clamp-3">
                   {event.description}
                 </p>
               )}
@@ -383,7 +383,7 @@ function EventsSection({ events }: EventsSectionProps) {
         <div className="text-center mt-16">
           <Link
             href="/events"
-            className="inline-block border-b border-gray-300 hover:border-black text-gray-700 hover:text-black transition-all duration-200 text-sm uppercase tracking-wider pb-1"
+            className="inline-block border-b border-gray-300 dark:border-gray-600 hover:border-black dark:hover:border-white text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-all duration-200 text-sm uppercase tracking-wider pb-1"
           >
             Voir Tous les Événements
           </Link>
@@ -419,11 +419,11 @@ function FeaturedProjects({ projects }: FeaturedProjectsProps) {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProjects.map((project: Project) => {
+      {featuredProjects.map((project: Project) => {
             const imageUrl = project.featuredImage?.asset ? urlFor(project.featuredImage).width(400).height(300).url() : '/placeholder-project.jpg';
             
             return (
-              <article key={project._id} className="card overflow-hidden group">
+        <article key={project._id} className="card overflow-hidden group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 transition-colors">
                 <div className="relative aspect-video overflow-hidden">
                   {imageUrl ? (
                     <Image
@@ -441,17 +441,17 @@ function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">
+          <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies?.slice(0, 3).map((tech: string, index: number) => (
                       <span
                         key={index}
-                        className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs font-medium"
+            className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs font-medium"
                       >
                         {tech}
                       </span>
@@ -459,7 +459,7 @@ function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                   </div>
                   <Link
                     href={`/projects/${project.slug.current}`}
-                    className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
+          className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
                   >
                     Voir le Proj&apos;et
                     <svg

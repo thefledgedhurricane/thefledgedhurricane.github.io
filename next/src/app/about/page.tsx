@@ -120,7 +120,7 @@ const education: Education[] = [
 
 function HeroSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden pt-20">
+  <section className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-950 relative overflow-hidden pt-20 transition-colors">
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-1 h-32 bg-gradient-to-b from-blue-500/20 to-transparent rotate-45"></div>
         <div className="absolute top-1/3 right-1/3 w-1 h-24 bg-gradient-to-b from-purple-500/20 to-transparent -rotate-12"></div>
@@ -257,7 +257,7 @@ function ExperienceSection() {
 
 function EducationSection() {
   return (
-    <section id="education" className="py-32 bg-white">
+  <section id="education" className="py-32 bg-white dark:bg-gray-950 transition-colors">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-24">
           <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
