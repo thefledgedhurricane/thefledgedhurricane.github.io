@@ -80,12 +80,12 @@ export default function CustomCursor() {
       {/* small dot */}
       <div
         ref={dotRef}
-        className="pointer-events-none fixed left-0 top-0 z-[10000] -translate-x-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-gray-900 dark:bg-gray-100 mix-blend-difference"
+        className="pointer-events-none fixed left-0 top-0 z-[10000] -translate-x-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-gray-900 dark:bg-gray-100 mix-blend-difference"
       />
       {/* ring */}
       <div
         ref={ringRef}
-        className="pointer-events-none fixed left-0 top-0 z-[9999] -translate-x-1/2 -translate-y-1/2 h-8 w-8 rounded-full border border-gray-900/70 dark:border-gray-100/70 mix-blend-difference opacity-70 transition-transform duration-150 ease-out"
+        className="pointer-events-none fixed left-0 top-0 z-[9999] -translate-x-1/2 -translate-y-1/2 h-9 w-9 rounded-full border border-gray-900/70 dark:border-gray-100/70 mix-blend-difference opacity-70 transition-transform duration-150 ease-out"
       />
     </>
   );

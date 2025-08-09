@@ -1,8 +1,28 @@
-# Academic Portfolio
+<p align="center">
+   <img src="next/public/logo.png" alt="Portfolio Logo" width="120" />
+</p>
 
-A modern, responsive academic portfolio built with Next.js and Sanity CMS, optimized for GitHub Pages deployment.
+# Academic Portfolio — Next.js + Sanity
 
-## ✨ Features
+<p align="center">
+   <a href="https://github.com/thefledgedhurricane/thefledgedhurricane.github.io/actions/workflows/deploy.yml">
+      <img alt="Deploy" src="https://github.com/thefledgedhurricane/thefledgedhurricane.github.io/actions/workflows/deploy.yml/badge.svg?branch=main" />
+   </a>
+   <img alt="Node.js" src="https://img.shields.io/badge/Node-20.x-339933?logo=node.js&logoColor=white" />
+   <img alt="Next.js" src="https://img.shields.io/badge/Next.js-15-black?logo=next.js&logoColor=white" />
+   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" />
+   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind-3-38B2AC?logo=tailwindcss&logoColor=white" />
+   <img alt="Sanity" src="https://img.shields.io/badge/Sanity-io-F03E2F?logo=sanity&logoColor=white" />
+   <img alt="GitHub Pages" src="https://img.shields.io/badge/Hosted-GitHub%20Pages-222?logo=github&logoColor=white" />
+   <img alt="License" src="https://img.shields.io/badge/License-MIT-blue.svg" />
+   <img alt="Lint" src="https://img.shields.io/badge/Lint-ESLint-4B32C3?logo=eslint&logoColor=white" />
+</p>
+
+Un portfolio académique moderne, performant et pensé pour le long terme. L’architecture frontend est basée sur Next.js (App Router) et Tailwind CSS; le contenu est géré via Sanity CMS et exporté statiquement pour un hébergement simple (GitHub Pages).
+
+Design, UX et direction artistique: Dr. Ihababdelbasset ANNAKI.
+
+## ✨ Points forts
 
 - 🎓 **Academic-focused design** - Tailored for researchers and academics
 - 📱 **Fully responsive** - Perfect on desktop, tablet, and mobile
@@ -14,23 +34,23 @@ A modern, responsive academic portfolio built with Next.js and Sanity CMS, optim
 - 🔒 **Security focused** - Best practices implemented
 - 🌐 **GitHub Pages ready** - Automated deployment workflow
 
-## 🛠️ Tech Stack
+## 🛠️ Stack technique
 
-- **Frontend**: Next.js 14, React 18, TypeScript
+- **Frontend**: Next.js 15, React 18, TypeScript
 - **Styling**: Tailwind CSS
 - **CMS**: Sanity.io
 - **Deployment**: GitHub Pages with GitHub Actions
 - **Analytics**: Google Analytics (optional)
 - **Email**: Contact form integration
 
-## 🚀 Quick Start
+## 🚀 Démarrage rapide
 
 ### 1. Clone and Setup
 
 ```bash
 # Clone the repository
 git clone <your-repository-url>
-cd academic-portfolio
+cd <your-repo-name>
 
 # Install dependencies for Next.js app
 cd next
@@ -41,7 +61,7 @@ cd ../sanity
 npm install
 ```
 
-### 2. Configure Environment Variables
+### 2. Variables d’environnement
 
 ```bash
 # Copy environment template
@@ -53,11 +73,6 @@ Fill in your Sanity and site configuration:
 ```env
 # Sanity CMS Configuration
 NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
-NEXT_PUBLIC_SANITY_DATASET=production
-SANITY_API_TOKEN=your_api_token
-
-# Site Configuration
-NEXT_PUBLIC_SITE_URL=https://yourusername.github.io/repository-name
 NEXT_PUBLIC_SITE_NAME=Dr. Your Name - Academic Portfolio
 NEXT_PUBLIC_SITE_DESCRIPTION=Academic portfolio showcasing research and achievements
 
@@ -65,117 +80,34 @@ NEXT_PUBLIC_SITE_DESCRIPTION=Academic portfolio showcasing research and achievem
 # Sign up at https://formspree.io and replace with your form endpoint
 NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
 
-# Optional: Analytics
-NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
-### 3. Set Up Sanity CMS
-
-```bash
-# Navigate to Sanity directory
-cd sanity
 
 # Login to Sanity (first time only)
-npx sanity login
+### 4. Lancer le serveur de dev
 
-# Start Sanity Studio
-npm run dev
-```
-
-Sanity Studio will be available at `http://localhost:3333`
-
-### 4. Run Development Server
-
-```bash
-# Navigate to Next.js app
 cd next
 
-# Start development server
-npm run dev
 ```
 
 Your portfolio will be available at `http://localhost:3000`
 
-### 5. Set Up Firebase Contact Form
+### 5. Formulaire de contact (Formspree)
 
-The portfolio includes a fully frontend contact form using Firebase Firestore:
+Le formulaire de contact utilise Formspree (aucun backend à gérer) :
 
-1. **Create Firebase Project**:
-   - Go to [Firebase Console](https://console.firebase.google.com)
-   - Click "Create a project" or "Add project"
-   - Enter your project name (e.g., "academic-portfolio")
-   - Disable Google Analytics (optional for contact forms)
-   - Click "Create project"
-
-2. **Set up Firestore Database**:
-   - In your Firebase project, go to "Firestore Database"
-   - Click "Create database"
-   - Choose "Start in test mode" (we'll secure it later)
-   - Select your preferred location
-   - Click "Done"
-
-3. **Get Firebase Configuration**:
-   - Go to Project Settings (gear icon)
-   - Scroll down to "Your apps" section
-   - Click "Web" icon (</>) to add a web app
-   - Register your app with a nickname
-   - Copy the Firebase configuration object
-
-4. **Configure Environment Variables**:
-   Add these to your `.env.local` file:
+1. Créez un compte sur https://formspree.io
+3. En local: mettez à jour `next/.env.local` avec:
    ```env
-   NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key_here
-   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project-id.firebaseapp.com
-   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
-   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project-id.appspot.com
-   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-   NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+   NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/votre-id
    ```
+4. En production (GitHub): ajoutez le secret de dépôt `NEXT_PUBLIC_FORMSPREE_ENDPOINT` avec la même valeur
+5. Rendez-vous sur `/contact`, envoyez un message test et vérifiez la réception dans Formspree
 
-5. **Set up Firestore Security Rules** (Important!):
-   - Go to Firestore Database → Rules
-   - Replace the default rules with:
-   ```javascript
-   rules_version = '2';
-   service cloud.firestore {
-     match /databases/{database}/documents {
-       // Allow writes to contact-messages collection
-       match /contact-messages/{document} {
-         allow create: if request.auth == null
-           && resource == null
-           && request.resource.data.keys().hasAll(['name', 'email', 'subject', 'message', 'timestamp'])
-           && request.resource.data.name is string
-           && request.resource.data.email is string
-           && request.resource.data.subject is string
-           && request.resource.data.message is string;
-         allow read: if false; // No public reading
-       }
-     }
-   }
-   ```
-   - Click "Publish"
+Protection anti-spam: champ honeypot + validations Zod côté client. Gestion des états succès/erreur incluse.
 
-6. **Test the Contact Form**:
-   - The contact form is available at `/contact`
-   - Submit a test message
-   - Check your Firestore console to see the submitted data
-
-7. **View Contact Messages**:
-   - Go to Firestore Database in Firebase Console
-   - Navigate to the `contact-messages` collection
-   - View submitted messages with timestamps
-
-**Features**:
-- ✅ Fully frontend (no backend server required)
-- ✅ Real-time data storage with Firestore
-- ✅ Spam protection with honeypot field
-- ✅ Form validation with Zod
-- ✅ Responsive design
-- ✅ Success/error handling
-- ✅ Secure database rules
-- ✅ Free tier supports thousands of submissions
-
-## 🎯 Features
+## 🎯 Modules fonctionnels
 
 ### Academic Content Management
 - **Publications** - Research papers, articles, and academic publications
@@ -186,14 +118,14 @@ The portfolio includes a fully frontend contact form using Firebase Firestore:
 - **Projects** - Research projects and academic work
 
 ### Modern Tech Stack
-- **Next.js 14** with App Router and TypeScript
+- **Next.js 15** with App Router and TypeScript
 - **Sanity CMS** for headless content management
 - **Rich Text Editor** with code blocks and academic formatting
 - **Content Relationships** between authors, publications, and events
 - **Multi-language Support** for international academic content
 - **SEO Optimized** for academic discoverability
 
-## 📁 Project Structure
+## 📁 Structure du projet
 
 ```
 Portfolio/
@@ -224,7 +156,7 @@ Portfolio/
 └── README.md
 ```
 
-## 🔄 Migration Process
+## 🔄 Migration (depuis Hugo Academic)
 
 The migration script (`migrate-content-to-sanity.js`) automatically:
 
@@ -255,7 +187,7 @@ Access your Sanity Studio at: [https://iannaki-portfolio.sanity.studio/](https:/
 - 🌍 Multi-language support
 - 📊 Content preview and validation
 
-## 🛠️ Development
+## 🛠️ Développement
 
 ### Available Scripts
 - `npm run migrate` - Migrate Hugo Academic content to Sanity
@@ -270,7 +202,7 @@ cd sanity
 npm run dev  # Starts studio at http://localhost:3333
 ```
 
-## 📚 Content Management Workflow
+## 📚 Workflow de gestion de contenu
 
 1. **Initial Setup**: Run the migration script to import existing Hugo content
 2. **Content Creation**: Use Sanity Studio to create new content
@@ -292,7 +224,7 @@ SANITY_STUDIO_DATASET=production
 SANITY_API_TOKEN=your_token_here
 ```
 
-## 📖 Content Types
+## 📖 Types de contenu
 
 The new Sanity schema includes:
 
@@ -307,14 +239,14 @@ The new Sanity schema includes:
 ### ⚙️ Configuration
 - **Settings**: Site-wide configuration and navigation
 
-## 🚨 Important Notes
+## 🚨 Notes importantes
 
 1. **API Token**: You must set up a Sanity API token for the migration to work
 2. **Content Backup**: The original `content/` directory is preserved as backup
 3. **Schema Changes**: Any schema modifications require redeployment of Sanity Studio
 4. **Data Relationships**: The migration maintains author relationships across all content types
 
-## 🆘 Troubleshooting
+## 🆘 Dépannage
 
 ### Migration Issues
 - Ensure Sanity API token has proper permissions
@@ -326,7 +258,7 @@ The new Sanity schema includes:
 - Check network connectivity to Sanity servers
 - Verify project ID and dataset configuration
 
-## 📖 Next Steps
+## 📖 Et après ?
 
 1. **Run the migration** to import your Hugo Academic content
 2. **Review migrated content** in Sanity Studio
@@ -352,6 +284,23 @@ For questions or support with the migration, please refer to the troubleshooting
 
 ---
 
-**Built with ❤️ using Next.js and Sanity CMS**
+---
 
-*Transform your Hugo Academic site into a modern, scalable academic portfolio!*
+## 🖋️ Crédits & mentions
+
+- Conception, design UI/UX, direction artistique: Dr. Ihababdelbasset ANNAKI
+- Développement frontend: Next.js (App Router), React 18, TypeScript
+- Styles: Tailwind CSS + plugins Typography/Forms
+- CMS: Sanity.io (schémas personnalisés pour publications, enseignement, événements, posts, projets)
+
+## ⚖️ Licence & Copyright
+
+© 2025 Dr. Ihababdelbasset ANNAKI. Tous droits réservés.
+
+Sauf indication contraire, le code source est fourni sous licence MIT. Le design, la marque, les contenus (textes, images et publications) restent la propriété de leurs auteurs respectifs et ne sont pas couverts par la licence du code. Toute réutilisation du thème doit conserver l’attribution du design.
+
+---
+
+**Construit avec ❤️ grâce à Next.js et Sanity CMS.**
+
+Faites évoluer votre présence académique avec une plateforme moderne, accessible et durable.

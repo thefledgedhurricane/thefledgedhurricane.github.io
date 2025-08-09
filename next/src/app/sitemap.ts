@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export const dynamic = 'force-static';
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://localhost:3000';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://thefledgedhurricane.github.io';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Static pages only for now - dynamic content will be handled differently

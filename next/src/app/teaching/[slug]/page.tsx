@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation';
 import { client, queries, urlFor } from '@/lib/sanity';
 import { Teaching } from '@/lib/sanity-types';
-import { generateJsonLd } from '@/lib/jsonld';
+import { generateJsonLd, generateBreadcrumbJsonLd } from '@/lib/jsonld';
 import Image from 'next/image';
 import Link from 'next/link';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
+import ShareButtons from '@/components/ShareButtons';
 
 interface TeachingPageProps {
   params: Promise<{
@@ -66,12 +67,21 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
     url: `${process.env.NEXT_PUBLIC_SITE_URL}/teaching/${teaching.slug.current}`,
     description: teaching.description || '',
   });
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+    { name: 'Accueil', url: `${process.env.NEXT_PUBLIC_SITE_URL}/` },
+    { name: 'Enseignement', url: `${process.env.NEXT_PUBLIC_SITE_URL}/teaching` },
+    { name: teaching.title, url: `${process.env.NEXT_PUBLIC_SITE_URL}/teaching/${teaching.slug.current}` },
+  ]);
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       
   <main className="min-h-screen bg-white dark:bg-gray-950 transition-colors">
@@ -128,22 +138,22 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
                 )}
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
                 {teaching.title}
               </h1>
               
               {teaching.courseCode && (
                 <div className="mb-4">
-                  <span className="text-lg font-mono bg-gray-100 px-3 py-1 rounded">
+                  <span className="text-lg font-mono bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded">
                     {teaching.courseCode}
                   </span>
                 </div>
               )}
               
               {teaching.description && (
-                <div className="bg-blue-50 p-6 rounded-lg mb-6">
-                  <h2 className="text-lg font-semibold text-gray-900 mb-3">Description</h2>
-                  <p className="text-gray-700 leading-relaxed">
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mb-6">
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Description</h2>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                     {teaching.description}
                   </p>
                 </div>
@@ -151,38 +161,38 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
               
               {/* Teaching Details */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-                <div className="space-y-3">
+        <div className="space-y-3">
                   <div>
-                    <span className="font-semibold text-gray-900">Institution: </span>
-                    <span className="text-gray-600">{teaching.institution}</span>
+          <span className="font-semibold text-gray-900 dark:text-gray-100">Institution: </span>
+          <span className="text-gray-600 dark:text-gray-300">{teaching.institution}</span>
                   </div>
                   
                   {teaching.department && (
                     <div>
-                      <span className="font-semibold text-gray-900">Département: </span>
-                      <span className="text-gray-600">{teaching.department}</span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Département: </span>
+                      <span className="text-gray-600 dark:text-gray-300">{teaching.department}</span>
                     </div>
                   )}
                   
                   {teaching.level && (
                     <div>
-                      <span className="font-semibold text-gray-900">Niveau: </span>
-                      <span className="text-gray-600">{levelLabels[teaching.level] || teaching.level}</span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Niveau: </span>
+                      <span className="text-gray-600 dark:text-gray-300">{levelLabels[teaching.level] || teaching.level}</span>
                     </div>
                   )}
                   
                   {teaching.semester && (
                     <div>
-                      <span className="font-semibold text-gray-900">Semestre: </span>
-                      <span className="text-gray-600">{teaching.semester}</span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Semestre: </span>
+                      <span className="text-gray-600 dark:text-gray-300">{teaching.semester}</span>
                     </div>
                   )}
                 </div>
                 
                 <div className="space-y-3">
                   <div>
-                    <span className="font-semibold text-gray-900">Période: </span>
-                    <span className="text-gray-600">
+                    <span className="font-semibold text-gray-900 dark:text-gray-100">Période: </span>
+                    <span className="text-gray-600 dark:text-gray-300">
                       {new Date(teaching.startDate).toLocaleDateString('fr-FR', {
                         year: 'numeric',
                         month: 'long'
@@ -198,15 +208,15 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
                   
                   {teaching.studentCount && (
                     <div>
-                      <span className="font-semibold text-gray-900">Nombre d&apos;étudiants: </span>
-                      <span className="text-gray-600">{teaching.studentCount}</span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Nombre d&apos;étudiants: </span>
+                      <span className="text-gray-600 dark:text-gray-300">{teaching.studentCount}</span>
                     </div>
                   )}
                   
                   {teaching.language && (
                     <div>
-                      <span className="font-semibold text-gray-900">Langue: </span>
-                      <span className="text-gray-600">
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Langue: </span>
+                      <span className="text-gray-600 dark:text-gray-300">
                         {teaching.language === 'fr' ? 'Français' : 
                          teaching.language === 'en' ? 'Anglais' : 
                          teaching.language === 'es' ? 'Espagnol' : 
@@ -247,12 +257,12 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
           {/* Subjects */}
           {teaching.subjects && teaching.subjects.length > 0 && (
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Sujets abordés</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Sujets abordés</h3>
               <div className="flex flex-wrap gap-2">
                 {teaching.subjects.map((subject: string, index: number) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm hover:bg-blue-200 transition-colors"
+                    className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors"
                   >
                     {subject}
                   </span>
@@ -264,12 +274,12 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
           {/* Technologies */}
           {teaching.technologies && teaching.technologies.length > 0 && (
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Technologies utilisées</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Technologies utilisées</h3>
               <div className="flex flex-wrap gap-2">
                 {teaching.technologies.map((tech: string, index: number) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors"
+                    className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                   >
                     {tech}
                   </span>
@@ -281,18 +291,18 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
           {/* Materials */}
           {teaching.materials && teaching.materials.length > 0 && (
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Matériel pédagogique</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Matériel pédagogique</h3>
               <div className="space-y-4">
                 {teaching.materials.map((material: any, index: number) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4">
+                  <div key={index} className="border border-gray-200 dark:border-gray-800 rounded-lg p-4">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 mb-1">{material.title}</h4>
-                        <span className="inline-block px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded mb-2">
+                        <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-1">{material.title}</h4>
+                        <span className="inline-block px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-xs rounded mb-2">
                           {material.type}
                         </span>
                         {material.description && (
-                          <p className="text-gray-600 text-sm">{material.description}</p>
+                          <p className="text-gray-600 dark:text-gray-300 text-sm">{material.description}</p>
                         )}
                       </div>
                       {(material.file || material.url) && (
@@ -315,16 +325,16 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
           {/* Evaluations */}
           {teaching.evaluations && (
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Évaluations</h3>
-              <div className="bg-green-50 p-6 rounded-lg">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Évaluations</h3>
+              <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg">
                 {teaching.evaluations.averageRating && (
                   <div className="mb-4">
-                    <span className="text-2xl font-bold text-green-800">
+                    <span className="text-2xl font-bold text-green-800 dark:text-green-400">
                       {teaching.evaluations.averageRating}/5
                     </span>
-                    <span className="text-green-600 ml-2">Note moyenne</span>
+                    <span className="text-green-600 dark:text-green-300 ml-2">Note moyenne</span>
                     {teaching.evaluations.responseRate && (
-                      <span className="text-sm text-gray-600 ml-4">
+                      <span className="text-sm text-gray-600 dark:text-gray-300 ml-4">
                         ({teaching.evaluations.responseRate}% de réponses)
                       </span>
                     )}
@@ -332,8 +342,8 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
                 )}
                 {teaching.evaluations.highlights && teaching.evaluations.highlights.length > 0 && (
                   <div>
-                    <h4 className="font-medium text-gray-900 mb-2">Points forts</h4>
-                    <ul className="list-disc list-inside space-y-1 text-gray-700">
+                    <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-2">Points forts</h4>
+                    <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300">
                       {teaching.evaluations.highlights.map((highlight: string, index: number) => (
                         <li key={index}>{highlight}</li>
                       ))}
@@ -347,8 +357,8 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
           {/* Achievements */}
           {teaching.achievements && teaching.achievements.length > 0 && (
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Réalisations</h3>
-              <ul className="list-disc list-inside space-y-2 text-gray-700">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Réalisations</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
                 {teaching.achievements.map((achievement: string, index: number) => (
                   <li key={index}>{achievement}</li>
                 ))}
@@ -359,7 +369,7 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
           {/* Syllabus */}
           {teaching.syllabus && (
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Syllabus</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Syllabus</h3>
               <a
                 href={urlFor(teaching.syllabus).url()}
                 target="_blank"
@@ -373,6 +383,16 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
               </a>
             </div>
           )}
+
+          {/* Share */}
+          <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Partager</h3>
+            <ShareButtons
+              url={`${process.env.NEXT_PUBLIC_SITE_URL}/teaching/${teaching.slug.current}`}
+              title={teaching.title}
+              summary={teaching.description || ''}
+            />
+          </div>
         </article>
 
         {/* Navigation */}
@@ -404,19 +424,36 @@ export async function generateMetadata({ params }: TeachingPageProps) {
     };
   }
 
+  const pageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/teaching/${teaching.slug.current}`;
+  const ogImage = teaching.featuredImage
+    ? urlFor(teaching.featuredImage).width(1200).height(630).url()
+    : '/og-image.jpg';
+
   return {
     title: teaching.title,
     description: teaching.description || `Cours d'enseignement par Dr. Ihababdelbasset ANNAKI à ${teaching.institution}`,
+    alternates: {
+      canonical: `/teaching/${teaching.slug.current}`,
+    },
     openGraph: {
       title: teaching.title,
       description: teaching.description || '',
       type: 'article',
-      images: teaching.featuredImage ? [{
-        url: urlFor(teaching.featuredImage).width(1200).height(630).url(),
-        width: 1200,
-        height: 630,
-        alt: teaching.featuredImage.alt || teaching.title,
-      }] : [],
+      url: pageUrl,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: teaching.featuredImage?.alt || teaching.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: teaching.title,
+      description: teaching.description || '',
+      images: [ogImage],
     },
   };
 }

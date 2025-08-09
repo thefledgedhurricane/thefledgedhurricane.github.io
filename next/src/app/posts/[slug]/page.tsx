@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation';
 import { client, queries, urlFor } from '@/lib/sanity';
 import { Post } from '@/lib/sanity-types';
-import { generateJsonLd } from '@/lib/jsonld';
+import { generateJsonLd, generateBreadcrumbJsonLd } from '@/lib/jsonld';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
 import Link from 'next/link';
 import Image from 'next/image';
+import ShareButtons from '@/components/ShareButtons';
 
 interface PostPageProps {
   params: Promise<{
@@ -40,12 +41,21 @@ export default async function PostPage({ params }: PostPageProps) {
     datePublished: post.publishedAt,
     author: post.authors?.[0]?.name || 'Dr. Ihababdelbasset ANNAKI',
   });
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+    { name: 'Accueil', url: `${process.env.NEXT_PUBLIC_SITE_URL}/` },
+    { name: 'Articles', url: `${process.env.NEXT_PUBLIC_SITE_URL}/posts` },
+    { name: post.title, url: `${process.env.NEXT_PUBLIC_SITE_URL}/posts/${post.slug.current}` },
+  ]);
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       
   <main className="min-h-screen bg-white dark:bg-gray-950 transition-colors">
@@ -169,6 +179,16 @@ export default async function PostPage({ params }: PostPageProps) {
               </div>
             </div>
           )}
+
+          {/* Share */}
+          <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Partager</h3>
+            <ShareButtons
+              url={`${process.env.NEXT_PUBLIC_SITE_URL}/posts/${post.slug.current}`}
+              title={post.title}
+              summary={post.excerpt || ''}
+            />
+          </div>
         </article>
 
         {/* Navigation */}
@@ -200,21 +220,39 @@ export async function generateMetadata({ params }: PostPageProps) {
     };
   }
 
+  const pageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/posts/${post.slug.current}`;
+
+  const ogImage = post.featuredImage
+    ? urlFor(post.featuredImage).width(1200).height(630).url()
+    : '/og-image.jpg';
+
   return {
     title: post.title,
     description: post.excerpt || `Article par ${post.authors?.[0]?.name || 'Dr. Ihababdelbasset ANNAKI'}`,
+    alternates: {
+      canonical: `/posts/${post.slug.current}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt || '',
       type: 'article',
       publishedTime: post.publishedAt,
+      url: pageUrl,
       authors: post.authors?.map(author => author?.name).filter(Boolean) || ['Dr. Ihababdelbasset ANNAKI'],
-      images: post.featuredImage ? [{
-        url: urlFor(post.featuredImage).width(1200).height(630).url(),
-        width: 1200,
-        height: 630,
-        alt: post.featuredImage.alt || post.title,
-      }] : [],
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: post.featuredImage?.alt || post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt || '',
+      images: [ogImage],
     },
   };
 }

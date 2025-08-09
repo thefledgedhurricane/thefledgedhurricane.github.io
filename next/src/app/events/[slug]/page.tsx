@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation';
 import { client, queries, urlFor } from '@/lib/sanity';
 import { Event } from '@/lib/sanity-types';
-import { generateJsonLd } from '@/lib/jsonld';
+import { generateJsonLd, generateBreadcrumbJsonLd } from '@/lib/jsonld';
 import Image from 'next/image';
 import Link from 'next/link';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
+import ShareButtons from '@/components/ShareButtons';
 
 interface EventPageProps {
   params: Promise<{
@@ -66,12 +67,21 @@ export default async function EventPage({ params }: EventPageProps) {
     url: `${process.env.NEXT_PUBLIC_SITE_URL}/events/${event.slug.current}`,
     description: event.description || '',
   });
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+    { name: 'Accueil', url: `${process.env.NEXT_PUBLIC_SITE_URL}/` },
+    { name: 'Événements', url: `${process.env.NEXT_PUBLIC_SITE_URL}/events` },
+    { name: event.title, url: `${process.env.NEXT_PUBLIC_SITE_URL}/events/${event.slug.current}` },
+  ]);
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       
   <main className="min-h-screen bg-white dark:bg-gray-950 transition-colors">
@@ -329,6 +339,16 @@ export default async function EventPage({ params }: EventPageProps) {
               </a>
             </div>
           )}
+
+          {/* Share */}
+          <div className="mt-12 pt-8 border-t border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Partager</h3>
+            <ShareButtons
+              url={`${process.env.NEXT_PUBLIC_SITE_URL}/events/${event.slug.current}`}
+              title={event.title}
+              summary={event.description || ''}
+            />
+          </div>
         </article>
 
         {/* Navigation */}
@@ -360,19 +380,36 @@ export async function generateMetadata({ params }: EventPageProps) {
     };
   }
 
+  const pageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/events/${event.slug.current}`;
+  const ogImage = event.featuredImage
+    ? urlFor(event.featuredImage).width(1200).height(630).url()
+    : '/og-image.jpg';
+
   return {
     title: event.title,
     description: event.description || `Événement organisé par Dr. Ihababdelbasset ANNAKI`,
+    alternates: {
+      canonical: `/events/${event.slug.current}`,
+    },
     openGraph: {
       title: event.title,
       description: event.description || '',
       type: 'article',
-      images: event.featuredImage ? [{
-        url: urlFor(event.featuredImage).width(1200).height(630).url(),
-        width: 1200,
-        height: 630,
-        alt: event.featuredImage.alt || event.title,
-      }] : [],
+      url: pageUrl,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: event.featuredImage?.alt || event.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: event.title,
+      description: event.description || '',
+      images: [ogImage],
     },
   };
 }

@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation';
 import { client, queries, urlFor } from '@/lib/sanity';
 import { Publication } from '@/lib/sanity-types';
-import { generateJsonLd } from '@/lib/jsonld';
+import { generateJsonLd, generateBreadcrumbJsonLd } from '@/lib/jsonld';
 import Image from 'next/image';
 import Link from 'next/link';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
+import ShareButtons from '@/components/ShareButtons';
 
 interface PublicationPageProps {
   params: Promise<{
@@ -38,12 +39,21 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
     url: `${process.env.NEXT_PUBLIC_SITE_URL}/publications/${publication.slug.current}`,
     description: publication.abstract || '',
   });
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+    { name: 'Accueil', url: `${process.env.NEXT_PUBLIC_SITE_URL}/` },
+    { name: 'Publications', url: `${process.env.NEXT_PUBLIC_SITE_URL}/publications` },
+    { name: publication.title, url: `${process.env.NEXT_PUBLIC_SITE_URL}/publications/${publication.slug.current}` },
+  ]);
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       
   <main className="min-h-screen bg-white dark:bg-gray-950 transition-colors">
@@ -242,6 +252,16 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
               </div>
             </div>
           )}
+
+          {/* Share */}
+          <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Partager</h3>
+            <ShareButtons
+              url={`${process.env.NEXT_PUBLIC_SITE_URL}/publications/${publication.slug.current}`}
+              title={publication.title}
+              summary={publication.abstract || ''}
+            />
+          </div>
         </article>
 
         {/* Navigation */}
@@ -273,21 +293,38 @@ export async function generateMetadata({ params }: PublicationPageProps) {
     };
   }
 
+  const pageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/publications/${publication.slug.current}`;
+  const ogImage = publication.featuredImage
+    ? urlFor(publication.featuredImage).width(1200).height(630).url()
+    : '/og-image.jpg';
+
   return {
     title: publication.title,
     description: publication.abstract || `Publication académique par ${publication.authors?.[0]?.name || 'Dr. Ihababdelbasset ANNAKI'}`,
+    alternates: {
+      canonical: `/publications/${publication.slug.current}`,
+    },
     openGraph: {
       title: publication.title,
       description: publication.abstract || '',
       type: 'article',
+      url: pageUrl,
       publishedTime: publication.publishedDate,
       authors: publication.authors?.map(author => author?.name).filter(Boolean) || ['Dr. Ihababdelbasset ANNAKI'],
-      images: publication.featuredImage ? [{
-        url: urlFor(publication.featuredImage).width(1200).height(630).url(),
-        width: 1200,
-        height: 630,
-        alt: publication.featuredImage.alt || publication.title,
-      }] : [],
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: publication.featuredImage?.alt || publication.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: publication.title,
+      description: publication.abstract || '',
+      images: [ogImage],
     },
   };
 }

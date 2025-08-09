@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import CustomCursor from '@/components/CustomCursor';
 import SmoothScroll from '@/components/SmoothScroll';
 import { generateJsonLd } from '@/lib/jsonld';
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const poppins = Poppins({ subsets: ['latin'], weight: ['300','400','500','600','700'], variable: '--font-poppins' });
@@ -12,7 +13,7 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['300','400','500','600','
 const siteConfig = {
   name: process.env.NEXT_PUBLIC_SITE_NAME || 'Portfolio',
   description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || 'Personal portfolio showcasing projects and skills',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://localhost:3000',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://thefledgedhurricane.github.io',
 };
 
 export const metadata: Metadata = {
@@ -22,15 +23,18 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: ['portfolio', 'developer', 'projects', 'web development', 'software engineer'],
-  authors: [{ name: 'Portfolio Owner' }],
-  creator: 'Portfolio Owner',
+  authors: [{ name: 'Pr. Ihababdelbasset Annaki' }],
+  creator: 'Pr. Ihababdelbasset Annaki',
   metadataBase: new URL(siteConfig.url),
   alternates: {
     canonical: '/',
+    languages: {
+      'fr': '/',
+    },
   },
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'fr_FR',
     url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.description,
@@ -79,7 +83,7 @@ export default function RootLayout({
   });
 
   return (
-  <html lang="en" className={`scroll-smooth ${inter.variable} ${poppins.variable}`}>
+  <html lang="fr" className={`scroll-smooth ${inter.variable} ${poppins.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -101,6 +105,7 @@ export default function RootLayout({
             {children}
           </div>
         </main>
+  <Footer />
       </body>
     </html>
   );
