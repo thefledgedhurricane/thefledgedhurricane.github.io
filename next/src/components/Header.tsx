@@ -12,6 +12,7 @@ const navigation = [
   { name: 'Enseignement', href: '/teaching' },
   { name: 'Événements', href: '/events' },
   { name: 'Projets', href: '/projects' },
+  { name: 'Showcase', href: '/showcase' },
 ];
 
 export default function Header() {

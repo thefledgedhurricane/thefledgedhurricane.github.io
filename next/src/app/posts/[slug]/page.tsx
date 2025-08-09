@@ -96,7 +96,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 )}
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 {post.title}
               </h1>
               
@@ -156,7 +156,7 @@ export default async function PostPage({ params }: PostPageProps) {
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (
             <div className="mt-12 pt-8 border-t border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Tags</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag: string, index: number) => (
                   <span

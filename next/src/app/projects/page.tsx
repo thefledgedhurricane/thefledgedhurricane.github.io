@@ -41,7 +41,7 @@ export default async function ProjectsPage() {
   <div className="bg-white dark:bg-gray-950 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Mes Projets
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -158,7 +158,7 @@ export default async function ProjectsPage() {
                       </span>
                     </div>
                     
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
                       {project.title}
                     </h3>
                     

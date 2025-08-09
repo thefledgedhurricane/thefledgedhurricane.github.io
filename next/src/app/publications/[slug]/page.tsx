@@ -97,13 +97,13 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
                 )}
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 {publication.title}
               </h1>
               
               {publication.abstract && (
                 <div className="bg-blue-50 p-6 rounded-lg mb-6">
-                  <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Résumé</h2>
+                  <h2 className="text-lg font-semibold text-gray-900 mb-3">Résumé</h2>
                   <p className="text-gray-700 leading-relaxed">
                     {publication.abstract}
                   </p>
@@ -114,7 +114,7 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
                 {publication.authors && publication.authors.length > 0 && (
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Auteurs</h3>
+                    <h3 className="font-semibold text-gray-900 mb-2">Auteurs</h3>
                     <div className="space-y-1">
                       {publication.authors.map((author, index) => (
                         <div key={index} className="text-gray-600">
@@ -128,13 +128,13 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
                 <div className="space-y-3">
                   {publication.journal && (
                     <div>
-                      <span className="font-semibold text-gray-900 dark:text-gray-100">Journal: </span>
+                      <span className="font-semibold text-gray-900">Journal: </span>
                       <span className="text-gray-600 italic">{publication.journal}</span>
                     </div>
                   )}
                   
                   <div>
-                    <span className="font-semibold text-gray-900 dark:text-gray-100">Date de publication: </span>
+                    <span className="font-semibold text-gray-900">Date de publication: </span>
                     <span className="text-gray-600">
                       {new Date(publication.publishedDate).toLocaleDateString('fr-FR', {
                         year: 'numeric',
@@ -146,7 +146,7 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
                   
                   {publication.doi && (
                     <div>
-                      <span className="font-semibold text-gray-900 dark:text-gray-100">DOI: </span>
+                      <span className="font-semibold text-gray-900">DOI: </span>
                       <a
                         href={`https://doi.org/${publication.doi}`}
                         target="_blank"
@@ -160,7 +160,7 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
                   
                   {publication.language && (
                     <div>
-                      <span className="font-semibold text-gray-900 dark:text-gray-100">Langue: </span>
+                      <span className="font-semibold text-gray-900">Langue: </span>
                       <span className="text-gray-600">{publication.language}</span>
                     </div>
                   )}
@@ -196,7 +196,7 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
           {/* Keywords */}
           {publication.keywords && publication.keywords.length > 0 && (
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Mots-clés</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Mots-clés</h3>
               <div className="flex flex-wrap gap-2">
                 {publication.keywords.map((keyword: string, index: number) => (
                   <span
@@ -213,7 +213,7 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
           {/* External Links */}
           {publication.urls && Object.keys(publication.urls).some(key => publication.urls![key as keyof typeof publication.urls]) && (
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Liens externes</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Liens externes</h3>
               <div className="space-y-2">
                 {Object.entries(publication.urls).map(([key, url]) => {
                   if (!url) return null;
