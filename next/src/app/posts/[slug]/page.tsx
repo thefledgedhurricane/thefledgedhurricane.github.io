@@ -7,9 +7,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 interface PostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 async function getPost(slug: string): Promise<Post | null> {
@@ -25,7 +25,7 @@ async function getPost(slug: string): Promise<Post | null> {
 
 
 export default async function PostPage({ params }: PostPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const post = await getPost(slug);
   
   if (!post) {

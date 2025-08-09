@@ -7,9 +7,9 @@ import Link from 'next/link';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
 
 interface EventPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 async function getEvent(slug: string): Promise<Event | null> {
@@ -53,7 +53,7 @@ const statusColors: Record<string, string> = {
 };
 
 export default async function EventPage({ params }: EventPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const event = await getEvent(slug);
   
   if (!event) {

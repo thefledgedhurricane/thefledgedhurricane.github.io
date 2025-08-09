@@ -13,23 +13,25 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const { slug } = params;
+interface ProjectPageProps {
+  params: Promise<{
+    slug: string;
+  }>;
+}
+
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+  const { slug } = await params;
   const project = await getProject(slug);
   
   if (!project) {
-    return {
-      title: 'Project Not Found',
-    };
+    return { title: 'Project Not Found' };
   }
 
-  // Assainir description (si une structure portable text ou trop longue est venue remplacer la description courte)
   const rawDescription: any = project.description;
   let cleanDescription: string = '';
   if (typeof rawDescription === 'string') {
     cleanDescription = rawDescription.trim();
   } else if (Array.isArray(rawDescription)) {
-    // PortableText blocks -> concat spans
     cleanDescription = rawDescription
       .filter((b: any) => b._type === 'block')
       .map((b: any) => (b.children || []).map((c: any) => c.text || '').join(''))
@@ -51,10 +53,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-
-
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  const { slug } = await params;
   const project = await getProject(slug);
 
   if (!project) {
@@ -68,7 +68,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors">
       {/* Hero Section */}
-  <div className="bg-white dark:bg-gray-900 transition-colors">
+      <div className="bg-white dark:bg-gray-900 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center mb-8">
             <Link 
@@ -93,7 +93,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
               }
               // Normaliser espaces
               raw = raw.replace(/\r\n?/g, '\n');
-              // Trouver la première occurrence d'un séparateur de structure (heading ou liste) même s'il est collé après un espace
+              // Trouver la première occurrence d'un séparateur de structure (heading ou liste)
               const separators = [
                 /#{1,6}\s/,          // heading markdown
                 /\n[-*+]\s/,        // liste
@@ -107,15 +107,13 @@ export default async function ProjectPage({ params }: { params: { slug: string }
                   if (cutIndex === -1 || idx < cutIndex) cutIndex = idx;
                 }
               }
-              if (cutIndex > 120) { // éviter de couper trop tôt si heading très proche du début
+              if (cutIndex > 120) {
                 raw = raw.slice(0, cutIndex).trim();
               }
-              // Si toujours trop long, couper au premier double saut de ligne
               if (raw.length > 260) {
                 const dbl = raw.indexOf('\n\n');
                 if (dbl !== -1 && dbl > 120) raw = raw.slice(0, dbl).trim();
               }
-              // Nettoyer éléments markdown basiques restants
               let summary = raw
                 .replace(/\*\*(.+?)\*\*/g, '$1')
                 .replace(/\*(.+?)\*/g, '$1')

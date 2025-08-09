@@ -7,9 +7,9 @@ import Link from 'next/link';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
 
 interface TeachingPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 async function getTeaching(slug: string): Promise<Teaching | null> {
@@ -53,7 +53,7 @@ const levelLabels: Record<string, string> = {
 };
 
 export default async function TeachingPage({ params }: TeachingPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const teaching = await getTeaching(slug);
   
   if (!teaching) {

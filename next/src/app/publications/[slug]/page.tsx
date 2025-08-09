@@ -7,9 +7,9 @@ import Link from 'next/link';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
 
 interface PublicationPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 async function getPublication(slug: string): Promise<Publication | null> {
@@ -25,7 +25,7 @@ async function getPublication(slug: string): Promise<Publication | null> {
 
 
 export default async function PublicationPage({ params }: PublicationPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const publication = await getPublication(slug);
   
   if (!publication) {
