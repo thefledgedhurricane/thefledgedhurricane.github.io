@@ -3,15 +3,18 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 
 type Props = {
   wallColor?: string;
   lightColor?: string;
   ambientIntensity?: number;
   dirIntensity?: number;
+  highDetail?: boolean;
 };
 
-export default function ShowcaseScene({ wallColor = '#e5e7eb', lightColor = '#ffffff', ambientIntensity = 0.6, dirIntensity = 1.2 }: Props) {
+export default function ShowcaseScene({ wallColor = '#e5e7eb', lightColor = '#ffffff', ambientIntensity = 0.6, dirIntensity = 1.2, highDetail = true }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
 
@@ -25,11 +28,18 @@ export default function ShowcaseScene({ wallColor = '#e5e7eb', lightColor = '#ff
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(width, height);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.xr.enabled = true;
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
   // Scene & Camera
     const scene = new THREE.Scene();
+    // Optional: a subtle environment to improve realism
+    if (highDetail) {
+      const pmrem = new THREE.PMREMGenerator(renderer);
+      scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+      pmrem.dispose();
+    }
     const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 100);
     camera.position.set(3, 2, 4);
 
@@ -100,12 +110,13 @@ export default function ShowcaseScene({ wallColor = '#e5e7eb', lightColor = '#ff
   scene.add(board);
 
   // Teacher desk (simple box) near front
-  const desk = new THREE.Mesh(new THREE.BoxGeometry(2, 1, 1), woodMat);
+  const deskGeo = highDetail ? new THREE.BoxGeometry(2, 1, 1, 2, 2, 2) : new THREE.BoxGeometry(2, 1, 1);
+  const desk = new THREE.Mesh(deskGeo, woodMat);
   desk.position.set(0, 0.5, roomD / 2 - 2);
   scene.add(desk);
 
   // Demo object: spinning torus above desk
-  const geometry = new THREE.TorusKnotGeometry(0.6, 0.2, 200, 32);
+  const geometry = highDetail ? new THREE.TorusKnotGeometry(0.6, 0.2, 400, 64) : new THREE.TorusKnotGeometry(0.6, 0.2, 120, 24);
   const material = new THREE.MeshStandardMaterial({ color: 0x60a5fa, metalness: 0.6, roughness: 0.35 });
   const torus = new THREE.Mesh(geometry, material);
   torus.position.set(0, 1.8, roomD / 2 - 2);
@@ -118,6 +129,48 @@ export default function ShowcaseScene({ wallColor = '#e5e7eb', lightColor = '#ff
     // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
+
+    // VR Button
+    const vrButton = VRButton.createButton(renderer);
+    vrButton.style.position = 'absolute';
+    vrButton.style.right = '1rem';
+    vrButton.style.bottom = '1rem';
+    container.appendChild(vrButton);
+
+    // Basic teleportation: click/trigger to move camera to a target point on the floor
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    const floorObjects: THREE.Object3D[] = [floor];
+
+    const teleportTo = (intersectPoint: THREE.Vector3) => {
+      // keep a small height and offset back a little
+      camera.position.set(intersectPoint.x, 1.6, intersectPoint.z + 0.1);
+      controls.target.set(intersectPoint.x, 1.5, intersectPoint.z);
+    };
+
+    const onClick = (event: MouseEvent) => {
+      const rect = renderer.domElement.getBoundingClientRect();
+      pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      const intersects = raycaster.intersectObjects(floorObjects, false);
+      if (intersects[0]) teleportTo(intersects[0].point);
+    };
+    renderer.domElement.addEventListener('click', onClick);
+
+    // Optional: basic XR controller teleport on select (if device present)
+    const controller = renderer.xr.getController(0);
+    controller.addEventListener('select', () => {
+      // ray from controller to floor
+      const tempMatrix = new THREE.Matrix4();
+      tempMatrix.identity().extractRotation(controller.matrixWorld);
+      const dir = new THREE.Vector3(0, 0, -1).applyMatrix4(tempMatrix).normalize();
+      const origin = new THREE.Vector3().setFromMatrixPosition(controller.matrixWorld);
+      raycaster.set(origin, dir);
+      const intersects = raycaster.intersectObjects(floorObjects, false);
+      if (intersects[0]) teleportTo(intersects[0].point);
+    });
+    scene.add(controller);
 
     // Resize
     const onResize = () => {
@@ -161,12 +214,14 @@ export default function ShowcaseScene({ wallColor = '#e5e7eb', lightColor = '#ff
     (board.material as THREE.Material).dispose();
     desk.geometry.dispose();
     (desk.material as THREE.Material).dispose();
+    renderer.domElement.removeEventListener('click', onClick);
+    if (vrButton && vrButton.parentNode) vrButton.parentNode.removeChild(vrButton);
       renderer.dispose();
       if (renderer.domElement && renderer.domElement.parentNode) {
         renderer.domElement.parentNode.removeChild(renderer.domElement);
       }
     };
-  }, [wallColor, lightColor, ambientIntensity, dirIntensity]);
+  }, [wallColor, lightColor, ambientIntensity, dirIntensity, highDetail]);
 
   return (
     <div ref={containerRef} className="w-full h-[70vh] bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950" />
