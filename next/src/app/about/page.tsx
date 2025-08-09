@@ -185,7 +185,7 @@ function HeroSection() {
 
 function ExperienceSection() {
   return (
-    <section id="experience" className="py-32 bg-gray-50">
+    <section id="experience" className="py-32 bg-gray-50 dark:bg-gray-950 transition-colors">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-24">
           <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
@@ -206,26 +206,26 @@ function ExperienceSection() {
                       {String(index + 1).padStart(2, '0')}
                     </div>
                     <div className="flex items-center gap-2 mb-3">
-                      <h3 className="text-xl font-bold text-black">{exp.company}</h3>
+                      <h3 className="text-xl font-bold text-black dark:text-gray-100">{exp.company}</h3>
                       {exp.current && (
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                       )}
                     </div>
-                    <div className="text-sm text-gray-500 mb-2">{exp.duration}</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-300 mb-2">{exp.duration}</div>
                     <div className="text-xs text-gray-400 mb-2">{exp.location}</div>
-                    <div className="inline-block px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs uppercase tracking-wider">
+                    <div className="inline-block px-2 py-1 bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300 rounded text-xs uppercase tracking-wider">
                       {exp.type}
                     </div>
                   </div>
                 </div>
                 
                 <div className="lg:col-span-9">
-                  <div className="bg-white p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <h4 className="text-2xl font-light text-black mb-6 leading-tight">
+                  <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <h4 className="text-2xl font-light text-black dark:text-gray-100 mb-6 leading-tight">
                       {exp.position}
                     </h4>
                     
-                    <p className="text-gray-600 leading-relaxed mb-6">
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
                       {exp.description}
                     </p>
                     
@@ -233,7 +233,7 @@ function ExperienceSection() {
                       {exp.skills.map((skill, skillIndex) => (
                         <span 
                           key={skillIndex} 
-                          className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                          className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 rounded-full text-sm"
                         >
                           {skill}
                         </span>
@@ -242,11 +242,6 @@ function ExperienceSection() {
                   </div>
                 </div>
               </div>
-              
-              {/* Connector line */}
-              {index < experiences.length - 1 && (
-                <div className="absolute left-6 lg:left-24 top-20 w-px h-16 bg-gray-200"></div>
-              )}
             </div>
           ))}
         </div>
