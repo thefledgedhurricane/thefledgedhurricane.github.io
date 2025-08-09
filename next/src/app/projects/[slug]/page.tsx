@@ -80,7 +80,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </svg>
               Back to Projects
             </Link>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">{project.title}</h1>
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">{project.title}</h1>
             {(() => {
               // Extraire description brute (string ou blocks) puis résumer avant markdown avancé
               let raw = '';
@@ -152,7 +152,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {/* Technologies */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Technologies</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Technologies</h3>
               <div className="flex flex-wrap gap-2">
                 {project.technologies?.map((tech: string, index: number) => (
                   <span
@@ -167,7 +167,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
             {/* Links */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Links</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Links</h3>
               <div className="space-y-2">
                 {project.liveUrl && (
                   <a
@@ -200,7 +200,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
             {/* Date */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Published</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Published</h3>
               <time className="text-gray-600">
                 {new Date(project.publishedAt).toLocaleDateString('en-US', {
                   year: 'numeric',

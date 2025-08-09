@@ -39,7 +39,7 @@ function TeachingCard({ course }: TeachingCardProps) {
         )}
       </div>
       
-      <h2 className="text-xl font-bold text-gray-900 mb-3 hover:text-primary-600 transition-colors">
+  <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-3 hover:text-primary-600 transition-colors">
         <Link href={`/teaching/${course.slug.current}`}>
           {course.title}
         </Link>
@@ -112,7 +112,7 @@ export default async function TeachingPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
               Enseignement
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -133,7 +133,7 @@ export default async function TeachingPage() {
               {/* Featured Teaching */}
               {teaching.some((course: Teaching) => course.featured) && (
                 <section className="mb-16">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-8">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
                     Cours en Vedette
                   </h2>
                   <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
@@ -149,7 +149,7 @@ export default async function TeachingPage() {
               
               {/* All Teaching */}
               <section>
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
                   Tous les Cours
                 </h2>
                 <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
@@ -183,7 +183,7 @@ export default async function TeachingPage() {
                     />
                   </svg>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Aucun Cours</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Aucun Cours</h2>
                 <p className="text-gray-600">
                   Les cours apparaîtront ici une fois qu&apos;ils seront ajoutés dans le CMS Sanity.
                 </p>

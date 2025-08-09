@@ -128,13 +128,13 @@ export default async function EventPage({ params }: EventPageProps) {
                 )}
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
                 {event.title}
               </h1>
               
               {event.description && (
                 <div className="bg-blue-50 p-6 rounded-lg mb-6">
-                  <h2 className="text-lg font-semibold text-gray-900 mb-3">Description</h2>
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Description</h2>
                   <p className="text-gray-700 leading-relaxed">
                     {event.description}
                   </p>

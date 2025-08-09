@@ -37,7 +37,7 @@ function PublicationCard({ publication }: PublicationCardProps) {
         )}
       </div>
       
-      <h2 className="text-xl font-bold text-gray-900 mb-3 hover:text-primary-600 transition-colors">
+  <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-3 hover:text-primary-600 transition-colors">
         <Link href={`/publications/${publication.slug.current}`}>
           {publication.title}
         </Link>
@@ -113,7 +113,7 @@ export default async function PublicationsPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
               Publications Académiques
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -155,7 +155,7 @@ export default async function PublicationsPage() {
                     />
                   </svg>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Aucune Publication</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Aucune Publication</h2>
                 <p className="text-gray-600">
                   Les publications apparaîtront ici une fois qu&apos;elles seront ajoutées dans le CMS Sanity.
                 </p>

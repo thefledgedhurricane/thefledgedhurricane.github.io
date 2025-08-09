@@ -128,7 +128,7 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
                 )}
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
                 {teaching.title}
               </h1>
               
@@ -142,7 +142,7 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
               
               {teaching.description && (
                 <div className="bg-blue-50 p-6 rounded-lg mb-6">
-                  <h2 className="text-lg font-semibold text-gray-900 mb-3">Description</h2>
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Description</h2>
                   <p className="text-gray-700 leading-relaxed">
                     {teaching.description}
                   </p>
@@ -153,27 +153,27 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
                 <div className="space-y-3">
                   <div>
-                    <span className="font-semibold text-gray-900">Institution: </span>
+                    <span className="font-semibold text-gray-900 dark:text-gray-100">Institution: </span>
                     <span className="text-gray-600">{teaching.institution}</span>
                   </div>
                   
                   {teaching.department && (
                     <div>
-                      <span className="font-semibold text-gray-900">Département: </span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Département: </span>
                       <span className="text-gray-600">{teaching.department}</span>
                     </div>
                   )}
                   
                   {teaching.level && (
                     <div>
-                      <span className="font-semibold text-gray-900">Niveau: </span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Niveau: </span>
                       <span className="text-gray-600">{levelLabels[teaching.level] || teaching.level}</span>
                     </div>
                   )}
                   
                   {teaching.semester && (
                     <div>
-                      <span className="font-semibold text-gray-900">Semestre: </span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Semestre: </span>
                       <span className="text-gray-600">{teaching.semester}</span>
                     </div>
                   )}
@@ -181,7 +181,7 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
                 
                 <div className="space-y-3">
                   <div>
-                    <span className="font-semibold text-gray-900">Période: </span>
+                    <span className="font-semibold text-gray-900 dark:text-gray-100">Période: </span>
                     <span className="text-gray-600">
                       {new Date(teaching.startDate).toLocaleDateString('fr-FR', {
                         year: 'numeric',
@@ -198,14 +198,14 @@ export default async function TeachingPage({ params }: TeachingPageProps) {
                   
                   {teaching.studentCount && (
                     <div>
-                      <span className="font-semibold text-gray-900">Nombre d&apos;étudiants: </span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Nombre d&apos;étudiants: </span>
                       <span className="text-gray-600">{teaching.studentCount}</span>
                     </div>
                   )}
                   
                   {teaching.language && (
                     <div>
-                      <span className="font-semibold text-gray-900">Langue: </span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Langue: </span>
                       <span className="text-gray-600">
                         {teaching.language === 'fr' ? 'Français' : 
                          teaching.language === 'en' ? 'Anglais' : 
