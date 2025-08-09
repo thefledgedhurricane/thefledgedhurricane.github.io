@@ -46,11 +46,11 @@ const statusLabels: Record<string, string> = {
 };
 
 const statusColors: Record<string, string> = {
-  upcoming: 'bg-blue-100 text-blue-800',
-  ongoing: 'bg-green-100 text-green-800',
-  completed: 'bg-gray-100 text-gray-800',
-  cancelled: 'bg-red-100 text-red-800',
-  postponed: 'bg-yellow-100 text-yellow-800'
+  upcoming: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300',
+  ongoing: 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300',
+  completed: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200',
+  cancelled: 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-300',
+  postponed: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-300'
 };
 
 export default async function EventPage({ params }: EventPageProps) {
@@ -120,32 +120,32 @@ export default async function EventPage({ params }: EventPageProps) {
             {/* Event Header */}
             <header className="mb-8">
               <div className="flex items-center space-x-4 mb-6">
-                <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                <span className="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full text-sm font-medium">
                   {eventTypeLabels[event.eventType] || event.eventType}
                 </span>
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusColors[event.status] || 'bg-gray-100 text-gray-800'}`}>
                   {statusLabels[event.status] || event.status}
                 </span>
                 {event.featured && (
-                  <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">
+                  <span className="px-3 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-300 rounded-full text-sm font-medium">
                     En vedette
                   </span>
                 )}
                 {event.location?.isVirtual && (
-                  <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
+                  <span className="px-3 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 rounded-full text-sm font-medium">
                     Virtuel
                   </span>
                 )}
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
                 {event.title}
               </h1>
               
               {event.description && (
-                <div className="bg-blue-50 p-6 rounded-lg mb-6">
-                  <h2 className="text-lg font-semibold text-gray-900 mb-3">Description</h2>
-                  <p className="text-gray-700 leading-relaxed">
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mb-6">
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Description</h2>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                     {event.description}
                   </p>
                 </div>
@@ -155,8 +155,8 @@ export default async function EventPage({ params }: EventPageProps) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
                 <div className="space-y-3">
                   <div>
-                    <span className="font-semibold text-gray-900">Date: </span>
-                    <span className="text-gray-600">
+                    <span className="font-semibold text-gray-900 dark:text-gray-100">Date: </span>
+                    <span className="text-gray-600 dark:text-gray-300">
                       {new Date(event.startDate).toLocaleDateString('fr-FR', {
                         year: 'numeric',
                         month: 'long',
@@ -169,8 +169,8 @@ export default async function EventPage({ params }: EventPageProps) {
                   
                   {event.endDate && (
                     <div>
-                      <span className="font-semibold text-gray-900">Fin: </span>
-                      <span className="text-gray-600">
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Fin: </span>
+                      <span className="text-gray-600 dark:text-gray-300">
                         {new Date(event.endDate).toLocaleDateString('fr-FR', {
                           year: 'numeric',
                           month: 'long',
@@ -184,8 +184,8 @@ export default async function EventPage({ params }: EventPageProps) {
                   
                   {event.location && (
                     <div>
-                      <span className="font-semibold text-gray-900">Lieu: </span>
-                      <span className="text-gray-600">
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Lieu: </span>
+                      <span className="text-gray-600 dark:text-gray-300">
                         {event.location.isVirtual ? 'Événement virtuel' : 
                          [event.location.venue, event.location.city, event.location.country]
                            .filter(Boolean).join(', ')}
@@ -195,8 +195,8 @@ export default async function EventPage({ params }: EventPageProps) {
                   
                   {event.organizer && (
                     <div>
-                      <span className="font-semibold text-gray-900">Organisateur: </span>
-                      <span className="text-gray-600">{event.organizer}</span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Organisateur: </span>
+                      <span className="text-gray-600 dark:text-gray-300">{event.organizer}</span>
                     </div>
                   )}
                 </div>
@@ -204,14 +204,14 @@ export default async function EventPage({ params }: EventPageProps) {
                 <div className="space-y-3">
                   {event.registrationUrl && (
                     <div>
-                      <span className="font-semibold text-gray-900">Inscription: </span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Inscription: </span>
                       <span className="text-blue-600 font-medium">Disponible</span>
                     </div>
                   )}
                   
                   {event.website && (
                     <div>
-                      <span className="font-semibold text-gray-900">Site web: </span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">Site web: </span>
                       <a
                         href={event.website}
                         target="_blank"
@@ -262,7 +262,7 @@ export default async function EventPage({ params }: EventPageProps) {
         {/* Event Content */}
         <article className="max-w-4xl mx-auto px-6 lg:px-8 pb-16">
           {event.content && (
-            <div className="prose prose-lg max-w-none mb-12">
+            <div className="prose prose-lg dark:prose-invert max-w-none mb-12">
               <PortableTextRenderer content={event.content} />
             </div>
           )}
@@ -270,10 +270,10 @@ export default async function EventPage({ params }: EventPageProps) {
           {/* Speakers */}
           {event.speakers && event.speakers.length > 0 && (
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Intervenants</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Intervenants</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {event.speakers.map((speaker: any, index: number) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4">
+                  <div key={index} className="border border-gray-200 dark:border-gray-800 rounded-lg p-4">
                     <div className="flex items-start space-x-4">
                       {speaker.image && (
                         <div className="flex-shrink-0">
@@ -287,15 +287,15 @@ export default async function EventPage({ params }: EventPageProps) {
                         </div>
                       )}
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900">{speaker.name}</h4>
+        <h4 className="font-medium text-gray-900 dark:text-gray-100">{speaker.name}</h4>
                         {speaker.title && (
-                          <p className="text-sm text-gray-600 mb-1">{speaker.title}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">{speaker.title}</p>
                         )}
                         {speaker.organization && (
-                          <p className="text-sm text-gray-500">{speaker.organization}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{speaker.organization}</p>
                         )}
                         {speaker.bio && (
-                          <p className="text-sm text-gray-700 mt-2">{speaker.bio}</p>
+          <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">{speaker.bio}</p>
                         )}
                       </div>
                     </div>
@@ -308,12 +308,12 @@ export default async function EventPage({ params }: EventPageProps) {
           {/* Tags */}
           {event.tags && event.tags.length > 0 && (
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Mots-clés</h3>
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Mots-clés</h3>
               <div className="flex flex-wrap gap-2">
                 {event.tags.map((tag: string, index: number) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors"
+        className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                   >
                     {tag}
                   </span>
@@ -325,7 +325,7 @@ export default async function EventPage({ params }: EventPageProps) {
           {/* External Links */}
           {event.website && (
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Liens externes</h3>
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Liens externes</h3>
               <a
                 href={event.website}
                 target="_blank"
@@ -341,8 +341,8 @@ export default async function EventPage({ params }: EventPageProps) {
           )}
 
           {/* Share */}
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Partager</h3>
+          <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Partager</h3>
             <ShareButtons
               url={`${process.env.NEXT_PUBLIC_SITE_URL}/events/${event.slug.current}`}
               title={event.title}
@@ -353,7 +353,7 @@ export default async function EventPage({ params }: EventPageProps) {
 
         {/* Navigation */}
         <div className="max-w-4xl mx-auto px-6 lg:px-8 pb-16">
-          <div className="border-t border-gray-200 pt-8">
+          <div className="border-t border-gray-200 dark:border-gray-800 pt-8">
             <Link
               href="/events"
               className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors"
