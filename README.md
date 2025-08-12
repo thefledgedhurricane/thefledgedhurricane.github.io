@@ -36,7 +36,7 @@ Design, UX et direction artistique: Dr. Ihababdelbasset ANNAKI.
 
 ## 🛠️ Stack technique
 
-- **Frontend**: Next.js 15, React 18, TypeScript
+- **Frontend**: Next.js 15, React, TypeScript
 - **Styling**: Tailwind CSS
 - **CMS**: Sanity.io
 - **Deployment**: GitHub Pages with GitHub Actions
