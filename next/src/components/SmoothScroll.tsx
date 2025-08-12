@@ -6,8 +6,8 @@ import Lenis from 'lenis';
 export default function SmoothScroll() {
   useEffect(() => {
     const lenis = new Lenis({
+      // Valeur douce et stable pour la landing
       lerp: 0.1,
-      smoothWheel: true,
     });
 
     let raf = 0;

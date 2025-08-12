@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: 'Academic portfolio of Pr. Ihababdelbasset Annaki- Research in Computer Science, Publications, Teaching, and Educational Innovation.',
 };
 
-import SmoothScroll from '@/components/SmoothScroll';
+// SmoothScroll est un composant client; import direct sans dynamic pour éviter ssr:false en Server Components
 
 function HeroSection() {
   return (
@@ -259,6 +259,45 @@ function TeachingSection({ teaching }: TeachingSectionProps) {
             Expérience <span className="font-bold dark:text-white">Pédagogique</span>
           </h2>
         </div>
+        {/* Highlights statiques d'enseignement — rectangulaire noir & blanc */}
+        <div className="mb-16 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-sm p-6 md:p-8 rounded-none">
+          <div className="grid gap-8 md:grid-cols-2">
+            <div>
+              <h3 className="text-[11px] font-medium text-gray-700 dark:text-gray-300 mb-4 uppercase tracking-[0.2em]">
+                Domaines enseignés
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-2.5 py-1 text-[12px] border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100 bg-transparent rounded-none">
+                  Développement avancé (Frontend & Backend)
+                </span>
+                <span className="px-2.5 py-1 text-[12px] border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100 bg-transparent rounded-none">
+                  Big Data & Data Engineering
+                </span>
+                <span className="px-2.5 py-1 text-[12px] border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100 bg-transparent rounded-none">
+                  Cloud
+                </span>
+                <span className="px-2.5 py-1 text-[12px] border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100 bg-transparent rounded-none">
+                  Informatique
+                </span>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-[11px] font-medium text-gray-700 dark:text-gray-300 mb-4 uppercase tracking-[0.2em]">
+                Statistiques
+              </h3>
+              <div className="flex flex-wrap gap-8 items-baseline text-gray-900 dark:text-gray-100">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-4xl font-light tracking-tight">5+</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-400">années d&apos;enseignement</span>
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-4xl font-light tracking-tight">1500+</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-400">heures de cours</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         
         <div className="grid md:grid-cols-2 gap-x-12 gap-y-16">
           {teaching.slice(0, 4).map((course, index) => (
@@ -412,7 +451,7 @@ function FeaturedProjects({ projects }: FeaturedProjectsProps) {
     <section className="section-padding">
       <div className="container-max">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Projets Sélectionnés
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -562,7 +601,6 @@ export default async function HomePage() {
 
   return (
     <>
-  <SmoothScroll />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
