@@ -14,12 +14,6 @@
   body {
   font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   }
-  /* Hide default cursor on fine pointers to use custom cursor */
-  @media (pointer: fine) {
-    html, body, a, button, input, textarea, select {
-      cursor: none;
-    }
-  }
   html.dark body {
     @apply bg-gray-950 text-gray-100;
   }

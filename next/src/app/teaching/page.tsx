@@ -1,104 +1,26 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
-import { getTeaching, urlFor } from '@/lib/sanity';
-import { Teaching } from '@/lib/sanity-types';
 import { generateJsonLd } from '@/lib/jsonld';
+import { courses } from '@/lib/lms-data';
+import Link from 'next/link';
+import CourseCard from '@/components/lms/CourseCard';
 
 export const metadata: Metadata = {
-  title: 'Teaching',
-  description: 'Courses, lectures, and educational content by Dr. Ihababdelbasset ANNAKI.',
+  title: 'LMS — Enseignement',
+  description: 'Apprenez via un LMS 100% front-end: cours, leçons, quiz et progression locale.',
   openGraph: {
-    title: 'Teaching | Dr. Ihababdelbasset ANNAKI',
-    description: 'Courses, lectures, and educational content.',
+    title: 'LMS — Enseignement | Dr. Ihababdelbasset ANNAKI',
+    description: 'Cours interactifs, leçons et quiz côté client (localStorage).',
     type: 'website',
   },
 };
 
-interface TeachingCardProps {
-  course: Teaching;
-}
-
-function TeachingCard({ course }: TeachingCardProps) {
-  return (
-  <article className="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 dark:border-gray-800">
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center space-x-4">
-          <div className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
-            {course.teachingType}
-          </div>
-          {course.level && (
-            <div className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">
-              {course.level}
-            </div>
-          )}
-        </div>
-        {course.featured && (
-          <div className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
-            Featured
-          </div>
-        )}
-      </div>
-      
-  <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-        <Link href={`/teaching/${course.slug.current}`}>
-          {course.title}
-        </Link>
-      </h2>
-      
-      {course.institution && (
-  <div className="text-gray-600 dark:text-gray-300 mb-3">
-          <strong>Institution:</strong> {course.institution}
-        </div>
-      )}
-      
-      {course.description && (
-  <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-          {course.description}
-        </p>
-      )}
-      
-  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
-        {course.startDate && (
-          <span>
-            <strong>Start:</strong> {new Date(course.startDate).toLocaleDateString()}
-          </span>
-        )}
-        {course.endDate && (
-          <span>
-            <strong>End:</strong> {new Date(course.endDate).toLocaleDateString()}
-          </span>
-        )}
-        {course.studentCount && (
-          <span>
-            <strong>Students:</strong> {course.studentCount}
-          </span>
-        )}
-      </div>
-      
-      {course.subjects && course.subjects.length > 0 && (
-    <div className="flex flex-wrap gap-2 mt-4">
-          {course.subjects.map((subject: string, index: number) => (
-            <span
-              key={index}
-      className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded text-xs"
-            >
-              {subject}
-            </span>
-          ))}
-        </div>
-      )}
-    </article>
-  );
-}
-
 export default async function TeachingPage() {
-  const teaching = await getTeaching();
   
   const jsonLd = generateJsonLd({
     type: 'WebPage',
-    name: 'Teaching',
-    url: `${process.env.NEXT_PUBLIC_SITE_URL}/teaching`,
-    description: 'Courses, lectures, and educational content by Dr. Ihababdelbasset ANNAKI.',
+  name: 'LMS — Enseignement',
+  url: `${process.env.NEXT_PUBLIC_SITE_URL}/teaching`,
+  description: 'Cours interactifs, leçons et quiz côté client (localStorage).',
   });
 
   return (
@@ -113,83 +35,64 @@ export default async function TeachingPage() {
           {/* Header */}
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-              Enseignement
+              LMS — Enseignement
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Découvrez mes cours, formations et activités pédagogiques dans les domaines 
-              de l&apos;Intelligence Artificielle et du d&apos;éveloppement avancé.
+              Apprenez via une plateforme LMS 100% front-end: cours, leçons, quiz et suivi de progression local.
             </p>
           </div>
           
-          {/* Teaching Grid */}
-          {teaching.length > 0 ? (
-            <>
-              <div className="mb-8">
-                <p className="text-gray-600">
-                  <strong>{teaching.length}</strong> cours trouvé{teaching.length > 1 ? 's' : ''}
-                </p>
-              </div>
-              
-              {/* Featured Teaching */}
-              {teaching.some((course: Teaching) => course.featured) && (
-                <section className="mb-16">
-                  <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
-                    Cours en Vedette
-                  </h2>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-                    {teaching
-                      .filter((course: Teaching) => course.featured)
-                      .slice(0, 4)
-                      .map((course: Teaching) => (
-                        <TeachingCard key={course._id} course={course} />
-                      ))}
-                  </div>
-                </section>
-              )}
-              
-              {/* All Teaching */}
-              <section>
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
-                  Tous les Cours
-                </h2>
-                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-                  {teaching.map((course: Teaching) => (
-                    <TeachingCard key={course._id} course={course} />
-                  ))}
-                </div>
-              </section>
-            </>
-          ) : (
-            <div className="text-center py-16">
-              <div className="max-w-md mx-auto">
-                <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
-                  <svg
-                    className="w-12 h-12 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 14l9-5-9-5-9 5 9 5z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-                    />
-                  </svg>
-                </div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Aucun Cours</h2>
-                <p className="text-gray-600">
-                  Les cours apparaîtront ici une fois qu&apos;ils seront ajoutés dans le CMS Sanity.
-                </p>
-              </div>
+          {/* Catégories (accès avant les cours) */}
+          <section>
+            <div className="mb-6 text-gray-600 dark:text-gray-300">
+              <p>
+                Explorez par catégorie avant d&apos;accéder aux cours. <strong>{courses.length}</strong> cours au total.
+              </p>
             </div>
-          )}
+
+            {/* Grille de catégories */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from(new Map(
+                courses
+                  .filter(c => !!c.category)
+                  .map(c => [
+                    (c.category as string)
+                      .toLowerCase()
+                      .normalize('NFD')
+                      .replace(/[\u0300-\u036f]/g, '')
+                      .replace(/[^a-z0-9]+/g, '-')
+                      .replace(/(^-|-$)/g, ''),
+                    c.category as string
+                  ])
+              ).entries()).map(([slug, label]) => {
+                const count = courses.filter(c => c.category && (
+                  (c.category as string)
+                    .toLowerCase()
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/(^-|-$)/g, '')
+                ) === slug).length;
+                return (
+                  <Link key={slug} href={`/teaching/category/${slug}`} className="block p-5 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 hover:shadow-md transition-shadow">
+                    <div className="text-sm text-gray-500 mb-1">Catégorie</div>
+                    <div className="text-xl font-semibold text-gray-900 dark:text-gray-100">{label}</div>
+                    <div className="text-sm text-gray-500">{count} cours</div>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Tous les cours */}
+          <section className="mt-12">
+            <h2 className="text-2xl font-semibold mb-4">Tous les cours</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+              {courses.map((c) => (
+                <CourseCard key={c.id} course={c} />
+              ))}
+            </div>
+          </section>
         </div>
       </main>
     </>

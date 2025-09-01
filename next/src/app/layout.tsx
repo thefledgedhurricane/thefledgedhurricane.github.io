@@ -2,10 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
-import CustomCursor from '@/components/CustomCursor';
-import SmoothScroll from '@/components/SmoothScroll';
 import { generateJsonLd } from '@/lib/jsonld';
-import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const poppins = Poppins({ subsets: ['latin'], weight: ['300','400','500','600','700'], variable: '--font-poppins' });
@@ -13,7 +10,7 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['300','400','500','600','
 const siteConfig = {
   name: process.env.NEXT_PUBLIC_SITE_NAME || 'Portfolio',
   description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || 'Personal portfolio showcasing projects and skills',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://thefledgedhurricane.github.io',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://localhost:3000',
 };
 
 export const metadata: Metadata = {
@@ -23,18 +20,15 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: ['portfolio', 'developer', 'projects', 'web development', 'software engineer'],
-  authors: [{ name: 'Pr. Ihababdelbasset Annaki' }],
-  creator: 'Pr. Ihababdelbasset Annaki',
+  authors: [{ name: 'Portfolio Owner' }],
+  creator: 'Portfolio Owner',
   metadataBase: new URL(siteConfig.url),
   alternates: {
     canonical: '/',
-    languages: {
-      'fr': '/',
-    },
   },
   openGraph: {
     type: 'website',
-    locale: 'fr_FR',
+    locale: 'en_US',
     url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.description,
@@ -83,7 +77,7 @@ export default function RootLayout({
   });
 
   return (
-  <html lang="fr" className={`scroll-smooth ${inter.variable} ${poppins.variable}`}>
+  <html lang="en" className={`scroll-smooth ${inter.variable} ${poppins.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -97,15 +91,12 @@ export default function RootLayout({
         <meta name="theme-color" content="#2563eb" />
       </head>
   <body className={`antialiased transition-colors duration-300 bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100`}>
-  <SmoothScroll />
-  <CustomCursor />
         <Header />
         <main>
           <div className="min-h-screen flex flex-col">
             {children}
           </div>
         </main>
-  <Footer />
       </body>
     </html>
   );
