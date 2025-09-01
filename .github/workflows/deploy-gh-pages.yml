@@ -8,12 +8,19 @@ on:
       - 'next/**'
       - '.github/workflows/deploy-gh-pages.yml'
 
+concurrency:
+  group: deploy-gh-pages-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    env:
+      CI: true
+      NEXT_TELEMETRY_DISABLED: '1'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,7 +34,16 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./next
-        run: npm ci || npm install
+        run: npm ci || npm install --no-audit --no-fund
+
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: next/.next/cache
+          key: nextjs-${{ runner.os }}-${{ hashFiles('next/package.json') }}-${{ github.sha }}
+          restore-keys: |
+            nextjs-${{ runner.os }}-${{ hashFiles('next/package.json') }}-
+            nextjs-${{ runner.os }}-
 
       - name: Build static export
         working-directory: ./next
