@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 type DataPoint = {
   x: number;
@@ -22,10 +22,10 @@ export default function SupervisedLearningDemo() {
     { x: 180, y: 350, label: 'Maison E', color: '#3B82F6' },
   ];
 
-  const newPoints: DataPoint[] = [
+  const newPoints: DataPoint[] = useMemo(() => [
     { x: 110, y: 210, label: 'Nouvelle maison 1', color: '#EF4444' },
     { x: 160, y: 320, label: 'Nouvelle maison 2', color: '#EF4444' },
-  ];
+  ], []);
 
   // Régression linéaire simple
   const linearRegression = (x: number) => {
@@ -36,7 +36,7 @@ export default function SupervisedLearningDemo() {
   };
 
   const steps = [
-    'Données d\'entraînement',
+    'Données d&apos;entraînement',
     'Entraînement du modèle',
     'Modèle appris',
     'Prédictions sur nouvelles données'
@@ -45,13 +45,15 @@ export default function SupervisedLearningDemo() {
   useEffect(() => {
     if (step === 3) {
       // Générer les prédictions
+      const a = 1.8;
+      const b = 20;
       const newPredictions = newPoints.map(point => ({
         ...point,
-        y: linearRegression(point.x)
+        y: a * point.x + b
       }));
       setPredictions(newPredictions);
     }
-  }, [step]);
+  }, [step, newPoints]);
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
@@ -152,13 +154,13 @@ export default function SupervisedLearningDemo() {
       <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg mb-4">
         {step === 0 && (
           <div>
-            <strong>Étape 1 :</strong> Nous avons des données d'entraînement avec des exemples de maisons
+            <strong>Étape 1 :</strong> Nous avons des données d&apos;entraînement avec des exemples de maisons
             (surface en m², prix en k€). Chaque point bleu représente une maison connue.
           </div>
         )}
         {step === 1 && (
           <div>
-            <strong>Étape 2 :</strong> L'algorithme d'apprentissage analyse les données pour trouver
+            <strong>Étape 2 :</strong> L&apos;algorithme d&apos;apprentissage analyse les données pour trouver
             la relation entre la surface et le prix. Il cherche la meilleure ligne qui passe près de tous les points.
           </div>
         )}

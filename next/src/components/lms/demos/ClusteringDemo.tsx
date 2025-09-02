@@ -119,10 +119,47 @@ export default function ClusteringDemo() {
   };
 
   useEffect(() => {
-    if (step > 0) {
-      handleStep();
+    if (step === 1) {
+      // Initialize centroids
+      const newCentroids = [
+        { x: 25, y: 25, cluster: 0 },
+        { x: 55, y: 70, cluster: 1 },
+        { x: 40, y: 50, cluster: 2 }
+      ];
+      setCentroids(newCentroids);
+    } else if (step === 2) {
+      // Assign clusters
+      const newDataPoints = dataPoints.map(point => {
+        let minDistance = Infinity;
+        let assignedCluster = 0;
+
+        centroids.forEach((centroid, index) => {
+          const distance = Math.sqrt(
+            Math.pow(point.x - centroid.x, 2) + Math.pow(point.y - centroid.y, 2)
+          );
+          if (distance < minDistance) {
+            minDistance = distance;
+            assignedCluster = index;
+          }
+        });
+
+        return { ...point, cluster: assignedCluster };
+      });
+      setDataPoints(newDataPoints);
+    } else if (step === 3) {
+      // Update centroids
+      const newCentroids = centroids.map((centroid, clusterIndex) => {
+        const pointsInCluster = dataPoints.filter(p => p.cluster === clusterIndex);
+        if (pointsInCluster.length === 0) return centroid;
+
+        const avgX = pointsInCluster.reduce((sum, p) => sum + p.x, 0) / pointsInCluster.length;
+        const avgY = pointsInCluster.reduce((sum, p) => sum + p.y, 0) / pointsInCluster.length;
+        
+        return { ...centroid, x: avgX, y: avgY };
+      });
+      setCentroids(newCentroids);
     }
-  }, [step]);
+  }, [step, dataPoints, centroids]);
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
@@ -212,7 +249,7 @@ export default function ClusteringDemo() {
         {step === 0 && (
           <div>
             <strong>Données brutes :</strong> Nous avons des données de clients (âge, revenu) sans étiquettes.
-            L'objectif est de découvrir des groupes naturels dans ces données.
+            L&apos;objectif est de découvrir des groupes naturels dans ces données.
           </div>
         )}
         {step === 1 && (
@@ -224,13 +261,13 @@ export default function ClusteringDemo() {
         {step === 2 && (
           <div>
             <strong>Assignment :</strong> Chaque point est assigné au centroïde le plus proche.
-            Les couleurs indiquent l'appartenance aux clusters.
+            Les couleurs indiquent l&apos;appartenance aux clusters.
           </div>
         )}
         {step === 3 && (
           <div>
             <strong>Mise à jour :</strong> Les centroïdes se déplacent vers le centre de gravité
-            de leurs points assignés. C'est l'étape d'optimisation.
+            de leurs points assignés. C&apos;est l&apos;étape d&apos;optimisation.
           </div>
         )}
         {step === 4 && (
