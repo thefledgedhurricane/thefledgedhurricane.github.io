@@ -19,7 +19,7 @@ export default async function TeachingPage() {
   const jsonLd = generateJsonLd({
     type: 'WebPage',
   name: 'LMS — Enseignement',
-  url: `${process.env.NEXT_PUBLIC_SITE_URL}/teaching`,
+  url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://thefledgedhurricane.github.io'}/teaching`,
   description: 'Cours interactifs, leçons et quiz côté client (localStorage).',
   });
 

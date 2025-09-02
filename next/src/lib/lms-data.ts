@@ -173,13 +173,22 @@ export const courses: Course[] = [
         durationMinutes: 35,
         html:
           '<h2 class="text-2xl font-semibold mb-4">Moyenne, médiane, variance, écart-type</h2>' +
-          '<p class="mb-4"><strong>Moyenne</strong> x̄ = (1/n) Σ xᵢ. <strong>Variance</strong> s² = (1/n) Σ (xᵢ - x̄)². <strong>Écart-type</strong> s = √s².</p>' +
+          '<p class="mb-4">Soient des observations x₁, …, xₙ. <strong>Moyenne empirique</strong>: x̄ = (1/n) Σ xᵢ.<br/>' +
+          '<strong>Variance empirique</strong> (définition basique): s² = (1/n) Σ (xᵢ - x̄)²; <strong>écart-type</strong>: s = √s².</p>' +
+          '<p class="mb-4">Pour une <em>estimation sans biais</em> de la variance de la population, on utilise s²_unb = (1/(n-1)) Σ (xᵢ - x̄)² (correction de Bessel).</p>' +
+          '<h3 class="text-xl font-semibold mt-6 mb-2">Propriété clé</h3>' +
+          '<p class="mb-4">Décomposition: Var(X) = E[X²] − (E[X])². <em>Démonstration</em> (esquisse): développer E[(X−E[X])²].</p>' +
           '<h3 class="text-xl font-semibold mt-6 mb-2">Exemple numérique</h3>' +
-          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">Données: 2, 3, 9, 10\nMoyenne: (2+3+9+10)/4 = 6\nVariance: [(2-6)²+(3-6)²+(9-6)²+(10-6)²]/4 = (16+9+9+16)/4 = 12.5\nÉcart-type: √12.5 ≈ 3.54</pre>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">Données: 2, 3, 9, 10\nMoyenne: (2+3+9+10)/4 = 6\nVariance (n): [(2-6)²+(3-6)²+(9-6)²+(10-6)²]/4 = (16+9+9+16)/4 = 12.5\nVariance (n-1): 12.5 * 4/3 ≈ 16.67\nÉcart-type: √12.5 ≈ 3.54</pre>' +
           '<img src="/lms/distribution.svg" alt="Distribution gaussienne" class="my-4 max-w-full" />' +
+          '<h3 class="text-xl font-semibold mt-6 mb-2">Médiane, quantiles et robustesse</h3>' +
+          '<p class="mb-4">La <strong>médiane</strong> coupe l\'échantillon en deux. Les <em>quartiles</em> Q1 et Q3 définissent l\'intervalle interquartile (IQR=Q3−Q1). ' +
+          'Les <em>outliers</em> sont parfois identifiés au-delà de [Q1−1.5·IQR, Q3+1.5·IQR]. Le <strong>MAD</strong> (median absolute deviation) est une mesure robuste de dispersion.</p>' +
           '<div class="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded">' +
-          '<strong>Astuce:</strong> En présence d\'outliers, la <em>médiane</em> est plus robuste que la moyenne; l\'écart absolu médian (MAD) peut compléter l\'écart-type.' +
-          '</div>',
+          '<strong>Astuce:</strong> En présence d\'outliers, privilégier médiane/MAD. Théorème de Tchebychev: P(|X−μ| ≥ kσ) ≤ 1/k², valable sans hypothèse de normalité.' +
+          '</div>' +
+          '<details class="mt-4"><summary class="cursor-pointer font-medium">Démonstration (Var = E[X²]−(E[X])²)</summary>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">Var(X)=E[(X−E[X])²]=E[X²−2XE[X]+(E[X])²]=E[X²]−2E[X]E[X]+(E[X])²=E[X²]−(E[X])²</pre></details>',
         quiz: [
           {
             id: 'q1',
@@ -208,13 +217,17 @@ export const courses: Course[] = [
         title: 'Probabilités (rappels)',
         durationMinutes: 40,
         html:
-          '<h2 class="text-2xl font-semibold mb-4">Probabilités et Bayes</h2>' +
-          '<p class="mb-4">Le théorème de Bayes relie les probabilités inverses: P(A|B) = P(B|A)·P(A) / P(B). Il permet la mise à jour des croyances via l\'évidence.</p>' +
+          '<h2 class="text-2xl font-semibold mb-4">Probabilités: définitions et théorème de Bayes</h2>' +
+          '<p class="mb-4"><strong>Axiomes (Kolmogorov)</strong>: P(Ω)=1, P(A)≥0, et pour des événements disjoints A_i, P(⋃A_i)=ΣP(A_i). ' +
+          '<strong>Probabilité conditionnelle</strong>: P(A|B)=P(A∩B)/P(B) si P(B)>0. <strong>Loi des totaux</strong>: P(B)=Σ_i P(B|A_i)P(A_i).</p>' +
+          '<p class="mb-4"><strong>Bayes</strong>: P(A|B) = P(B|A)·P(A)/P(B). Dérive directement de la définition de P(A|B) et P(B|A).</p>' +
           '<h3 class="text-xl font-semibold mt-6 mb-2">Indépendance</h3>' +
-          '<p class="mb-4">A et B sont indépendants si P(A∩B) = P(A)P(B). Conditionnelle: P(A|C) et P(B|C) indépendants si P(A∩B|C)=P(A|C)P(B|C).</p>' +
-          '<h3 class="text-xl font-semibold mt-6 mb-2">Exemple médical</h3>' +
+          '<p class="mb-4">A et B sont indépendants si P(A∩B) = P(A)P(B). Indépendance conditionnelle: P(A∩B|C)=P(A|C)P(B|C).</p>' +
+          '<h3 class="text-xl font-semibold mt-6 mb-2">Exemple médical (démonstration chiffrée)</h3>' +
           '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">Prévalence P(Maladie)=1%\nSensibilité P(+) | Maladie = 99%\nSpécificité P(-) | Pas de maladie = 95%\nP(+) = 0.99*0.01 + 0.05*0.99 = 0.0594\nP(Maladie|+) = 0.99*0.01 / 0.0594 ≈ 16.7%</pre>' +
-          '<img src="/lms/bayes.svg" alt="Théorème de Bayes" class="my-4 max-w-full" />',
+          '<img src="/lms/bayes.svg" alt="Théorème de Bayes" class="my-4 max-w-full" />' +
+          '<details class="mt-2"><summary class="cursor-pointer font-medium">Esquisse de dérivation de Bayes</summary>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">P(A|B)=P(A∩B)/P(B)=P(B|A)P(A)/P(B)</pre></details>',
         quiz: [
           {
             id: 'q1',
@@ -324,14 +337,21 @@ export const courses: Course[] = [
         durationMinutes: 45,
         html:
           '<h2 class="text-2xl font-semibold mb-4">Régression linéaire</h2>' +
-          '<p class="mb-4">Modèle: ŷ = wᵀx + b. <strong>Coût MSE</strong>: J(w,b) = (1/n) Σ (ŷᵢ - yᵢ)².</p>' +
+          '<p class="mb-4"><strong>Modèle</strong>: ŷ = wᵀx + b. <strong>Coût MSE</strong>: J(w,b) = (1/n) Σ (ŷᵢ - yᵢ)².</p>' +
+          '<h3 class="text-xl font-semibold mt-6 mb-2">Solution analytique (équations normales)</h3>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">w* = (X^T X)^{-1} X^T y  \n(b inclus via une colonne de 1 dans X)</pre>' +
+          '<p class="mb-4">Dérive de la condition ∇J=0. Interprétation géométrique: projection orthogonale de y sur l\'espace engendré par les colonnes de X.</p>' +
           '<h3 class="text-xl font-semibold mt-6 mb-2">Dérivation du gradient</h3>' +
           '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">∂J/∂w = (2/n) Σ (ŷᵢ - yᵢ) xᵢ\n∂J/∂b = (2/n) Σ (ŷᵢ - yᵢ)</pre>' +
-          '<p class="mb-4"><strong>Descente de gradient</strong>: w ← w - α ∂J/∂w, b ← b - α ∂J/∂b. Normaliser les features accélère la convergence.</p>' +
+          '<p class="mb-4"><strong>Descente de gradient</strong>: w ← w − α ∂J/∂w, b ← b − α ∂J/∂b. Normaliser les features accélère la convergence.</p>' +
           '<img src="/lms/gradient-descent.svg" alt="Descente de gradient" class="my-4 max-w-full" />' +
+          '<h3 class="text-xl font-semibold mt-6 mb-2">Qualité d\'ajustement</h3>' +
+          '<p class="mb-4"><strong>R²</strong> = 1 − SS_res/SS_tot, avec SS_res=Σ(yᵢ−ŷᵢ)² et SS_tot=Σ(yᵢ−ȳ)². Attention au sur-apprentissage et aux variables corrélées (multicolinéarité).</p>' +
           '<div class="not-prose"><div data-demo="regression"></div></div>' +
           '<div class="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded">' +
-          'Choisir α (taux d\'apprentissage) avec soin: trop grand → divergence; trop petit → lenteur.</div>',
+          'Choisir α (taux d\'apprentissage) avec soin: trop grand → divergence; trop petit → lenteur. Préférer normalisation/standardisation et régularisation si besoin.</div>' +
+          '<details class="mt-4"><summary class="cursor-pointer font-medium">Exemple chiffré (mini-dataset)</summary>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">X=[1,2,3], y=[2,2.5,3.5]\nPente w ≈ 0.75, intercept b ≈ 1.25 (par les formules de covariance/variance)</pre></details>',
         quiz: [
           {
             id: 'q1',
@@ -362,10 +382,14 @@ export const courses: Course[] = [
         html:
           '<h2 class="text-2xl font-semibold mb-4">Régression logistique</h2>' +
           '<p class="mb-4">P(y=1|x) = σ(wᵀx+b) où σ(z)=1/(1+e^{-z}); <em>log-odds</em> = log(p/(1-p)) = wᵀx+b.</p>' +
+          '<p class="mb-4"><strong>Fonction de coût</strong> (log-loss/NLL): L = −(1/n) Σ [ yᵢ log pᵢ + (1−yᵢ) log(1−pᵢ) ], avec pᵢ=σ(wᵀxᵢ+b). ' +
+          'Gradient: ∂L/∂w = (1/n) Σ (pᵢ − yᵢ) xᵢ; ∂L/∂b = (1/n) Σ (pᵢ − yᵢ).</p>' +
           '<h3 class="text-xl font-semibold mt-6 mb-2">SVM linéaire</h3>' +
-          '<p class="mb-4">Maximise la marge; perte hinge max(0, 1 - y·(wᵀx)). Regularisation L2 courante.</p>' +
+          '<p class="mb-4">Maximise la marge; perte hinge max(0, 1 − y·(wᵀx)). <strong>Primal</strong>: min (1/2)||w||² + C Σ ξᵢ s.c. yᵢ(wᵀxᵢ+b) ≥ 1−ξᵢ, ξᵢ≥0. <strong>Dual</strong> exploite les produits scalaires (kernel).</p>' +
           '<h3 class="text-xl font-semibold mt-6 mb-2">Arbres et forêts</h3>' +
-          '<p class="mb-4">Critères: Gini, entropie. Ensemble: Random Forest (bagging), gradient boosting.</p>',
+          '<p class="mb-4">Critères: <strong>Gini</strong> = Σ p_k (1−p_k); <strong>Entropie</strong> = −Σ p_k log p_k. Ensembles: Random Forest (bagging), Gradient Boosting (additif séquentiel).</p>' +
+          '<details class="mt-4"><summary class="cursor-pointer font-medium">Exemple rapide (logistique 1D)</summary>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">x=[-1,0,1], y=[0,0,1]\nEntraînement par GD: w>0 et b≈0 séparent à x≈0</pre></details>',
         quiz: [
           { id: 'q1', question: 'Un SVM linéaire maximise…', options: [
               { id: 'a', text: 'La marge entre classes' },
@@ -423,12 +447,17 @@ export const courses: Course[] = [
         html:
           '<h2 class="text-2xl font-semibold mb-4">k-means</h2>' +
           '<p class="mb-4">Objectif: minimiser la <em>somme des distances intra-clusters</em>. Algorithme: (1) init des centres, (2) assignation des points au centre le plus proche, (3) recalcul des centres (moyenne), (4) répéter jusqu\'à convergence.</p>' +
-          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">Critère J = Σ_k Σ_{x∈C_k} \|x - μ_k\|²</pre>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">Critère J = Σ_k Σ_{x∈C_k} \|x − μ_k\|²</pre>' +
+          '<p class="mb-4">Chaque étape (assignation puis mise à jour) ne peut qu\'<em>augmenter</em> ou <em>maintenir</em> la qualité (en fait diminuer J); ceci assure une convergence vers un optimum local (algorithme de Lloyd).</p>' +
           '<div class="not-prose"><div data-demo="kmeans"></div></div>' +
+          '<h3 class="text-xl font-semibold mt-6 mb-2">Initialisation et évaluation</h3>' +
+          '<p class="mb-4"><strong>k-means++</strong> améliore l\'initialisation. Mesure de qualité: <em>silhouette</em>, WCSS, ou validation externe (ARI, NMI).</p>' +
           '<h3 class="text-xl font-semibold mt-6 mb-2">DBSCAN</h3>' +
-          '<p class="mb-4">Méthode par densité: deux hyperparamètres <code>eps</code> (rayon) et <code>minPts</code>. Découvre des formes arbitraires et marque le bruit; n\'exige pas k.</p>' +
+          '<p class="mb-4">Méthode par densité: hyperparamètres <code>eps</code> (rayon) et <code>minPts</code>. Découvre des formes arbitraires et marque le bruit; n\'exige pas k.</p>' +
           '<div class="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded">' +
-          'k-means est sensible aux outliers et suppose des clusters sphériques de taille comparable; DBSCAN est sensible au choix de eps/minPts.</div>',
+          'k-means est sensible aux outliers et suppose des clusters sphériques de taille comparable; DBSCAN est sensible au choix de eps/minPts.</div>' +
+          '<details class="mt-4"><summary class="cursor-pointer font-medium">Exemple 2D</summary>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">Deux nuages gaussiens centrés en (0,0) et (3,3) avec variance ≈ I\nPour k=2, k-means retrouve μ₁≈(0,0), μ₂≈(3,3)</pre></details>',
         quiz: [
           { id: 'q1', question: 'DBSCAN nécessite…', options: [
               { id: 'a', text: 'Le nombre de clusters k' },
@@ -449,12 +478,17 @@ export const courses: Course[] = [
         html:
           '<h2 class="text-2xl font-semibold mb-4">PCA (Analyse en composantes principales)</h2>' +
           '<p class="mb-4">PCA projette les données sur des axes (vecteurs propres) maximisant la variance. Étapes: centrer X, calculer la covariance S = (1/n) XᵀX, diagonaliser S = VΛVᵀ, garder les premiers vecteurs propres (cols de V).</p>' +
+          '<p class="mb-4"><strong>Erreur de reconstruction</strong> (k composantes): E_k = \|X − X_k\|_F². Le <em>taux de variance expliquée</em> cumulé est Σ_{i≤k} λ_i / Σ_j λ_j.</p>' +
           '<img src="/lms/pca.svg" alt="PCA" class="my-4 max-w-full" />' +
+          '<h3 class="text-xl font-semibold mt-6 mb-2">Lien SVD</h3>' +
+          '<p class="mb-4">Avec X centré: S = (1/n) XᵀX. La SVD X = UΣVᵀ ⇒ colonnes de V = composantes principales; valeurs propres λᵢ = Σᵢ² / n.</p>' +
           '<h3 class="text-xl font-semibold mt-6 mb-2">t-SNE / UMAP</h3>' +
           '<p class="mb-4">t-SNE préserve les voisinages locaux via des probabilités symétrisées et minimise la divergence KL; UMAP repose sur une théorie topologique (simplicial sets) pour une structure globale plus stable.</p>' +
           '<img src="/lms/tsne.svg" alt="t-SNE" class="my-4 max-w-full" />' +
           '<div class="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded">' +
-          'PCA est linéaire et interprétable; t-SNE/UMAP sont non-linéaires et surtout utiles pour la visualisation (attention aux hyperparamètres).</div>',
+          'PCA est linéaire et interprétable; t-SNE/UMAP sont non-linéaires et surtout utiles pour la visualisation (attention aux hyperparamètres).</div>' +
+          '<details class="mt-4"><summary class="cursor-pointer font-medium">Exemple (variance expliquée)</summary>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">λ = [5, 2, 1, 0.5] ⇒ Var expliquée à k=2: (5+2)/(5+2+1+0.5) ≈ 77.8%</pre></details>',
         quiz: [
           {
             id: 'q1',
@@ -520,6 +554,8 @@ export const courses: Course[] = [
         durationMinutes: 40,
         html:
           '<p class="mb-4">Convolutions, kernels, padding, stride; pooling max/avg.</p>' +
+          '<p class="mb-4"><strong>Taille de sortie</strong> pour une dimension: out = ⌊(in + 2·padding − kernel)/stride⌋ + 1. ' +
+          'Le <em>champ réceptif</em> croît avec la profondeur et le stride.</p>' +
           '<img src="/lms/cnn.svg" alt="CNN" class="my-4 max-w-full" />',
         quiz: [
           { id: 'q1', question: 'Le pooling…', options: [
@@ -602,7 +638,13 @@ export const courses: Course[] = [
           '<img src="/lms/a-star.svg" alt="A* sur grille" class="my-4 max-w-full" />' +
           '<div class="not-prose"><div data-demo="astar"></div></div>' +
           '<div class="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded">' +
-          'Complexité ~ O(b^d) en pire cas. Une bonne heuristique réduit drastiquement l\'espace exploré.</div>',
+          'Complexité ~ O(b^d) en pire cas. Une bonne heuristique réduit drastiquement l\'espace exploré.</div>' +
+          '<details class="mt-4"><summary class="cursor-pointer font-medium">Esquisse de preuve (optimalité)</summary>' +
+          '<p class="mb-4">Si h est admissible, A* ne ferme jamais un chemin sous-optimal vers le but avant d\'avoir exploré le chemin optimal: lorsque le but est extrait de open, son g est minimal possible.</p>' +
+          '<p class="mb-2">Si h est <em>consistante</em>, f est non décroissante le long d\'un chemin ⇒ pas besoin de diminuer les clés des nœuds déjà dans closed.</p>' +
+          '</details>' +
+          '<details class="mt-2"><summary class="cursor-pointer font-medium">Exemple pas-à-pas (grille 5×5)</summary>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">Start (0,0), Goal (4,4), coût 1 par mouvement, h=Manhattan.\nLes nœuds s\'étendent le long de la diagonale; les obstacles détournent la trajectoire mais h reste admissible.</pre></details>',
         quiz: [
           { id: 'q1', question: 'La fonction d\'évaluation d\'A* est…', options: [
               { id: 'a', text: 'f(n)=h(n)' },
@@ -637,7 +679,11 @@ export const courses: Course[] = [
           '<img src="/lms/bellman.svg" alt="Équation de Bellman" class="my-4 max-w-full" />' +
           '<h3 class="text-xl font-semibold mt-6 mb-2">Itération sur la valeur</h3>' +
           '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">V_{k+1}(s) ← max_a [ R(s,a) + γ Σ_{s\'} P(s\'|s,a) V_k(s\') ]</pre>' +
-          '<img src="/lms/value-iteration.svg" alt="Value Iteration" class="my-4 max-w-full" />',
+          '<img src="/lms/value-iteration.svg" alt="Value Iteration" class="my-4 max-w-full" />' +
+          '<h3 class="text-xl font-semibold mt-6 mb-2">Fonctions Q et itération de politique</h3>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">Q*(s,a) = R(s,a) + γ Σ_{s\'} P(s\'|s,a) max_{a\'} Q*(s\',a\')\nPolicy Iteration: (1) évaluation de π, (2) amélioration: π(s) ← argmax_a Q^π(s,a)</pre>' +
+          '<details class="mt-2"><summary class="cursor-pointer font-medium">Exemple (Gridworld)</summary>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">Récompense −1 par pas, +0 au but. γ=0.9.\nValue Iteration converge en quelques itérations vers une politique qui suit la plus courte trajectoire.</pre></details>',
         quiz: [
           { id: 'q1', question: 'Quelle est la forme de Bellman optimalité pour V* ?', options: [
               { id: 'a', text: 'V*(s) = Σ P(s\'|s) V*(s\')' },
@@ -651,8 +697,11 @@ export const courses: Course[] = [
         title: 'Q-learning et exploration/exploitation',
         durationMinutes: 45,
         html:
-          '<p class="mb-4">Mise à jour: Q(s,a) ← Q(s,a) + α[r + γ maxₐ\' Q(s\',a\') − Q(s,a)]. ε-greedy.</p>' +
-          '<img src="/lms/q-learning.svg" alt="Q-learning" class="my-4 max-w-full" />',
+          '<p class="mb-4"><strong>Mise à jour</strong>: Q(s,a) ← Q(s,a) + α [ r + γ max_{a\'} Q(s\',a\') − Q(s,a) ].<br/>Stratégie d\'exploration: <em>ε-greedy</em> (choisir au hasard avec proba ε, sinon argmax).</p>' +
+          '<p class="mb-4">Convergence (tabulaire) si chaque (s,a) est visité infiniment souvent, α_t vérifie Σ α_t = ∞ et Σ α_t² < ∞, et γ∈[0,1).</p>' +
+          '<img src="/lms/q-learning.svg" alt="Q-learning" class="my-4 max-w-full" />' +
+          '<details class="mt-2"><summary class="cursor-pointer font-medium">Exemple (table Q initialisée à 0)</summary>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">Épisode 1: transitions aléatoires (ε élevé) → premières récompenses propagées.\nÉpisodes suivants: ε décroît, la politique devient plus exploitante.</pre></details>',
         quiz: [
           { id: 'q1', question: 'Le paramètre ε contrôle…', options: [
               { id: 'a', text: 'Le taux d\'apprentissage' },

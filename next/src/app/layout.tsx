@@ -10,7 +10,8 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['300','400','500','600','
 const siteConfig = {
   name: process.env.NEXT_PUBLIC_SITE_NAME || 'Portfolio',
   description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || 'Personal portfolio showcasing projects and skills',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://localhost:3000',
+  // Par défaut, pointer vers le domaine GitHub Pages (utile si la variable d'env n'est pas fournie en CI)
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://thefledgedhurricane.github.io',
 };
 
 export const metadata: Metadata = {
@@ -23,9 +24,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Portfolio Owner' }],
   creator: 'Portfolio Owner',
   metadataBase: new URL(siteConfig.url),
-  alternates: {
-    canonical: '/',
-  },
+  // Laisser chaque page définir sa canonical si nécessaire
   openGraph: {
     type: 'website',
     locale: 'en_US',
