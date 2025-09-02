@@ -17,9 +17,10 @@ export type Lesson = {
   id: string; // slug-friendly
   title: string;
   durationMinutes?: number;
-  // For simplicity, lesson content is trusted HTML; it's local/static in the repo.
-  // In a real app, prefer a markdown renderer and sanitize.
-  html: string;
+  // Content is now loaded from Markdown files
+  contentFile?: string; // optional: custom filename, defaults to id
+  // Fallback inline HTML for lessons not yet migrated
+  html?: string;
   quiz?: QuizQuestion[];
   passThreshold?: number; // seuil de passage spécifique à cette leçon (pour déverrouiller la suivante)
 };
@@ -51,12 +52,7 @@ export const courses: Course[] = [
         id: 'fondamentaux',
         title: 'Fondamentaux et histoire',
         durationMinutes: 25,
-        html:
-          '<h2 class="text-2xl font-semibold mb-4">Fondamentaux</h2>' +
-          '<p class="mb-4">L\'IA vise à créer des systèmes capables d\'effectuer des tâches requérant normalement l\'intelligence humaine.</p>' +
-          '<ul class="list-disc pl-6 mb-4"><li>Symbolique vs. Apprentissage</li><li>Supervisé, non supervisé, renforcement</li><li>Applications réelles</li></ul>' +
-          '<div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">' +
-          '<strong>Note:</strong> Cette leçon est 100% front-end, les progrès sont enregistrés dans votre navigateur.</div>',
+        contentFile: 'intro-ia-fondamentaux',
         quiz: [
           {
             id: 'q1',
@@ -75,16 +71,7 @@ export const courses: Course[] = [
         id: 'types-ml',
         title: "Types d'apprentissage",
         durationMinutes: 30,
-        html:
-          '<h2 class="text-2xl font-semibold mb-4">Supervisé / Non supervisé / Renforcement</h2>' +
-          '<p class="mb-4">Chaque paradigme répond à des besoins distincts et s\'appuie sur des données différemment.</p>' +
-          '<ul class="list-disc pl-6 mb-4">' +
-          '<li><strong>Supervisé</strong>: entrainement avec des <em>labels</em>. Ex: régression de prix, classification spam.</li>' +
-          '<li><strong>Non supervisé</strong>: pas de labels; découverte de structure. Ex: clustering clientèles, réduction de dimension.</li>' +
-          '<li><strong>Renforcement</strong>: agent qui apprend par essai/erreur via récompenses. Ex: contrôle, jeux.</li>' +
-          '</ul>' +
-          '<div class="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded">' +
-          'Choix du paradigme = nature des données + objectif métier (prédire, segmenter, agir).</div>',
+        contentFile: 'intro-ia-types-ml',
         quiz: [
           {
             id: 'q1',
@@ -99,20 +86,52 @@ export const courses: Course[] = [
         ],
       },
       {
+        id: 'algorithmes-recherche',
+        title: 'Algorithmes de recherche et optimisation',
+        durationMinutes: 45,
+        contentFile: 'algorithmes-recherche-optimisation',
+        quiz: [
+          {
+            id: 'q1',
+            question: 'Quelle propriété garantit l\'optimalité de A* ?',
+            options: [
+              { id: 'a', text: 'Heuristique admissible' },
+              { id: 'b', text: 'Heuristique rapide à calculer' },
+              { id: 'c', text: 'Heuristique constante' },
+            ],
+            correctOptionId: 'a',
+            explanation: 'Une heuristique admissible ne surestime jamais le coût réel, garantissant l\'optimalité de A*.',
+          },
+          {
+            id: 'q2',
+            question: 'Quel algorithme est le mieux adapté pour éviter les maxima locaux ?',
+            options: [
+              { id: 'a', text: 'Montée de gradient simple' },
+              { id: 'b', text: 'Recuit simulé' },
+              { id: 'c', text: 'Recherche en largeur' },
+            ],
+            correctOptionId: 'b',
+            explanation: 'Le recuit simulé accepte temporairement des solutions dégradantes, permettant d\'échapper aux maxima locaux.',
+          },
+        ],
+      },
+      {
         id: 'cas-usage',
         title: "Cas d'usage",
         durationMinutes: 20,
         html:
-          '<h2 class="text-2xl font-semibold mb-4">Applications</h2>' +
-          '<ul class="list-disc pl-6 mb-4">' +
-          '<li><strong>Santé</strong>: triage, imagerie, aide au diagnostic.</li>' +
-          '<li><strong>Industrie</strong>: maintenance prédictive, contrôle qualité visuel.</li>' +
-          '<li><strong>Finance</strong>: scoring, détection de fraude, market making.</li>' +
-          '<li><strong>Langage</strong>: assistants, résumé, RAG, traduction.</li>' +
-          '<li><strong>Vision</strong>: détection, suivi, SLAM.</li>' +
-          '</ul>' +
+          '<h2 class="text-2xl font-semibold mb-4">Cas d\'usage majeurs</h2>' +
+          '<h3 class="text-xl font-semibold mt-2 mb-1">Santé</h3>' +
+          '<p class="mb-3">Imagerie (classification, détection d\'anomalies), aide au diagnostic (scores calibrés), triage. ' +
+          'Contraintes: explicabilité, biais de sélection, évaluation clinique.</p>' +
+          '<h3 class="text-xl font-semibold mt-2 mb-1">Industrie</h3>' +
+          '<p class="mb-3">Maintenance prédictive (séries temporelles), contrôle visuel (défauts), optimisation (RL). Données déséquilibrées et dérive fréquentes.</p>' +
+          '<h3 class="text-xl font-semibold mt-2 mb-1">Finance</h3>' +
+          '<p class="mb-3">Scoring (AUC/PR), fraude (anomalies, graphes), market making (RL). Exigences réglementaires, robustesse et drift monitoring.</p>' +
+          '<h3 class="text-xl font-semibold mt-2 mb-1">Langage & Vision</h3>' +
+          '<p class="mb-3">Assistants, résumé, RAG, traduction; en vision: détection/segmentation/suivi. Les <em>modèles fondamentaux</em> unifient plusieurs tâches.</p>' +
           '<div class="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded">' +
-          'Clés de succès: qualité des données, métriques adaptées, déploiement fiable, monitoring.</div>',
+          'Clés de succès: qualité/volume des données, métriques liées au coût métier, déploiement fiable, surveillance post-prod, gouvernance.</div>',
       },
     ],
   },
@@ -256,11 +275,22 @@ export const courses: Course[] = [
         title: 'Distributions usuelles',
         durationMinutes: 35,
         html:
-          '<h2 class="text-2xl font-semibold mb-4">Bernoulli, Binomiale, Normale</h2>' +
-          '<ul class="list-disc pl-6 mb-4"><li><strong>Bernoulli(p)</strong>: succès (1) ou échec (0) avec P(1)=p.</li><li><strong>Binomiale(n,p)</strong>: somme de n Bernoulli; moyenne np, variance np(1-p).</li><li><strong>Normale(μ,σ²)</strong>: distribution continue en cloche; ~centrale en statistique.</li></ul>' +
+          '<h2 class="text-2xl font-semibold mb-4">Bernoulli, Binomiale, Poisson, Exponentielle, Normale</h2>' +
+          '<ul class="list-disc pl-6 mb-4">' +
+          '<li><strong>Bernoulli(p)</strong>: succès (1) / échec (0), E[X]=p, Var[X]=p(1−p).</li>' +
+          '<li><strong>Binomiale(n,p)</strong>: somme de n Bernoulli; E[np], Var[np(1−p)].</li>' +
+          '<li><strong>Poisson(λ)</strong>: nombre d\'événements rares par unité; P(X=k)=e^{−λ}λ^k/k!, E=Var=λ.</li>' +
+          '<li><strong>Exponentielle(λ)</strong>: temps d\'attente i.i.d.; f(t)=λe^{−λt}, mémoire sans effet, E[1/λ], Var[1/λ²].</li>' +
+          '<li><strong>Normale(μ,σ²)</strong>: continue en cloche; centrée et réduite N(0,1) après standardisation.</li>' +
+          '</ul>' +
           '<img src="/lms/gaussian.svg" alt="Courbe en cloche" class="my-4 max-w-full" />' +
+          '<h3 class="text-xl font-semibold mt-6 mb-2">Loi des grands nombres (LGN)</h3>' +
+          '<p class="mb-4">La moyenne empirique x̄ converge en probabilité vers μ lorsque n→∞ pour des variables i.i.d. d\'espérance finie.</p>' +
+          '<h3 class="text-xl font-semibold mt-6 mb-2">Théorème central limite (TCL)</h3>' +
+          '<p class="mb-4">Pour des variables i.i.d. de variance finie, √n (x̄−μ) ⇒ N(0,σ²). ' +
+          'Le TCL explique l\'usage généralisé des intervalles de confiance basés sur la normale.</p>' +
           '<div class="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded">' +
-          'Le <em>théorème central limite</em> justifie l\'apparition fréquente de la normale: la somme de variables indépendantes tend vers une normale.</div>',
+          'Choisir la bonne loi = nature de la variable (binaire, compte, durée) + hypothèses (i.i.d., mémoire sans effet, variance finie…).</div>',
         quiz: [
           {
             id: 'q1',
@@ -727,8 +757,11 @@ export const courses: Course[] = [
         durationMinutes: 35,
         html:
           '<h2 class="text-2xl font-semibold mb-4">Embeddings et sous-mots</h2>' +
-          '<p class="mb-4"><strong>word2vec</strong>: objectifs CBOW/Skip-gram via softmax négatif ou NCE; vecteurs qui capturent des analogies. <strong>BPE</strong> segmente en sous-unités fréquentes, utile pour OOV et morphologie.</p>' +
-          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">Skip-gram: max Σ_t Σ_{c∈C_t} log P(w_c | w_t)\nP(w_c|w_t) = exp(v_{w_c}^T v_{w_t}) / Σ_j exp(v_j^T v_{w_t})</pre>',
+          '<p class="mb-4"><strong>word2vec</strong>: CBOW/Skip-gram apprennent des vecteurs continus capturant sémantique et analogies via objectifs de probabilité conditionnelle.</p>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">Skip-gram: max Σ_t Σ_{c∈C_t} log P(w_c | w_t)\nSoftmax: P(w_c|w_t) = exp(v_{w_c}^T v_{w_t}) / Σ_j exp(v_j^T v_{w_t})\nNégative sampling: max Σ_t [ log σ(v_{w_t}^T v_{w_c}) + Σ_{j=1..k} E_{w_n\sim P_n} log σ(−v_{w_t}^T v_{w_n}) ]</pre>' +
+          '<p class="mb-4"><strong>BPE (Byte-Pair Encoding)</strong>: algorithme de fusion itérative de paires de symboles les plus fréquentes jusque taille de vocabulaire cible.</p>' +
+          '<ol class="list-decimal pl-6 mb-4"><li>Initialiser avec vocabulaire de caractères.</li><li>Compter les paires adjacentes; fusionner la plus fréquente.</li><li>Répéter jusqu\'à atteindre la taille désirée.</li></ol>' +
+          '<p class="mb-4">Avantages: gère les mots rares/OOV, capture la morphologie; compromis: séquences plus longues, granularité.</p>',
         quiz: [
           { id: 'q1', question: 'Le but de word2vec est de…', options: [
               { id: 'a', text: 'Apprendre des vecteurs continus pour les mots' },
@@ -789,11 +822,14 @@ export const courses: Course[] = [
         durationMinutes: 40,
         html:
           '<h2 class="text-2xl font-semibold mb-4">Détection d\'objets</h2>' +
-          '<p class="mb-4">Faster R-CNN (propositions régionales), YOLO (full-convolutionnel one-shot). <strong>IoU</strong> mesure le recouvrement prédiction-vérité; des <em>anchors</em> multi-échelles facilitent la régression de boîtes.</p>' +
+          '<p class="mb-4">Faster R-CNN (propositions régionales), YOLO (one-stage). <strong>IoU</strong> mesure le recouvrement prédiction-vérité; des <em>anchors</em> multi-échelles facilitent la régression de boîtes.</p>' +
           '<img src="/lms/iou.svg" alt="IoU" class="my-4 max-w-full" />' +
           '<img src="/lms/anchors.svg" alt="Anchors" class="my-4 max-w-full" />' +
+          '<h3 class="text-xl font-semibold mt-6 mb-2">NMS (Non-Maximum Suppression)</h3>' +
+          '<pre class="bg-gray-900 text-gray-100 p-4 rounded overflow-auto">Trier les boîtes par score décroissant\nPour chaque boîte b:\n  Ajouter b au set final si son IoU avec les boîtes gardées &lt; seuil\n  Sinon la supprimer\nRetourner les boîtes gardées</pre>' +
+          '<p class="mb-4">Variants: Soft-NMS (réduit les scores au lieu de supprimer), NMS par classe, NMS multi-échelles.</p>' +
           '<h3 class="text-xl font-semibold mt-6 mb-2">Segmentation</h3>' +
-          '<p class="mb-4">U-Net/DeepLab pour la segmentation sémantique; métriques: IoU moyen, Dice.</p>',
+          '<p class="mb-4">U-Net/DeepLab pour la segmentation sémantique; métriques: IoU moyen, Dice. \'Instance segmentation\' (Mask R-CNN) prédit des masques par instance.</p>',
         quiz: [
           { id: 'q1', question: 'L\'IoU mesure…', options: [
               { id: 'a', text: 'Le score de classification' },
