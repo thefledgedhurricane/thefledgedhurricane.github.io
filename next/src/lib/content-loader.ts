@@ -1,54 +1,36 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { remark } from 'remark';
-import html from 'remark-html';
-
-const contentDirectory = path.join(process.cwd(), 'content');
-
-export interface LessonContent {
+export type LessonContent = {
   content: string;
-  metadata?: {
-    [key: string]: any;
+  metadata: {
+    title?: string;
+    description?: string;
+    difficulty?: string;
+    estimatedTime?: string;
+    keywords?: string[];
   };
-}
+};
 
+/**
+ * Load lesson content from the API route
+ */
 export async function loadLessonContent(lessonId: string): Promise<LessonContent> {
   try {
-    const filePath = path.join(contentDirectory, 'lessons', `${lessonId}.md`);
+    const response = await fetch(`/api/lessons?id=${encodeURIComponent(lessonId)}`);
     
-    if (!fs.existsSync(filePath)) {
-      // Fallback to inline content if file doesn't exist
-      return { content: `<p>Contenu en cours de migration pour ${lessonId}</p>` };
+    if (!response.ok) {
+      throw new Error(`Failed to load lesson: ${response.statusText}`);
     }
-
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const { data, content } = matter(fileContents);
     
-    // Process markdown to HTML
-    const processedContent = await remark()
-      .use(html, { sanitize: false })
-      .process(content);
-    
-    return {
-      content: processedContent.toString(),
-      metadata: data,
-    };
+    const lessonContent: LessonContent = await response.json();
+    return lessonContent;
   } catch (error) {
-    console.error(`Error loading lesson content for ${lessonId}:`, error);
-    return { content: `<p>Erreur de chargement du contenu pour ${lessonId}</p>` };
+    console.error('Error loading lesson content:', error);
+    // Return fallback content
+    return {
+      content: '<p>Erreur de chargement du contenu de la lecon.</p>',
+      metadata: {
+        title: 'Erreur',
+        description: 'Le contenu n a pas pu etre charge.',
+      },
+    };
   }
-}
-
-export function getAllLessonIds(): string[] {
-  const lessonsDirectory = path.join(contentDirectory, 'lessons');
-  
-  if (!fs.existsSync(lessonsDirectory)) {
-    return [];
-  }
-  
-  const fileNames = fs.readdirSync(lessonsDirectory);
-  return fileNames
-    .filter(fileName => fileName.endsWith('.md'))
-    .map(fileName => fileName.replace(/\.md$/, ''));
 }
