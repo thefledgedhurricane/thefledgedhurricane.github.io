@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import type { LessonWithContent } from '@/lib/lms-data';
+import type { LessonWithContent, Course } from '@/lib/lms-data';
 import { markLessonCompleted } from '@/lib/lms-storage';
 import Quiz from './Quiz';
+import LessonNavigation from './LessonNavigation';
 import dynamic from 'next/dynamic';
 
 // Démos montées dynamiquement pour éviter SSR
@@ -12,13 +13,18 @@ const Demos: Record<string, any> = {
   'kmeans': dynamic(() => import('./demos/KMeansDemo'), { ssr: false }),
   'regression': dynamic(() => import('./demos/RegressionDemo'), { ssr: false }),
   'astar': dynamic(() => import('./demos/AStarDemo'), { ssr: false }),
+  'ai-history': dynamic(() => import('./demos/AIHistoryDemo'), { ssr: false }),
+  'supervised-learning': dynamic(() => import('./demos/SupervisedLearningDemo'), { ssr: false }),
+  'clustering': dynamic(() => import('./demos/ClusteringDemo'), { ssr: false }),
 };
 
 export default function LessonViewer({
   courseId,
+  course,
   lesson,
 }: {
   courseId: string;
+  course: Course;
   lesson: LessonWithContent;
 }) {
   const [content, setContent] = useState<string>('');
@@ -54,12 +60,35 @@ export default function LessonViewer({
   }, [lesson.preloadedContent, lesson.html]);
 
   useEffect(() => {
-    // monter les démos référencées par des placeholders <div data-demo="id"></div>
+    // Handle Mermaid diagrams and interactive demos
     if (loading || !content) return;
 
     const container = document.getElementById('lesson-html');
     if (!container) return;
 
+    // Handle Mermaid diagrams
+    const mermaidElements = container.querySelectorAll('[data-mermaid]');
+    mermaidElements.forEach((element, index) => {
+      const diagramId = (element as HTMLElement).dataset.mermaid;
+      if (!diagramId) return;
+
+      // Create a placeholder for the Mermaid diagram
+      const mermaidContainer = document.createElement('div');
+      mermaidContainer.className = 'mermaid-diagram my-6 flex justify-center';
+      mermaidContainer.innerHTML = `
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
+          <div class="flex items-center justify-center p-8">
+            <div class="text-center">
+              <div class="animate-pulse bg-gray-200 dark:bg-gray-700 h-32 w-64 rounded mb-2"></div>
+              <div class="text-sm text-gray-500">Diagramme: ${diagramId}</div>
+            </div>
+          </div>
+        </div>
+      `;
+      element.replaceWith(mermaidContainer);
+    });
+
+    // Handle demo placeholders
     const demoPlaceholders = container.querySelectorAll('[data-demo]');
     const roots: any[] = [];
 
@@ -112,6 +141,8 @@ export default function LessonViewer({
           questions={lesson.quiz}
         />
       )}
+
+      <LessonNavigation course={course} currentLesson={lesson} />
     </div>
   );
 }

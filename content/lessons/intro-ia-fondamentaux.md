@@ -8,228 +8,490 @@ keywords: ["intelligence artificielle", "histoire", "approches", "symbolique", "
 
 # Fondamentaux de l'Intelligence Artificielle
 
-## Introduction
+## 🎯 Objectifs d'apprentissage
 
-L'Intelligence Artificielle (IA) représente l'un des domaines les plus fascinants et révolutionnaires de l'informatique moderne. Cette discipline vise à créer des systèmes capables de reproduire, voire de dépasser, certaines capacités cognitives humaines.
-
-## Histoire et évolution
-
-### Les précurseurs (1940-1956)
-
-L'IA trouve ses racines dans les travaux pionniers de plusieurs visionnaires :
-
-- **Alan Turing (1950)** : Propose le célèbre "Test de Turing" comme critère d'intelligence artificielle
-- **John von Neumann** : Développe l'architecture des ordinateurs modernes
-- **Norbert Wiener** : Fonde la cybernétique, étudiant les systèmes de contrôle et de communication
-
-### L'âge d'or symbolique (1956-1980)
-
-**1956 : Naissance officielle**
-La conférence de Dartmouth, organisée par John McCarthy, marque la naissance officielle de l'IA comme discipline académique.
-
-**Réalisations marquantes** :
-- **Logic Theorist (1956)** : Premier programme d'IA capable de démontrer des théorèmes mathématiques
-- **ELIZA (1966)** : Chatbot simulant un thérapeute rogérien
-- **Shakey (1969)** : Premier robot mobile autonome
-
-**Approche dominante** : IA symbolique basée sur la manipulation de symboles et règles logiques.
-
-### Les hivers de l'IA (1980-1990)
-
-Périodes de désillusion due aux limitations des approches symboliques :
-- Problème de l'explosion combinatoire
-- Difficulté à gérer l'incertitude et le bruit
-- Manque de données d'entraînement massives
-
-### Renaissance statistique (1990-présent)
-
-**Facteurs de renouveau** :
-- Puissance de calcul exponentiellement croissante
-- Disponibilité de grandes bases de données
-- Algorithmes d'apprentissage automatique performants
-
-**Jalons récents** :
-- **Deep Blue (1997)** : Bat le champion du monde d'échecs Garry Kasparov
-- **Watson (2011)** : Remporte le jeu télévisé Jeopardy!
-- **AlphaGo (2016)** : Bat le champion du monde de Go
-- **GPT et LLMs (2020+)** : Révolution du traitement du langage naturel
-
-## Approches fondamentales
-
-### 1. Intelligence Artificielle Symbolique
-
-**Principe** : Représentation explicite des connaissances sous forme de symboles et règles logiques.
-
-**Caractéristiques** :
-- Raisonnement déductif basé sur des règles
-- Représentation explicite des connaissances
-- Interprétabilité élevée des décisions
-
-**Exemples d'applications** :
-- Systèmes experts (diagnostic médical, conseil juridique)
-- Planification automatique
-- Démonstration de théorèmes
-
-**Avantages** :
-- Transparence du raisonnement
-- Capacité d'explication
-- Performance dans des domaines bien définis
-
-**Limitations** :
-- Difficulté à gérer l'incertitude
-- Acquisition coûteuse des connaissances
-- Fragilité face aux données bruitées
-
-### 2. Intelligence Artificielle Statistique
-
-**Principe** : Apprentissage de patterns à partir de données sans programmation explicite des règles.
-
-**Fondements mathématiques** :
-- Théorie des probabilités
-- Optimisation numérique
-- Analyse statistique
-
-**Paradigmes principaux** :
-- **Apprentissage supervisé** : Prédiction à partir d'exemples étiquetés
-- **Apprentissage non supervisé** : Découverte de structures cachées
-- **Apprentissage par renforcement** : Optimisation par essais-erreurs
-
-**Avantages** :
-- Robustesse au bruit
-- Capacité de généralisation
-- Performance sur données complexes (images, texte, audio)
-
-**Applications modernes** :
-- Vision par ordinateur
-- Traitement du langage naturel
-- Systèmes de recommandation
-- Véhicules autonomes
-
-## Architecture d'un projet IA
-
-### 1. Analyse du problème
-
-**Questions clés** :
-- Quel type de problème ? (classification, régression, optimisation)
-- Quelles données sont disponibles ?
-- Quelles sont les contraintes de performance ?
-- Niveau d'interprétabilité requis ?
-
-### 2. Collecte et préparation des données
-
-**Étapes critiques** :
-- **Acquisition** : Sources, méthodes de collecte
-- **Nettoyage** : Gestion des valeurs manquantes, outliers
-- **Transformation** : Normalisation, encodage, feature engineering
-- **Division** : Ensembles d'entraînement/validation/test
-
-**Règle des 80/20** : 80% du temps consacré aux données, 20% aux algorithmes.
-
-### 3. Sélection et entraînement du modèle
-
-**Critères de choix** :
-- Nature des données (structurées/non structurées)
-- Taille du dataset
-- Contraintes computationnelles
-- Exigences d'interprétabilité
-
-**Processus itératif** :
-1. Baseline simple
-2. Modèles plus complexes
-3. Optimisation des hyperparamètres
-4. Validation croisée
-
-### 4. Évaluation et déploiement
-
-**Métriques d'évaluation** :
-- Classification : Précision, Rappel, F1-Score, AUC-ROC
-- Régression : MAE, RMSE, R²
-- Clustering : Silhouette score, Inertie
-
-**Déploiement** :
-- Infrastructure (cloud, edge computing)
-- Monitoring et maintenance
-- Mise à jour continue des modèles
-
-## Défis actuels et limitations
-
-### 1. Biais et équité
-
-**Sources de biais** :
-- Données d'entraînement non représentatives
-- Algorithmes perpétuant des discriminations historiques
-- Annotations humaines subjectives
-
-**Mitigation** :
-- Audits réguliers des modèles
-- Techniques de débiaisage
-- Diversité des équipes de développement
-
-### 2. Explicabilité et interprétabilité
-
-**Problématique** : Les modèles performants (réseaux de neurones profonds) sont souvent des "boîtes noires".
-
-**Approches** :
-- **LIME** : Approximations locales interprétables
-- **SHAP** : Valeurs de Shapley pour l'importance des features
-- **Attention mechanisms** : Visualisation des zones d'intérêt
-
-### 3. Robustesse et sécurité
-
-**Vulnérabilités** :
-- Attaques adversariales (exemples perturbés)
-- Empoisonnement des données d'entraînement
-- Extraction de modèles propriétaires
-
-### 4. Consommation énergétique
-
-**Impact environnemental** :
-- Entraînement de grands modèles : émissions carbone considérables
-- Inférence à grande échelle : consommation énergétique continue
-
-**Solutions émergentes** :
-- Modèles plus efficaces (pruning, quantization)
-- Hardware spécialisé (TPUs, neuromorphic chips)
-- Apprentissage fédéré
-
-## Perspectives d'avenir
-
-### Intelligence Artificielle Générale (AGI)
-
-**Objectif** : Systèmes égalant ou dépassant l'intelligence humaine dans tous les domaines.
-
-**Défis** :
-- Transfer learning universel
-- Raisonnement abstrait et créativité
-- Conscience artificielle (débat philosophique)
-
-### Convergence des approches
-
-**Hybridation** :
-- Neuro-symbolique : Combinaison apprentissage et raisonnement logique
-- Apprentissage par renforcement + planification symbolique
-- Large Language Models + bases de connaissances
-
-### Applications émergentes
-
-**Domaines en expansion** :
-- IA quantique : Exploitation des propriétés quantiques
-- Bio-informatique : Découverte de médicaments, génomique
-- Climat : Modélisation et adaptation au changement climatique
-- Éducation : Tuteurs intelligents personnalisés
-
-## Conclusion
-
-L'Intelligence Artificielle traverse une période d'innovation exceptionnelle, portée par la convergence de plusieurs facteurs : puissance de calcul, disponibilité des données, et algorithmes sophistiqués. 
-
-Les défis restent nombreux - biais, explicabilité, robustesse - mais les perspectives sont immenses. La prochaine décennie sera cruciale pour déterminer si nous parviendrons à développer une IA véritablement bénéfique à l'humanité.
-
-**Points clés à retenir** :
-- L'IA combine approches symboliques et statistiques
-- Les données sont au cœur de tout projet IA moderne
-- L'éthique et la responsabilité sont des enjeux majeurs
-- L'avenir réside dans l'hybridation des techniques
+À la fin de cette leçon, vous serez capable de :
+- ✅ Définir l'intelligence artificielle et ses domaines d'application
+- ✅ Distinguer les approches symboliques et statistiques
+- ✅ Identifier les étapes clés de l'histoire de l'IA
+- ✅ Comprendre l'architecture d'un projet IA moderne
 
 ---
 
-*Cette introduction pose les bases pour approfondir les concepts spécialisés de l'IA. Les prochaines leçons exploreront les algorithmes et techniques spécifiques.*
+## 🤔 Qu'est-ce que l'Intelligence Artificielle ?
+
+<div data-mermaid="ia-definition">
+graph TD
+    A[Intelligence Artificielle] --> B[Simulation de l'intelligence humaine]
+    A --> C[Résolution automatique de problèmes]
+    A --> D[Apprentissage et adaptation]
+    
+    B --> E[Raisonnement logique]
+    B --> F[Compréhension du langage]
+    B --> G[Reconnaissance de formes]
+    
+    C --> H[Planification]
+    C --> I[Optimisation]
+    C --> J[Prise de décision]
+    
+    D --> K[Apprentissage supervisé]
+    D --> L[Apprentissage non supervisé]
+    D --> M[Apprentissage par renforcement]
+</div>
+
+**Définition formelle** : L'IA est une branche de l'informatique qui vise à créer des machines capables de reproduire des comportements intelligents typiquement associés à l'esprit humain.
+
+---
+
+## 📚 Histoire et évolution
+
+### Chronologie interactive
+
+<div data-mermaid="ia-timeline">
+timeline
+    title Histoire de l'Intelligence Artificielle
+    
+    1950s : Test de Turing (1950)
+           : Dartmouth Conference (1956)
+           : Logic Theorist
+    
+    1960s-70s : ELIZA (1966)
+              : Expert Systems
+              : Shakey Robot (1969)
+    
+    1980s-90s : Hiver de l'IA
+              : Réseaux de neurones
+              : Machine Learning
+    
+    2000s : Deep Blue vs Kasparov (1997)
+          : Support Vector Machines
+          : Random Forests
+    
+    2010s : ImageNet (2012)
+          : AlphaGo (2016)
+          : Transformers (2017)
+    
+    2020s : GPT-3/4
+          : DALL-E
+          : ChatGPT
+</div>
+
+### 🔄 Les cycles de l'IA
+
+L'histoire de l'IA est marquée par des cycles d'**espoir** et de **désillusion** :
+
+<div data-mermaid="ia-cycles">
+graph LR
+    A[Découverte<br/>breakthrough] --> B[Hype<br/>surestimation]
+    B --> C[Désillusion<br/>limitations]
+    C --> D[Maturation<br/>applications pratiques]
+    D --> A
+    
+    style A fill:#4CAF50
+    style B fill:#FF9800
+    style C fill:#F44336
+    style D fill:#2196F3
+</div>
+
+---
+
+## 🧠 Approches fondamentales
+
+### 1. Intelligence Artificielle Symbolique
+
+<div data-interactive-demo="symbolic-reasoning">
+  <div class="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
+    <h4 class="font-bold mb-4">🔧 Démo : Système Expert Simple</h4>
+    <div class="space-y-4">
+      <div class="bg-white dark:bg-gray-800 p-4 rounded border">
+        <strong>Règles de base :</strong>
+        <ul class="mt-2 space-y-1 text-sm">
+          <li>• SI température > 38°C ET maux_de_tête ALORS suspicion_fièvre</li>
+          <li>• SI suspicion_fièvre ET toux ALORS possibilité_grippe</li>
+          <li>• SI possibilité_grippe ALORS recommander_repos</li>
+        </ul>
+      </div>
+      <div class="bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded">
+        <strong>Avantages :</strong> Transparence, explicabilité, raisonnement déductif
+      </div>
+      <div class="bg-red-50 dark:bg-red-900/20 p-3 rounded">
+        <strong>Limites :</strong> Rigidité, difficulté avec l'incertitude, acquisition des connaissances
+      </div>
+    </div>
+  </div>
+</div>
+
+**Architecture symbolique :**
+
+<div data-mermaid="symbolic-architecture">
+graph TD
+    A[Base de Connaissances] --> B[Moteur d'Inférence]
+    C[Faits/Observations] --> B
+    B --> D[Conclusions]
+    
+    A --> A1[Règles logiques]
+    A --> A2[Ontologies]
+    A --> A3[Faits établis]
+    
+    B --> B1[Chaînage avant]
+    B --> B2[Chaînage arrière]
+    
+    D --> D1[Prédictions]
+    D --> D2[Explications]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style D fill:#e8f5e8
+</div>
+
+### 2. Intelligence Artificielle Statistique
+
+<div data-interactive-demo="statistical-learning">
+  <div class="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg">
+    <h4 class="font-bold mb-4">📊 Démo : Apprentissage Statistique</h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-white dark:bg-gray-800 p-4 rounded border">
+        <strong>Données d'entraînement :</strong>
+        <div class="mt-2 text-sm">
+          <div>🏠 Maison A: 100m², 2 chambres → 200k€</div>
+          <div>🏠 Maison B: 150m², 3 chambres → 300k€</div>
+          <div>🏠 Maison C: 80m², 1 chambre → 150k€</div>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-gray-800 p-4 rounded border">
+        <strong>Modèle appris :</strong>
+        <div class="mt-2 text-sm">
+          <code>Prix = 1000€ × m² + 50k€ × chambres</code>
+          <div class="mt-2 text-green-600">
+            ✅ Prédiction nouvelle maison (120m², 2 ch.) = 220k€
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+**Pipeline d'apprentissage statistique :**
+
+<div data-mermaid="ml-pipeline">
+graph LR
+    A[Données brutes] --> B[Prétraitement]
+    B --> C[Extraction features]
+    C --> D[Entraînement modèle]
+    D --> E[Validation]
+    E --> F[Déploiement]
+    
+    B --> B1[Nettoyage]
+    B --> B2[Normalisation]
+    
+    C --> C1[Sélection]
+    C --> C2[Transformation]
+    
+    D --> D1[Algorithme ML]
+    D --> D2[Optimisation]
+    
+    E --> E1[Test set]
+    E --> E2[Métriques]
+    
+    F --> F1[Production]
+    F --> F2[Monitoring]
+    
+    style A fill:#ffebee
+    style F fill:#e8f5e8
+</div>
+
+---
+
+## 🏗️ Architecture d'un projet IA
+
+### Cycle de développement
+
+<div data-mermaid="ia-project-cycle">
+graph TB
+    A[1. Définition du problème] --> B[2. Collecte des données]
+    B --> C[3. Exploration et analyse]
+    C --> D[4. Préparation des données]
+    D --> E[5. Modélisation]
+    E --> F[6. Évaluation]
+    F --> G[7. Déploiement]
+    G --> H[8. Monitoring]
+    H --> I[9. Maintenance]
+    I --> A
+    
+    A --> A1["🎯 Objectifs<br/>📊 Métriques<br/>⚖️ Contraintes"]
+    B --> B1["🔍 Sources<br/>📝 Collecte<br/>✅ Qualité"]
+    C --> C1["📈 Visualisation<br/>🔍 Patterns<br/>❓ Hypothèses"]
+    D --> D1["🧹 Nettoyage<br/>🔄 Transformation<br/>⚡ Features"]
+    E --> E1["🤖 Algorithmes<br/>🎛️ Hyperparamètres<br/>🔬 Expériences"]
+    F --> F1["📊 Validation<br/>📈 Métriques<br/>🎯 Performance"]
+    G --> G1["🚀 Production<br/>🔧 Infrastructure<br/>📡 API"]
+    H --> H1["📊 Performances<br/>🚨 Alertes<br/>📈 Métriques"]
+    I --> I1["🔄 Mise à jour<br/>🐛 Corrections<br/>📊 Optimisation"]
+    
+    style A fill:#e3f2fd
+    style E fill:#fff3e0
+    style G fill:#e8f5e8
+</div>
+
+### 📊 Répartition du temps de travail
+
+<div data-mermaid="time-distribution">
+pie title Distribution du temps dans un projet IA
+    "Collecte & préparation données" : 40
+    "Exploration & analyse" : 25
+    "Modélisation & expériences" : 20
+    "Déploiement & monitoring" : 10
+    "Communication & reporting" : 5
+</div>
+
+---
+
+## 🌟 Applications modernes
+
+### Domaines d'impact
+
+<div data-mermaid="ia-applications">
+mindmap
+  root((IA Applications))
+    Santé
+      Diagnostic médical
+      Découverte médicaments
+      Imagerie médicale
+      Chirurgie assistée
+    
+    Transport
+      Véhicules autonomes
+      Optimisation trafic
+      Maintenance prédictive
+      Logistique intelligente
+    
+    Finance
+      Trading algorithmique
+      Détection fraude
+      Évaluation crédit
+      Assurance personnalisée
+    
+    Technologie
+      Assistants virtuels
+      Traduction automatique
+      Reconnaissance vocale
+      Vision par ordinateur
+    
+    Industrie
+      Robotique industrielle
+      Qualité contrôle
+      Optimisation processus
+      IoT intelligent
+</div>
+
+### 🚀 Cas d'usage concrets
+
+<div data-interactive-demo="use-cases">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+    <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+      <h4 class="font-bold text-blue-700 dark:text-blue-300 mb-2">🏥 Santé</h4>
+      <ul class="text-sm space-y-1">
+        <li>• Diagnostic cancer (ImageNet médical)</li>
+        <li>• Prédiction épidémies</li>
+        <li>• Personnalisation traitements</li>
+        <li>• Télémédecine intelligente</li>
+      </ul>
+    </div>
+    <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+      <h4 class="font-bold text-green-700 dark:text-green-300 mb-2">🌍 Environnement</h4>
+      <ul class="text-sm space-y-1">
+        <li>• Prévision météo précise</li>
+        <li>• Optimisation énergie</li>
+        <li>• Monitoring pollution</li>
+        <li>• Agriculture intelligente</li>
+      </ul>
+    </div>
+    <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
+      <h4 class="font-bold text-purple-700 dark:text-purple-300 mb-2">🎓 Éducation</h4>
+      <ul class="text-sm space-y-1">
+        <li>• Tuteurs adaptatifs</li>
+        <li>• Évaluation automatique</li>
+        <li>• Personnalisation parcours</li>
+        <li>• Détection difficultés</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+---
+
+## ⚠️ Défis et limites actuelles
+
+### Challenges techniques
+
+<div data-mermaid="ia-challenges">
+graph TD
+    A[Défis IA] --> B[Techniques]
+    A --> C[Éthiques]
+    A --> D[Sociétaux]
+    
+    B --> B1[Biais données]
+    B --> B2[Explicabilité]
+    B --> B3[Robustesse]
+    B --> B4[Généralisation]
+    
+    C --> C1[Vie privée]
+    C --> C2[Équité algorithmes]
+    C --> C3[Transparence]
+    C --> C4[Responsabilité]
+    
+    D --> D1[Emploi futur]
+    D --> D2[Inégalités numériques]
+    D --> D3[Concentration pouvoir]
+    D --> D4[Gouvernance IA]
+    
+    style B fill:#ffebee
+    style C fill:#fff3e0
+    style D fill:#e8eaf6
+</div>
+
+### 🎯 Solutions émergentes
+
+<div data-interactive-demo="solutions">
+  <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-6 rounded-lg">
+    <h4 class="font-bold mb-4">🔧 Approches de résolution</h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <strong class="text-blue-700 dark:text-blue-300">Techniques :</strong>
+        <ul class="mt-2 space-y-2 text-sm">
+          <li>🔍 <strong>Explicabilité :</strong> LIME, SHAP, GradCAM</li>
+          <li>🛡️ <strong>Robustesse :</strong> Adversarial training, tests stress</li>
+          <li>📊 <strong>Débiaisage :</strong> Fair ML, audit algorithmes</li>
+          <li>🔒 <strong>Confidentialité :</strong> Federated learning, DP</li>
+        </ul>
+      </div>
+      <div>
+        <strong class="text-purple-700 dark:text-purple-300">Gouvernance :</strong>
+        <ul class="mt-2 space-y-2 text-sm">
+          <li>📋 <strong>Réglementation :</strong> AI Act européen</li>
+          <li>🏢 <strong>Comités éthique :</strong> Review boards</li>
+          <li>🎓 <strong>Formation :</strong> AI literacy, sensibilisation</li>
+          <li>🤝 <strong>Collaboration :</strong> Multi-stakeholder initiatives</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+
+## 🔮 Perspectives d'avenir
+
+### Horizon technologique
+
+<div data-mermaid="future-ia">
+timeline
+    title Avenir de l'IA - Prédictions 2024-2034
+    
+    2024-2026 : Large Language Models++
+              : Multimodal AI généralisé
+              : IA edge computing
+    
+    2026-2028 : AGI prototypes
+              : IA quantique hybride
+              : Robotique domestique
+    
+    2028-2030 : IA créative mature
+              : Simulation réalité complète
+              : Interface cerveau-machine
+    
+    2030-2034 : AGI déployé largement
+              : IA scientifique autonome
+              : Société post-numérique
+</div>
+
+### 💡 Concepts émergents
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+  <div class="bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 p-5 rounded-lg">
+    <h4 class="font-bold text-orange-700 dark:text-orange-300 mb-3">🧠 Intelligence Artificielle Générale (AGI)</h4>
+    <p class="text-sm mb-3">Systèmes égalant ou dépassant l'intelligence humaine dans tous les domaines cognitifs.</p>
+    <div class="text-xs space-y-1">
+      <div>🎯 <strong>Objectif :</strong> Capacités cognitives universelles</div>
+      <div>🔬 <strong>Défis :</strong> Raisonnement abstrait, créativité, conscience</div>
+      <div>📅 <strong>Horizon :</strong> Estimations entre 2030-2050</div>
+    </div>
+  </div>
+  
+  <div class="bg-gradient-to-br from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 p-5 rounded-lg">
+    <h4 class="font-bold text-teal-700 dark:text-teal-300 mb-3">🔗 IA Neuro-Symbolique</h4>
+    <p class="text-sm mb-3">Fusion des approches connexionnistes (réseaux de neurones) et symboliques.</p>
+    <div class="text-xs space-y-1">
+      <div>🎯 <strong>Objectif :</strong> Raisonnement + apprentissage</div>
+      <div>🔬 <strong>Avantages :</strong> Explicabilité + performance</div>
+      <div>📅 <strong>État :</strong> Recherche active, premiers produits</div>
+    </div>
+  </div>
+</div>
+
+---
+
+## 📝 Points clés à retenir
+
+<div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-lg my-6">
+  <h3 class="font-bold text-lg mb-4 text-indigo-700 dark:text-indigo-300">🎯 Synthèse de la leçon</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <h4 class="font-semibold mb-2 text-blue-700 dark:text-blue-300">Concepts fondamentaux</h4>
+      <ul class="text-sm space-y-1">
+        <li>✅ IA = simulation intelligence humaine par machines</li>
+        <li>✅ Approches : symbolique (règles) vs statistique (données)</li>
+        <li>✅ Histoire cyclique : espoirs → désillusions → maturité</li>
+        <li>✅ Applications transversales tous secteurs</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-semibold mb-2 text-purple-700 dark:text-purple-300">Enjeux actuels</h4>
+      <ul class="text-sm space-y-1">
+        <li>⚠️ Défis éthiques et sociétaux majeurs</li>
+        <li>🔬 Recherche active sur explicabilité/robustesse</li>
+        <li>🚀 Évolution vers AGI et approches hybrides</li>
+        <li>📋 Nécessité gouvernance et réglementation</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+---
+
+## 🚀 Pour aller plus loin
+
+### Ressources recommandées
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+  <div class="bg-white dark:bg-gray-800 p-4 rounded-lg border">
+    <h4 class="font-bold mb-2">📚 Lectures essentielles</h4>
+    <ul class="text-sm space-y-1">
+      <li>• "AI: A Modern Approach" (Russell & Norvig)</li>
+      <li>• "The Hundred-Page ML Book" (Burkov)</li>
+      <li>• "Human Compatible" (Russell)</li>
+    </ul>
+  </div>
+  
+  <div class="bg-white dark:bg-gray-800 p-4 rounded-lg border">
+    <h4 class="font-bold mb-2">🎓 Cours en ligne</h4>
+    <ul class="text-sm space-y-1">
+      <li>• CS188 UC Berkeley (AI)</li>
+      <li>• MIT 6.034 (Artificial Intelligence)</li>
+      <li>• Stanford CS229 (Machine Learning)</li>
+    </ul>
+  </div>
+  
+  <div class="bg-white dark:bg-gray-800 p-4 rounded-lg border">
+    <h4 class="font-bold mb-2">🔧 Outils pratiques</h4>
+    <ul class="text-sm space-y-1">
+      <li>• Python + scikit-learn</li>
+      <li>• TensorFlow / PyTorch</li>
+      <li>• Jupyter Notebooks</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+*Cette introduction pose les bases conceptuelles et historiques de l'IA. La prochaine leçon explorera en détail les différents types d'apprentissage automatique avec des exemples mathématiques et des implémentations pratiques.*

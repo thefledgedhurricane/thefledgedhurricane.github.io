@@ -32,6 +32,6 @@ export default function LessonGuard({ course, lesson }: { course: Course; lesson
   }
 
   return (
-    <LessonViewer courseId={course.id} lesson={lesson} />
+    <LessonViewer courseId={course.id} course={course} lesson={lesson} />
   );
 }
