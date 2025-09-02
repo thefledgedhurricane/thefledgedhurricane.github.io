@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import type { Course, Lesson } from '@/lib/lms-data';
+import type { Course, LessonWithContent } from '@/lib/lms-data';
 import { getCourseProgress, PASS_THRESHOLD } from '@/lib/lms-storage';
 import LessonViewer from './LessonViewer';
 
-export default function LessonGuard({ course, lesson }: { course: Course; lesson: Lesson }) {
+export default function LessonGuard({ course, lesson }: { course: Course; lesson: LessonWithContent }) {
   const progress = getCourseProgress(course.id);
   const lessons = course.lessons.map(l => l.id);
   const idx = lessons.indexOf(lesson.id);

@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import LessonViewer from '@/components/lms/LessonViewer';
 import { generateJsonLd, generateBreadcrumbJsonLd } from '@/lib/jsonld';
-import { getLessonById } from '@/lib/lms-data';
+import { getLessonById, type LessonWithContent } from '@/lib/lms-data';
+import { loadLessonContent } from '@/lib/content-loader';
 import LessonGuard from '@/components/lms/LessonGuard';
 
 
@@ -20,7 +21,23 @@ export default async function LessonPage({ params }: PageProps) {
       </main>
     );
   }
+  
   const { course, lesson } = result;
+  
+  // Pre-load lesson content if it uses Markdown
+  let lessonWithContent: LessonWithContent = lesson;
+  if (lesson.contentFile) {
+    try {
+      const content = await loadLessonContent(lesson.contentFile);
+      lessonWithContent = {
+        ...lesson,
+        preloadedContent: content.content,
+      };
+    } catch (error) {
+      console.error('Error pre-loading lesson content:', error);
+      // Keep original lesson without preloaded content
+    }
+  }
   // Accès et affichage gérés côté client pour lire le score depuis localStorage
 
   const jsonLd = generateJsonLd({
@@ -52,8 +69,8 @@ export default async function LessonPage({ params }: PageProps) {
             <span className="text-gray-700 dark:text-gray-300">{lesson.title}</span>
           </nav>
 
-          <h1 className="text-3xl font-bold mb-6">{lesson.title}</h1>
-          <LessonGuard course={course} lesson={lesson} />
+          <h1 className="text-3xl font-bold mb-6">{lessonWithContent.title}</h1>
+          <LessonGuard course={course} lesson={lessonWithContent} />
 
           <div className="mt-10">
             <Link href={`/teaching/${course.id}`} className="text-blue-600 hover:text-blue-800">← Retour au cours</Link>

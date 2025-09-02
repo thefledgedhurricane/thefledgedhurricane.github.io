@@ -25,6 +25,11 @@ export type Lesson = {
   passThreshold?: number; // seuil de passage spécifique à cette leçon (pour déverrouiller la suivante)
 };
 
+// Type for lesson with pre-loaded content (for static generation)
+export type LessonWithContent = Lesson & {
+  preloadedContent?: string; // HTML content pre-loaded from Markdown
+};
+
 export type Course = {
   id: string; // slug
   title: string;

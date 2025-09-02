@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import type { Lesson } from '@/lib/lms-data';
-import { loadLessonContent } from '@/lib/content-loader';
+import type { LessonWithContent } from '@/lib/lms-data';
 import { markLessonCompleted } from '@/lib/lms-storage';
 import Quiz from './Quiz';
 import dynamic from 'next/dynamic';
@@ -20,7 +19,7 @@ export default function LessonViewer({
   lesson,
 }: {
   courseId: string;
-  lesson: Lesson;
+  lesson: LessonWithContent;
 }) {
   const [content, setContent] = useState<string>('');
   const [loading, setLoading] = useState(true);
@@ -34,10 +33,9 @@ export default function LessonViewer({
     async function loadContent() {
       setLoading(true);
       try {
-        if (lesson.contentFile) {
-          // Load from Markdown file
-          const lessonContent = await loadLessonContent(lesson.contentFile);
-          setContent(lessonContent.content);
+        if (lesson.preloadedContent) {
+          // Use pre-loaded content from server
+          setContent(lesson.preloadedContent);
         } else if (lesson.html) {
           // Fallback to inline HTML
           setContent(lesson.html);
@@ -53,7 +51,7 @@ export default function LessonViewer({
     }
 
     loadContent();
-  }, [lesson.contentFile, lesson.html]);
+  }, [lesson.preloadedContent, lesson.html]);
 
   useEffect(() => {
     // monter les démos référencées par des placeholders <div data-demo="id"></div>

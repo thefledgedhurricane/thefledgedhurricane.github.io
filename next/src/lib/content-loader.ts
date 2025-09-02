@@ -1,3 +1,9 @@
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { remark } from 'remark';
+import remarkHtml from 'remark-html';
+
 export type LessonContent = {
   content: string;
   metadata: {
@@ -10,27 +16,86 @@ export type LessonContent = {
 };
 
 /**
- * Load lesson content from the API route
+ * Get the content directory path
+ */
+function getContentDir(): string {
+  return path.join(process.cwd(), '..', 'content', 'lessons');
+}
+
+/**
+ * Load and parse a lesson from a Markdown file (server-side only)
  */
 export async function loadLessonContent(lessonId: string): Promise<LessonContent> {
   try {
-    const response = await fetch(`/api/lessons?id=${encodeURIComponent(lessonId)}`);
-    
-    if (!response.ok) {
-      throw new Error(`Failed to load lesson: ${response.statusText}`);
+    const contentDir = getContentDir();
+    const filePath = path.join(contentDir, `${lessonId}.md`);
+
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`Lesson file not found: ${filePath}`);
     }
-    
-    const lessonContent: LessonContent = await response.json();
-    return lessonContent;
+
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+    const { content, data } = matter(fileContent);
+
+    // Convert markdown to HTML
+    const processedContent = await remark()
+      .use(remarkHtml, { sanitize: false })
+      .process(content);
+
+    return {
+      content: processedContent.toString(),
+      metadata: {
+        title: data.title,
+        description: data.description,
+        difficulty: data.difficulty,
+        estimatedTime: data.estimatedTime,
+        keywords: data.keywords,
+      },
+    };
   } catch (error) {
     console.error('Error loading lesson content:', error);
     // Return fallback content
     return {
-      content: '<p>Erreur de chargement du contenu de la lecon.</p>',
+      content: '<p>Erreur de chargement du contenu de la leçon.</p>',
       metadata: {
         title: 'Erreur',
-        description: 'Le contenu n a pas pu etre charge.',
+        description: 'Le contenu n\'a pas pu être chargé.',
       },
     };
   }
+}
+
+/**
+ * Get all available lesson IDs (server-side only)
+ */
+export async function getAllLessonIds(): Promise<string[]> {
+  try {
+    const contentDir = getContentDir();
+    
+    if (!fs.existsSync(contentDir)) {
+      return [];
+    }
+    
+    const files = fs.readdirSync(contentDir);
+    return files
+      .filter(file => file.endsWith('.md'))
+      .map(file => file.replace('.md', ''));
+  } catch (error) {
+    console.error('Error getting lesson IDs:', error);
+    return [];
+  }
+}
+
+/**
+ * Pre-load all lesson content (for static generation)
+ */
+export async function preloadAllLessons(): Promise<Record<string, LessonContent>> {
+  const lessonIds = await getAllLessonIds();
+  const lessons: Record<string, LessonContent> = {};
+
+  for (const lessonId of lessonIds) {
+    lessons[lessonId] = await loadLessonContent(lessonId);
+  }
+
+  return lessons;
 }
