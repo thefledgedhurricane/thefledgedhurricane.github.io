@@ -152,13 +152,13 @@ export default function SupervisedLearningDemo() {
       <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg mb-4">
         {step === 0 && (
           <div>
-            <strong>Étape 1 :</strong> Nous avons des données d'entraînement avec des exemples de maisons
+            <strong>Étape 1 :</strong> Nous avons des données d&apos;entraînement avec des exemples de maisons
             (surface en m², prix en k€). Chaque point bleu représente une maison connue.
           </div>
         )}
         {step === 1 && (
           <div>
-            <strong>Étape 2 :</strong> L'algorithme d'apprentissage analyse les données pour trouver
+            <strong>Étape 2 :</strong> L&apos;algorithme d&apos;apprentissage analyse les données pour trouver
             la relation entre la surface et le prix. Il cherche la meilleure ligne qui passe près de tous les points.
           </div>
         )}

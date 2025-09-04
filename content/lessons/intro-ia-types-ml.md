@@ -12,6 +12,8 @@ keywords: ["apprentissage automatique", "supervisé", "non supervisé", "renforc
 
 L'apprentissage automatique (Machine Learning) se divise en plusieurs paradigmes fondamentaux, chacun adapté à des types de problèmes spécifiques. Cette taxonomie guide le choix des algorithmes et des approches méthodologiques.
 
+![Vue d'ensemble — supervisé vs non supervisé](/lms/supervised-unsupervised.svg)
+
 ## 1. Apprentissage supervisé
 
 ### Principe fondamental
@@ -403,6 +405,16 @@ La compréhension des paradigmes d'apprentissage est fondamentale pour :
 - **Innovation** par combinaison créative des approches
 
 L'avenir de l'IA réside dans l'hybridation intelligente de ces paradigmes, créant des systèmes plus robustes et polyvalents.
+
+## Notebooks d'exercices
+
+Mettez en pratique les concepts vus dans ce module avec un petit carnet d'exercices prêt à l'emploi :
+
+- Calculer précision, rappel et F1 à partir d'une matrice de confusion
+- Régression linéaire univariée en forme fermée (w0, w1)
+- Une itération de k-means (assignations puis mise à jour des centroïdes)
+
+Accéder au notebook: /notebooks/02_types_ml_exercices.ipynb
 
 ---
 

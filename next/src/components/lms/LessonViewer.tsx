@@ -7,6 +7,7 @@ import { markLessonCompleted } from '@/lib/lms-storage';
 import Quiz from './Quiz';
 import LessonNavigation from './LessonNavigation';
 import dynamic from 'next/dynamic';
+import mermaid from 'mermaid';
 
 // Démos montées dynamiquement pour éviter SSR
 const Demos: Record<string, any> = {
@@ -16,6 +17,11 @@ const Demos: Record<string, any> = {
   'ai-history': dynamic(() => import('./demos/AIHistoryDemo'), { ssr: false }),
   'supervised-learning': dynamic(() => import('./demos/SupervisedLearningDemo'), { ssr: false }),
   'clustering': dynamic(() => import('./demos/ClusteringDemo'), { ssr: false }),
+  // New lightweight demos referenced in lesson Markdown
+  'symbolic-reasoning': dynamic(() => import('./demos/SymbolicReasoningDemo'), { ssr: false }),
+  'statistical-learning': dynamic(() => import('./demos/StatisticalLearningDemo'), { ssr: false }),
+  'use-cases': dynamic(() => import('./demos/UseCasesDemo'), { ssr: false }),
+  'solutions': dynamic(() => import('./demos/SolutionsDemo'), { ssr: false }),
 };
 
 export default function LessonViewer({
@@ -66,39 +72,63 @@ export default function LessonViewer({
     const container = document.getElementById('lesson-html');
     if (!container) return;
 
-    // Handle Mermaid diagrams
-    const mermaidElements = container.querySelectorAll('[data-mermaid]');
-    mermaidElements.forEach((element, index) => {
-      const diagramId = (element as HTMLElement).dataset.mermaid;
-      if (!diagramId) return;
+    // Initialize Mermaid once
+    try {
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'default',
+        securityLevel: 'loose',
+        fontFamily: 'system-ui, -apple-system, Segoe UI, Roboto, sans-serif',
+      });
+    } catch (e) {
+      // ignore init race
+    }
 
-      // Create a placeholder for the Mermaid diagram
-      const mermaidContainer = document.createElement('div');
-      mermaidContainer.className = 'mermaid-diagram my-6 flex justify-center';
-      mermaidContainer.innerHTML = `
-        <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border">
-          <div class="flex items-center justify-center p-8">
-            <div class="text-center">
-              <div class="animate-pulse bg-gray-200 dark:bg-gray-700 h-32 w-64 rounded mb-2"></div>
-              <div class="text-sm text-gray-500">Diagramme: ${diagramId}</div>
-            </div>
-          </div>
-        </div>
-      `;
-      element.replaceWith(mermaidContainer);
+    // Handle Mermaid diagrams: render inline graph definitions inside elements with [data-mermaid]
+    const mermaidElements = Array.from(container.querySelectorAll('[data-mermaid]')) as HTMLElement[];
+    mermaidElements.forEach((el, i) => {
+      const raw = (el.textContent || '').trim();
+      const uid = `mermaid-${Math.random().toString(36).slice(2, 9)}-${i}`;
+
+      const holder = document.createElement('div');
+      holder.className = 'my-6 flex justify-center';
+      holder.innerHTML = `
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border w-full overflow-auto">
+          <div id="${uid}" class="min-h-12"></div>
+        </div>`;
+      el.replaceWith(holder);
+
+      if (!raw) {
+        const target = holder.querySelector(`#${uid}`) as HTMLElement | null;
+        if (target) target.innerHTML = '<div class="text-red-600 text-sm">Aucun contenu Mermaid détecté.</div>';
+        return;
+      }
+
+      mermaid
+        .render(uid, raw)
+        .then(({ svg }) => {
+          const target = holder.querySelector(`#${uid}`) as HTMLElement | null;
+          if (target) target.innerHTML = svg;
+        })
+        .catch((err) => {
+          const target = holder.querySelector(`#${uid}`) as HTMLElement | null;
+          if (target)
+            target.innerHTML = `<div class="text-red-600 text-sm">Erreur Mermaid: ${String(err).slice(0, 200)}</div>`;
+        });
     });
 
     // Handle demo placeholders
-    const demoPlaceholders = container.querySelectorAll('[data-demo]');
+    const demoPlaceholders = container.querySelectorAll('[data-demo], [data-interactive-demo]');
     const roots: any[] = [];
 
     demoPlaceholders.forEach((placeholder) => {
-      const demoId = (placeholder as HTMLElement).dataset.demo;
+      const el = placeholder as HTMLElement;
+      const demoId = el.dataset.demo || el.dataset.interactiveDemo;
       if (!demoId || !Demos[demoId]) return;
 
       const Comp = Demos[demoId];
       const mount = document.createElement('div');
-      placeholder.appendChild(mount);
+      el.appendChild(mount);
 
       const root = createRoot(mount);
       root.render(<Comp />);

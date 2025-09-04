@@ -116,6 +116,8 @@ Utilise une fonction heuristique h(n) qui estime le coût du nœud n vers le but
 h(n) = √[(x_but - x_n)² + (y_but - y_n)²]
 ```
 
+![Chemin A* sur grille](/lms/astar-grid.svg)
+
 ### 3. Optimisations de A*
 
 #### A* bidirectionnel
@@ -271,3 +273,13 @@ fonction minimax(état, profondeur, joueur_max):
 ---
 
 *Cette leçon présente les concepts fondamentaux de la recherche en IA. La maîtrise de ces algorithmes est essentielle pour comprendre de nombreux domaines de l'intelligence artificielle moderne.*
+
+## Notebooks d'exercices
+
+Entraînez-vous avec un carnet d'exercices contenant des gabarits "add your code here" :
+
+- Implémenter BFS sur un graphe simple
+- Implémenter A* sur une grille avec heuristique Manhattan
+- Comparer empiriquement BFS/DFS/A* sur de petits graphes
+
+Accéder au notebook: /notebooks/03_recherche_optimisation_exercices.ipynb

@@ -495,3 +495,8 @@ timeline
 ---
 
 *Cette introduction pose les bases conceptuelles et historiques de l'IA. La prochaine leçon explorera en détail les différents types d'apprentissage automatique avec des exemples mathématiques et des implémentations pratiques.*
+
+## 📝 Notebooks d'exercices
+
+- Téléchargez et ouvrez dans Jupyter: [/notebooks/01_fondamentaux_exercices.ipynb](/notebooks/01_fondamentaux_exercices.ipynb)
+  - Exercices guidés: domaines d’application, mini-système expert (règles).

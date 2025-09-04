@@ -19,7 +19,7 @@ export default function AIHistoryDemo() {
     },
     {
       id: '1960s',
-      name: 'Âge d\'or (1960s-70s)',
+      name: 'Âge d&apos;or (1960s-70s)',
       color: 'bg-green-100 dark:bg-green-900/30',
       achievements: [
         'ELIZA (1966)',
@@ -65,7 +65,7 @@ export default function AIHistoryDemo() {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
-      <h3 className="text-lg font-bold mb-4 text-center">🕰️ Histoire Interactive de l'IA</h3>
+  <h3 className="text-lg font-bold mb-4 text-center">🕰️ Histoire Interactive de l&apos;IA</h3>
       
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-2 mb-6">
         {eras.map((era) => (

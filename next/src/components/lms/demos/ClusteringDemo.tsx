@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 type DataPoint = {
   x: number;
@@ -106,7 +106,7 @@ export default function ClusteringDemo() {
     'Clusters finaux'
   ];
 
-  const handleStep = () => {
+  const handleStep = useCallback(() => {
     if (step === 1) {
       initializeCentroids();
     } else if (step === 2) {
@@ -116,13 +116,13 @@ export default function ClusteringDemo() {
     } else if (step === 4) {
       assignClusters(); // Final assignment
     }
-  };
+  }, [step, initializeCentroids, assignClusters, updateCentroids]);
 
   useEffect(() => {
     if (step > 0) {
       handleStep();
     }
-  }, [step]);
+  }, [step, handleStep]);
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
@@ -212,7 +212,7 @@ export default function ClusteringDemo() {
         {step === 0 && (
           <div>
             <strong>Données brutes :</strong> Nous avons des données de clients (âge, revenu) sans étiquettes.
-            L'objectif est de découvrir des groupes naturels dans ces données.
+            L&apos;objectif est de découvrir des groupes naturels dans ces données.
           </div>
         )}
         {step === 1 && (
@@ -224,13 +224,13 @@ export default function ClusteringDemo() {
         {step === 2 && (
           <div>
             <strong>Assignment :</strong> Chaque point est assigné au centroïde le plus proche.
-            Les couleurs indiquent l'appartenance aux clusters.
+            Les couleurs indiquent l&apos;appartenance aux clusters.
           </div>
         )}
         {step === 3 && (
           <div>
             <strong>Mise à jour :</strong> Les centroïdes se déplacent vers le centre de gravité
-            de leurs points assignés. C'est l'étape d'optimisation.
+            de leurs points assignés. C&apos;est l&apos;étape d&apos;optimisation.
           </div>
         )}
         {step === 4 && (
