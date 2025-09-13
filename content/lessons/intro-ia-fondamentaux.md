@@ -21,6 +21,8 @@ keywords: ["intelligence artificielle", "histoire", "approches", "symbolique", "
 ## 🤔 Qu'est-ce que l'Intelligence Artificielle ?
 
 <div data-mermaid="ia-definition">
+
+```mermaid
 graph TD
     A[Intelligence Artificielle] --> B[Simulation de l'intelligence humaine]
     A --> C[Résolution automatique de problèmes]
@@ -37,6 +39,8 @@ graph TD
     D --> K[Apprentissage supervisé]
     D --> L[Apprentissage non supervisé]
     D --> M[Apprentissage par renforcement]
+```
+
 </div>
 
 **Définition formelle** : L'IA est une branche de l'informatique qui vise à créer des machines capables de reproduire des comportements intelligents typiquement associés à l'esprit humain.
@@ -47,7 +51,7 @@ graph TD
 
 ### Chronologie interactive
 
-<div data-mermaid="ia-timeline">
+```mermaid
 timeline
     title Histoire de l'Intelligence Artificielle
     
@@ -74,13 +78,13 @@ timeline
     2020s : GPT-3/4
           : DALL-E
           : ChatGPT
-</div>
+```
 
 ### 🔄 Les cycles de l'IA
 
 L'histoire de l'IA est marquée par des cycles d'**espoir** et de **désillusion** :
 
-<div data-mermaid="ia-cycles">
+```mermaid
 graph LR
     A[Découverte<br/>breakthrough] --> B[Hype<br/>surestimation]
     B --> C[Désillusion<br/>limitations]
@@ -91,7 +95,7 @@ graph LR
     style B fill:#FF9800
     style C fill:#F44336
     style D fill:#2196F3
-</div>
+```
 
 ---
 
@@ -104,18 +108,45 @@ graph LR
     <h4 class="font-bold mb-4">🔧 Démo : Système Expert Simple</h4>
     <div class="space-y-4">
       <div class="bg-white dark:bg-gray-800 p-4 rounded border">
-        <strong>Règles de base :</strong>
-        <ul class="mt-2 space-y-1 text-sm">
-          <li>• SI température > 38°C ET maux_de_tête ALORS suspicion_fièvre</li>
-          <li>• SI suspicion_fièvre ET toux ALORS possibilité_grippe</li>
-          <li>• SI possibilité_grippe ALORS recommander_repos</li>
+        <strong>Base de règles médicales :</strong>
+        <ul class="mt-2 space-y-1 text-sm font-mono">
+          <li>• <code>SI température > 38°C ET maux_de_tête ALORS suspicion_fièvre</code></li>
+          <li>• <code>SI suspicion_fièvre ET toux ALORS possibilité_grippe</code></li>
+          <li>• <code>SI possibilité_grippe ALORS recommander_repos</code></li>
+          <li>• <code>SI suspicion_fièvre ET mal_gorge ALORS possibilité_angine</code></li>
+          <li>• <code>SI possibilité_angine ALORS recommander_médecin</code></li>
         </ul>
       </div>
-      <div class="bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded">
-        <strong>Avantages :</strong> Transparence, explicabilité, raisonnement déductif
+      <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+        <strong>Exemple de raisonnement :</strong>
+        <div class="mt-2 text-sm">
+          <div class="mb-2"><strong>Entrée :</strong> Température = 39°C, Maux de tête = Oui, Toux = Oui</div>
+          <div class="text-blue-600 dark:text-blue-400">
+            <div>1. 39°C > 38°C ET maux_de_tête → <strong>suspicion_fièvre</strong></div>
+            <div>2. suspicion_fièvre ET toux → <strong>possibilité_grippe</strong></div>
+            <div>3. possibilité_grippe → <strong>recommander_repos</strong></div>
+          </div>
+        </div>
       </div>
-      <div class="bg-red-50 dark:bg-red-900/20 p-3 rounded">
-        <strong>Limites :</strong> Rigidité, difficulté avec l'incertitude, acquisition des connaissances
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div class="bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded">
+          <strong>Avantages :</strong>
+          <ul class="text-sm mt-1">
+            <li>• Transparence totale du raisonnement</li>
+            <li>• Explicabilité des décisions</li>
+            <li>• Facilité de modification des règles</li>
+            <li>• Validation par des experts</li>
+          </ul>
+        </div>
+        <div class="bg-red-50 dark:bg-red-900/20 p-3 rounded">
+          <strong>Limites :</strong>
+          <ul class="text-sm mt-1">
+            <li>• Rigidité face aux cas non prévus</li>
+            <li>• Difficulté avec l'incertitude</li>
+            <li>• Maintenance complexe à grande échelle</li>
+            <li>• Acquisition des connaissances coûteuse</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -123,7 +154,7 @@ graph LR
 
 **Architecture symbolique :**
 
-<div data-mermaid="symbolic-architecture">
+```mermaid
 graph TD
     A[Base de Connaissances] --> B[Moteur d'Inférence]
     C[Faits/Observations] --> B
@@ -142,30 +173,48 @@ graph TD
     style A fill:#e1f5fe
     style B fill:#f3e5f5
     style D fill:#e8f5e8
-</div>
+```
 
 ### 2. Intelligence Artificielle Statistique
 
 <div data-interactive-demo="statistical-learning">
   <div class="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg">
-    <h4 class="font-bold mb-4">📊 Démo : Apprentissage Statistique</h4>
+    <h4 class="font-bold mb-4">📊 Démo : Apprentissage Statistique - Prédiction Immobilière</h4>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="bg-white dark:bg-gray-800 p-4 rounded border">
         <strong>Données d'entraînement :</strong>
-        <div class="mt-2 text-sm">
-          <div>🏠 Maison A: 100m², 2 chambres → 200k€</div>
-          <div>🏠 Maison B: 150m², 3 chambres → 300k€</div>
-          <div>🏠 Maison C: 80m², 1 chambre → 150k€</div>
+        <div class="mt-2 text-sm space-y-1">
+          <div>🏠 Maison A: 100m², 2 chambres, quartier centre → <strong>200k€</strong></div>
+          <div>🏠 Maison B: 150m², 3 chambres, quartier centre → <strong>300k€</strong></div>
+          <div>🏠 Maison C: 80m², 1 chambre, quartier banlieue → <strong>120k€</strong></div>
+          <div>🏠 Maison D: 120m², 2 chambres, quartier banlieue → <strong>180k€</strong></div>
+          <div>🏠 Maison E: 200m², 4 chambres, quartier centre → <strong>450k€</strong></div>
         </div>
       </div>
       <div class="bg-white dark:bg-gray-800 p-4 rounded border">
-        <strong>Modèle appris :</strong>
+        <strong>Modèle appris (régression linéaire) :</strong>
         <div class="mt-2 text-sm">
-          <code>Prix = 1000€ × m² + 50k€ × chambres</code>
-          <div class="mt-2 text-green-600">
-            ✅ Prédiction nouvelle maison (120m², 2 ch.) = 220k€
+          <code class="bg-gray-100 dark:bg-gray-700 p-2 rounded block">
+            Prix = 1500€ × surface + 30k€ × chambres + 50k€ × (si_centre)
+          </code>
+          <div class="mt-3 space-y-2">
+            <div className="text-blue-600 dark:text-blue-400">
+              <strong>Test :</strong> Maison (110m², 2 ch., centre)
+            </div>
+            <div className="text-green-600 dark:text-green-400">
+              ✅ Prédiction = 1500×110 + 30×2 + 50 = <strong>275k€</strong>
+            </div>
+            <div className="text-gray-600 dark:text-gray-400 text-xs">
+              Confiance : ±15k€ (intervalle 95%)
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="mt-4 bg-blue-50 dark:bg-blue-900/30 p-3 rounded">
+      <strong>Processus d'apprentissage :</strong>
+      <div class="text-sm mt-2">
+        L'algorithme analyse les relations entre features (surface, chambres, localisation) et prix pour découvrir automatiquement le modèle de prix. Contrairement au système expert, aucune règle n'est programmée explicitement.
       </div>
     </div>
   </div>
@@ -173,7 +222,7 @@ graph TD
 
 **Pipeline d'apprentissage statistique :**
 
-<div data-mermaid="ml-pipeline">
+```mermaid
 graph LR
     A[Données brutes] --> B[Prétraitement]
     B --> C[Extraction features]
@@ -198,7 +247,7 @@ graph LR
     
     style A fill:#ffebee
     style F fill:#e8f5e8
-</div>
+```
 
 ---
 
@@ -206,7 +255,7 @@ graph LR
 
 ### Cycle de développement
 
-<div data-mermaid="ia-project-cycle">
+```mermaid
 graph TB
     A[1. Définition du problème] --> B[2. Collecte des données]
     B --> C[3. Exploration et analyse]
@@ -231,18 +280,18 @@ graph TB
     style A fill:#e3f2fd
     style E fill:#fff3e0
     style G fill:#e8f5e8
-</div>
+```
 
 ### 📊 Répartition du temps de travail
 
-<div data-mermaid="time-distribution">
+```mermaid
 pie title Distribution du temps dans un projet IA
     "Collecte & préparation données" : 40
     "Exploration & analyse" : 25
     "Modélisation & expériences" : 20
     "Déploiement & monitoring" : 10
     "Communication & reporting" : 5
-</div>
+```
 
 ---
 
@@ -250,7 +299,7 @@ pie title Distribution du temps dans un projet IA
 
 ### Domaines d'impact
 
-<div data-mermaid="ia-applications">
+```mermaid
 mindmap
   root((IA Applications))
     Santé
@@ -282,7 +331,7 @@ mindmap
       Qualité contrôle
       Optimisation processus
       IoT intelligent
-</div>
+```
 
 ### 🚀 Cas d'usage concrets
 
@@ -324,7 +373,7 @@ mindmap
 
 ### Challenges techniques
 
-<div data-mermaid="ia-challenges">
+```mermaid
 graph TD
     A[Défis IA] --> B[Techniques]
     A --> C[Éthiques]
@@ -348,7 +397,7 @@ graph TD
     style B fill:#ffebee
     style C fill:#fff3e0
     style D fill:#e8eaf6
-</div>
+```
 
 ### 🎯 Solutions émergentes
 
@@ -384,7 +433,7 @@ graph TD
 
 ### Horizon technologique
 
-<div data-mermaid="future-ia">
+```mermaid
 timeline
     title Avenir de l'IA - Prédictions 2024-2034
     
@@ -403,7 +452,7 @@ timeline
     2030-2034 : AGI déployé largement
               : IA scientifique autonome
               : Société post-numérique
-</div>
+```
 
 ### 💡 Concepts émergents
 
