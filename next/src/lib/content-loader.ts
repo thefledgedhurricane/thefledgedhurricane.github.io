@@ -16,6 +16,64 @@ export type LessonContent = {
 };
 
 /**
+ * Custom plugin to handle Mermaid code blocks
+ */
+function remarkMermaid() {
+  return (tree: any) => {
+    const visit = (node: any, callback: (node: any) => void) => {
+      callback(node);
+      if (node.children) {
+        node.children.forEach((child: any) => visit(child, callback));
+      }
+    };
+
+    visit(tree, (node: any) => {
+      if (node.type === 'code' && node.lang === 'mermaid') {
+        // Transform mermaid code blocks to HTML with proper class
+        node.type = 'html';
+        node.value = `<pre><code class="language-mermaid">${node.value}</code></pre>`;
+      }
+    });
+  };
+}
+
+/**
+ * Custom plugin to enhance table styling
+ */
+function remarkTables() {
+  return (tree: any) => {
+    const visit = (node: any, callback: (node: any) => void) => {
+      callback(node);
+      if (node.children) {
+        node.children.forEach((child: any) => visit(child, callback));
+      }
+    };
+
+    visit(tree, (node: any) => {
+      if (node.type === 'table') {
+        // Add wrapper div for responsive tables
+        const wrapper = {
+          type: 'html',
+          value: '<div class="table-wrapper">'
+        };
+        const closingWrapper = {
+          type: 'html', 
+          value: '</div>'
+        };
+        
+        // Find parent and replace table with wrapped version
+        node.data = {
+          ...node.data,
+          hProperties: {
+            className: ['enhanced-table']
+          }
+        };
+      }
+    });
+  };
+}
+
+/**
  * Get the content directory path
  */
 function getContentDir(): string {
@@ -37,9 +95,14 @@ export async function loadLessonContent(lessonId: string): Promise<LessonContent
     const fileContent = fs.readFileSync(filePath, 'utf8');
     const { content, data } = matter(fileContent);
 
-    // Convert markdown to HTML
+    // Convert markdown to HTML with custom plugins
     const processedContent = await remark()
-      .use(remarkHtml, { sanitize: false })
+      .use(remarkMermaid)
+      .use(remarkTables)
+      .use(remarkHtml, { 
+        sanitize: false,
+        allowDangerousHtml: true 
+      })
       .process(content);
 
     return {

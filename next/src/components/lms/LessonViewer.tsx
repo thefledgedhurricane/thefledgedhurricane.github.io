@@ -84,8 +84,11 @@ export default function LessonViewer({
       // ignore init race
     }
 
-    // Handle Mermaid diagrams: render inline graph definitions inside elements with [data-mermaid]
+    // Handle Mermaid diagrams: both [data-mermaid] elements and code blocks
     const mermaidElements = Array.from(container.querySelectorAll('[data-mermaid]')) as HTMLElement[];
+    const mermaidCodeBlocks = Array.from(container.querySelectorAll('pre code.language-mermaid')) as HTMLElement[];
+    
+    // Process data-mermaid elements
     mermaidElements.forEach((el, i) => {
       const raw = (el.textContent || '').trim();
       const uid = `mermaid-${Math.random().toString(36).slice(2, 9)}-${i}`;
@@ -97,6 +100,41 @@ export default function LessonViewer({
           <div id="${uid}" class="min-h-12"></div>
         </div>`;
       el.replaceWith(holder);
+
+      if (!raw) {
+        const target = holder.querySelector(`#${uid}`) as HTMLElement | null;
+        if (target) target.innerHTML = '<div class="text-red-600 text-sm">Aucun contenu Mermaid détecté.</div>';
+        return;
+      }
+
+      mermaid
+        .render(uid, raw)
+        .then(({ svg }) => {
+          const target = holder.querySelector(`#${uid}`) as HTMLElement | null;
+          if (target) target.innerHTML = svg;
+        })
+        .catch((err) => {
+          const target = holder.querySelector(`#${uid}`) as HTMLElement | null;
+          if (target)
+            target.innerHTML = `<div class="text-red-600 text-sm">Erreur Mermaid: ${String(err).slice(0, 200)}</div>`;
+        });
+    });
+
+    // Process code blocks with mermaid language
+    mermaidCodeBlocks.forEach((codeEl, i) => {
+      const preEl = codeEl.parentElement;
+      if (!preEl) return;
+
+      const raw = (codeEl.textContent || '').trim();
+      const uid = `mermaid-code-${Math.random().toString(36).slice(2, 9)}-${i}`;
+
+      const holder = document.createElement('div');
+      holder.className = 'my-6 flex justify-center';
+      holder.innerHTML = `
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border w-full overflow-auto">
+          <div id="${uid}" class="min-h-12"></div>
+        </div>`;
+      preEl.replaceWith(holder);
 
       if (!raw) {
         const target = holder.querySelector(`#${uid}`) as HTMLElement | null;
@@ -133,6 +171,52 @@ export default function LessonViewer({
       const root = createRoot(mount);
       root.render(<Comp />);
       roots.push(root);
+    });
+
+    // Improve table styling
+    const tables = container.querySelectorAll('table');
+    tables.forEach(table => {
+      table.className = 'min-w-full divide-y divide-gray-200 dark:divide-gray-700 my-6';
+      
+      // Style table header
+      const thead = table.querySelector('thead');
+      if (thead) {
+        thead.className = 'bg-gray-50 dark:bg-gray-800';
+        const thElements = thead.querySelectorAll('th');
+        thElements.forEach(th => {
+          th.className = 'px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider';
+        });
+      }
+
+      // Style table body
+      const tbody = table.querySelector('tbody');
+      if (tbody) {
+        tbody.className = 'bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700';
+        const trElements = tbody.querySelectorAll('tr');
+        trElements.forEach((tr, index) => {
+          tr.className = index % 2 === 0 ? 'bg-white dark:bg-gray-900' : 'bg-gray-50 dark:bg-gray-800';
+          const tdElements = tr.querySelectorAll('td');
+          tdElements.forEach(td => {
+            td.className = 'px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100';
+          });
+        });
+      }
+
+      // Wrap table in container for horizontal scroll
+      const wrapper = document.createElement('div');
+      wrapper.className = 'overflow-x-auto shadow ring-1 ring-black ring-opacity-5 dark:ring-white dark:ring-opacity-10 md:rounded-lg my-6';
+      table.parentNode?.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    });
+
+    // Improve code block styling
+    const codeBlocks = container.querySelectorAll('pre code:not(.language-mermaid)');
+    codeBlocks.forEach(code => {
+      const pre = code.parentElement;
+      if (pre) {
+        pre.className = 'bg-gray-900 dark:bg-gray-800 rounded-lg p-4 overflow-x-auto my-6 border border-gray-200 dark:border-gray-700';
+        code.className = 'text-sm text-gray-100 font-mono';
+      }
     });
 
     return () => {
