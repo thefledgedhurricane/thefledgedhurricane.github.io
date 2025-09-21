@@ -81,10 +81,6 @@ export default async function LessonPage({ params }: PageProps) {
   );
 }
 
-// Désactiver la génération statique temporairement pour résoudre l'erreur de pré-rendu
-export const dynamic = 'force-dynamic';
-
-/*
 export async function generateStaticParams() {
   const { courses } = await import('@/lib/lms-data');
   const params: { slug: string; lessonId: string }[] = [];
@@ -95,4 +91,3 @@ export async function generateStaticParams() {
   }
   return params;
 }
-*/

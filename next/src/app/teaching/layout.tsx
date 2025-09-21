@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import CurriculumSidebar from '@/components/lms/CurriculumSidebar';
-import TeachingMobileUI from '@/components/lms/TeachingMobileUI';
+import CurriculumSidebarSSR from '@/components/lms/CurriculumSidebarSSR';
+import TeachingMobileUISimple from '@/components/lms/TeachingMobileUISimple';
 
 export const metadata: Metadata = {
   title: {
@@ -20,12 +20,12 @@ export default function TeachingLayout({
       <div className="flex">
         {/* Sidebar - masqué sur mobile, fixe sur desktop */}
         <div className="hidden lg:block w-80 fixed h-screen overflow-y-auto bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700">
-          <CurriculumSidebar className="h-full" />
+          <CurriculumSidebarSSR />
         </div>
 
         {/* Contenu principal */}
         <div className="flex-1 lg:ml-80">
-          <TeachingMobileUI />
+          <TeachingMobileUISimple />
 
           {/* Contenu des pages */}
           {children}

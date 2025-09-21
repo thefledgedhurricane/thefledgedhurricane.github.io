@@ -154,13 +154,8 @@ export async function generateMetadata({ params }: PageProps) {
   } as any;
 }
 
-// Désactiver la génération statique temporairement pour résoudre l'erreur de pré-rendu
-export const dynamic = 'force-dynamic';
-
-/*
 export async function generateStaticParams() {
   // Static from local data
   const { courses } = await import('@/lib/lms-data');
   return courses.map((c) => ({ slug: c.id }));
 }
-*/
