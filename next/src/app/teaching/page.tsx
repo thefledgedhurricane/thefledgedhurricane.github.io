@@ -51,8 +51,8 @@ export default async function TeachingPage() {
               🧠 Formation Intelligence Artificielle
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8">
-              Apprenez l'IA avec une approche pédagogique structurée : prérequis clairs, 
-              progression logique et objectifs d'apprentissage définis.
+              Apprenez l&apos;IA avec une approche pédagogique structurée : prérequis clairs, 
+              progression logique et objectifs d&apos;apprentissage définis.
             </p>
             
             {/* Statistiques rapides */}
@@ -83,7 +83,7 @@ export default async function TeachingPage() {
           {/* Parcours d'apprentissage recommandés */}
           <section className="mb-16">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
-              🎯 Parcours d'apprentissage recommandés
+              🎯 Parcours d&apos;apprentissage recommandés
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {learningPaths.map((path) => (
@@ -177,8 +177,8 @@ export default async function TeachingPage() {
                 ) === slug);
 
                 const totalHours = categoryCourses.reduce((acc, course) => {
-                  const module = courseModules[course.id];
-                  return acc + (module?.estimatedHours || 0);
+                  const courseModule = courseModules[course.id];
+                  return acc + (courseModule?.estimatedHours || 0);
                 }, 0);
 
                 return (

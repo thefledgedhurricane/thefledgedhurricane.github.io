@@ -43,15 +43,15 @@ export default function SupervisedLearningDemo() {
   ];
 
   useEffect(() => {
-    if (step === 3) {
-      // Générer les prédictions
+    if (step === 2) {
+      // Generate predictions for visualization
       const newPredictions = newPoints.map(point => ({
-        ...point,
+        x: point.x,
         y: linearRegression(point.x)
       }));
       setPredictions(newPredictions);
     }
-  }, [step]);
+  }, [step, newPoints]);
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">

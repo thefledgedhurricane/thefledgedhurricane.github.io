@@ -13,6 +13,7 @@ export default function ClusteringDemo() {
   const [step, setStep] = useState(0);
   const [dataPoints, setDataPoints] = useState<DataPoint[]>([]);
   const [centroids, setCentroids] = useState<DataPoint[]>([]);
+  const k = 3; // Nombre de clusters
 
   const colors = ['#3B82F6', '#EF4444', '#10B981', '#F59E0B'];
 
@@ -54,20 +55,31 @@ export default function ClusteringDemo() {
     setDataPoints(generateClusterData());
   }, []);
 
-  const initializeCentroids = () => {
-    const newCentroids = [
-      { x: 25, y: 25, cluster: 0 },
-      { x: 55, y: 70, cluster: 1 },
-      { x: 40, y: 50, cluster: 2 }
-    ];
-    setCentroids(newCentroids);
-  };
+  const steps = [
+    'Données non étiquetées',
+    'Initialiser centroides',
+    'Assigner aux clusters',
+    'Mettre à jour centroides',
+    'Clusters finaux'
+  ];
 
-  const assignClusters = () => {
+  const initializeCentroids = useCallback(() => {
+    const newCentroids = [];
+    for (let i = 0; i < k; i++) {
+      newCentroids.push({
+        x: Math.random() * 400,
+        y: Math.random() * 300,
+        id: i,
+      });
+    }
+    setCentroids(newCentroids);
+  }, [k]);
+
+  const assignClusters = useCallback(() => {
     const newDataPoints = dataPoints.map(point => {
       let minDistance = Infinity;
       let assignedCluster = 0;
-
+      
       centroids.forEach((centroid, idx) => {
         const distance = Math.sqrt(
           Math.pow(point.x - centroid.x, 2) + Math.pow(point.y - centroid.y, 2)
@@ -77,34 +89,24 @@ export default function ClusteringDemo() {
           assignedCluster = idx;
         }
       });
-
+      
       return { ...point, cluster: assignedCluster };
     });
-
     setDataPoints(newDataPoints);
-  };
+  }, [dataPoints, centroids]);
 
-  const updateCentroids = () => {
+  const updateCentroids = useCallback(() => {
     const newCentroids = centroids.map((centroid, idx) => {
       const clusterPoints = dataPoints.filter(p => p.cluster === idx);
       if (clusterPoints.length === 0) return centroid;
-
+      
       const newX = clusterPoints.reduce((sum, p) => sum + p.x, 0) / clusterPoints.length;
       const newY = clusterPoints.reduce((sum, p) => sum + p.y, 0) / clusterPoints.length;
-
-      return { x: newX, y: newY, cluster: idx };
+      
+      return { ...centroid, x: newX, y: newY };
     });
-
     setCentroids(newCentroids);
-  };
-
-  const steps = [
-    'Données non étiquetées',
-    'Initialiser centroides',
-    'Assigner aux clusters',
-    'Mettre à jour centroides',
-    'Clusters finaux'
-  ];
+  }, [centroids, dataPoints]);
 
   const handleStep = useCallback(() => {
     if (step === 1) {

@@ -10,7 +10,7 @@ import {
   type LearningPath 
 } from '@/lib/curriculum-structure';
 import { courses } from '@/lib/lms-data';
-import { getProgress } from '@/lib/lms-storage';
+import { getCourseProgress, getCourseCompletionPercent } from '@/lib/lms-storage';
 
 interface CurriculumSidebarProps {
   className?: string;
@@ -38,10 +38,9 @@ export default function CurriculumSidebar({
   const currentPath = learningPaths.find(p => p.id === activePath);
 
   const getProgressPercentage = (courseId: string): number => {
-    // Simulation - dans la vraie app, calculer depuis localStorage
-    const completedLessons = Math.floor(Math.random() * 5);
-    const totalLessons = courses.find(c => c.id === courseId)?.lessons.length || 1;
-    return Math.round((completedLessons / totalLessons) * 100);
+    const course = courses.find(c => c.id === courseId);
+    if (!course) return 0;
+    return getCourseCompletionPercent(courseId, course.lessons.length);
   };
 
   const isCurrentCourse = (courseId: string): boolean => {
@@ -89,7 +88,7 @@ export default function CurriculumSidebar({
             📚 Curriculum IA
           </h2>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            Parcours d'apprentissage structuré
+            Parcours d&apos;apprentissage structuré
           </p>
         </div>
 
@@ -143,8 +142,8 @@ export default function CurriculumSidebar({
             
             {currentPath.courses.map((courseId, index) => {
               const course = courses.find(c => c.id === courseId);
-              const module = courseModules[courseId];
-              if (!course || !module) return null;
+              const courseModule = courseModules[courseId];
+              if (!course || !courseModule) return null;
 
               const status = getCourseStatus(courseId);
               const progress = getProgressPercentage(courseId);
@@ -204,7 +203,7 @@ export default function CurriculumSidebar({
                             ? 'text-gray-400'
                             : 'text-gray-600 dark:text-gray-400'
                         }`}>
-                          {module.description}
+                          {courseModule.description}
                         </p>
 
                         {/* Barre de progression */}
@@ -224,7 +223,7 @@ export default function CurriculumSidebar({
 
                         {/* Métadonnées */}
                         <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
-                          <span>⏱️ {module.estimatedHours}h</span>
+                          <span>⏱️ {courseModule.estimatedHours}h</span>
                           <span className={`px-2 py-0.5 rounded-full ${getDifficultyColor(course.level)}`}>
                             {course.level}
                           </span>

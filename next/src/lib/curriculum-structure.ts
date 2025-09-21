@@ -481,10 +481,10 @@ export function checkPrerequisites(courseId: string, completedCourses: string[])
   satisfied: boolean;
   missing: Prerequisite[];
 } {
-  const module = courseModules[courseId];
-  if (!module) return { satisfied: true, missing: [] };
+  const courseModule = courseModules[courseId];
+  if (!courseModule) return { satisfied: true, missing: [] };
   
-  const missing = module.prerequisites.filter(prereq => {
+  const missing = courseModule.prerequisites.filter(prereq => {
     if (prereq.type === 'course') {
       return !completedCourses.includes(prereq.id);
     }
