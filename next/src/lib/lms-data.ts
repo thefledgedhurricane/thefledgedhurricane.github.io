@@ -57,19 +57,13 @@ export const courses: Course[] = [
         id: 'bases-langages',
         title: 'Variables, types et contrôle de flux',
         durationMinutes: 35,
-        html:
-          '<h2 class="text-2xl font-semibold mb-4">Concepts fondamentaux</h2>' +
-          '<ul class="list-disc pl-6 mb-4"><li>Variables et types (entiers, flottants, booléens, chaînes)</li><li>Contrôle de flux (if/else, switch)</li><li>Boucles (for, while)</li></ul>' +
-          '<pre><code>// Exemple (pseudo-code)\nlet x = 10;\nif (x &gt; 5) {\n  print("grand");\n} else {\n  print("petit");\n}</code></pre>',
+        contentFile: 'bases-langages',
       },
       {
         id: 'fonctions-structures',
         title: 'Fonctions et structures de données',
         durationMinutes: 40,
-        html:
-          '<h2 class="text-2xl font-semibold mb-4">Abstraction et modularité</h2>' +
-          '<p class="mb-4">Définir des fonctions réutilisables et manipuler listes, dictionnaires, ensembles.</p>' +
-          '<pre><code>// Exemple (pseudo-code)\nfunction somme(liste) {\n  let s = 0;\n  for (v in liste) s += v;\n  return s;\n}</code></pre>',
+        contentFile: 'fonctions-structures',
       },
     ],
   },
@@ -88,19 +82,13 @@ export const courses: Course[] = [
         id: 'html-css',
         title: 'HTML & CSS essentiels',
         durationMinutes: 35,
-        html:
-          '<h2 class="text-2xl font-semibold mb-4">Structure et style</h2>' +
-          '<p class="mb-4">Balises, sémantique, layout, responsive, accessibilité.</p>' +
-          '<pre><code>&lt;header&gt;Titre&lt;/header&gt;\n&lt;main&gt;Contenu&lt;/main&gt;\n&lt;footer&gt;Pied&lt;/footer&gt;</code></pre>',
+        contentFile: 'html-css',
       },
       {
         id: 'javascript-bases',
         title: 'JavaScript de base',
         durationMinutes: 40,
-        html:
-          '<h2 class="text-2xl font-semibold mb-4">JS pour le web</h2>' +
-          '<p class="mb-4">DOM, événements, fetch API, module bundlers (aperçu).</p>' +
-          '<pre><code>document.querySelector("button").addEventListener("click", () =&gt; alert("Hi"));</code></pre>',
+        contentFile: 'javascript-bases',
       },
     ],
   },
@@ -119,17 +107,13 @@ export const courses: Course[] = [
         id: 'react-fondamentaux',
         title: 'React — composants et état',
         durationMinutes: 45,
-        html:
-          '<h2 class="text-2xl font-semibold mb-4">Composants</h2>' +
-          '<p class="mb-4">JSX, props, state, effets, composition et hooks de base.</p>',
+        contentFile: 'react-fondamentaux',
       },
       {
         id: 'nextjs-rendu',
         title: 'Next.js — rendu & données',
         durationMinutes: 45,
-        html:
-          '<h2 class="text-2xl font-semibold mb-4">App Router</h2>' +
-          '<p class="mb-4">File-based routing, SSG/SSR, actions, optimisations et déploiement.</p>',
+        contentFile: 'nextjs-rendu',
       },
     ],
   },
