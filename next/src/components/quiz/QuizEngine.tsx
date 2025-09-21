@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { saveQuizScore } from '@/lib/lms-storage';
 
 export interface QuizQuestion {
@@ -51,57 +51,7 @@ export default function QuizEngine({ quiz, onComplete, className = '' }: QuizEng
   const totalQuestions = quiz.questions.length;
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
 
-  // Timer effect
-  useEffect(() => {
-    if (quizStarted && !quizCompleted && timeLeft !== null && timeLeft > 0) {
-      const timer = setInterval(() => {
-        setTimeLeft(prev => {
-          if (prev && prev <= 1) {
-            handleQuizSubmit();
-            return 0;
-          }
-          return prev ? prev - 1 : 0;
-        });
-      }, 1000);
-
-      return () => clearInterval(timer);
-    }
-  }, [quizStarted, quizCompleted, timeLeft]);
-
-  const startQuiz = () => {
-    setQuizStarted(true);
-    setTimeLeft(quiz.timeLimit ? quiz.timeLimit * 60 : null);
-  };
-
-  const handleAnswer = (answer: any) => {
-    setAnswers(prev => ({
-      ...prev,
-      [currentQuestion.id]: answer
-    }));
-  };
-
-  const useHint = (questionId: string) => {
-    setUsedHints(prev => ({
-      ...prev,
-      [questionId]: (prev[questionId] || 0) + 1
-    }));
-  };
-
-  const nextQuestion = () => {
-    if (currentQuestionIndex < totalQuestions - 1) {
-      setCurrentQuestionIndex(prev => prev + 1);
-    } else {
-      handleQuizSubmit();
-    }
-  };
-
-  const previousQuestion = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(prev => prev - 1);
-    }
-  };
-
-  const calculateScore = () => {
+  const calculateScore = useCallback(() => {
     let totalPoints = 0;
     let earnedPoints = 0;
 
@@ -129,9 +79,9 @@ export default function QuizEngine({ quiz, onComplete, className = '' }: QuizEng
               : [question.correctAnswer];
             const userAnswers = Array.isArray(userAnswer) ? userAnswer : [userAnswer];
             
-            const correctCount = userAnswers.filter(ans => 
-              correctAnswers.some(correct => 
-                ans.toLowerCase().trim() === correct.toLowerCase().trim()
+            const correctCount = userAnswers.filter((ans: any) => 
+              correctAnswers.some((correct: any) => 
+                String(ans).toLowerCase().trim() === String(correct).toLowerCase().trim()
               )
             ).length;
             
@@ -155,7 +105,7 @@ export default function QuizEngine({ quiz, onComplete, className = '' }: QuizEng
             
           case 'code-completion':
             // Pour le code, on peut faire une vérification simple ou utiliser un système plus sophistiqué
-            if (userAnswer.toLowerCase().includes(question.correctAnswer.toString().toLowerCase())) {
+            if (String(userAnswer).toLowerCase().includes(String(question.correctAnswer).toLowerCase())) {
               questionPoints = question.points * (1 - hintPenalty);
             }
             break;
@@ -167,9 +117,9 @@ export default function QuizEngine({ quiz, onComplete, className = '' }: QuizEng
 
     const percentage = totalPoints > 0 ? (earnedPoints / totalPoints) * 100 : 0;
     return Math.round(percentage);
-  };
+  }, [quiz.questions, answers, usedHints]);
 
-  const handleQuizSubmit = () => {
+  const handleQuizSubmit = useCallback(() => {
     const finalScore = calculateScore();
     const passed = finalScore >= quiz.passingScore;
     
@@ -181,6 +131,60 @@ export default function QuizEngine({ quiz, onComplete, className = '' }: QuizEng
     saveQuizScore(quiz.courseId, quiz.lessonId, finalScore);
     
     onComplete(finalScore, passed);
+  }, [calculateScore, quiz.passingScore, quiz.courseId, quiz.lessonId, onComplete]);
+
+  // Timer effect
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    
+    if (quizStarted && timeLeft && timeLeft > 0) {
+      timer = setInterval(() => {
+        setTimeLeft(prev => {
+          if (prev && prev <= 1) {
+            handleQuizSubmit();
+            return 0;
+          }
+          return prev ? prev - 1 : 0;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [quizStarted, timeLeft, handleQuizSubmit]);
+
+  const startQuiz = () => {
+    setQuizStarted(true);
+    setTimeLeft(quiz.timeLimit ? quiz.timeLimit * 60 : null);
+  };
+
+  const handleAnswer = (answer: any) => {
+    setAnswers(prev => ({
+      ...prev,
+      [currentQuestion.id]: answer
+    }));
+  };
+
+  const showHint = (questionId: string) => {
+    setUsedHints(prev => ({
+      ...prev,
+      [questionId]: (prev[questionId] || 0) + 1
+    }));
+  };
+
+  const nextQuestion = () => {
+    if (currentQuestionIndex < totalQuestions - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+    } else {
+      handleQuizSubmit();
+    }
+  };
+
+  const previousQuestion = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(prev => prev - 1);
+    }
   };
 
   const formatTime = (seconds: number) => {
@@ -433,7 +437,7 @@ export default function QuizEngine({ quiz, onComplete, className = '' }: QuizEng
         {currentQuestion.hints && currentQuestion.hints.length > 0 && (
           <div className="mb-4">
             <button
-              onClick={() => useHint(currentQuestion.id)}
+              onClick={() => showHint(currentQuestion.id)}
               disabled={(usedHints[currentQuestion.id] || 0) >= currentQuestion.hints.length}
               className="text-sm text-blue-600 hover:text-blue-800 disabled:text-gray-400 disabled:cursor-not-allowed"
             >

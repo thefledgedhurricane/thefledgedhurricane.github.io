@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface SortingVisualizerProps {
   algorithm: 'bubble' | 'selection' | 'insertion' | 'quick' | 'merge';
@@ -29,7 +29,7 @@ export default function SortingVisualizer({ algorithm, className = '' }: Sorting
     merge: 'Tri Fusion'
   };
 
-  const generateRandomArray = () => {
+  const generateRandomArray = useCallback(() => {
     const newArray = Array.from({ length: arraySize }, () => ({
       value: Math.floor(Math.random() * 300) + 10,
       color: 'default' as const
@@ -37,11 +37,11 @@ export default function SortingVisualizer({ algorithm, className = '' }: Sorting
     setArray(newArray);
     setCurrentStep(0);
     setTotalSteps(0);
-  };
+  }, [arraySize]);
 
   useEffect(() => {
     generateRandomArray();
-  }, [arraySize]);
+  }, [arraySize, generateRandomArray]);
 
   const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 

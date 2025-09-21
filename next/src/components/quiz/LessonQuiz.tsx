@@ -40,7 +40,11 @@ export default function LessonQuiz({ courseId, lessonId, className = '' }: Lesso
       localStorage.setItem(`quiz_${selectedQuiz.id}_passed`, passed.toString());
       
       if (passed) {
-        setCompletedQuizzes(prev => new Set([...prev, selectedQuiz.id]));
+        setCompletedQuizzes(prev => {
+          const newSet = new Set(prev);
+          newSet.add(selectedQuiz.id);
+          return newSet;
+        });
       }
     }
   };
@@ -82,7 +86,7 @@ export default function LessonQuiz({ courseId, lessonId, className = '' }: Lesso
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
-        <h3 className="text-lg font-semibold text-gray-900">Quiz d'Évaluation</h3>
+        <h3 className="text-lg font-semibold text-gray-900">Quiz d&apos;Évaluation</h3>
       </div>
       
       <p className="text-gray-600 mb-6">
@@ -154,7 +158,7 @@ export default function LessonQuiz({ courseId, lessonId, className = '' }: Lesso
               <li>• Relisez attentivement le contenu de la leçon avant de commencer</li>
               <li>• Utilisez les indices disponibles si vous êtes bloqué</li>
               <li>• Prenez votre temps pour bien comprendre chaque question</li>
-              <li>• N'hésitez pas à refaire le quiz pour améliorer votre score</li>
+              <li>• N&apos;hésitez pas à refaire le quiz pour améliorer votre score</li>
             </ul>
           </div>
         </div>

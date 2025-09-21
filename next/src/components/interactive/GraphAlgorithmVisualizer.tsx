@@ -48,6 +48,7 @@ export default function GraphAlgorithmVisualizer({ algorithm, className = '' }: 
   // Initialiser un graphe exemple
   useEffect(() => {
     initializeGraph();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const initializeGraph = () => {
@@ -291,12 +292,12 @@ export default function GraphAlgorithmVisualizer({ algorithm, className = '' }: 
       let current = '';
       let minDistance = Infinity;
       
-      for (const nodeId of unvisited) {
+      unvisited.forEach(nodeId => {
         if (distances[nodeId] < minDistance) {
           minDistance = distances[nodeId];
           current = nodeId;
         }
-      }
+      });
 
       if (minDistance === Infinity) break; // Graphe déconnecté
 
@@ -628,7 +629,7 @@ export default function GraphAlgorithmVisualizer({ algorithm, className = '' }: 
 
       {/* Journal des opérations */}
       <div className="bg-gray-50 rounded-lg p-4">
-        <h4 className="font-medium text-gray-900 mb-2">Journal d'exécution :</h4>
+        <h4 className="font-medium text-gray-900 mb-2">Journal d&apos;exécution :</h4>
         <div className="max-h-40 overflow-y-auto space-y-1">
           {log.length === 0 ? (
             <div className="text-gray-500 text-sm">Aucune opération en cours</div>

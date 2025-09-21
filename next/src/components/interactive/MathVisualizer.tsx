@@ -30,12 +30,14 @@ export default function MathVisualizer({ type, className = '' }: MathVisualizerP
   // Initialisation selon le type
   useEffect(() => {
     initializeVisualization();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type]);
 
   useEffect(() => {
     if (canvasRef.current) {
       draw();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [parameters, data, type]);
 
   const initializeVisualization = () => {
@@ -629,7 +631,7 @@ export default function MathVisualizer({ type, className = '' }: MathVisualizerP
               <span className="text-xs text-gray-600">{(parameters.x || 0).toFixed(1)}</span>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Taux d'apprentissage</label>
+              <label className="block text-sm font-medium text-gray-700">Taux d&apos;apprentissage</label>
               <input
                 type="range"
                 min="0.01"
@@ -717,7 +719,7 @@ export default function MathVisualizer({ type, className = '' }: MathVisualizerP
         {type === 'gradient' && (
           <div className="mb-4">
             <div className="flex items-center space-x-4">
-              <label className="text-sm font-medium text-gray-700">Vitesse d'animation :</label>
+              <label className="text-sm font-medium text-gray-700">Vitesse d&apos;animation :</label>
               <input
                 type="range"
                 min="1"
@@ -824,7 +826,7 @@ export default function MathVisualizer({ type, className = '' }: MathVisualizerP
             {type === 'distribution' && (
               <>
                 <p>• Tests statistiques</p>
-                <p>• Modélisation d'incertitudes</p>
+                <p>• Modélisation d&apos;incertitudes</p>
                 <p>• Contrôle qualité</p>
               </>
             )}
@@ -845,7 +847,7 @@ export default function MathVisualizer({ type, className = '' }: MathVisualizerP
             {type === 'fourier' && (
               <>
                 <p>• Traitement du signal</p>
-                <p>• Compression d'images</p>
+                <p>• Compression d&apos;images</p>
                 <p>• Analyse spectrale</p>
               </>
             )}

@@ -37,6 +37,7 @@ export default function DataStructureVisualizer({ type, className = '' }: DataSt
   // Initialisation selon le type
   useEffect(() => {
     initializeStructure();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type]);
 
   const initializeStructure = () => {

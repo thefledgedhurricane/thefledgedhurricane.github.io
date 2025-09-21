@@ -27,7 +27,7 @@ export default function InteractiveDemo({ category = 'all', className = '' }: In
         { id: 'bubble', name: 'Tri à Bulles', description: 'Algorithme simple comparant les éléments adjacents' },
         { id: 'selection', name: 'Tri par Sélection', description: 'Trouve le minimum et le place au début' },
         { id: 'insertion', name: 'Tri par Insertion', description: 'Insère chaque élément à sa place dans la partie triée' },
-        { id: 'quick', name: 'Tri Rapide', description: 'Divise autour d\'un pivot et trie récursivement' },
+        { id: 'quick', name: 'Tri Rapide', description: 'Divise autour d&apos;un pivot et trie récursivement' },
         { id: 'merge', name: 'Tri Fusion', description: 'Divise puis fusionne les parties triées' }
       ]
     },
@@ -36,7 +36,7 @@ export default function InteractiveDemo({ category = 'all', className = '' }: In
       demos: [
         { id: 'bst', name: 'Arbre Binaire de Recherche', description: 'Structure arborescente pour la recherche efficace' },
         { id: 'heap', name: 'Tas (Heap)', description: 'Arbre binaire complet avec propriété de tas' },
-        { id: 'linkedList', name: 'Liste Chaînée', description: 'Séquence d\'éléments liés par des pointeurs' },
+        { id: 'linkedList', name: 'Liste Chaînée', description: 'Séquence d&apos;éléments liés par des pointeurs' },
         { id: 'stack', name: 'Pile (Stack)', description: 'Structure LIFO (Last In, First Out)' },
         { id: 'queue', name: 'File (Queue)', description: 'Structure FIFO (First In, First Out)' }
       ]
@@ -178,7 +178,7 @@ export default function InteractiveDemo({ category = 'all', className = '' }: In
                       <>
                         <li>• Comprendre les différentes approches de tri</li>
                         <li>• Analyser la complexité temporelle et spatiale</li>
-                        <li>• Visualiser l'évolution des algorithmes</li>
+                        <li>• Visualiser l&apos;évolution des algorithmes</li>
                         <li>• Comparer les performances relatives</li>
                       </>
                     )}
@@ -186,7 +186,7 @@ export default function InteractiveDemo({ category = 'all', className = '' }: In
                       <>
                         <li>• Maîtriser les structures de données fondamentales</li>
                         <li>• Comprendre les opérations et leur complexité</li>
-                        <li>• Visualiser l'organisation des données</li>
+                        <li>• Visualiser l&apos;organisation des données</li>
                         <li>• Choisir la structure adaptée au problème</li>
                       </>
                     )}
@@ -194,7 +194,7 @@ export default function InteractiveDemo({ category = 'all', className = '' }: In
                       <>
                         <li>• Comprendre les algorithmes de parcours</li>
                         <li>• Maîtriser la recherche de chemins</li>
-                        <li>• Analyser les stratégies d'exploration</li>
+                        <li>• Analyser les stratégies d&apos;exploration</li>
                         <li>• Optimiser les performances de recherche</li>
                       </>
                     )}
@@ -203,18 +203,18 @@ export default function InteractiveDemo({ category = 'all', className = '' }: In
                         <li>• Visualiser les concepts mathématiques abstraits</li>
                         <li>• Comprendre les liens théorie-pratique</li>
                         <li>• Expérimenter avec les paramètres</li>
-                        <li>• Développer l'intuition mathématique</li>
+                        <li>• Développer l&apos;intuition mathématique</li>
                       </>
                     )}
                   </ul>
                 </div>
 
                 <div>
-                  <h5 className="font-medium text-gray-900 mb-2">💡 Conseils d'utilisation</h5>
+                  <h5 className="font-medium text-gray-900 mb-2">💡 Conseils d&apos;utilisation</h5>
                   <ul className="text-sm text-gray-700 space-y-1">
                     <li>• Commencez par les exemples simples</li>
-                    <li>• Modifiez les paramètres pour voir l'impact</li>
-                    <li>• Observez les étapes d'exécution</li>
+                    <li>• Modifiez les paramètres pour voir l&apos;impact</li>
+                    <li>• Observez les étapes d&apos;exécution</li>
                     <li>• Comparez les différentes approches</li>
                     <li>• Prenez des notes sur vos observations</li>
                     <li>• Testez vos hypothèses avec la visualisation</li>
@@ -228,28 +228,28 @@ export default function InteractiveDemo({ category = 'all', className = '' }: In
                 <div className="text-sm text-purple-800 space-y-2">
                   {categoryKey === 'algorithms' && (
                     <>
-                      <p><strong>Défi 1 :</strong> Comparez les temps d'exécution pour différentes tailles de tableaux</p>
+                      <p><strong>Défi 1 :</strong> Comparez les temps d&apos;exécution pour différentes tailles de tableaux</p>
                       <p><strong>Défi 2 :</strong> Identifiez les cas où chaque algorithme est optimal</p>
-                      <p><strong>Défi 3 :</strong> Prédisez le nombre d'opérations avant d'exécuter</p>
+                      <p><strong>Défi 3 :</strong> Prédisez le nombre d&apos;opérations avant d&apos;exécuter</p>
                     </>
                   )}
                   {categoryKey === 'dataStructures' && (
                     <>
                       <p><strong>Défi 1 :</strong> Implémentez mentalement chaque opération</p>
                       <p><strong>Défi 2 :</strong> Prédisez la complexité de chaque opération</p>
-                      <p><strong>Défi 3 :</strong> Identifiez les cas d'usage optimaux</p>
+                      <p><strong>Défi 3 :</strong> Identifiez les cas d&apos;usage optimaux</p>
                     </>
                   )}
                   {categoryKey === 'graphs' && (
                     <>
-                      <p><strong>Défi 1 :</strong> Prédisez l'ordre de visite des nœuds</p>
+                      <p><strong>Défi 1 :</strong> Prédisez l&apos;ordre de visite des nœuds</p>
                       <p><strong>Défi 2 :</strong> Comparez les chemins trouvés par chaque algorithme</p>
-                      <p><strong>Défi 3 :</strong> Modifiez les poids et observez l'impact</p>
+                      <p><strong>Défi 3 :</strong> Modifiez les poids et observez l&apos;impact</p>
                     </>
                   )}
                   {categoryKey === 'math' && (
                     <>
-                      <p><strong>Défi 1 :</strong> Prédisez l'effet de chaque paramètre</p>
+                      <p><strong>Défi 1 :</strong> Prédisez l&apos;effet de chaque paramètre</p>
                       <p><strong>Défi 2 :</strong> Identifiez les relations mathématiques</p>
                       <p><strong>Défi 3 :</strong> Trouvez des applications réelles</p>
                     </>
@@ -268,9 +268,9 @@ export default function InteractiveDemo({ category = 'all', className = '' }: In
           <div>
             <h5 className="font-medium mb-1">Livres recommandés :</h5>
             <ul className="space-y-1">
-              <li>• "Introduction to Algorithms" (CLRS)</li>
-              <li>• "Algorithms" par Robert Sedgewick</li>
-              <li>• "The Algorithm Design Manual" par Skiena</li>
+              <li>• &ldquo;Introduction to Algorithms&rdquo; (CLRS)</li>
+              <li>• &ldquo;Algorithms&rdquo; par Robert Sedgewick</li>
+              <li>• &ldquo;The Algorithm Design Manual&rdquo; par Skiena</li>
             </ul>
           </div>
           <div>
