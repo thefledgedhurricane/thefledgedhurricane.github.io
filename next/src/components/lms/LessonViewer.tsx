@@ -72,11 +72,15 @@ export default function LessonViewer({
     const container = document.getElementById('lesson-html');
     if (!container) return;
 
-    // Initialize Mermaid once
+    // Detect theme (dark or light)
+    const isDark = document.documentElement.classList.contains('dark') ||
+      window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+
+    // Initialize Mermaid (idempotent)
     try {
       mermaid.initialize({
         startOnLoad: false,
-        theme: 'default',
+        theme: isDark ? 'dark' : 'default',
         securityLevel: 'loose',
         fontFamily: 'system-ui, -apple-system, Segoe UI, Roboto, sans-serif',
       });
@@ -85,12 +89,14 @@ export default function LessonViewer({
     }
 
     // Handle Mermaid diagrams: both [data-mermaid] elements and code blocks
-    const mermaidElements = Array.from(container.querySelectorAll('[data-mermaid]')) as HTMLElement[];
+  const mermaidElements = Array.from(container.querySelectorAll('[data-mermaid]')) as HTMLElement[];
     const mermaidCodeBlocks = Array.from(container.querySelectorAll('pre code.language-mermaid')) as HTMLElement[];
     
     // Process data-mermaid elements
     mermaidElements.forEach((el, i) => {
-      const raw = (el.textContent || '').trim();
+      // Prefer inner code content if present
+      const codeChild = el.querySelector('code');
+      const raw = codeChild ? (codeChild.textContent || '').trim() : (el.textContent || '').trim();
       const uid = `mermaid-${Math.random().toString(36).slice(2, 9)}-${i}`;
 
       const holder = document.createElement('div');

@@ -44,10 +44,100 @@ export type Course = {
 
 export const courses: Course[] = [
   {
+    id: 'programmation-fondamentale',
+    title: 'Programmation fondamentale',
+    level: 'beginner',
+    category: 'Intelligence artificielle',
+    description:
+      'Bases des langages de programmation: variables, types, contrôle de flux, fonctions, structures de données.',
+    estimatedHours: 8,
+    prerequisites: [],
+    lessons: [
+      {
+        id: 'bases-langages',
+        title: 'Variables, types et contrôle de flux',
+        durationMinutes: 35,
+        html:
+          '<h2 class="text-2xl font-semibold mb-4">Concepts fondamentaux</h2>' +
+          '<ul class="list-disc pl-6 mb-4"><li>Variables et types (entiers, flottants, booléens, chaînes)</li><li>Contrôle de flux (if/else, switch)</li><li>Boucles (for, while)</li></ul>' +
+          '<pre><code>// Exemple (pseudo-code)\nlet x = 10;\nif (x &gt; 5) {\n  print("grand");\n} else {\n  print("petit");\n}</code></pre>',
+      },
+      {
+        id: 'fonctions-structures',
+        title: 'Fonctions et structures de données',
+        durationMinutes: 40,
+        html:
+          '<h2 class="text-2xl font-semibold mb-4">Abstraction et modularité</h2>' +
+          '<p class="mb-4">Définir des fonctions réutilisables et manipuler listes, dictionnaires, ensembles.</p>' +
+          '<pre><code>// Exemple (pseudo-code)\nfunction somme(liste) {\n  let s = 0;\n  for (v in liste) s += v;\n  return s;\n}</code></pre>',
+      },
+    ],
+  },
+
+  {
+    id: 'dev-web-bases',
+    title: 'Développement web — bases',
+    level: 'beginner',
+    category: 'Intelligence artificielle',
+    description:
+      'HTML/CSS/JS fondamentaux, HTTP, modèles client-serveur et bonnes pratiques front-end.',
+    estimatedHours: 8,
+    prerequisites: ['Programmation fondamentale'],
+    lessons: [
+      {
+        id: 'html-css',
+        title: 'HTML & CSS essentiels',
+        durationMinutes: 35,
+        html:
+          '<h2 class="text-2xl font-semibold mb-4">Structure et style</h2>' +
+          '<p class="mb-4">Balises, sémantique, layout, responsive, accessibilité.</p>' +
+          '<pre><code>&lt;header&gt;Titre&lt;/header&gt;\n&lt;main&gt;Contenu&lt;/main&gt;\n&lt;footer&gt;Pied&lt;/footer&gt;</code></pre>',
+      },
+      {
+        id: 'javascript-bases',
+        title: 'JavaScript de base',
+        durationMinutes: 40,
+        html:
+          '<h2 class="text-2xl font-semibold mb-4">JS pour le web</h2>' +
+          '<p class="mb-4">DOM, événements, fetch API, module bundlers (aperçu).</p>' +
+          '<pre><code>document.querySelector("button").addEventListener("click", () =&gt; alert("Hi"));</code></pre>',
+      },
+    ],
+  },
+
+  {
+    id: 'frameworks-web',
+    title: 'Frameworks web',
+    level: 'intermediate',
+    category: 'Intelligence artificielle',
+    description:
+      'Découvrir les frameworks modernes: React/Next.js, écosystème, routing, data fetching et déploiement.',
+    estimatedHours: 10,
+    prerequisites: ['Développement web — bases'],
+    lessons: [
+      {
+        id: 'react-fondamentaux',
+        title: 'React — composants et état',
+        durationMinutes: 45,
+        html:
+          '<h2 class="text-2xl font-semibold mb-4">Composants</h2>' +
+          '<p class="mb-4">JSX, props, state, effets, composition et hooks de base.</p>',
+      },
+      {
+        id: 'nextjs-rendu',
+        title: 'Next.js — rendu & données',
+        durationMinutes: 45,
+        html:
+          '<h2 class="text-2xl font-semibold mb-4">App Router</h2>' +
+          '<p class="mb-4">File-based routing, SSG/SSR, actions, optimisations et déploiement.</p>',
+      },
+    ],
+  },
+  {
     id: 'intro-ia',
     title: "Introduction à l'Intelligence Artificielle",
     level: 'beginner',
-    category: 'IA',
+  category: 'Intelligence artificielle',
     description:
       "Découvrez les bases de l'IA: historique, types d'approches, problématiques clés et cas d'usage.",
     estimatedHours: 6,
@@ -144,7 +234,7 @@ export const courses: Course[] = [
     id: 'statistiques-pour-ia',
     title: 'Statistiques pour l’IA',
     level: 'beginner',
-    category: 'Maths',
+  category: 'Intelligence artificielle',
     description:
       'Bases indispensables: variables, statistiques descriptives, probabilités, distributions et inférence.',
     estimatedHours: 10,
@@ -360,7 +450,7 @@ export const courses: Course[] = [
     id: 'apprentissage-supervise',
     title: 'Apprentissage supervisé',
     level: 'intermediate',
-    category: 'ML',
+  category: 'Intelligence artificielle',
     description:
       'Régression, classification, régularisation et optimisation pour problèmes supervisés.',
     estimatedHours: 12,
@@ -470,7 +560,7 @@ export const courses: Course[] = [
     id: 'apprentissage-non-supervise',
     title: 'Apprentissage non supervisé',
     level: 'intermediate',
-    category: 'ML',
+  category: 'Intelligence artificielle',
     description: 'Clustering, réduction de dimension et méthodes de densité.',
     estimatedHours: 8,
     prerequisites: ['Statistiques pour l’IA'],
@@ -553,7 +643,7 @@ export const courses: Course[] = [
     id: 'deep-learning',
     title: 'Réseaux de neurones profonds',
     level: 'advanced',
-    category: 'DL',
+  category: 'Intelligence artificielle',
     description: 'Perceptrons, CNN, RNN/LSTM et Transformers.',
     estimatedHours: 14,
   passThreshold: 80,
@@ -632,7 +722,7 @@ export const courses: Course[] = [
     id: 'recherche-et-planification',
     title: 'Recherche et planification (A*, heuristiques)',
     level: 'intermediate',
-    category: 'IA classique',
+  category: 'Intelligence artificielle',
     description: 'Graphes d\'états, heuristiques admissibles/consistantes, A* et variantes.',
     estimatedHours: 8,
     prerequisites: ['Théorie des graphes (bases)'],
@@ -699,7 +789,7 @@ export const courses: Course[] = [
     id: 'apprentissage-par-renforcement',
     title: 'Apprentissage par renforcement',
     level: 'advanced',
-    category: 'RL',
+  category: 'Intelligence artificielle',
     description: 'MDP, politiques, Q-learning et fonctions de valeur.',
     estimatedHours: 10,
     prerequisites: ['Probabilités (rappels)'],
@@ -751,7 +841,7 @@ export const courses: Course[] = [
     id: 'nlp',
     title: 'Traitement automatique du langage (NLP)',
     level: 'intermediate',
-    category: 'NLP',
+  category: 'Intelligence artificielle',
     description: 'Représentations, modèles séquentiels et Transformers.',
     estimatedHours: 8,
     prerequisites: ['Réseaux de neurones profonds'],
@@ -799,7 +889,7 @@ export const courses: Course[] = [
     id: 'vision',
     title: 'Vision par ordinateur',
     level: 'intermediate',
-    category: 'CV',
+  category: 'Intelligence artificielle',
     description: 'Convolutions, détection et segmentation.',
     estimatedHours: 8,
     prerequisites: ['Réseaux de neurones profonds'],
@@ -849,7 +939,7 @@ export const courses: Course[] = [
     id: 'ethique-mlops',
     title: 'Éthique, biais et MLOps',
     level: 'beginner',
-    category: 'Pratique',
+  category: 'Intelligence artificielle',
     description: 'Biais de données, équité, reproductibilité et déploiement.',
     estimatedHours: 6,
     prerequisites: [],
@@ -895,7 +985,7 @@ export const courses: Course[] = [
     id: 'web-avance',
     title: 'Développement Web Avancé (Front-end only LMS)',
     level: 'intermediate',
-    category: 'Web',
+  category: 'Intelligence artificielle',
     description:
       'Créez une mini-plateforme LMS côté client avec React/Next.js, localStorage et UI moderne.',
     estimatedHours: 8,

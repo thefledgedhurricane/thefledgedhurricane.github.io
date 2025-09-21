@@ -112,6 +112,8 @@ export const learningPaths: LearningPath[] = [
     estimatedWeeks: 4,
     difficulty: 'débutant',
     courses: [
+      'programmation-fondamentale',
+      'dev-web-bases',
       'intro-ia',
       'statistiques-pour-ia', 
       'apprentissage-supervise',
@@ -126,6 +128,9 @@ export const learningPaths: LearningPath[] = [
     estimatedWeeks: 8,
     difficulty: 'intermédiaire',
     courses: [
+      'programmation-fondamentale',
+      'dev-web-bases',
+      'frameworks-web',
       'statistiques-pour-ia',
       'apprentissage-supervise',
       'apprentissage-non-supervise', 
@@ -184,6 +189,74 @@ export const learningPaths: LearningPath[] = [
 
 // Structure modulaire enrichie des cours
 export const courseModules: Record<string, CourseModule> = {
+  'programmation-fondamentale': {
+    id: 'programmation-fondamentale',
+    name: 'Programmation fondamentale',
+    description: 'Variables, types, contrôle de flux, fonctions et structures de données dans un langage moderne.',
+    estimatedHours: 8,
+    prerequisites: [
+      {
+        type: 'concept',
+        id: 'computer-basics',
+        name: 'Bases de l\'informatique',
+        description: 'Système d\'exploitation, terminal, éditeur de code',
+        essential: false
+      }
+    ],
+    learningObjectives: [
+      'Écrire des programmes simples (IO, conditions, boucles)',
+      'Utiliser fonctions et modules pour structurer le code',
+      'Manipuler listes, dictionnaires, ensembles et chaînes',
+      'Comprendre les erreurs courantes et le débogage de base'
+    ],
+    nextRecommendations: ['dev-web-bases', 'statistiques-pour-ia']
+  },
+
+  'dev-web-bases': {
+    id: 'dev-web-bases',
+    name: 'Développement web — bases',
+    description: 'HTML, CSS et JavaScript fondamentaux, HTTP et modèles client-serveur.',
+    estimatedHours: 8,
+    prerequisites: [
+      {
+        type: 'course',
+        id: 'programmation-fondamentale',
+        name: 'Programmation fondamentale',
+        description: 'Notions de base en programmation',
+        essential: true
+      }
+    ],
+    learningObjectives: [
+      'Structurer une page avec HTML sémantique',
+      'Styliser avec CSS (flexbox, grid, responsive)',
+      'Programmer des interactions DOM en JavaScript',
+      'Comprendre HTTP, requêtes fetch et JSON'
+    ],
+    nextRecommendations: ['frameworks-web', 'intro-ia']
+  },
+
+  'frameworks-web': {
+    id: 'frameworks-web',
+    name: 'Frameworks web',
+    description: 'Découvrir React/Next.js : composants, état, routing et data fetching.',
+    estimatedHours: 10,
+    prerequisites: [
+      {
+        type: 'course',
+        id: 'dev-web-bases',
+        name: 'Développement web — bases',
+        description: 'HTML/CSS/JS essentiels',
+        essential: true
+      }
+    ],
+    learningObjectives: [
+      'Créer des composants React avec état et effets',
+      'Utiliser Next.js (routing, SSG/SSR, assets)',
+      'Gérer des appels API et l\'affichage de données',
+      'Déployer une application web basique'
+    ],
+    nextRecommendations: ['web-avance', 'deep-learning']
+  },
   'intro-ia': {
     id: 'intro-ia',
     name: 'Introduction à l\'Intelligence Artificielle',
