@@ -185,22 +185,58 @@ const analytics = {
 ## 🎓 Impact Pédagogique
 
 ### Avant la Restructuration
-- ❌ Contenu désordonné sans progression claire
-- ❌ Pas de guidage pour les prérequis
-- ❌ Navigation confuse entre les cours
-- ❌ Difficile de suivre sa progression
 
 ### Après la Restructuration
-- ✅ **Parcours structurés** avec progression logique
 - ✅ **Prérequis explicites** pour chaque cours
-- ✅ **Navigation intuitive** avec sidebar
-- ✅ **Suivi visuel** de la progression
-- ✅ **Recommandations personnalisées** selon les objectifs
 
-Cette restructuration transforme une simple collection de cours en une véritable **plateforme d'apprentissage guidé** qui aide les étudiants à progresser efficacement selon leurs objectifs professionnels.
+# Restructuration pédagogique (septembre 2025)
 
-## 🔧 Installation et Test
+Objectif: passer d’une offre centrée uniquement sur l’IA à une structure multi-domaines avec des catégories distinctes et des parcours progressifs.
 
+## 1) Nouvelles catégories
+
+- Programmation
+- Développement web
+- Intelligence artificielle
+
+Les pages catégories sont accessibles sous `/teaching/category/<slug>`:
+- `/teaching/category/programmation`
+- `/teaching/category/developpement-web`
+- `/teaching/category/intelligence-artificielle`
+
+## 2) Cours et rattachement de catégorie
+
+- Programmation fondamentale (`programmation-fondamentale`) → Catégorie: Programmation
+- Développement web — bases (`dev-web-bases`) → Catégorie: Développement web
+- Frameworks web (`frameworks-web`) → Catégorie: Développement web
+- Tous les cours IA existants → Catégorie: Intelligence artificielle
+
+## 3) Parcours d’apprentissage
+
+Parcours ajoutés dans `curriculum-structure.ts`:
+- `programmation-bases` (⌨️): programmation fondamentale
+- `developpement-web` (🌐): dev web bases → frameworks web
+
+Parcours IA existants enrichis:
+- `ia-fundamentals`: Programmation fondamentale → Dev web bases → Intro IA → Stats pour IA → Supervisé → Non-supervisé
+- `ml-engineer`: Programmation fondamentale → Dev web bases → Frameworks web → Stats → Supervisé → Non-supervisé → Deep Learning → Éthique/MLOps
+
+## 4) Page d’accueil Enseignement
+
+- Titre et description mis à jour pour refléter les trois domaines (Programmation, Web, IA).
+- CTA principal: commence par `programmation-fondamentale`.
+- Parcours recommandés affichent désormais aussi Programmation et Développement web.
+
+## 5) Validation
+
+- Build Next.js: OK (SSG + export statique). Les 3 catégories sont générées.
+- Les nouvelles routes de cours et de leçons sont pré-générées.
+
+## 6) Prochaines étapes (suggestions)
+
+- Ajouter des quiz/ressources pour les nouveaux cours (programmation/web).
+- Option: ordonner l’affichage de la page catégorie selon l’ordre du parcours correspondant.
+- Ajouter une page “Vue d’ensemble” par catégorie avec recommandations et liens rapides.
 Pour tester la nouvelle structure :
 
 ```bash

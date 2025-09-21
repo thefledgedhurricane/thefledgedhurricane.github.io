@@ -47,7 +47,7 @@ export const courses: Course[] = [
     id: 'programmation-fondamentale',
     title: 'Programmation fondamentale',
     level: 'beginner',
-    category: 'Intelligence artificielle',
+    category: 'Programmation',
     description:
       'Bases des langages de programmation: variables, types, contrôle de flux, fonctions, structures de données.',
     estimatedHours: 8,
@@ -78,7 +78,7 @@ export const courses: Course[] = [
     id: 'dev-web-bases',
     title: 'Développement web — bases',
     level: 'beginner',
-    category: 'Intelligence artificielle',
+    category: 'Développement web',
     description:
       'HTML/CSS/JS fondamentaux, HTTP, modèles client-serveur et bonnes pratiques front-end.',
     estimatedHours: 8,
@@ -109,7 +109,7 @@ export const courses: Course[] = [
     id: 'frameworks-web',
     title: 'Frameworks web',
     level: 'intermediate',
-    category: 'Intelligence artificielle',
+    category: 'Développement web',
     description:
       'Découvrir les frameworks modernes: React/Next.js, écosystème, routing, data fetching et déploiement.',
     estimatedHours: 10,

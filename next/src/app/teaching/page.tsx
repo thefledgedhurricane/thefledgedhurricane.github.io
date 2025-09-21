@@ -5,11 +5,11 @@ import { learningPaths, courseModules } from '@/lib/curriculum-structure';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Enseignement IA — Parcours d\'apprentissage structuré',
-  description: 'Apprenez l\'Intelligence Artificielle avec nos parcours pédagogiques structurés, des prérequis aux applications avancées.',
+  title: 'Enseignement — Programmation, Web et IA',
+  description: 'Parcours pédagogiques structurés: Programmation, Développement web et Intelligence Artificielle.',
   openGraph: {
-    title: 'Enseignement IA — Parcours d\'apprentissage | Dr. Ihababdelbasset ANNAKI',
-    description: 'Formation complète en IA avec progression pédagogique, prérequis et objectifs clairs.',
+    title: 'Enseignement — Programmation, Web et IA | Dr. Ihababdelbasset ANNAKI',
+    description: 'Parcours complets avec progression pédagogique, prérequis et objectifs clairs.',
     type: 'website',
   },
 };
@@ -18,9 +18,9 @@ export default async function TeachingPage() {
   
   const jsonLd = generateJsonLd({
     type: 'WebPage',
-    name: 'Enseignement IA — Parcours d\'apprentissage',
+    name: 'Enseignement — Programmation, Web et IA',
     url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://thefledgedhurricane.github.io'}/teaching`,
-    description: 'Formation complète en IA avec progression pédagogique, prérequis et objectifs clairs.',
+    description: 'Parcours complets en Programmation, Développement web et Intelligence Artificielle.',
   });
 
   const getDifficultyColor = (difficulty: string) => {
@@ -48,11 +48,10 @@ export default async function TeachingPage() {
           {/* Header */}
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-              🧠 Formation Intelligence Artificielle
+              Enseignement — Programmation, Web et IA
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8">
-              Apprenez l&apos;IA avec une approche pédagogique structurée : prérequis clairs, 
-              progression logique et objectifs d&apos;apprentissage définis.
+              Parcours modulaires et progressifs couvrant la Programmation, le Développement web et l&apos;Intelligence Artificielle.
             </p>
             
             {/* Statistiques rapides */}
@@ -206,7 +205,7 @@ export default async function TeachingPage() {
           {/* Call to action */}
           <section className="text-center bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-8 border border-blue-200 dark:border-blue-800">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Prêt à commencer votre formation en IA ?
+              Prêt à commencer au bon endroit ?
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
               Choisissez un parcours adapté à votre niveau et vos objectifs. 
@@ -214,16 +213,16 @@ export default async function TeachingPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/teaching/intro-ia"
+                href="/teaching/programmation-fondamentale"
                 className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
               >
-                🚀 Commencer par les bases
+                🚀 Commencer par la programmation
               </Link>
               <Link
                 href={`/teaching/${learningPaths.find(p => p.id === 'ml-engineer')?.courses[0]}`}
                 className="inline-flex items-center justify-center px-6 py-3 border border-blue-600 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
               >
-                ⚡ Formation accélérée
+                ⚡ Parcours Ingénieur ML
               </Link>
             </div>
           </section>

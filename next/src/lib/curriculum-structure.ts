@@ -105,6 +105,29 @@ export const basePrerequisites: Record<string, Prerequisite> = {
 // Parcours d'apprentissage recommandés
 export const learningPaths: LearningPath[] = [
   {
+    id: 'programmation-bases',
+    name: '⌨️ Programmation — bases',
+    description: 'Apprendre à programmer: logique, structures de contrôle, fonctions et structures de données.',
+    icon: '⌨️',
+    estimatedWeeks: 2,
+    difficulty: 'débutant',
+    courses: [
+      'programmation-fondamentale'
+    ]
+  },
+  {
+    id: 'developpement-web',
+    name: '🌐 Développement web',
+    description: 'Du HTML/CSS/JS aux frameworks modernes (React/Next.js) et bonnes pratiques.',
+    icon: '🌐',
+    estimatedWeeks: 3,
+    difficulty: 'débutant',
+    courses: [
+      'dev-web-bases',
+      'frameworks-web'
+    ]
+  },
+  {
     id: 'ia-fundamentals',
     name: '🧠 Fondamentaux de l\'IA',
     description: 'Découverte complète de l\'Intelligence Artificielle depuis les bases',
