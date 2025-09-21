@@ -28,6 +28,28 @@ fetch('https://api.example.com/data')
   .then(data => console.log(data))
 ```
 
+Async/await:
+```js
+async function charger() {
+  try {
+    const r = await fetch('/api/data')
+    const data = await r.json()
+    console.log(data)
+  } catch (e) {
+    console.error(e)
+  }
+}
+```
+
+Modules ES:
+```js
+// utils.js
+export function somme(a,b){ return a+b }
+// main.js
+import { somme } from './utils.js'
+```
+
 # Exercices
 1. Intercepter la soumission d’un formulaire et afficher les données.
 2. Consommer une API publique et afficher une liste.
+3. Bonus: gérer erreurs réseau et état de chargement (spinner).

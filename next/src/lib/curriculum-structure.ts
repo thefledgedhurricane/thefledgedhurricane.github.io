@@ -106,7 +106,7 @@ export const basePrerequisites: Record<string, Prerequisite> = {
 export const learningPaths: LearningPath[] = [
   {
     id: 'programmation-bases',
-    name: '⌨️ Programmation — bases',
+    name: 'Programmation — bases',
     description: 'Apprendre à programmer: logique, structures de contrôle, fonctions et structures de données.',
     icon: '⌨️',
     estimatedWeeks: 2,
@@ -117,7 +117,7 @@ export const learningPaths: LearningPath[] = [
   },
   {
     id: 'developpement-web',
-    name: '🌐 Développement web',
+    name: 'Développement web',
     description: 'Du HTML/CSS/JS aux frameworks modernes (React/Next.js) et bonnes pratiques.',
     icon: '🌐',
     estimatedWeeks: 3,
@@ -129,7 +129,7 @@ export const learningPaths: LearningPath[] = [
   },
   {
     id: 'ia-fundamentals',
-    name: '🧠 Fondamentaux de l\'IA',
+    name: 'Fondamentaux de l\'IA',
     description: 'Découverte complète de l\'Intelligence Artificielle depuis les bases',
     icon: '🧠',
     estimatedWeeks: 4,
@@ -145,7 +145,7 @@ export const learningPaths: LearningPath[] = [
   },
   {
     id: 'ml-engineer',
-    name: '🛠️ Ingénieur ML',
+    name: 'Ingénieur ML',
     description: 'Formation complète pour devenir ingénieur en apprentissage automatique',
     icon: '🛠️',
     estimatedWeeks: 8,
@@ -163,7 +163,7 @@ export const learningPaths: LearningPath[] = [
   },
   {
     id: 'ai-researcher',
-    name: '🔬 Chercheur IA',
+    name: 'Chercheur IA',
     description: 'Parcours avancé pour la recherche en Intelligence Artificielle',
     icon: '🔬',
     estimatedWeeks: 12,
@@ -182,7 +182,7 @@ export const learningPaths: LearningPath[] = [
   },
   {
     id: 'specialized-nlp',
-    name: '💬 Spécialiste NLP',
+    name: 'Spécialiste NLP',
     description: 'Expertise en traitement automatique du langage naturel',
     icon: '💬',
     estimatedWeeks: 6,
@@ -196,7 +196,7 @@ export const learningPaths: LearningPath[] = [
   },
   {
     id: 'computer-vision',
-    name: '👁️ Vision par ordinateur',
+    name: 'Vision par ordinateur',
     description: 'Spécialisation en traitement et analyse d\'images',
     icon: '👁️',
     estimatedWeeks: 6,

@@ -31,6 +31,15 @@ function Compteur() {
 }
 ```
 
+Concepts:
+- Lifting state up (remonter l’état au parent)
+- Props drilling et alternatives (contexte)
+- Hooks utiles: `useMemo`, `useCallback`
+
+Mini-projet:
+- Construire une liste filtrable (barre de recherche + tags), mémoriser les calculs coûteux avec `useMemo`.
+
 # Exercices
 1. Un champ de recherche contrôlé avec filtrage de liste.
 2. Un mini-compteur avec persistance dans `localStorage`.
+3. Bonus: composant `Tabs` avec état contrôlé.

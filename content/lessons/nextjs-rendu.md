@@ -31,6 +31,15 @@ graph TD
 - Côté serveur: `fetch` dans une Server Component
 - Côté client: `useEffect`, SWR, react-query (aperçu)
 
+Pré-chargement et navigation:
+- Liens Next `<Link prefetch>`
+- Mise en cache selon `fetch` options (`{ next: { revalidate: ... } }`)
+
+Mini-projet:
+- Créer une page `posts` SSG avec liste d’articles (faux data)
+- Détail d’un article en page dynamique
+- Ajouter une page SSR consommant une API externe (ex: météo)
+
 # Exercices
 1. Créer une page dynamique SSG pour une liste d’items.
 2. Ajouter une page SSR qui consomme une API.

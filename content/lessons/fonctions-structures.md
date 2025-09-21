@@ -24,6 +24,11 @@ function somme(liste) {
 }
 ```
 
+Bonnes pratiques:
+- Une fonction = une intention claire (nom explicite)
+- Paramètres avec valeurs par défaut si pertinent
+- Éviter les effets de bord (préférer retourner une nouvelle valeur)
+
 ## 2. Listes, dictionnaires, ensembles
 - Liste: ordonnée, indexée
 - Dictionnaire: `clé -> valeur`
@@ -35,6 +40,20 @@ let etudiant = { "nom": "Sara", "age": 20 }
 let tags = {"ml", "web", "ai"}
 ```
 
+Complexité (notions):
+- Liste: accès O(1), insertion/suppression milieu O(n)
+- Dictionnaire: accès/insertion amorti O(1)
+- Ensemble: test d’appartenance O(1)
+
+Immutabilité vs mutabilité: comprendre quand copier pour éviter des effets de bord.
+
+## 3. Mini-projet: agrégateur de notes
+Écrire un module avec:
+- `ajouterNote(etudiant, note)`
+- `moyenne(etudiant)`
+- `topN(etudiants, n)`
+
 # Exercices
 1. Écrire une fonction `maxListe`.
 2. Compter les occurrences de mots dans une phrase.
+3. Implémenter un `dict` inversé: de `mot -> [indices]` dans un texte.
