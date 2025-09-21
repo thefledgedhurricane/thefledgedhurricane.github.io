@@ -7,11 +7,7 @@ import Link from 'next/link';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
 import ShareButtons from '@/components/ShareButtons';
 
-interface PublicationPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
+interface PublicationPageProps { params: { slug: string } }
 
 async function getPublication(slug: string): Promise<Publication | null> {
   try {
@@ -25,8 +21,8 @@ async function getPublication(slug: string): Promise<Publication | null> {
 
 
 
-export default async function PublicationPage({ params }: PublicationPageProps) {
-  const { slug } = await params;
+export default async function PublicationPage({ params }: any) {
+  const { slug } = params;
   const publication = await getPublication(slug);
   
   if (!publication) {
@@ -283,8 +279,8 @@ export default async function PublicationPage({ params }: PublicationPageProps) 
   );
 }
 
-export async function generateMetadata({ params }: PublicationPageProps) {
-  const { slug } = await params;
+export async function generateMetadata({ params }: any) {
+  const { slug } = params;
   const publication = await getPublication(slug);
   
   if (!publication) {

@@ -6,12 +6,8 @@ import { loadLessonContent } from '@/lib/content-loader';
 import LessonGuard from '@/components/lms/LessonGuard';
 
 
-interface PageProps {
-  params: Promise<{ slug: string; lessonId: string }>;
-}
-
-export default async function LessonPage({ params }: PageProps) {
-  const { slug, lessonId } = await params;
+export default async function LessonPage(props: any) {
+  const { slug, lessonId } = (props?.params ?? {}) as { slug: string; lessonId: string };
   const result = getLessonById(slug, lessonId);
   if (!result) {
     return (
@@ -81,10 +77,6 @@ export default async function LessonPage({ params }: PageProps) {
   );
 }
 
-// Désactiver la génération statique temporairement pour résoudre l'erreur de pré-rendu
-export const dynamic = 'force-dynamic';
-
-/*
 export async function generateStaticParams() {
   const { courses } = await import('@/lib/lms-data');
   const params: { slug: string; lessonId: string }[] = [];
@@ -95,4 +87,3 @@ export async function generateStaticParams() {
   }
   return params;
 }
-*/

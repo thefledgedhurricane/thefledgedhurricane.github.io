@@ -7,11 +7,6 @@ import Link from 'next/link';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
 import ShareButtons from '@/components/ShareButtons';
 
-interface EventPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
 
 async function getEvent(slug: string): Promise<Event | null> {
   try {
@@ -53,8 +48,8 @@ const statusColors: Record<string, string> = {
   postponed: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-300'
 };
 
-export default async function EventPage({ params }: EventPageProps) {
-  const { slug } = await params;
+export default async function EventPage({ params }: any) {
+  const { slug } = params;
   const event = await getEvent(slug);
   
   if (!event) {
@@ -370,8 +365,8 @@ export default async function EventPage({ params }: EventPageProps) {
   );
 }
 
-export async function generateMetadata({ params }: EventPageProps) {
-  const { slug } = await params;
+export async function generateMetadata({ params }: any) {
+  const { slug } = params;
   const event = await getEvent(slug);
   
   if (!event) {

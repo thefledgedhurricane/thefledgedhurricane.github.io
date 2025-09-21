@@ -4,10 +4,6 @@ import { getCourseById } from '@/lib/lms-data';
 import CourseProgressControls from '@/components/lms/CourseProgressControls';
 import LessonList from '@/components/lms/LessonList';
 
-interface PageProps {
-  params: Promise<{ slug: string }>;
-}
-
 
 
 const levelPill: Record<string, string> = {
@@ -16,8 +12,8 @@ const levelPill: Record<string, string> = {
   advanced: 'bg-red-100 text-red-700',
 };
 
-export default async function CoursePage({ params }: PageProps) {
-  const { slug } = await params;
+export default function CoursePage({ params }: any) {
+  const { slug } = params;
   const course = getCourseById(slug);
   if (!course) return (
     <main className="max-w-3xl mx-auto px-6 py-16">
@@ -128,8 +124,8 @@ export default async function CoursePage({ params }: PageProps) {
   );
 }
 
-export async function generateMetadata({ params }: PageProps) {
-  const { slug } = await params;
+export async function generateMetadata({ params }: any) {
+  const { slug } = params;
   const course = getCourseById(slug);
   if (!course) return { title: 'Cours introuvable' };
   const pageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/teaching/${course.id}`;
@@ -154,13 +150,8 @@ export async function generateMetadata({ params }: PageProps) {
   } as any;
 }
 
-// Désactiver la génération statique temporairement pour résoudre l'erreur de pré-rendu
-export const dynamic = 'force-dynamic';
-
-/*
 export async function generateStaticParams() {
   // Static from local data
   const { courses } = await import('@/lib/lms-data');
   return courses.map((c) => ({ slug: c.id }));
 }
-*/

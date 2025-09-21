@@ -7,11 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ShareButtons from '@/components/ShareButtons';
 
-interface PostPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
+interface PostPageProps { params: { slug: string } }
 
 async function getPost(slug: string): Promise<Post | null> {
   try {
@@ -25,8 +21,8 @@ async function getPost(slug: string): Promise<Post | null> {
 
 
 
-export default async function PostPage({ params }: PostPageProps) {
-  const { slug } = await params;
+export default async function PostPage({ params }: any) {
+  const { slug } = params;
   const post = await getPost(slug);
   
   if (!post) {
@@ -210,8 +206,8 @@ export default async function PostPage({ params }: PostPageProps) {
   );
 }
 
-export async function generateMetadata({ params }: PostPageProps) {
-  const { slug } = await params;
+export async function generateMetadata({ params }: any) {
+  const { slug } = params;
   const post = await getPost(slug);
   
   if (!post) {

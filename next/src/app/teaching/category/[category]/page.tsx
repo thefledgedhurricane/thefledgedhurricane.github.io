@@ -3,10 +3,6 @@ import { generateJsonLd, generateBreadcrumbJsonLd } from '@/lib/jsonld';
 import { courses } from '@/lib/lms-data';
 import CourseCard from '@/components/lms/CourseCard';
 
-interface PageProps {
-  params: Promise<{ category: string }>;
-}
-
 function slugifyCategory(cat: string) {
   const normalized = cat
     .toLowerCase()
@@ -17,8 +13,8 @@ function slugifyCategory(cat: string) {
     .replace(/(^-|-$)/g, '');
 }
 
-export default async function CategoryPage({ params }: PageProps) {
-  const { category } = await params;
+export default function CategoryPage({ params }: any) {
+  const { category } = params;
   const uniqueCategories = Array.from(
     new Map(
       courses

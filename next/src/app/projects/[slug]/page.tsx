@@ -14,14 +14,10 @@ export async function generateStaticParams() {
   }));
 }
 
-interface ProjectPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
+// Use untyped params to avoid Next internal PageProps constraint conflicts
 
-export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({ params }: any): Promise<Metadata> {
+  const { slug } = params;
   const project = await getProject(slug);
   
   if (!project) {
@@ -69,8 +65,8 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   };
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { slug } = await params;
+export default async function ProjectPage({ params }: any) {
+  const { slug } = params;
   const project = await getProject(slug);
 
   if (!project) {
