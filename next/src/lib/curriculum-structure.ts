@@ -135,12 +135,12 @@ export const learningPaths: LearningPath[] = [
     estimatedWeeks: 4,
     difficulty: 'débutant',
     courses: [
-      'programmation-fondamentale',
-      'dev-web-bases',
       'intro-ia',
-      'statistiques-pour-ia', 
+      'statistiques-pour-ia',
       'apprentissage-supervise',
-      'apprentissage-non-supervise'
+      'apprentissage-non-supervise',
+      'deep-learning-basics',
+      'projets-ia-pratiques'
     ]
   },
   {
@@ -154,11 +154,7 @@ export const learningPaths: LearningPath[] = [
       'programmation-fondamentale',
       'dev-web-bases',
       'frameworks-web',
-      'statistiques-pour-ia',
-      'apprentissage-supervise',
-      'apprentissage-non-supervise', 
-      'deep-learning',
-      'ethique-mlops'
+      'intro-ia'
     ]
   },
   {
@@ -170,14 +166,7 @@ export const learningPaths: LearningPath[] = [
     difficulty: 'avancé',
     courses: [
       'intro-ia',
-      'statistiques-pour-ia',
-      'apprentissage-supervise',
-      'apprentissage-non-supervise',
-      'deep-learning',
-      'apprentissage-par-renforcement',
-      'recherche-et-planification',
-      'nlp',
-      'vision'
+      'programmation-fondamentale'
     ]
   },
   {
@@ -188,10 +177,8 @@ export const learningPaths: LearningPath[] = [
     estimatedWeeks: 6,
     difficulty: 'intermédiaire',
     courses: [
-      'statistiques-pour-ia',
-      'apprentissage-supervise',
-      'deep-learning',
-      'nlp'
+      'intro-ia',
+      'programmation-fondamentale'
     ]
   },
   {
@@ -202,10 +189,8 @@ export const learningPaths: LearningPath[] = [
     estimatedWeeks: 6,
     difficulty: 'intermédiaire',
     courses: [
-      'statistiques-pour-ia',
-      'apprentissage-supervise',
-      'deep-learning',
-      'vision'
+      'intro-ia',
+      'programmation-fondamentale'
     ]
   }
 ];
@@ -232,7 +217,7 @@ export const courseModules: Record<string, CourseModule> = {
       'Manipuler listes, dictionnaires, ensembles et chaînes',
       'Comprendre les erreurs courantes et le débogage de base'
     ],
-    nextRecommendations: ['dev-web-bases', 'statistiques-pour-ia']
+    nextRecommendations: ['frameworks-web', 'intro-ia']
   },
 
   'dev-web-bases': {
@@ -292,31 +277,7 @@ export const courseModules: Record<string, CourseModule> = {
       'Identifier les domaines d\'application de l\'IA',
       'Évaluer les enjeux éthiques et sociétaux'
     ],
-    nextRecommendations: ['statistiques-pour-ia', 'recherche-et-planification']
-  },
-  
-  'statistiques-pour-ia': {
-    id: 'statistiques-pour-ia',
-    name: 'Statistiques pour l\'IA',
-    description: 'Maîtrisez les fondements mathématiques indispensables pour comprendre et appliquer les techniques d\'IA.',
-    estimatedHours: 10,
-    prerequisites: [
-      basePrerequisites['linear-algebra'],
-      {
-        type: 'math',
-        id: 'basic-math',
-        name: 'Mathématiques de niveau lycée',
-        description: 'Fonctions, logarithmes, exponentielles',
-        essential: true
-      }
-    ],
-    learningObjectives: [
-      'Maîtriser les statistiques descriptives et inférentielles',
-      'Comprendre les distributions de probabilité principales',
-      'Appliquer le théorème de Bayes et ses implications',
-      'Calculer et interpréter les métriques d\'évaluation ML'
-    ],
-    nextRecommendations: ['apprentissage-supervise', 'apprentissage-non-supervise']
+    nextRecommendations: ['programmation-fondamentale', 'dev-web-bases']
   },
   
   'apprentissage-supervise': {
