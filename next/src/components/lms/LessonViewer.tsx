@@ -10,6 +10,7 @@ import mermaid from 'mermaid';
 import { TableEnhancer } from './MermaidRenderer';
 import { MermaidDebugger } from './MermaidDebugger';
 import { SimpleMermaidRenderer } from './SimpleMermaidRenderer';
+import { MermaidCDNRenderer } from './MermaidCDNRenderer';
 
 // Démos montées dynamiquement pour éviter SSR
 const Demos: Record<string, any> = {
@@ -243,6 +244,7 @@ export default function LessonViewer({
     <div className="space-y-8">
       {/* Composants pour le rendu de Mermaid et l'amélioration des tableaux */}
       <SimpleMermaidRenderer />
+      <MermaidCDNRenderer />
       <TableEnhancer />
       <MermaidDebugger />
 

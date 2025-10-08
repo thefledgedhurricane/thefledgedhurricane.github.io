@@ -76,9 +76,10 @@ export function SimpleMermaidRenderer() {
               block.classList.add('processed');
               const errorContainer = document.createElement('div');
               errorContainer.className = 'my-6 p-4 bg-red-50 border border-red-200 rounded-lg';
+              const errorMessage = error instanceof Error ? error.message : 'Syntaxe invalide';
               errorContainer.innerHTML = `
                 <div class="text-red-800 font-medium">Erreur Mermaid</div>
-                <div class="text-red-600 text-sm">${error.message || 'Syntaxe invalide'}</div>
+                <div class="text-red-600 text-sm">${errorMessage}</div>
                 <pre class="text-xs mt-2 bg-red-100 p-2 rounded">${mermaidCode}</pre>
               `;
               
