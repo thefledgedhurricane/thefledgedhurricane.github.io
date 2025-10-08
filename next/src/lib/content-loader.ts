@@ -29,9 +29,9 @@ function remarkMermaid() {
 
     visit(tree, (node: any) => {
       if (node.type === 'code' && node.lang === 'mermaid') {
-        // Transform mermaid code blocks to HTML with proper class
+        // Transform mermaid code blocks to HTML with proper class and data attribute
         node.type = 'html';
-        node.value = `<pre><code class="language-mermaid">${node.value}</code></pre>`;
+        node.value = `<pre class="mermaid-block"><code class="language-mermaid" data-mermaid="true">${node.value}</code></pre>`;
       }
     });
   };

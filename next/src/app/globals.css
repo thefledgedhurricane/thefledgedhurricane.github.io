@@ -369,6 +369,14 @@ h3 { font-weight: 500; }
   @apply hidden;
 }
 
+.markdown-content .mermaid-block {
+  @apply my-6 p-0 bg-transparent border-0;
+}
+
+.markdown-content .mermaid-block code {
+  @apply hidden;
+}
+
 /* Responsive tables on mobile */
 @media (max-width: 640px) {
   .table-wrapper {
