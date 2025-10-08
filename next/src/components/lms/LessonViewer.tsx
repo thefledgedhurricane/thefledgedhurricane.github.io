@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import type { LessonWithContent, Course } from '@/lib/lms-data';
 import { markLessonCompleted } from '@/lib/lms-storage';
-import Quiz from './Quiz';
 import LessonNavigation from './LessonNavigation';
 import dynamic from 'next/dynamic';
 import mermaid from 'mermaid';
@@ -253,14 +252,6 @@ export default function LessonViewer({
           <div dangerouslySetInnerHTML={{ __html: content }} />
         )}
       </div>
-
-      {lesson.quiz && lesson.quiz.length > 0 && (
-        <Quiz
-          courseId={courseId}
-          lessonId={lesson.id}
-          questions={lesson.quiz}
-        />
-      )}
 
       <LessonNavigation course={course} currentLesson={lesson} />
     </div>

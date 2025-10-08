@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { generateJsonLd, generateBreadcrumbJsonLd } from '@/lib/jsonld';
 import { getCourseById } from '@/lib/lms-data';
-import CourseProgressControls from '@/components/lms/CourseProgressControls';
-import LessonList from '@/components/lms/LessonList';
+import CoursePlan from '@/components/lms/CoursePlan';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -87,7 +86,6 @@ export default async function CoursePage({ params }: PageProps) {
                 <span className={`px-3 py-1 rounded text-sm ${levelPill[course.level]}`}>{course.level}</span>
               </div>
               <p className="text-gray-700 dark:text-gray-300">{course.description}</p>
-              <p className="mt-2 text-sm text-gray-500">Seuil de passage par défaut: {course.passThreshold ?? 70}%</p>
               {course.prerequisites && course.prerequisites.length > 0 && (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {course.prerequisites.map((p) => (
@@ -102,13 +100,8 @@ export default async function CoursePage({ params }: PageProps) {
         </div>
         {/* Course Content */}
         <article className="max-w-4xl mx-auto px-6 lg:px-8 pb-16">
-          <section className="mb-8">
-            <CourseProgressControls courseId={course.id} totalLessons={course.lessons.length} />
-          </section>
-
           <section>
-            <h2 className="text-xl font-semibold mb-4">Leçons</h2>
-            <LessonList course={course} />
+            <CoursePlan course={course} />
           </section>
         </article>
 

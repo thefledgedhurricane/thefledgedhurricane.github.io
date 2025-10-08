@@ -37,8 +37,6 @@ export default function LessonNavigation({ course, currentLesson }: LessonNaviga
   const nextLesson = currentIndex < lessons.length - 1 ? lessons[currentIndex + 1] : null;
   
   const isCurrentCompleted = progress.completedLessons.includes(currentLesson.id);
-  const hasQuiz = currentLesson.quiz && currentLesson.quiz.length > 0;
-  const quizScore = progress.quizScores[currentLesson.id];
 
   return (
     <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
@@ -72,19 +70,6 @@ export default function LessonNavigation({ course, currentLesson }: LessonNaviga
             <div className="flex items-center text-green-600 dark:text-green-400 mb-2">
               <CheckCircleIcon className="w-5 h-5 mr-2" />
               <span className="text-sm font-medium">Terminé</span>
-            </div>
-          )}
-          
-          {hasQuiz && (
-            <div className="text-center">
-              <div className="text-sm text-gray-500 dark:text-gray-400">Score du quiz</div>
-              <div className={`text-lg font-bold ${
-                quizScore !== undefined 
-                  ? quizScore >= 70 ? 'text-green-600' : 'text-yellow-600' 
-                  : 'text-gray-400'
-              }`}>
-                {quizScore !== undefined ? `${quizScore}%` : 'Non fait'}
-              </div>
             </div>
           )}
         </div>
