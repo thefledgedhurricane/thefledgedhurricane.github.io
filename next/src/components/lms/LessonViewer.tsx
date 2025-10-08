@@ -7,7 +7,9 @@ import { markLessonCompleted } from '@/lib/lms-storage';
 import LessonNavigation from './LessonNavigation';
 import dynamic from 'next/dynamic';
 import mermaid from 'mermaid';
-import { MermaidRenderer, TableEnhancer } from './MermaidRenderer';
+import { TableEnhancer } from './MermaidRenderer';
+import { MermaidDebugger } from './MermaidDebugger';
+import { SimpleMermaidRenderer } from './SimpleMermaidRenderer';
 
 // Démos montées dynamiquement pour éviter SSR
 const Demos: Record<string, any> = {
@@ -240,8 +242,9 @@ export default function LessonViewer({
   return (
     <div className="space-y-8">
       {/* Composants pour le rendu de Mermaid et l'amélioration des tableaux */}
-      <MermaidRenderer />
+      <SimpleMermaidRenderer />
       <TableEnhancer />
+      <MermaidDebugger />
 
       {/* Contenu de la leçon */}
       <div
