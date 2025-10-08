@@ -5,11 +5,13 @@ on:
     branches: [main]
     paths:
       - 'next/**'
+      - 'content/**'
       - '.github/workflows/**'
   pull_request:
     branches: [main]
     paths:
       - 'next/**'
+      - 'content/**'
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
