@@ -2,7 +2,7 @@
 title: "Algorithmes de recherche et optimisation"
 description: "Exploration approfondie des algorithmes de recherche, heuristiques et techniques d'optimisation en intelligence artificielle"
 difficulty: "intermediate"
-estimatedTime: "240 minutes"
+estimatedTime: "360 minutes"
 keywords: ["algorithmes", "recherche", "optimisation", "heuristiques", "A*", "minimax", "méta-heuristiques"]
 ---
 
