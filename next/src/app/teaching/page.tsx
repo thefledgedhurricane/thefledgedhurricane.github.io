@@ -1,233 +1,241 @@
-import { Metadata } from 'next';
-import { generateJsonLd } from '@/lib/jsonld';
-import { courses } from '@/lib/lms-data';
-import { learningPaths, courseModules } from '@/lib/curriculum-structure';
+'use client';
+
+import React from 'react';
 import Link from 'next/link';
+import FadeIn from '@/components/FadeIn';
+import Counter from '@/components/Counter';
+import { ArrowRight, BookOpen, Clock, Code, GraduationCap, Layers, Terminal, Brain, Globe, Cpu } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Enseignement — Programmation, Web et IA',
-  description: 'Parcours pédagogiques structurés: Programmation, Développement web et Intelligence Artificielle.',
-  openGraph: {
-    title: 'Enseignement — Programmation, Web et IA | Dr. Ihababdelbasset ANNAKI',
-    description: 'Parcours complets avec progression pédagogique, prérequis et objectifs clairs.',
-    type: 'website',
+const courses = [
+  {
+    id: 'ia-1-introduction',
+    icon: Brain,
+    title: "IA — Introduction & Fondements",
+    description: "Découvrez les fondements de l'IA, le Machine Learning, le Deep Learning et les mathématiques essentielles (algèbre, gradients, probabilités).",
+    difficulty: 'débutant',
+    duration: '8h',
+    lessons: 2,
+    href: '/teaching/modules/ia-1-introduction',
+    tags: ['IA', 'ML', 'Mathématiques', 'Fondamentaux'],
+    color: 'from-purple-500 to-indigo-500'
   },
-};
+  {
+    id: 'ia-2-apprentissage-supervise',
+    icon: Brain,
+    title: "IA — Apprentissage Supervisé",
+    description: "Régression linéaire approfondie, MSE, gradient descent, équation normale, régularisation Ridge/Lasso avec implémentations complètes.",
+    difficulty: 'intermédiaire',
+    duration: '12h',
+    lessons: 1,
+    href: '/teaching/modules/ia-2-apprentissage-supervise',
+    tags: ['Régression', 'Gradient Descent', 'Régularisation'],
+    color: 'from-blue-500 to-purple-500'
+  },
+  {
+    id: 'ia-3-apprentissage-non-supervise',
+    icon: Brain,
+    title: "IA — Apprentissage Non-Supervisé",
+    description: "Clustering K-Means, K-Means++, PCA avec décomposition spectrale, t-SNE et applications réelles avec code from scratch.",
+    difficulty: 'intermédiaire',
+    duration: '14h',
+    lessons: 2,
+    href: '/teaching/modules/ia-3-apprentissage-non-supervise',
+    tags: ['Clustering', 'PCA', 't-SNE', 'Dimensionnalité'],
+    color: 'from-teal-500 to-cyan-500'
+  },
+  {
+    id: 'ia-4-deep-learning-tabular',
+    icon: Brain,
+    title: "IA — Deep Learning (Tabulaire)",
+    description: "Réseaux de neurones MLP, fonctions d'activation, forward pass, universal approximation theorem et loss functions.",
+    difficulty: 'avancé',
+    duration: '16h',
+    lessons: 1,
+    href: '/teaching/modules/ia-4-deep-learning-tabular',
+    tags: ['Neural Networks', 'MLP', 'Activations', 'Forward Pass'],
+    color: 'from-indigo-500 to-purple-500'
+  },
+  {
+    id: 'intelligence-artificielle',
+    icon: Brain,
+    title: "Intelligence Artificielle (Ancien)",
+    description: "Version originale du cours IA (7 leçons). Les nouveaux modules ci-dessus sont plus approfondis.",
+    difficulty: 'intermédiaire',
+    duration: '12h',
+    lessons: 7,
+    href: '/teaching/modules/intelligence-artificielle',
+    tags: ['Machine Learning', 'Deep Learning', 'Neural Networks', 'Python'],
+    color: 'from-gray-500 to-gray-600'
+  },
+  {
+    id: 'programmation-fondamentale',
+    icon: Terminal,
+    title: "Fondamentaux de la Programmation",
+    description: "Apprenez les bases essentielles : logique, variables, structures de contrôle, fonctions et paradigmes de programmation pour bien débuter.",
+    difficulty: 'débutant',
+    duration: '8h',
+    lessons: 10,
+    href: '/teaching/modules/programmation-bases',
+    tags: ['Logique', 'Variables', 'Fonctions', 'POO'],
+    color: 'from-blue-500 to-cyan-500'
+  },
+  {
+    id: 'algorithmique',
+    icon: Layers,
+    title: "Algorithmique & Structures de Données",
+    description: "Maîtrisez les algorithmes de tri, recherche, graphes et les structures de données essentielles avec visualisations interactives.",
+    difficulty: 'intermédiaire',
+    duration: '10h',
+    lessons: 12,
+    href: '/teaching/modules/algorithmique',
+    tags: ['Tri', 'Recherche', 'Graphes', 'Complexité'],
+    color: 'from-emerald-500 to-teal-500'
+  },
+  {
+    id: 'python',
+    icon: Code,
+    title: "Python — De Zéro à Expert",
+    description: "Cours complet Python : syntaxe, structures de données, POO, modules, data science et projets pratiques avec exercices interactifs.",
+    difficulty: 'débutant',
+    duration: '15h',
+    lessons: 14,
+    href: '/teaching/modules/python',
+    tags: ['Python', 'Data Science', 'Automation', 'Web'],
+    color: 'from-yellow-500 to-orange-500'
+  },
+  {
+    id: 'langage-c',
+    icon: Cpu,
+    title: "Langage C — Programmation Système",
+    description: "Apprenez le C : gestion mémoire, pointeurs, structures, fichiers et programmation système pour comprendre le fonctionnement bas niveau.",
+    difficulty: 'intermédiaire',
+    duration: '12h',
+    lessons: 11,
+    href: '/teaching/modules/langage-c',
+    tags: ['Pointeurs', 'Mémoire', 'Système', 'Performance'],
+    color: 'from-red-500 to-pink-500'
+  },
+  {
+    id: 'developpement-web',
+    icon: Globe,
+    title: "Développement Web Moderne",
+    description: "HTML, CSS, JavaScript, React et Next.js : créez des applications web modernes, responsives et performantes.",
+    difficulty: 'débutant',
+    duration: '14h',
+    lessons: 12,
+    href: '/teaching/modules/developpement-web',
+    tags: ['HTML/CSS', 'JavaScript', 'React', 'Next.js'],
+    color: 'from-cyan-500 to-blue-500'
+  }
+];
 
-export default async function TeachingPage() {
-  
-  const jsonLd = generateJsonLd({
-    type: 'WebPage',
-    name: 'Enseignement — Programmation, Web et IA',
-    url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://thefledgedhurricane.github.io'}/teaching`,
-    description: 'Parcours complets en Programmation, Développement web et Intelligence Artificielle.',
-  });
+const stats = [
+  { value: 6, label: 'Cours complets', icon: BookOpen },
+  { value: 67, label: 'Leçons détaillées', icon: Layers },
+  { value: 71, label: 'Heures de contenu', icon: Clock },
+  { value: 100, label: '% Interactif', icon: GraduationCap }
+];
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'débutant':
-        return 'text-green-700 bg-green-100 border-green-200';
-      case 'intermédiaire':
-        return 'text-orange-700 bg-orange-100 border-orange-200';
-      case 'avancé':
-        return 'text-red-700 bg-red-100 border-red-200';
-      default:
-        return 'text-gray-700 bg-gray-100 border-gray-200';
-    }
-  };
-
+export default function TeachingPage() {
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      
-      <main>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-              Enseignement — Programmation, Web et IA
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8">
-              Parcours modulaires et progressifs couvrant la Programmation, le Développement web et l&apos;Intelligence Artificielle.
-            </p>
-            
-            {/* Statistiques rapides */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600">{learningPaths.length}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Parcours</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-600">{courses.length}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Cours</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-purple-600">
-                  {courses.reduce((acc, course) => acc + course.lessons.length, 0)}
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Leçons</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-orange-600">
-                  {Math.round(Object.values(courseModules).reduce((acc, module) => acc + module.estimatedHours, 0))}h
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Contenu</div>
-              </div>
-            </div>
-          </div>
+    <main className="min-h-screen bg-white selection:bg-mckinsey-teal-100 selection:text-mckinsey-navy-900">
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
+          <div className="absolute top-20 left-20 w-96 h-96 bg-mckinsey-teal-50/40 rounded-full blur-3xl mix-blend-multiply animate-blob" />
+          <div className="absolute top-40 right-20 w-96 h-96 bg-mckinsey-navy-50/40 rounded-full blur-3xl mix-blend-multiply animate-blob animation-delay-2000" />
+        </div>
 
-          {/* Parcours d'apprentissage recommandés */}
-          <section className="mb-16">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
-              🎯 Parcours d&apos;apprentissage recommandés
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {learningPaths.map((path) => (
-                <div 
-                  key={path.id}
-                  className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow"
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-3xl">{path.icon}</span>
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
-                        {path.name}
-                      </h3>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getDifficultyColor(path.difficulty)}`}>
-                          {path.difficulty}
-                        </span>
-                        <span className="text-sm text-gray-600 dark:text-gray-400">
-                          {path.estimatedWeeks} semaines
-                        </span>
-                      </div>
-                    </div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <FadeIn>
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-mckinsey-gray-200 rounded-full text-xs font-medium text-mckinsey-navy-800 mb-8 shadow-sm">
+                <span className="w-1.5 h-1.5 bg-mckinsey-teal-500 rounded-full animate-pulse" />
+                Espace d'Apprentissage
+              </div>
+              <h1 className="text-5xl lg:text-7xl font-light text-mckinsey-navy-900 mb-6 tracking-tight">
+                Excellence <span className="font-normal text-mckinsey-teal-600">Pédagogique</span>
+              </h1>
+              <p className="text-xl text-mckinsey-gray-600 leading-relaxed">
+                Une approche moderne de l'enseignement, combinant théorie rigoureuse et pratique interactive pour former les ingénieurs de demain.
+              </p>
+            </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
+              {stats.map((stat, idx) => (
+                <div key={idx} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow text-center group">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-mckinsey-gray-50 text-mckinsey-teal-600 mb-4 group-hover:scale-110 transition-transform">
+                    <stat.icon className="w-6 h-6" />
                   </div>
-                  
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">
-                    {path.description}
-                  </p>
-                  
-                  <div className="mb-4">
-                    <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Cours inclus ({path.courses.length}) :
-                    </h4>
-                    <div className="space-y-1">
-                      {path.courses.slice(0, 3).map((courseId, index) => {
-                        const course = courses.find(c => c.id === courseId);
-                        return course ? (
-                          <div key={courseId} className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
-                            <span className="w-4 h-4 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xs font-bold">
-                              {index + 1}
-                            </span>
-                            <span>{course.title}</span>
-                          </div>
-                        ) : null;
-                      })}
-                      {path.courses.length > 3 && (
-                        <div className="text-sm text-gray-500 dark:text-gray-400 ml-6">
-                          +{path.courses.length - 3} cours supplémentaires
-                        </div>
-                      )}
-                    </div>
+                  <div className="text-3xl font-light text-mckinsey-navy-900 mb-1">
+                    <Counter end={stat.value} suffix={stat.label.includes('%') ? '%' : ''} />
                   </div>
-                  
-                  <Link
-                    href={`/teaching/${path.courses[0]}`}
-                    className="inline-flex items-center justify-center w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
-                  >
-                    Commencer ce parcours →
-                  </Link>
+                  <div className="text-xs font-medium text-mckinsey-gray-500 uppercase tracking-wider">{stat.label}</div>
                 </div>
               ))}
             </div>
-          </section>
-
-          {/* Vue par catégories */}
-          <section className="mb-16">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
-              📂 Explorer par domaine
-            </h2>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Array.from(new Map(
-                courses
-                  .filter(c => !!c.category)
-                  .map(c => [
-                    (c.category as string)
-                      .toLowerCase()
-                      .normalize('NFD')
-                      .replace(/[\u0300-\u036f]/g, '')
-                      .replace(/[^a-z0-9]+/g, '-')
-                      .replace(/(^-|-$)/g, ''),
-                    c.category as string
-                  ])
-              ).entries()).map(([slug, label]) => {
-                const categoryCourses = courses.filter(c => c.category && (
-                  (c.category as string)
-                    .toLowerCase()
-                    .normalize('NFD')
-                    .replace(/[\u0300-\u036f]/g, '')
-                    .replace(/[^a-z0-9]+/g, '-')
-                    .replace(/(^-|-$)/g, '')
-                ) === slug);
-
-                const totalHours = categoryCourses.reduce((acc, course) => {
-                  const courseModule = courseModules[course.id];
-                  return acc + (courseModule?.estimatedHours || 0);
-                }, 0);
-
-                return (
-                  <Link 
-                    key={slug} 
-                    href={`/teaching/category/${slug}`} 
-                    className="group p-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-600 transition-all"
-                  >
-                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Domaine</div>
-                    <div className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400">
-                      {label}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                      {categoryCourses.length} cours • {totalHours}h de contenu
-                    </div>
-                    <div className="text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300">
-                      Explorer →
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </section>
-
-          {/* Call to action */}
-          <section className="text-center bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-8 border border-blue-200 dark:border-blue-800">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Prêt à commencer au bon endroit ?
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
-              Choisissez un parcours adapté à votre niveau et vos objectifs. 
-              Chaque cours est conçu avec des prérequis clairs et des objectifs pédagogiques précis.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/teaching/programmation-fondamentale"
-                className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
-              >
-                🚀 Commencer par la programmation
-              </Link>
-              <Link
-                href={`/teaching/${learningPaths.find(p => p.id === 'ml-engineer')?.courses[0]}`}
-                className="inline-flex items-center justify-center px-6 py-3 border border-blue-600 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
-              >
-                ⚡ Parcours Ingénieur ML
-              </Link>
-            </div>
-          </section>
+          </FadeIn>
         </div>
-      </main>
-    </>
+      </section>
+
+      {/* Courses Grid */}
+      <section className="pb-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {courses.map((course, idx) => (
+              <FadeIn key={course.id} delay={idx * 100}>
+                <Link href={course.href} className="block h-full">
+                  <div className="group h-full bg-white rounded-2xl border border-gray-100 hover:border-mckinsey-teal-200 hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
+                    <div className={`h-2 bg-gradient-to-r ${course.color}`} />
+                    <div className="p-8 flex flex-col flex-grow">
+                      <div className="flex justify-between items-start mb-6">
+                        <div className="p-3 bg-gray-50 rounded-xl group-hover:bg-mckinsey-teal-50 transition-colors">
+                          <course.icon className="w-8 h-8 text-mckinsey-navy-700 group-hover:text-mckinsey-teal-600 transition-colors" />
+                        </div>
+                        <span className="px-3 py-1 bg-gray-50 rounded-full text-xs font-medium text-gray-600 uppercase tracking-wider">
+                          {course.difficulty}
+                        </span>
+                      </div>
+                      
+                      <h3 className="text-2xl font-light text-mckinsey-navy-900 mb-3 group-hover:text-mckinsey-teal-600 transition-colors">
+                        {course.title}
+                      </h3>
+                      
+                      <p className="text-mckinsey-gray-600 mb-6 flex-grow">
+                        {course.description}
+                      </p>
+                      
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {course.tags.map((tag, tIdx) => (
+                          <span key={tIdx} className="px-2 py-1 bg-gray-50 rounded text-xs text-gray-500">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      
+                      <div className="flex items-center justify-between pt-6 border-t border-gray-100">
+                        <div className="flex items-center gap-4 text-sm text-gray-500">
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-4 h-4" />
+                            {course.duration}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Layers className="w-4 h-4" />
+                            {course.lessons} leçons
+                          </span>
+                        </div>
+                        <ArrowRight className="w-5 h-5 text-mckinsey-teal-500 transform group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

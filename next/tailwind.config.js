@@ -9,30 +9,92 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // McKinsey-inspired professional color palette
+        mckinsey: {
+          // Navy Blue - McKinsey primary brand color
+          navy: {
+            50: '#E6F0F8',
+            100: '#CCE1F1',
+            200: '#99C3E3',
+            300: '#66A5D5',
+            400: '#3387C7',
+            500: '#003C6C', // McKinsey navy
+            600: '#003056',
+            700: '#002441',
+            800: '#00182B',
+            900: '#000C16',
+          },
+          // Teal - McKinsey secondary accent
+          teal: {
+            50: '#E6F7F9',
+            100: '#CCEFF3',
+            200: '#99DFE7',
+            300: '#66CFDB',
+            400: '#33BFCF',
+            500: '#00A0B0', // McKinsey teal
+            600: '#00808D',
+            700: '#00606A',
+            800: '#004047',
+            900: '#002024',
+          },
+          // Gray - Professional neutral tones
+          gray: {
+            50: '#F8F9FA',
+            100: '#F1F3F5',
+            200: '#E9ECEF',
+            300: '#DEE2E6',
+            400: '#CED4DA',
+            500: '#6C757D', // Mid gray
+            600: '#565E64',
+            700: '#41464B',
+            800: '#2B2F32',
+            900: '#161719',
+          },
+          // Accent colors for highlights
+          green: {
+            50: '#E8F5E9',
+            100: '#C8E6C9',
+            200: '#A5D6A7',
+            300: '#81C784',
+            400: '#66BB6A',
+            500: '#4CAF50',
+            600: '#43A047',
+            700: '#388E3C',
+            800: '#2E7D32',
+            900: '#1B5E20',
+          },
+        },
+        // Primary color is McKinsey navy
         primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
+          50: '#E6F0F8',
+          100: '#CCE1F1',
+          200: '#99C3E3',
+          300: '#66A5D5',
+          400: '#3387C7',
+          500: '#003C6C', // McKinsey navy as primary
+          600: '#003056',
+          700: '#002441',
+          800: '#00182B',
+          900: '#000C16',
         },
         gray: {
-          50: '#f9fafb',
-          100: '#f3f4f6',
-          200: '#e5e7eb',
-          300: '#d1d5db',
-          400: '#9ca3af',
-          500: '#6b7280',
-          600: '#4b5563',
-          700: '#374151',
-          800: '#1f2937',
-          900: '#111827',
+          50: '#F5F5F5',
+          100: '#E8E8E8',
+          200: '#D1D1D1',
+          300: '#B0B0B0',
+          400: '#808080',
+          500: '#5A5A5A',
+          600: '#3F3F3F',
+          700: '#333333',
+          800: '#262626',
+          900: '#1A1A1A',
+          950: '#0D0D0D',
         },
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['Playfair Display', 'Georgia', 'serif'],
+        display: ['Cormorant Garamond', 'serif'],
       },
       typography: {
         DEFAULT: {

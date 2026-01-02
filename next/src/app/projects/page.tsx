@@ -1,262 +1,489 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { getProjects, urlFor } from '@/lib/sanity';
-import { Project } from '@/lib/sanity-types';
+'use client';
+import React, { useState } from 'react';
+import ProjectLayout from '@/components/project/ProjectLayout';
+import { 
+  Heading2, 
+  Heading3, 
+  Paragraph, 
+  CodeBlock, 
+  List,
+  Callout 
+} from '@/components/project/ProjectComponents';
+import FadeIn from '@/components/FadeIn';
+import { ArrowRight, ArrowUpRight, Filter, X } from 'lucide-react';
 
-export const metadata = {
-  title: 'Projets | Portfolio Académique',
-  description: 'Découvrez mes projets de recherche et développement en Intelligence Artificielle, Réalité Virtuelle et Neurosciences Computationnelles.',
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  status: string;
+  technologies: string[];
+  year: string;
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  content: () => React.ReactElement;
+}
+
+const projects: Project[] = [
+  {
+    id: 'portfolio-website',
+    title: 'Portfolio Personnel - Site Web Moderne',
+    description: 'Site portfolio académique et professionnel développé avec Next.js 14, TypeScript et TailwindCSS. Design moderne, performant et accessible.',
+    category: 'Développement Web',
+    status: 'Terminé',
+    technologies: ['Next.js 14', 'TypeScript', 'TailwindCSS', 'React', 'Vercel'],
+    year: '2024',
+    githubUrl: 'https://github.com/thefledgedhurricane/portfolio',
+    liveUrl: 'https://thefledgedhurricane.github.io',
+    featured: true,
+    content: () => (
+      <>
+        <Paragraph>
+          Ce portfolio représente mon identité numérique complète, conçu pour présenter 
+          mes travaux de recherche, mes projets de développement, et mes compétences en 
+          tant que développeur full-stack et chercheur en IA.
+        </Paragraph>
+
+        <Heading2>Objectifs du Projet</Heading2>
+        <List items={[
+          'Créer une plateforme centralisée pour mes publications académiques',
+          'Présenter mes projets de développement avec documentation technique',
+          'Offrir un système de cours interactif pour l\'enseignement',
+          'Assurer une performance optimale et un SEO excellence'
+        ]} />
+
+        <Heading2>Architecture Technique</Heading2>
+        <Heading3>Framework et Technologies</Heading3>
+        <Paragraph>
+          Le projet utilise Next.js 14 avec App Router, permettant le Server-Side Rendering 
+          et la génération statique pour des performances optimales.
+        </Paragraph>
+
+        <CodeBlock 
+          language="typescript"
+            title="next.config.js"
+          code={`/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
+  basePath: '',
+  trailingSlash: true,
 };
 
-// Metadata is handled by layout.tsx for client components
+module.exports = nextConfig;`}
+        />
 
-const categoryLabels = {
-  web: 'Web',
-  mobile: 'Mobile',
-  desktop: 'Desktop',
-  ai: 'Intelligence Artificielle',
-  data: 'Science des Données',
-  other: 'Autre'
-};
+        <Heading3>Système de Design</Heading3>
+        <Paragraph>
+          TailwindCSS permet une conception rapide avec un système de design cohérent. 
+          Le mode sombre est implémenté nativement avec les classes dark: de Tailwind.
+        </Paragraph>
 
-const statusLabels = {
-  planning: 'En planification',
-  'in-progress': 'En cours',
-  completed: 'Terminé',
-  'on-hold': 'En pause',
-  cancelled: 'Annulé'
-};
+        <Callout type="success" title="Performance">
+          Le site atteint un score Lighthouse de 95+ sur tous les critères : Performance, 
+          Accessibilité, Best Practices et SEO.
+        </Callout>
 
-export default async function ProjectsPage() {
-  // Fetch all projects at build time
-  const projects = await getProjects();
+        <Heading2>Fonctionnalités Clés</Heading2>
+        <List items={[
+          'Système de blog avec articles techniques',
+          'Portfolio de projets avec descriptions détaillées',
+          'Publications scientifiques avec intégration Scopus',
+          'Plateforme d\'enseignement interactive',
+          'Mode sombre/clair automatique',
+          'SEO optimisé avec métadonnées dynamiques'
+        ]} />
+
+        <Heading2>Déploiement</Heading2>
+        <Paragraph>
+          Le site est déployé sur GitHub Pages avec un workflow CI/CD automatisé utilisant 
+          GitHub Actions pour le build et le déploiement.
+        </Paragraph>
+      </>
+    )
+  },
+  {
+    id: 'vr-magic-carpet',
+    title: 'VR Magic Carpet - Évaluation Neuropsychologique',
+    description: 'Plateforme de réalité virtuelle pour l\'évaluation de la navigation spatiale et de la mémoire de travail. Adaptation du test de Corsi en VR.',
+    category: 'Réalité Virtuelle & IA',
+    status: 'En Recherche',
+    technologies: ['Unity', 'C#', 'Python', 'Machine Learning', 'PyTorch', 'Scikit-learn'],
+    year: '2021-2025',
+    featured: true,
+    content: () => (
+      <>
+        <Paragraph>
+          Le VR Magic Carpet est une innovation majeure en neuropsychologie, permettant 
+          d'évaluer la navigation spatiale dans un environnement virtuel immersif. C'est 
+          une adaptation du célèbre test de Corsi, transposée en réalité virtuelle.
+        </Paragraph>
+
+        <Heading2>Contexte Scientifique</Heading2>
+        <Paragraph>
+          Le test de Corsi (Corsi Block-Tapping Test) est un outil classique d'évaluation 
+          de la mémoire visuospatiale. Notre adaptation en VR permet une analyse beaucoup 
+          plus riche des comportements de navigation.
+        </Paragraph>
+
+        <Callout type="info" title="Collaboration Internationale">
+          Ce projet est développé en collaboration avec le Collège de France (Prof. Alain Berthoz), 
+          la Sorbonne Université (Prof. Bernard Cohen) et l\'Université Mohammed Premier.
+        </Callout>
+
+        <Heading2>Méthodologie</Heading2>
+        <Heading3>Protocole Expérimental</Heading3>
+        <List items={[
+          'Les participants portent un casque VR et se déplacent sur un tapis physique',
+          'Des cibles sont projetées virtuellement en séquence',
+          'Le participant doit mémoriser et reproduire la séquence',
+          'Enregistrement de la trajectoire 3D avec capture de mouvement'
+        ]} />
+
+        <Heading3>Analyse par IA</Heading3>
+        <Paragraph>
+          Nous utilisons plusieurs techniques de Machine Learning pour analyser les trajectoires :
+        </Paragraph>
+
+        <CodeBlock 
+          language="python"
+            title="trajectory_clustering.py"
+          code={`from sklearn.cluster import KMeans, DBSCAN
+import numpy as np
+
+def analyze_trajectory(data):
+    # Extraction des features cinématiques
+    velocity = np.diff(data, axis=0)
+    acceleration = np.diff(velocity, axis=0)
+    
+    # K-means clustering
+    kmeans = KMeans(n_clusters=3)
+    clusters_kmeans = kmeans.fit_predict(velocity)
+    
+    # DBSCAN pour détecter les outliers
+    dbscan = DBSCAN(eps=0.5, min_samples=5)
+    clusters_dbscan = dbscan.fit_predict(velocity)
+    
+    return {
+        'kmeans': clusters_kmeans,
+        'dbscan': clusters_dbscan,
+        'velocity': velocity,
+        'acceleration': acceleration
+    }`}
+        />
+
+        <Heading2>Résultats et Publications</Heading2>
+        <Paragraph>
+          Ce projet a donné lieu à 10 publications scientifiques dans des conférences 
+          internationales et revues académiques, avec plus de 50 citations cumulées.
+        </Paragraph>
+
+        <List items={[
+          'Identification de 3 clusters de comportements de navigation',
+          'Distinction précise entre patients et sujets sains',
+          'Détection de troubles vestibulaires et cognitifs',
+          'Validation clinique avec des patients réels'
+        ]} />
+      </>
+    )
+  },
+  {
+    id: 'ml-toolkit',
+    title: 'ML Research Toolkit - Outils de Recherche',
+    description: 'Bibliothèque Python pour la recherche en Machine Learning. Preprocessing, data augmentation, clustering et visualisation pour time series.',
+    category: 'Data Science & ML',
+    status: 'Open Source',
+    technologies: ['Python', 'PyTorch', 'Scikit-learn', 'Pandas', 'NumPy', 'Matplotlib'],
+    year: '2023-2024',
+    githubUrl: 'https://github.com/thefledgedhurricane',
+    featured: false,
+    content: () => (
+      <>
+        <Paragraph>
+          Un ensemble d'outils et de scripts Python pour faciliter la recherche en 
+          Machine Learning, avec un focus particulier sur l'analyse de séries temporelles 
+          et le clustering.
+        </Paragraph>
+
+        <Heading2>Fonctionnalités</Heading2>
+        <Heading3>Data Augmentation</Heading3>
+        <Paragraph>
+          Techniques avancées d'augmentation de données pour séries temporelles :
+        </Paragraph>
+
+        <CodeBlock 
+          language="python"
+          code={`import numpy as np
+
+class TimeSeriesAugmentation:
+    def jitter(self, data, sigma=0.03):
+        """Ajoute du bruit gaussien"""
+        noise = np.random.normal(0, sigma, data.shape)
+        return data + noise
+    
+    def scaling(self, data, sigma=0.1):
+        """Mise à l'échelle aléatoire"""
+        factor = np.random.normal(1.0, sigma)
+        return data * factor
+    
+    def time_warp(self, data, sigma=0.2):
+        """Déformation temporelle"""
+        # Implementation...
+        pass`}
+        />
+
+        <Heading3>Clustering Avancé</Heading3>
+        <List items={[
+          'K-Means optimisé avec recherche automatique du nombre de clusters',
+          'DBSCAN pour détection d\'outliers',
+          'Hierarchical clustering avec dendrogrammes',
+          'Ant Colony Optimization pour clustering'
+        ]} />
+
+        <Heading2>Utilisation</Heading2>
+        <Paragraph>
+          Installation simple via pip et documentation complète :
+        </Paragraph>
+
+        <CodeBlock 
+          language="bash"
+          code={`# Installation
+pip install ml-research-toolkit
+
+# Utilisation
+from ml_toolkit import TimeSeriesAnalyzer
+analyzer = TimeSeriesAnalyzer()
+results = analyzer.analyze(data)`}
+        />
+      </>
+    )
+  },
+  {
+    id: 'teaching-platform',
+    title: 'Plateforme d\'Enseignement Interactive',
+    description: 'Système de gestion de cours interactif avec visualisations d\'algorithmes, exercices pratiques et suivi de progression.',
+    category: 'Éducation & Tech',
+    status: 'Terminé',
+    technologies: ['Next.js', 'TypeScript', 'React', 'D3.js', 'TailwindCSS'],
+    year: '2024',
+    featured: true,
+    content: () => (
+      <>
+        <Paragraph>
+          Une plateforme d'apprentissage moderne intégrée à mon portfolio, offrant des 
+          cours interactifs en programmation, algorithmique et intelligence artificielle.
+        </Paragraph>
+
+        <Heading2>Modules Pédagogiques</Heading2>
+        <List items={[
+          'Fondamentaux de la Programmation (Python, C)',
+          'Algorithmique et Structures de Données',
+          'Intelligence Artificielle et Machine Learning',
+          'Développement Web (HTML, CSS, JavaScript)',
+          'Bases de Données et SQL'
+        ]} />
+
+        <Heading2>Fonctionnalités Interactives</Heading2>
+        <Heading3>Visualisations d\'Algorithmes</Heading3>
+        <Paragraph>
+          Des visualisations interactives permettent aux étudiants de comprendre 
+          le fonctionnement des algorithmes en temps réel :
+        </Paragraph>
+
+        <List items={[
+          'Tri à bulles, insertion, fusion et rapide',
+          'Structures de données : piles, files, arbres',
+          'Algorithmes de graphes : DFS, BFS, Dijkstra',
+          'Régressions linéaire et logistique'
+        ]} />
+
+        <Callout type="success" title="Impact Pédagogique">
+          Plus de 200 étudiants utilisent actuellement la plateforme à l\'Université 
+          Mohammed Premier.
+        </Callout>
+
+        <Heading2>Système de Navigation</Heading2>
+        <Paragraph>
+          Chaque cours est organisé en leçons progressives avec navigation fluide et 
+          suivi de la progression de l'étudiant.
+        </Paragraph>
+      </>
+    )
+  }
+];
+
+export default function ProjectsPage() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [filterCategory, setFilterCategory] = useState<string>('all');
   
-  // Extract unique categories and statuses for filters
-  const categories: string[] = Array.from(new Set(projects.map((p: Project) => p.category).filter(Boolean))) as string[];
-  const statuses: string[] = Array.from(new Set(projects.map((p: Project) => p.status).filter(Boolean))) as string[];
+  function mapCategory(cat: string): 'web' | 'mobile' | 'desktop' | 'ai' | 'data' | 'other' {
+    const c = (cat || '').toLowerCase();
+    if (c.includes('web') || c.includes('développement') || c.includes('portfolio')) return 'web';
+    if (c.includes('mobile')) return 'mobile';
+    if (c.includes('desktop')) return 'desktop';
+    if (c.includes('vr') || c.includes('réalité') || c.includes('ia') || c.includes('intelligence') || c.includes('ai')) return 'ai';
+    if (c.includes('data') || c.includes('ml') || c.includes('machine') || c.includes('science')) return 'data';
+    return 'other';
+  }
+
+  function mapStatus(s: string): 'planning' | 'in-progress' | 'completed' | 'on-hold' | 'cancelled' {
+    const st = (s || '').toLowerCase();
+    if (st.includes('termin') || st.includes('finished') || st.includes('completed')) return 'completed';
+    if (st.includes('en recherche') || st.includes('en cours') || st.includes('in progress') || st.includes('research')) return 'in-progress';
+    if (st.includes('open source') || st.includes('released')) return 'completed';
+    if (st.includes('pause') || st.includes('on hold')) return 'on-hold';
+    if (st.includes('cancel')) return 'cancelled';
+    return 'planning';
+  }
+  
+  const categories = ['all', ...Array.from(new Set(projects.map(p => p.category)))];
+  
+  const filteredProjects = filterCategory === 'all' 
+    ? projects 
+    : projects.filter(p => p.category === filterCategory);
+
+  if (selectedProject) {
+    return (
+      <div className="min-h-screen bg-white pt-24">
+        <ProjectLayout
+          title={selectedProject.title}
+          description={selectedProject.description}
+          category={mapCategory(selectedProject.category)}
+          status={mapStatus(selectedProject.status)}
+          technologies={selectedProject.technologies}
+          year={selectedProject.year}
+          githubUrl={selectedProject.githubUrl}
+          liveUrl={selectedProject.liveUrl}
+        >
+          <div className="mb-8">
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="group inline-flex items-center text-sm font-medium text-mckinsey-gray-600 hover:text-mckinsey-teal-600 transition-colors"
+            >
+              <ArrowRight className="w-4 h-4 mr-2 rotate-180 group-hover:-translate-x-1 transition-transform" />
+              Back to projects
+            </button>
+          </div>
+          {selectedProject.content()}
+        </ProjectLayout>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-  <div className="bg-white dark:bg-gray-950 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-              Mes Projets
+    <main className="min-h-screen bg-white pt-32 pb-24 selection:bg-mckinsey-teal-100 selection:text-mckinsey-navy-900">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        {/* Header */}
+        <FadeIn>
+          <div className="text-center mb-24">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-mckinsey-gray-200 rounded-full text-xs font-medium text-mckinsey-navy-800 mb-8 shadow-sm">
+              <span className="w-1.5 h-1.5 bg-mckinsey-teal-500 rounded-full animate-pulse" />
+              Innovation & Development
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl font-light text-mckinsey-navy-900 mb-8 leading-[0.95] tracking-tight">
+              Featured <span className="font-normal text-transparent bg-clip-text bg-gradient-to-r from-mckinsey-navy-800 to-mckinsey-teal-600">Projects</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Une collection de mes travaux de recherche et développement en Intelligence Artificielle, 
-              Réalité Virtuelle et Neurosciences Computationnelles.
+            
+            <p className="text-xl text-mckinsey-gray-600 font-light max-w-2xl mx-auto mb-12 leading-relaxed">
+              Discover my research and development projects in AI, virtual reality, and web technologies.
             </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Filters - Static version */}
-  <div className="bg-white dark:bg-gray-950 border-b border-gray-100 dark:border-gray-800 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-wrap gap-4 items-center justify-between">
-            <div className="flex flex-wrap gap-4">
-              {/* Category Filter */}
-              <div className="flex items-center space-x-2">
-                <span className="text-sm font-medium text-gray-700">Catégorie:</span>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-blue-600 text-white">
-                    Tous
-                  </span>
-                  {categories.map((category) => (
-                    <span
-                      key={category}
-                      className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer"
-                    >
-                      {categoryLabels[category as keyof typeof categoryLabels] || category}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Status Filter */}
-              <div className="flex items-center space-x-2">
-                <span className="text-sm font-medium text-gray-700">Statut:</span>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-green-600 text-white">
-                    Tous
-                  </span>
-                  {statuses.map((status) => (
-                    <span
-                      key={status}
-                      className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer"
-                    >
-                      {statusLabels[status as keyof typeof statusLabels] || status}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="text-sm text-gray-500">
-              {projects.length} projet{projects.length !== 1 ? 's' : ''} trouv&eacute;{projects.length !== 1 ? 's' : ''}
+            
+            {/* Filter */}
+            <div className="flex justify-center gap-3 flex-wrap">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setFilterCategory(category)}
+                  className={`px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 border ${
+                    filterCategory === category
+                      ? 'bg-mckinsey-navy-900 text-white border-mckinsey-navy-900 shadow-lg shadow-mckinsey-navy-900/20'
+                      : 'bg-white text-mckinsey-gray-600 border-gray-200 hover:border-mckinsey-navy-900 hover:text-mckinsey-navy-900'
+                  }`}
+                >
+                  {category === 'all' ? 'All Projects' : category}
+                </button>
+              ))}
             </div>
           </div>
-        </div>
-      </div>
+        </FadeIn>
 
-      {/* Projects Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project: Project) => {
-              const imageUrl = project.featuredImage?.asset 
-                ? urlFor(project.featuredImage).width(400).height(300).url() 
-                : '/placeholder-project.jpg';
-
-              return (
-                <article key={project._id} className="bg-white dark:bg-gray-900 rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden group border border-gray-100 dark:border-gray-800">
-                  <div className="relative aspect-video overflow-hidden">
-                    {imageUrl ? (
-                      <Image
-                        src={imageUrl}
-                        alt={project.featuredImage?.alt || project.title}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                        <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                      </div>
-                    )}
-                    
-                    {/* Status Badge */}
-                    <div className="absolute top-3 left-3">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        project.status === 'completed' ? 'bg-green-100 text-green-800' :
-                        project.status === 'in-progress' ? 'bg-blue-100 text-blue-800' :
-                        project.status === 'planning' ? 'bg-yellow-100 text-yellow-800' :
-                        project.status === 'on-hold' ? 'bg-orange-100 text-orange-800' :
-                        'bg-gray-100 text-gray-800'
-                      }`}>
-                        {statusLabels[project.status as keyof typeof statusLabels] || project.status}
-                      </span>
-                    </div>
-
-                    {/* Featured Badge */}
-                    {project.featured && (
-                      <div className="absolute top-3 right-3">
-                        <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium">
-                          ⭐ En vedette
-                        </span>
-                      </div>
-                    )}
+          {filteredProjects.map((project, index) => (
+            <FadeIn key={project.id} delay={index * 100}>
+              <article
+                className="group relative bg-white rounded-2xl border border-gray-100 hover:border-mckinsey-teal-200 hover:shadow-xl transition-all duration-500 cursor-pointer flex flex-col h-full overflow-hidden"
+                onClick={() => setSelectedProject(project)}
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-mckinsey-teal-50/50 to-transparent rounded-bl-full -mr-16 -mt-16 transition-transform duration-700 group-hover:scale-150" />
+                
+                <div className="p-8 flex flex-col h-full relative z-10">
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="inline-block px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-mckinsey-navy-700 bg-mckinsey-gray-50 rounded-full">
+                      {project.category}
+                    </span>
+                    <span className="text-xs font-medium text-mckinsey-gray-400">
+                      {project.year}
+                    </span>
                   </div>
-                  
-                  <div className="p-6">
-                    <div className="mb-3">
-                      <span className="inline-block px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium">
-                        {categoryLabels[project.category as keyof typeof categoryLabels] || project.category}
+
+                  {project.featured && (
+                    <div className="mb-4">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-mckinsey-teal-600">
+                        <span className="w-1.5 h-1.5 bg-mckinsey-teal-500 rounded-full animate-pulse" /> Featured
                       </span>
                     </div>
-                    
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {project.title}
-                    </h3>
-                    
-                    <p className="text-gray-600 mb-4 line-clamp-3">
-                      {project.description}
-                    </p>
-                    
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {project.technologies?.slice(0, 4).map((tech: string, index: number) => (
-                        <span
-                          key={index}
-                          className="bg-blue-50 text-blue-700 px-2 py-1 rounded text-xs font-medium"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.technologies && project.technologies.length > 4 && (
-                        <span className="bg-gray-50 text-gray-600 px-2 py-1 rounded text-xs font-medium">
-                          +{project.technologies.length - 4}
-                        </span>
-                      )}
-                    </div>
-                    
-                    {/* Project Links */}
-                    <div className="flex items-center justify-between">
-                      <Link
-                        href={`/projects/${project.slug.current}`}
-                        className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+                  )}
+
+                  <h2 className="text-2xl font-medium text-mckinsey-navy-900 mb-4 group-hover:text-mckinsey-teal-600 transition-colors duration-300">
+                    {project.title}
+                  </h2>
+
+                  <p className="text-mckinsey-gray-600 font-light mb-8 line-clamp-3 flex-grow leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {project.technologies.slice(0, 3).map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-[10px] font-medium px-2 py-1 bg-gray-50 text-mckinsey-gray-600 rounded-md border border-gray-100"
                       >
-                        Voir le projet
-                        <svg
-                          className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </Link>
-                      
-                      <div className="flex items-center space-x-2">
-                        {project.liveUrl && (
-                          <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-                            title="Voir en direct"
-                          >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                          </a>
-                        )}
-                        {project.githubUrl && (
-                          <a
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-                            title="Voir sur GitHub"
-                          >
-                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                          </a>
-                        )}
-                      </div>
-                    </div>
+                        {tech}
+                      </span>
+                    ))}
+                    {project.technologies.length > 3 && (
+                      <span className="text-[10px] font-medium px-2 py-1 bg-gray-50 text-mckinsey-gray-600 rounded-md border border-gray-100">
+                        +{project.technologies.length - 3}
+                      </span>
+                    )}
                   </div>
-                </article>
-              );
-            })}
-          </div>
-      </div>
 
-      {/* Back to Home */}
-  <div className="bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center">
-            <Link
-              href="/"
-              className="inline-flex items-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 font-medium"
-            >
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Retour à l&#39;accueil
-            </Link>
-          </div>
+                  <div className="flex items-center justify-between pt-6 border-t border-gray-100 mt-auto">
+                    <span className={`text-xs font-medium px-2 py-1 rounded-full ${
+                      project.status === 'Terminé' ? 'bg-green-50 text-green-700' :
+                      project.status === 'En Recherche' ? 'bg-blue-50 text-blue-700' :
+                      'bg-purple-50 text-purple-700'
+                    }`}>
+                      {project.status}
+                    </span>
+
+                    <button className="text-mckinsey-navy-900 text-sm font-medium flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+                      View Details
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </FadeIn>
+          ))}
         </div>
       </div>
-    </div>
+    </main>
   );
 }

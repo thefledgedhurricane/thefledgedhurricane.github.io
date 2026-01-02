@@ -115,8 +115,8 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <form onSubmit={handleSubmit} method="POST" className="space-y-6">
+    <div className="w-full">
+      <form onSubmit={handleSubmit} method="POST" className="space-y-8">
         {/* Honeypot field - hidden from users */}
         <input
           type="text"
@@ -128,9 +128,9 @@ export default function ContactForm() {
           autoComplete="off"
         />
 
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Name *
+        <div className="group">
+          <label htmlFor="name" className="block text-xs uppercase tracking-widest text-luxury-charcoal-500 dark:text-luxury-charcoal-400 mb-2">
+            Nom
           </label>
           <input
             type="text"
@@ -138,18 +138,16 @@ export default function ContactForm() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-              errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-            } bg-white dark:bg-gray-800 text-gray-900 dark:text-white`}
-            placeholder="Your full name"
+            className="w-full bg-transparent border-b border-luxury-charcoal-200 dark:border-luxury-charcoal-700 py-3 text-luxury-charcoal-900 dark:text-white focus:border-luxury-gold-500 focus:outline-none transition-colors duration-300 placeholder-luxury-charcoal-300 dark:placeholder-luxury-charcoal-600"
+            placeholder="Votre nom complet"
             required
           />
-          {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+          {errors.name && <p className="mt-2 text-xs text-red-500">{errors.name}</p>}
         </div>
 
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Email *
+        <div className="group">
+          <label htmlFor="email" className="block text-xs uppercase tracking-widest text-luxury-charcoal-500 dark:text-luxury-charcoal-400 mb-2">
+            Email
           </label>
           <input
             type="email"
@@ -157,18 +155,16 @@ export default function ContactForm() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-              errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-            } bg-white dark:bg-gray-800 text-gray-900 dark:text-white`}
-            placeholder="your.email@example.com"
+            className="w-full bg-transparent border-b border-luxury-charcoal-200 dark:border-luxury-charcoal-700 py-3 text-luxury-charcoal-900 dark:text-white focus:border-luxury-gold-500 focus:outline-none transition-colors duration-300 placeholder-luxury-charcoal-300 dark:placeholder-luxury-charcoal-600"
+            placeholder="votre.email@exemple.com"
             required
           />
-          {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+          {errors.email && <p className="mt-2 text-xs text-red-500">{errors.email}</p>}
         </div>
 
-        <div>
-          <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Subject *
+        <div className="group">
+          <label htmlFor="subject" className="block text-xs uppercase tracking-widest text-luxury-charcoal-500 dark:text-luxury-charcoal-400 mb-2">
+            Sujet
           </label>
           <input
             type="text"
@@ -176,48 +172,42 @@ export default function ContactForm() {
             name="subject"
             value={formData.subject}
             onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-              errors.subject ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-            } bg-white dark:bg-gray-800 text-gray-900 dark:text-white`}
-            placeholder="What's this about?"
+            className="w-full bg-transparent border-b border-luxury-charcoal-200 dark:border-luxury-charcoal-700 py-3 text-luxury-charcoal-900 dark:text-white focus:border-luxury-gold-500 focus:outline-none transition-colors duration-300 placeholder-luxury-charcoal-300 dark:placeholder-luxury-charcoal-600"
+            placeholder="De quoi s'agit-il ?"
             required
           />
-          {errors.subject && <p className="mt-1 text-sm text-red-600">{errors.subject}</p>}
+          {errors.subject && <p className="mt-2 text-xs text-red-500">{errors.subject}</p>}
         </div>
 
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Message *
+        <div className="group">
+          <label htmlFor="message" className="block text-xs uppercase tracking-widest text-luxury-charcoal-500 dark:text-luxury-charcoal-400 mb-2">
+            Message
           </label>
           <textarea
             id="message"
             name="message"
-            rows={6}
+            rows={4}
             value={formData.message}
             onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-vertical ${
-              errors.message ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-            } bg-white dark:bg-gray-800 text-gray-900 dark:text-white`}
-            placeholder="Tell me about your project, question, or just say hello!"
+            className="w-full bg-transparent border-b border-luxury-charcoal-200 dark:border-luxury-charcoal-700 py-3 text-luxury-charcoal-900 dark:text-white focus:border-luxury-gold-500 focus:outline-none transition-colors duration-300 placeholder-luxury-charcoal-300 dark:placeholder-luxury-charcoal-600 resize-none"
+            placeholder="Votre message..."
             required
           />
-          {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
+          {errors.message && <p className="mt-2 text-xs text-red-500">{errors.message}</p>}
         </div>
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-3 px-6 rounded-lg transition-colors focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+          className="w-full py-4 bg-luxury-charcoal-900 dark:bg-white text-white dark:text-luxury-charcoal-900 text-sm uppercase tracking-widest hover:bg-luxury-gold-600 dark:hover:bg-luxury-gold-500 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isSubmitting ? 'Sending...' : 'Send Message'}
+          {isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'}
         </button>
 
-
-
         {submitStatus === 'error' && (
-          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-            <p className="text-red-800 dark:text-red-200 text-center">
-              ❌ Sorry, there was an error sending your message. Please try again or contact me directly.
+          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+            <p className="text-red-800 dark:text-red-200 text-sm text-center">
+              Une erreur est survenue. Veuillez réessayer ou me contacter directement par email.
             </p>
           </div>
         )}

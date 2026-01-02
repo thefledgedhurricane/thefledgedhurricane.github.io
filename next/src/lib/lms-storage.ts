@@ -1,93 +1,161 @@
 "use client";
 
-// Local storage-based progress tracking for the LMS
-// Structure: { courses: { [courseId]: { completedLessons: string[], quizScores: { [lessonId]: number } } } }
-
-export type CourseProgress = {
-  completedLessons: string[];
-  quizScores: Record<string, number>;
+// Local storage-based progress tracking
+export type LessonProgress = {
+  completed: boolean;
+  completedAt?: string;
+  quizScore?: number;
+  timeSpent?: number; // in minutes
 };
 
-export type LMSState = {
+export type CourseProgress = {
+  lessons: Record<string, LessonProgress>;
+  lastAccessedLesson?: string;
+  startedAt: string;
+  totalTimeSpent: number;
+};
+
+export type LMSProgress = {
   version: number;
   courses: Record<string, CourseProgress>;
 };
 
-const STORAGE_KEY = 'lms:v1';
-const VERSION = 1;
-export const PASS_THRESHOLD = 70; // score minimal (%) pour déverrouiller la leçon suivante
+const STORAGE_KEY = 'lms:progress:v2';
+const VERSION = 2;
 
-function readState(): LMSState {
+function readProgress(): LMSProgress {
   if (typeof window === 'undefined') {
     return { version: VERSION, courses: {} };
   }
+  
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { version: VERSION, courses: {} };
-    const data = JSON.parse(raw);
-    if (!data.version || data.version !== VERSION) {
+    const data = localStorage.getItem(STORAGE_KEY);
+    if (!data) return { version: VERSION, courses: {} };
+    
+    const parsed = JSON.parse(data);
+    if (parsed.version !== VERSION) {
+      // Migration logic if needed
       return { version: VERSION, courses: {} };
     }
-    return data as LMSState;
+    return parsed;
   } catch {
     return { version: VERSION, courses: {} };
   }
 }
 
-function writeState(state: LMSState) {
+function writeProgress(progress: LMSProgress) {
   if (typeof window === 'undefined') return;
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  } catch (error) {
+    console.error('Failed to save progress:', error);
+  }
 }
 
 export function getCourseProgress(courseId: string): CourseProgress {
-  const state = readState();
-  return state.courses[courseId] || { completedLessons: [], quizScores: {} };
-}
-
-export function markLessonCompleted(courseId: string, lessonId: string) {
-  const state = readState();
-  const course = state.courses[courseId] || { completedLessons: [], quizScores: {} };
-  if (!course.completedLessons.includes(lessonId)) {
-    course.completedLessons.push(lessonId);
+  const progress = readProgress();
+  
+  if (!progress.courses[courseId]) {
+    return {
+      lessons: {},
+      startedAt: new Date().toISOString(),
+      totalTimeSpent: 0
+    };
   }
-  state.courses[courseId] = course;
-  writeState(state);
+  
+  return progress.courses[courseId];
 }
 
-export function saveQuizScore(courseId: string, lessonId: string, score: number) {
-  const state = readState();
-  const course = state.courses[courseId] || { completedLessons: [], quizScores: {} };
-  course.quizScores[lessonId] = Math.max(course.quizScores[lessonId] || 0, score);
-  state.courses[courseId] = course;
-  writeState(state);
+export function markLessonCompleted(courseId: string, lessonId: string, quizScore?: number) {
+  const progress = readProgress();
+  
+  if (!progress.courses[courseId]) {
+    progress.courses[courseId] = {
+      lessons: {},
+      startedAt: new Date().toISOString(),
+      totalTimeSpent: 0
+    };
+  }
+  
+  progress.courses[courseId].lessons[lessonId] = {
+    completed: true,
+    completedAt: new Date().toISOString(),
+    quizScore,
+    timeSpent: progress.courses[courseId].lessons[lessonId]?.timeSpent || 0
+  };
+  
+  progress.courses[courseId].lastAccessedLesson = lessonId;
+  
+  writeProgress(progress);
+}
+
+export function updateLessonProgress(
+  courseId: string, 
+  lessonId: string, 
+  updates: Partial<LessonProgress>
+) {
+  const progress = readProgress();
+  
+  if (!progress.courses[courseId]) {
+    progress.courses[courseId] = {
+      lessons: {},
+      startedAt: new Date().toISOString(),
+      totalTimeSpent: 0
+    };
+  }
+  
+  const currentLesson = progress.courses[courseId].lessons[lessonId] || {
+    completed: false
+  };
+  
+  progress.courses[courseId].lessons[lessonId] = {
+    ...currentLesson,
+    ...updates
+  };
+  
+  progress.courses[courseId].lastAccessedLesson = lessonId;
+  
+  writeProgress(progress);
+}
+
+export function getLessonProgress(courseId: string, lessonId: string): LessonProgress | undefined {
+  const progress = readProgress();
+  return progress.courses[courseId]?.lessons[lessonId];
+}
+
+export function getCompletedLessons(courseId: string): string[] {
+  const courseProgress = getCourseProgress(courseId);
+  return Object.entries(courseProgress.lessons)
+    .filter(([_, progress]) => progress.completed)
+    .map(([lessonId]) => lessonId);
+}
+
+export function getProgressPercentage(courseId: string, totalLessons: number): number {
+  const completedCount = getCompletedLessons(courseId).length;
+  return totalLessons > 0 ? Math.round((completedCount / totalLessons) * 100) : 0;
 }
 
 export function resetCourseProgress(courseId: string) {
-  const state = readState();
-  delete state.courses[courseId];
-  writeState(state);
+  const progress = readProgress();
+  delete progress.courses[courseId];
+  writeProgress(progress);
 }
 
-export function getCourseCompletionPercent(courseId: string, totalLessons: number): number {
-  const progress = getCourseProgress(courseId);
-  if (totalLessons <= 0) return 0;
-  const pct = Math.round((progress.completedLessons.length / totalLessons) * 100);
-  return Math.min(100, Math.max(0, pct));
+export function exportProgress(): string {
+  const progress = readProgress();
+  return JSON.stringify(progress, null, 2);
 }
 
-export function isLessonUnlocked(
-  courseId: string,
-  lessonIdsInOrder: string[],
-  lessonId: string,
-  getPassThreshold?: (prevLessonId: string) => number
-): boolean {
-  // La première leçon est toujours disponible
-  const idx = lessonIdsInOrder.indexOf(lessonId);
-  if (idx <= 0) return true;
-  // La leçon i est déverrouillée si la leçon i-1 a un score de quiz >= PASS_THRESHOLD
-  const prevId = lessonIdsInOrder[idx - 1];
-  const progress = getCourseProgress(courseId);
-  const score = progress.quizScores[prevId] || 0;
-  const threshold = getPassThreshold ? getPassThreshold(prevId) : PASS_THRESHOLD;
-  return score >= threshold;
+export function importProgress(data: string): boolean {
+  try {
+    const parsed = JSON.parse(data) as LMSProgress;
+    if (parsed.version === VERSION) {
+      writeProgress(parsed);
+      return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
 }

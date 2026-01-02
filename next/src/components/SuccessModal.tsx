@@ -24,26 +24,28 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
-      <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" onClick={onClose} />
+      <div className="fixed inset-0 bg-luxury-charcoal-900/80 backdrop-blur-sm transition-opacity" onClick={onClose} />
       
       <div className="flex min-h-full items-center justify-center p-4">
-    <div className="relative w-full max-w-md transform overflow-hidden rounded-2xl bg-white dark:bg-gray-900 p-6 shadow-xl transition-all border border-gray-200 dark:border-gray-800">
-          <div className="flex items-center justify-between mb-4">
+    <div className="relative w-full max-w-md transform overflow-hidden bg-white dark:bg-luxury-charcoal-950 p-8 shadow-2xl transition-all border border-luxury-charcoal-100 dark:border-luxury-charcoal-800">
+          <div className="flex items-center justify-between mb-6">
             <div className="flex items-center">
-              <svg className="h-8 w-8 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
-                Message envoyé !
+              <div className="text-luxury-gold-600 dark:text-luxury-gold-500 mr-4">
+                <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-serif font-medium leading-6 text-luxury-charcoal-900 dark:text-white">
+                Message envoyé
               </h3>
             </div>
             <button
               type="button"
-              className="text-gray-400 hover:text-gray-600 transition-colors"
+              className="text-luxury-charcoal-400 hover:text-luxury-charcoal-600 dark:hover:text-luxury-charcoal-200 transition-colors"
               onClick={onClose}
             >
               <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>

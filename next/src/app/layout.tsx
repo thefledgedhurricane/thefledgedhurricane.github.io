@@ -1,11 +1,32 @@
 import type { Metadata } from 'next';
-import { Inter, Poppins } from 'next/font/google';
+import { Inter, Playfair_Display, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
-import { generateJsonLd } from '@/lib/jsonld';
+import Footer from '@/components/Footer';
+import CustomCursor from '@/components/CustomCursor';
+import ScrollProgress from '@/components/ScrollProgress';
+import AnimatedMeshGradient from '@/components/AnimatedMeshGradient';
+import FloatingOrbs from '@/components/FloatingOrbs';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const poppins = Poppins({ subsets: ['latin'], weight: ['300','400','500','600','700'], variable: '--font-poppins' });
+const inter = Inter({ 
+  subsets: ['latin'], 
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({ 
+  subsets: ['latin'], 
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-playfair',
+  display: 'swap',
+});
+
+const cormorant = Cormorant_Garamond({ 
+  subsets: ['latin'], 
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-cormorant',
+  display: 'swap',
+});
 
 const siteConfig = {
   name: process.env.NEXT_PUBLIC_SITE_NAME || 'Portfolio',
@@ -68,34 +89,28 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const jsonLd = generateJsonLd({
-    type: 'Organization',
-    name: siteConfig.name,
-    url: siteConfig.url,
-    description: siteConfig.description,
-  });
+
 
   return (
-  <html lang="en" className={`scroll-smooth ${inter.variable} ${poppins.variable}`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable} ${cormorant.variable}`}>
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#2563eb" />
+        <meta name="theme-color" content="#A4863D" />
       </head>
-  <body className={`antialiased transition-colors duration-300 bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100`}>
+      <body className={`antialiased transition-colors duration-500 font-sans bg-white text-gray-900`}>
+        {/* 2025 Modern UI Enhancements */}
+        <FloatingOrbs />
+        <AnimatedMeshGradient />
+        <ScrollProgress />
+        <CustomCursor />
+        
         <Header />
-        <main>
-          <div className="min-h-screen flex flex-col">
-            {children}
-          </div>
-        </main>
+        {children}
+        <Footer />
       </body>
     </html>
   );

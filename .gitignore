@@ -48,7 +48,8 @@ yarn-error.log*
 *.tmp
 *.temp
 
-# Sanity build
+# Sanity (archived)
+sanity/
 sanity/dist/
 
 # Next.js specific

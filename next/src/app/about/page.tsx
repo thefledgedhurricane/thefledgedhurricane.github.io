@@ -1,10 +1,15 @@
+
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight, Download, MapPin, Calendar, Briefcase, GraduationCap } from 'lucide-react';
+import FadeIn from '@/components/FadeIn';
+import Counter from '@/components/Counter';
+import { logos } from '@/components/about-logos';
 
 export const metadata: Metadata = {
-  title: 'À Propos | Dr. Ihababdelbasset Annaki',
-  description: 'Découvrez le parcours académique et professionnel du Dr. Ihababdelbasset Annaki, expert en Intelligence Artificielle et développement avancé.',
+  title: 'About | Dr. Ihababdelbasset Annaki',
+  description: 'Academic and professional journey of Dr. Ihababdelbasset Annaki, expert in Artificial Intelligence and advanced development.',
 };
 
 // Experience data structure
@@ -29,19 +34,19 @@ const experiences: Experience[] = [
     duration: 'Sep 2024 - Present',
     location: 'Oujda Metropolitan Area · On-site',
     type: 'Full-time',
-    description: 'Maître de Conférences à l\'École Supérieure de l\'Éducation et de la Formation (ESEF), partie de l\'Université Mohammed Premier Oujda. Mon travail se concentre sur l\'enseignement et la recherche en Intelligence Artificielle et développement avancé, particulièrement dans le contexte des technologies éducatives et de l\'innovation.',
+    description: 'Maître de Conférences à l\'École Supérieure de l\'Éducation et de la Formation (ESEF). Teaching and research in AI and advanced development, focusing on educational technologies.',
     skills: ['University Lecturing', 'Artificial Intelligence (AI)', 'Educational Technology'],
     current: true
   },
   {
     id: 'larsa-researcher',
-    company: 'LARSA - Laboratory of Research in Applied Sciences',
-    position: 'PhD & Researcher in AI & VR for Healthcare | Specializing in Neuroscience',
+    company: 'LARSA Laboratory',
+    position: 'PhD & Researcher in AI & VR',
     duration: 'Jan 2020 - Present',
     location: 'Remote',
     type: 'Research',
-    description: 'Chercheur en IA pionnier spécialisé dans les architectures d\'apprentissage profond de pointe, incluant les modèles transformers, l\'apprentissage par renforcement et la recherche d\'architecture neuronale. Expert en développement de systèmes de traitement du langage naturel état-de-l\'art, algorithmes de vision par ordinateur et modèles IA multimodaux. Dans mon travail, j\'exploite les technologies VR pour créer des environnements immersifs qui simulent des scénarios du monde réel pour l\'observation détaillée et l\'analyse des comportements de locomotion.',
-    skills: ['Data Science', 'Virtual Reality (VR)', 'Machine Learning', 'Deep Learning', 'Neuroscience', 'Healthcare AI'],
+    description: 'Pioneering AI researcher specializing in deep learning architectures, transformers, and RL. Expert in VR technologies for immersive behavioral analysis environments.',
+    skills: ['Data Science', 'Virtual Reality (VR)', 'Machine Learning', 'Deep Learning', 'Neuroscience'],
     current: true
   },
   {
@@ -51,18 +56,18 @@ const experiences: Experience[] = [
     duration: 'Aug 2023 - Nov 2023',
     location: 'Remote',
     type: 'Seasonal',
-    description: 'Mentor BIPOC chez KaggleX, guidant la prochaine génération de pionniers en science des données. Partage de mon expertise en science des données, transformation numérique et blockchain avec des talents aspirants de divers horizons. Avec plus de 5 ans d\'expérience en VR et JavaScript, j\'apporte une perspective unique.',
+    description: 'Mentoring the next generation of data science pioneers. Sharing expertise in data science, digital transformation, and blockchain.',
     skills: ['Data Science', 'Teamwork', 'Mentorship']
   },
   {
     id: 'kertys-consultant',
     company: 'Kertys',
-    position: 'Consultant, Strategic Business and Technology Intelligence',
+    position: 'Consultant, Strategic BI',
     duration: 'Oct 2017 - Nov 2019',
     location: 'Casablanca, Morocco',
     type: 'Full-time',
-    description: 'Expert en planification, gestion de contenu d\'entreprise (ECM) et Business Intelligence. Développeur Full-stack polyvalent avec expertise en ExpressJS, ReactJS, ElectronJS, React Native et visualisation de données avec D3.js. Portfolio de 7 projets remarquables avec collaborations dans 6 pays. Orchestration de stratégies de contenu transparentes et création de solutions personnalisées innovantes.',
-    skills: ['Data Science', 'Digital Strategy', 'Full-stack Development', 'Business Intelligence', 'ECM']
+    description: 'Expert in planning, ECM, and Business Intelligence. Full-stack developer with expertise in modern JS frameworks and data visualization.',
+    skills: ['Data Science', 'Digital Strategy', 'Full-stack Development', 'Business Intelligence']
   }
 ];
 
@@ -83,100 +88,119 @@ const education: Education[] = [
     id: 'ump-phd',
     institution: 'Université Mohammed Premier Oujda',
     degree: 'Doctor of Science',
-    field: 'Artificial Intelligence and Data Science for Neuroscience',
+    field: 'AI & Data Science for Neuroscience',
     duration: 'Jan 2020 - May 2024',
     grade: 'PhD with Highest Honors',
-    description: 'Candidat au doctorat et chercheur dédié dans le domaine dynamique de la science des données (DS) et de l\'intelligence artificielle (IA), repoussant les limites de l\'innovation depuis le prestigieux Laboratoire de Recherche en Sciences Appliquées (LARSA). Spécialisé dans l\'apprentissage profond des séries temporelles et le développement de techniques avancées de clustering et de classification.',
-    skills: ['Data Analytics and Visualization', 'Project Management', 'Data Science', 'Research', 'Artificial Intelligence (AI)']
+    description: 'Doctoral research in Data Science and AI, pushing innovation boundaries at LARSA. Specialized in time-series deep learning and advanced neural architectures.',
+    skills: ['Data Analytics', 'Project Management', 'Data Science', 'Research', 'AI']
   },
   {
     id: 'wharton',
     institution: 'The Wharton School',
     degree: 'Non-degree',
-    field: 'Entrepreneurship/Entrepreneurial Studies',
+    field: 'Entrepreneurship Studies',
     duration: 'Jun 2021 - Dec 2021',
-    description: 'Programme de spécialisation en entrepreneuriat en ligne de Wharton couvrant la conception, la conception, l\'organisation et la gestion de nouvelles entreprises. Cette série de cinq cours est conçue pour vous emmener de l\'identification des opportunités au lancement, à la croissance, au financement et à la rentabilité.',
+    description: 'Entrepreneurship specialization covering venture design, organization, and management.',
     skills: ['Entrepreneurship', 'Start-up Ventures', 'Project Management', 'Fundraising']
   },
   {
     id: 'insea',
-    institution: 'Institut National de Statistique et d\'Économie Appliquée (INSEA)',
-    degree: 'Diploma as State Engineer',
-    field: 'Ingénierie de données et informatique décisionnelle',
+    institution: 'INSEA',
+    degree: 'State Engineer Diploma',
+    field: 'Data Engineering & BI',
     duration: '2014 - 2017',
-    description: 'Formation permettant à l\'ingénieur informatique de l\'INSEA de se concentrer sur la conception et la production de systèmes d\'information décisionnels. Cette option se concentre sur les nouvelles technologies BI (Business Intelligence), Big Data et Cloud Computing.',
+    description: 'Focus on BI systems design, Big Data, and Cloud Computing technologies.',
     skills: ['Data Science', 'Business Intelligence', 'Big Data', 'Cloud Computing']
   },
   {
     id: 'cpge',
-    institution: 'CPGE - Classes préparatoires aux grandes écoles',
-    degree: 'Classes Préparatoires',
+    institution: 'CPGE',
+    degree: 'Preparatory Classes',
     field: 'Mathematics and Physics',
     duration: 'Sep 2012 - Jul 2014',
-    description: 'Formation intensive en mathématiques et physique préparant aux concours des grandes écoles d\'ingénieurs.',
+    description: 'Intensive training in mathematics and physics preparing for engineering school entrance exams.',
     skills: ['Mathematics', 'Physics', 'Analytical Thinking']
   }
 ];
 
 function HeroSection() {
   return (
-  <section className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-950 relative overflow-hidden pt-20 transition-colors">
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-1 h-32 bg-gradient-to-b from-blue-500/20 to-transparent rotate-45"></div>
-        <div className="absolute top-1/3 right-1/3 w-1 h-24 bg-gradient-to-b from-purple-500/20 to-transparent -rotate-12"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-1 h-28 bg-gradient-to-b from-green-500/20 to-transparent rotate-12"></div>
+    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-white">
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-mckinsey-teal-50/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-mckinsey-navy-50/50 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
       </div>
-      
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10 w-full">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-full text-sm text-gray-600 mb-8">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              Parcours Académique & Professionnel
-            </div>
-            
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extralight text-gray-900 dark:text-gray-100 mb-6 tracking-tighter leading-none">
-              À Propos de
-              <br />
-              <span className="font-bold text-black">
-                Dr. Annaki
-              </span>
-            </h1>
-            
-            <p className="text-lg text-gray-600 leading-relaxed mb-8">
-              Découvrez mon parcours unique qui combine excellence académique, recherche de pointe 
-              et impact pratique dans le domaine de l&apos;Intelligence Artificielle et des technologies avancées.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="#experience"
-                className="bg-black hover:bg-gray-800 text-white font-medium py-4 px-8 transition-all duration-200 text-sm uppercase tracking-wider text-center"
-              >
-                Expérience Professionnelle
-              </Link>
-              <Link
-                href="#education"
-                className="border border-gray-300 hover:border-black text-gray-700 hover:text-black font-medium py-4 px-8 transition-all duration-200 text-sm uppercase tracking-wider text-center"
-              >
-                Formation Académique
-              </Link>
-            </div>
+            <FadeIn>
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-mckinsey-gray-200 rounded-full text-xs font-medium text-mckinsey-navy-800 mb-8 shadow-sm">
+                <span className="w-1.5 h-1.5 bg-mckinsey-teal-500 rounded-full animate-pulse" />
+                Academic & Professional Journey
+              </div>
+              
+              <h1 className="text-5xl lg:text-7xl font-light text-mckinsey-navy-900 mb-4 leading-[1.1] tracking-tight break-words">
+                About <br />
+                <span className="font-normal text-transparent bg-clip-text bg-gradient-to-r from-mckinsey-navy-800 to-mckinsey-teal-600 whitespace-pre-line">
+                  Ihab Abdelbasset Annaki
+                </span>
+              </h1>
+              <div className="mb-6 flex flex-wrap gap-3 items-center">
+                <span className="inline-block px-4 py-1 rounded-full bg-mckinsey-navy-900 text-white text-xs font-semibold shadow">Assistant Professor</span>
+                <span className="inline-block px-4 py-1 rounded-full bg-mckinsey-teal-500 text-mckinsey-navy-900 text-xs font-semibold shadow">PhD</span>
+                <span className="inline-block px-4 py-1 rounded-full bg-mckinsey-gray-200 text-mckinsey-navy-900 text-xs font-semibold shadow">Engineer</span>
+              </div>
+              
+              <p className="text-xl text-mckinsey-gray-600 font-light leading-relaxed mb-10 max-w-lg">
+                Discover a unique path combining academic excellence, cutting-edge research, and practical impact in Artificial Intelligence and advanced technologies.
+              </p>
+
+              
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href="#experience"
+                  className="group inline-flex items-center gap-2 bg-mckinsey-navy-900 text-white px-8 py-4 rounded-full hover:bg-mckinsey-teal-600 transition-all duration-300"
+                >
+                  Professional Experience
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <a
+                  href="/cv.pdf"
+                  className="group inline-flex items-center gap-2 px-8 py-4 rounded-full border border-mckinsey-gray-200 hover:border-mckinsey-navy-900 transition-all duration-300"
+                >
+                  Download CV
+                  <Download className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+                </a>
+              </div>
+            </FadeIn>
           </div>
           
-          <div className="relative">
-            <div className="aspect-[4/5] bg-gray-100 overflow-hidden shadow-lg">
+          <FadeIn delay={200} className="relative">
+            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
               <Image
                 src="/portrait-academique.jpg"
                 alt="Dr. Ihababdelbasset Annaki"
                 fill
-                className="object-cover"
+                className="object-cover hover:scale-105 transition-transform duration-700"
                 priority
-                sizes="(max-width: 768px) 100vw, 50vw"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-mckinsey-navy-900/60 via-transparent to-transparent" />
+              
+              <div className="absolute bottom-8 left-8 right-8 text-white">
+                <div className="text-3xl font-light mb-2">Dr. Annaki</div>
+                <div className="text-white/80 text-sm">PhD in Artificial Intelligence</div>
+              </div>
             </div>
-            <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-black/5 -z-10"></div>
-          </div>
+            
+            {/* Floating Stats Card */}
+            <div className="absolute -bottom-10 -left-10 bg-white p-6 rounded-xl shadow-xl border border-gray-100 max-w-[200px] hidden lg:block">
+              <div className="text-4xl font-light text-mckinsey-navy-900 mb-1">
+                <Counter end={10} suffix="+" />
+              </div>
+              <div className="text-xs text-mckinsey-gray-500 uppercase tracking-wider">Years of Experience</div>
+            </div>
+          </FadeIn>
         </div>
       </div>
     </section>
@@ -185,118 +209,225 @@ function HeroSection() {
 
 function ExperienceSection() {
   return (
-    <section id="experience" className="py-32 bg-gray-50 dark:bg-gray-950 transition-colors">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-24">
-          <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
-            Parcours Professionnel
-          </div>
-          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 dark:text-gray-100 mb-12 leading-tight max-w-4xl">
-            Expérience <span className="font-bold">Professionnelle</span>
-          </h2>
+    <section id="experience" className="py-32 bg-mckinsey-gray-50 relative overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <FadeIn>
+                <h2 className="text-5xl lg:text-7xl font-light text-mckinsey-navy-900 mb-6 tracking-tight">
+                Professional <span className="font-normal text-mckinsey-teal-600">Experience</span>
+                </h2>
+                <p className="text-xl text-mckinsey-gray-600 max-w-xl leading-relaxed">
+                A track record of innovation and leadership in academia and industry.
+                </p>
+            </FadeIn>
+            <div className="hidden md:block h-px flex-1 bg-gradient-to-r from-mckinsey-gray-200 to-transparent ml-12 mb-8" />
         </div>
         
-        <div className="space-y-16">
-          {experiences.map((exp, index) => (
-            <div key={exp.id} className="group relative">
-              <div className="grid lg:grid-cols-12 gap-8 items-start">
-                <div className="lg:col-span-3">
-                  <div className="sticky top-8">
-                    <div className="text-xs text-gray-400 uppercase tracking-[0.2em] mb-3">
-                      {String(index + 1).padStart(2, '0')}
-                    </div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <h3 className="text-xl font-bold text-black dark:text-gray-100">{exp.company}</h3>
-                      {exp.current && (
-                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          {experiences.map((exp, index) => {
+            let logo = null;
+            if (
+              exp.company.toLowerCase().includes('mohammed premier') ||
+              exp.company.toLowerCase().includes('ecole supérieure') ||
+              exp.description.toLowerCase().includes('esef')
+            ) {
+              logo = logos.find(l => l.name.toLowerCase().includes('esef')) || logos.find(l => l.name.toLowerCase().includes('université'));
+            } else if (exp.company.toLowerCase().includes('kertys')) {
+              logo = logos.find(l => l.name.toLowerCase().includes('kertys'));
+            } else if (exp.company.toLowerCase().includes('kaggle')) {
+              logo = logos.find(l => l.name.toLowerCase().includes('kaggle'));
+            } else if (exp.company.toLowerCase().includes('larsa')) {
+              logo = logos.find(l => l.name.toLowerCase().includes('université'));
+            }
+
+            // Bento grid logic for Experience
+            const isFirst = index === 0;
+            const colSpan = isFirst ? 'md:col-span-8' : (index === 1 ? 'md:col-span-4' : 'md:col-span-6');
+
+            return (
+              <FadeIn key={exp.id} delay={index * 100} className={colSpan}>
+                <div className={`
+                    group relative h-full p-8 lg:p-10 rounded-[2rem] 
+                    bg-white border border-gray-100 
+                    hover:border-mckinsey-teal-200/50 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] 
+                    transition-all duration-500 ease-out overflow-hidden
+                    flex flex-col
+                `}>
+                  {/* Hover Gradient Background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-mckinsey-teal-50/0 via-mckinsey-teal-50/0 to-mckinsey-teal-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="flex flex-col md:flex-row gap-6 mb-8 items-start">
+                      {logo ? (
+                        <div className="relative w-20 h-20 flex-shrink-0 p-2 bg-white rounded-2xl shadow-sm border border-gray-100 group-hover:border-mckinsey-teal-100 transition-colors">
+                          <Image src={logo.src} alt={logo.alt} fill className="object-contain p-1" />
+                        </div>
+                      ) : (
+                        <div className="w-20 h-20 flex-shrink-0 rounded-2xl bg-mckinsey-gray-50 flex items-center justify-center text-mckinsey-gray-400 group-hover:bg-mckinsey-teal-50 group-hover:text-mckinsey-teal-600 transition-colors">
+                            <Briefcase className="w-8 h-8" />
+                        </div>
                       )}
-                    </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-300 mb-2">{exp.duration}</div>
-                    <div className="text-xs text-gray-400 mb-2">{exp.location}</div>
-                    <div className="inline-block px-2 py-1 bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300 rounded text-xs uppercase tracking-wider">
-                      {exp.type}
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="lg:col-span-9">
-                  <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <h4 className="text-2xl font-light text-black dark:text-gray-100 mb-6 leading-tight">
-                      {exp.position}
-                    </h4>
-                    
-                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                      {exp.description}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-2">
-                      {exp.skills.map((skill, skillIndex) => (
-                        <span 
-                          key={skillIndex} 
-                          className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 rounded-full text-sm"
-                        >
-                          {skill}
+                      
+                      <div className="flex flex-col items-start">
+                        <span className="inline-flex items-center gap-2 text-xs font-bold tracking-wider uppercase text-mckinsey-teal-700 mb-3 bg-mckinsey-teal-50 px-3 py-1 rounded-full">
+                            <Calendar className="w-3 h-3" />
+                            {exp.duration}
                         </span>
-                      ))}
+                        <h3 className="text-2xl lg:text-3xl font-medium text-mckinsey-navy-900 group-hover:text-mckinsey-teal-700 transition-colors leading-tight mb-1">
+                            {exp.position}
+                        </h3>
+                        <div className="text-lg text-mckinsey-gray-500 flex items-center gap-2">
+                            {exp.company}
+                            <span className="w-1 h-1 rounded-full bg-gray-300" />
+                            <span className="text-sm text-mckinsey-gray-400">{exp.location}</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <p className="text-mckinsey-gray-600 leading-relaxed text-lg mb-8 max-w-3xl">
+                        {exp.description}
+                    </p>
+
+                    <div className="mt-auto pt-6 border-t border-gray-50 group-hover:border-mckinsey-teal-100/50 transition-colors">
+                        <div className="mb-4 inline-block">
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-mckinsey-navy-50 text-mckinsey-navy-700 text-xs font-bold border border-mckinsey-navy-100 uppercase tracking-wide">
+                                {exp.type}
+                            </span>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                            {exp.skills.map((skill, idx) => (
+                            <span 
+                                key={idx} 
+                                className="px-3 py-1.5 bg-mckinsey-gray-50 text-mckinsey-gray-600 text-xs font-medium rounded-lg group-hover:bg-white group-hover:shadow-sm transition-all duration-300"
+                            >
+                                {skill}
+                            </span>
+                            ))}
+                        </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
 
+// Déclaration du composant EducationSection déplacée au niveau module
 function EducationSection() {
   return (
-  <section id="education" className="py-32 bg-white dark:bg-gray-950 transition-colors">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-24">
-          <div className="text-sm text-gray-400 uppercase tracking-[0.2em] mb-8">
-            Formation Académique
-          </div>
-          <h2 className="text-5xl md:text-6xl font-extralight text-gray-900 dark:text-gray-100 mb-12 leading-tight max-w-4xl">
-            Parcours <span className="font-bold">Académique</span>
-          </h2>
+    <section className="py-32 relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-1/2 left-0 w-full h-full -z-10 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-mckinsey-teal-50/40 rounded-full blur-[100px] mix-blend-multiply" />
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-mckinsey-navy-50/40 rounded-full blur-[100px] mix-blend-multiply" />
+      </div>
+
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <FadeIn>
+                <h2 className="text-5xl lg:text-7xl font-light text-mckinsey-navy-900 mb-6 tracking-tight">
+                Academic <span className="font-normal text-mckinsey-teal-600">Background</span>
+                </h2>
+                <p className="text-xl text-mckinsey-gray-600 max-w-xl leading-relaxed">
+                A journey of rigorous intellectual pursuit and continuous specialization.
+                </p>
+            </FadeIn>
+            <div className="hidden md:block h-px flex-1 bg-gradient-to-r from-mckinsey-gray-200 to-transparent ml-12 mb-8" />
         </div>
-        
-        <div className="grid md:grid-cols-2 gap-8">
-          {education.map((edu, index) => (
-            <div key={edu.id} className="group bg-gray-50 p-8 hover:bg-white hover:shadow-lg transition-all duration-300">
-              <div className="mb-6">
-                <div className="text-xs text-gray-400 uppercase tracking-[0.2em] mb-3">
-                  {String(index + 1).padStart(2, '0')}
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          {education.map((edu, idx) => {
+            let logo = null;
+            if (
+              edu.institution.toLowerCase().includes('mohammed premier') ||
+              edu.institution.toLowerCase().includes('ecole supérieure') ||
+              edu.description.toLowerCase().includes('esef')
+            ) {
+              // Prioritize University logo for PhD, ESEF logo for others if applicable
+              if (edu.degree.toLowerCase().includes('doctor') || edu.degree.toLowerCase().includes('phd')) {
+                 logo = logos.find(l => l.name.toLowerCase().includes('université'));
+              } else {
+                 logo = logos.find(l => l.name.toLowerCase().includes('esef')) || logos.find(l => l.name.toLowerCase().includes('université'));
+              }
+            } else if (edu.institution.toLowerCase().includes('insea')) {
+              logo = logos.find(l => l.name.toLowerCase().includes('insea'));
+            } else if (edu.institution.toLowerCase().includes('wharton')) {
+              logo = logos.find(l => l.name.toLowerCase().includes('wharton'));
+            }
+            
+            // Bento grid logic
+            const isPhd = idx === 0;
+            const colSpan = isPhd ? 'md:col-span-8' : (idx === 1 ? 'md:col-span-4' : 'md:col-span-6');
+            
+            return (
+              <FadeIn key={edu.id} delay={idx * 100} className={colSpan}>
+                <div className={`
+                    group relative h-full p-8 lg:p-10 rounded-[2rem] 
+                    bg-white border border-gray-100 
+                    hover:border-mckinsey-teal-200/50 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] 
+                    transition-all duration-500 ease-out overflow-hidden
+                    flex flex-col
+                `}>
+                    {/* Hover Gradient Background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-mckinsey-teal-50/0 via-mckinsey-teal-50/0 to-mckinsey-teal-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    <div className="relative z-10 flex flex-col h-full">
+                        <div className="flex flex-col md:flex-row gap-6 mb-8 items-start">
+                            {logo ? (
+                                <div className="relative w-20 h-20 flex-shrink-0 p-2 bg-white rounded-2xl shadow-sm border border-gray-100 group-hover:border-mckinsey-teal-100 transition-colors">
+                                    <Image src={logo.src} alt={logo.alt} fill className="object-contain p-1" />
+                                </div>
+                            ) : (
+                                 <div className="w-20 h-20 flex-shrink-0 rounded-2xl bg-mckinsey-gray-50 flex items-center justify-center text-mckinsey-gray-400 group-hover:bg-mckinsey-teal-50 group-hover:text-mckinsey-teal-600 transition-colors">
+                                    <GraduationCap className="w-8 h-8" />
+                                </div>
+                            )}
+                            
+                            <div className="flex flex-col items-start">
+                                <span className="inline-flex items-center gap-2 text-xs font-bold tracking-wider uppercase text-mckinsey-teal-700 mb-3 bg-mckinsey-teal-50 px-3 py-1 rounded-full">
+                                    <Calendar className="w-3 h-3" />
+                                    {edu.duration}
+                                </span>
+                                <h3 className="text-2xl lg:text-3xl font-medium text-mckinsey-navy-900 group-hover:text-mckinsey-teal-700 transition-colors leading-tight mb-1">
+                                    {edu.institution}
+                                </h3>
+                                <div className="text-lg text-mckinsey-gray-500">{edu.degree} in <span className="text-mckinsey-navy-700">{edu.field}</span></div>
+                            </div>
+                        </div>
+
+                        <p className="text-mckinsey-gray-600 leading-relaxed text-lg mb-8 max-w-3xl">
+                            {edu.description}
+                        </p>
+
+                        <div className="mt-auto pt-6 border-t border-gray-50 group-hover:border-mckinsey-teal-100/50 transition-colors">
+                            {edu.grade && (
+                                <div className="mb-4 inline-block">
+                                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-bold border border-amber-100 uppercase tracking-wide">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                                        {edu.grade}
+                                    </span>
+                                </div>
+                            )}
+                            <div className="flex flex-wrap gap-2">
+                                {edu.skills.map((skill, sIdx) => (
+                                    <span 
+                                        key={sIdx} 
+                                        className="px-3 py-1.5 bg-mckinsey-gray-50 text-mckinsey-gray-600 text-xs font-medium rounded-lg group-hover:bg-white group-hover:shadow-sm transition-all duration-300"
+                                    >
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h3 className="text-xl font-bold text-black mb-2">{edu.institution}</h3>
-                <div className="text-lg text-gray-700 mb-1">{edu.degree}</div>
-                <div className="text-base text-gray-600 mb-2">{edu.field}</div>
-                <div className="text-sm text-gray-500 mb-2">{edu.duration}</div>
-                {edu.grade && (
-                  <div className="inline-block px-3 py-1 bg-green-100 text-green-700 rounded text-xs uppercase tracking-wider">
-                    {edu.grade}
-                  </div>
-                )}
-              </div>
-              
-              <p className="text-gray-600 leading-relaxed mb-6 text-sm">
-                {edu.description}
-              </p>
-              
-              <div className="flex flex-wrap gap-2">
-                {edu.skills.map((skill, skillIndex) => (
-                  <span 
-                    key={skillIndex} 
-                    className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -305,25 +436,33 @@ function EducationSection() {
 
 function StatsSection() {
   return (
-    <section className="py-32 bg-black text-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-20 bg-mckinsey-navy-900 text-white">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div>
-            <div className="text-4xl md:text-5xl font-light mb-4">8+</div>
-            <div className="text-sm text-gray-400 uppercase tracking-wider">Années d&apos;Expérience</div>
-          </div>
-          <div>
-            <div className="text-4xl md:text-5xl font-light mb-4">10+</div>
-            <div className="text-sm text-gray-400 uppercase tracking-wider">Publications</div>
-          </div>
-          <div>
-            <div className="text-4xl md:text-5xl font-light mb-4">6</div>
-            <div className="text-sm text-gray-400 uppercase tracking-wider">Pays de Collaboration</div>
-          </div>
-          <div>
-            <div className="text-4xl md:text-5xl font-light mb-4">3</div>
-            <div className="text-sm text-gray-400 uppercase tracking-wider">Domaines d&apos;Expertise</div>
-          </div>
+          <FadeIn delay={0}>
+            <div className="text-4xl lg:text-5xl font-light mb-2">
+              <Counter end={6} suffix="+" />
+            </div>
+            <div className="text-sm text-mckinsey-gray-300 uppercase tracking-wider">Years of Research</div>
+          </FadeIn>
+          <FadeIn delay={100}>
+            <div className="text-4xl lg:text-5xl font-light mb-2">
+              <Counter end={10} suffix="+" />
+            </div>
+            <div className="text-sm text-mckinsey-gray-300 uppercase tracking-wider">Publications</div>
+          </FadeIn>
+           <FadeIn delay={200}>
+            <div className="text-4xl lg:text-5xl font-light mb-2">
+              <Counter end={4} suffix="+" />
+            </div>
+            <div className="text-sm text-mckinsey-gray-300 uppercase tracking-wider">Research Projects</div>
+          </FadeIn>
+           <FadeIn delay={300}>
+            <div className="text-4xl lg:text-5xl font-light mb-2">
+              <Counter end={8} suffix="+" />
+            </div>
+            <div className="text-sm text-mckinsey-gray-300 uppercase tracking-wider">Years Digitalization Expert</div>
+          </FadeIn>
         </div>
       </div>
     </section>
@@ -332,33 +471,41 @@ function StatsSection() {
 
 function CTASection() {
   return (
-    <section className="py-32 bg-gray-50">
-      <div className="max-w-4xl mx-auto px-6 text-center">
-        <h2 className="text-4xl md:text-5xl font-extralight text-gray-900 mb-8 leading-tight">
-          Collaborons sur l&apos;Avenir de l&apos;
-          <span className="font-bold">Intelligence Artificielle</span>
-        </h2>
-        
-        <p className="text-xl text-gray-600 leading-relaxed mb-12 max-w-2xl mx-auto">
-          Mon parcours unique combine recherche académique de pointe, expertise technique pratique 
-          et passion pour l&apos;innovation. Explorons ensemble les possibilités de collaboration.
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/contact"
-            className="bg-black hover:bg-gray-800 text-white font-medium py-4 px-12 transition-all duration-200 text-sm uppercase tracking-wider"
-          >
-            Discutons d&apos;un Projet
-          </Link>
+    <section className="py-32 bg-white relative overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-[1400px]">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-mckinsey-teal-50 rounded-full blur-3xl opacity-50" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-mckinsey-navy-50 rounded-full blur-3xl opacity-50" />
+      </div>
+      
+      <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+        <FadeIn>
+          <h2 className="text-5xl md:text-7xl font-light text-mckinsey-navy-900 mb-8 leading-tight">
+            Let's shape the future of <br/>
+            <span className="font-normal text-mckinsey-teal-600">Artificial Intelligence</span>
+          </h2>
           
-          <Link
-            href="/publications"
-            className="border border-gray-300 hover:border-black text-gray-700 hover:text-black font-medium py-4 px-12 transition-all duration-200 text-sm uppercase tracking-wider"
-          >
-            Voir mes Publications
-          </Link>
-        </div>
+          <p className="text-xl text-mckinsey-gray-600 font-light leading-relaxed mb-12 max-w-2xl mx-auto">
+            My unique journey combines cutting-edge academic research, practical technical expertise, and a passion for innovation. Let's explore collaboration possibilities.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <Link
+              href="/contact"
+              className="group inline-flex items-center justify-center gap-3 bg-mckinsey-navy-900 text-white px-10 py-5 rounded-full hover:bg-mckinsey-teal-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+            >
+              Start a Conversation
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            
+            <Link
+              href="/publications"
+              className="group inline-flex items-center justify-center gap-3 bg-white text-mckinsey-navy-900 border border-gray-200 px-10 py-5 rounded-full hover:border-mckinsey-navy-900 transition-all duration-300"
+            >
+              View Publications
+              <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+            </Link>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
@@ -366,12 +513,12 @@ function CTASection() {
 
 export default function AboutPage() {
   return (
-    <>
+    <main className="bg-white selection:bg-mckinsey-teal-100 selection:text-mckinsey-navy-900">
       <HeroSection />
       <ExperienceSection />
       <EducationSection />
       <StatsSection />
       <CTASection />
-    </>
+    </main>
   );
 }
