@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import { Inter, Playfair_Display, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
@@ -107,29 +106,10 @@ export default function RootLayout({
           integrity="sha384-GMR9m/tUiK3wDFA96qhCFYeA5A14McPk5DX1T5Yuaa4E5C1Wv9Gr1yk6XdeyqB" 
           crossOrigin="anonymous"
         />
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" defer></script>
       </head>
       <body className={`antialiased transition-colors duration-500 font-sans bg-white text-gray-900`}>
-        <Script 
-          src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" 
-          strategy="lazyOnload"
-        />
-        <Script 
-          src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
-          strategy="lazyOnload"
-          onLoad={() => {
-            // @ts-ignore
-            if (window.renderMathInElement) {
-              // @ts-ignore
-              window.renderMathInElement(document.body, {
-                delimiters: [
-                  { left: '$$', right: '$$', display: true },
-                  { left: '$', right: '$', display: false },
-                ],
-                throwOnError: false,
-              });
-            }
-          }}
-        />
         {/* 2025 Modern UI Enhancements */}
         <FloatingOrbs />
         <AnimatedMeshGradient />
