@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { 
   ArrowLeft, 
@@ -16,6 +16,13 @@ import {
 } from 'lucide-react';
 import FadeIn from '@/components/FadeIn';
 import LessonView from './LessonView';
+import {
+  addLessonTimeSpent,
+  getCompletedLessons,
+  getCourseProgress,
+  markLessonCompleted,
+  updateLessonProgress,
+} from '@/lib/lms-storage';
 
 interface Exercise {
   id: string;
@@ -48,6 +55,7 @@ interface Lesson {
 }
 
 interface CourseOverviewProps {
+  courseId: string;
   title: string;
   description: string;
   level: string;
@@ -61,6 +69,7 @@ interface CourseOverviewProps {
 }
 
 export default function CourseOverview({
+  courseId,
   title,
   description,
   level,
@@ -75,6 +84,24 @@ export default function CourseOverview({
   const [activeTab, setActiveTab] = useState<'content' | 'details'>('content');
   const [expandedLessonId, setExpandedLessonId] = useState<string | number | null>(null);
   const [currentLessonId, setCurrentLessonId] = useState<string | number | null>(null);
+  const [completedLessonIds, setCompletedLessonIds] = useState<string[]>(
+    () => getCompletedLessons(courseId),
+  );
+
+  useEffect(() => {
+    if (currentLessonId === null) return;
+
+    const startedAt = Date.now();
+    return () => {
+      const minutes = Math.floor((Date.now() - startedAt) / 60_000);
+      addLessonTimeSpent(courseId, String(currentLessonId), minutes);
+    };
+  }, [courseId, currentLessonId]);
+
+  const progressPercentage = useMemo(
+    () => lessons.length ? Math.round((completedLessonIds.length / lessons.length) * 100) : 0,
+    [completedLessonIds.length, lessons.length],
+  );
 
   const toggleLesson = (id: string | number) => {
     setExpandedLessonId(expandedLessonId === id ? null : id);
@@ -82,15 +109,27 @@ export default function CourseOverview({
 
   const startLesson = (id: string | number) => {
     setCurrentLessonId(id);
+    updateLessonProgress(courseId, String(id), {
+      completed: completedLessonIds.includes(String(id)),
+    });
     window.scrollTo(0, 0);
+  };
+
+  const completeLesson = (lessonId: string | number, quizScore?: number) => {
+    const id = String(lessonId);
+    if (quizScore !== undefined && quizScore < 70) {
+      updateLessonProgress(courseId, id, { quizScore });
+      return;
+    }
+    markLessonCompleted(courseId, id, quizScore);
+    setCompletedLessonIds((current) => current.includes(id) ? current : [...current, id]);
   };
 
   const handleNextLesson = () => {
     if (!currentLessonId) return;
     const currentIndex = lessons.findIndex(l => l.id === currentLessonId);
     if (currentIndex < lessons.length - 1) {
-      setCurrentLessonId(lessons[currentIndex + 1].id);
-      window.scrollTo(0, 0);
+      startLesson(lessons[currentIndex + 1].id);
     }
   };
 
@@ -98,8 +137,7 @@ export default function CourseOverview({
     if (!currentLessonId) return;
     const currentIndex = lessons.findIndex(l => l.id === currentLessonId);
     if (currentIndex > 0) {
-      setCurrentLessonId(lessons[currentIndex - 1].id);
-      window.scrollTo(0, 0);
+      startLesson(lessons[currentIndex - 1].id);
     }
   };
 
@@ -110,6 +148,7 @@ export default function CourseOverview({
     if (currentLesson) {
       return (
         <LessonView
+          key={String(currentLesson.id)}
           courseTitle={title}
           lesson={currentLesson}
           allLessons={lessons}
@@ -118,6 +157,9 @@ export default function CourseOverview({
           onPrev={handlePrevLesson}
           hasNext={currentIndex < lessons.length - 1}
           hasPrev={currentIndex > 0}
+          completedLessonIds={completedLessonIds}
+          onSelectLesson={startLesson}
+          onComplete={completeLesson}
         />
       );
     }
@@ -241,7 +283,9 @@ export default function CourseOverview({
                             ? 'bg-mckinsey-teal-500 text-white'
                             : 'bg-gray-50 text-gray-500 group-hover:bg-mckinsey-teal-50 group-hover:text-mckinsey-teal-600'
                         }`}>
-                          {index + 1}
+                          {completedLessonIds.includes(String(lesson.id)) ? (
+                            <CheckCircle2 className="w-5 h-5" />
+                          ) : index + 1}
                         </div>
                         
                         <div className="flex-1">
@@ -255,9 +299,7 @@ export default function CourseOverview({
                               <Clock className="w-3 h-3" />
                               {lesson.duration}
                             </span>
-                            {lesson.content && typeof lesson.content === 'string' && (
-                              <span className="hidden sm:inline-block text-gray-400">• {lesson.content}</span>
-                            )}
+                            <span className="hidden sm:inline-block text-gray-400">• Leçon {index + 1}</span>
                           </div>
                         </div>
 
@@ -346,12 +388,28 @@ export default function CourseOverview({
               
               {!syllabusOnly && (
                 <div className="mt-8 pt-6 border-t border-gray-100">
+                  <div className="mb-4" aria-label={`Progression du cours : ${progressPercentage}%`}>
+                    <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
+                      <span>Progression</span>
+                      <span>{progressPercentage}%</span>
+                    </div>
+                    <div className="h-1.5 rounded-full bg-gray-100 overflow-hidden">
+                      <div
+                        className="h-full rounded-full bg-mckinsey-teal-500 transition-all duration-500"
+                        style={{ width: `${progressPercentage}%` }}
+                      />
+                    </div>
+                  </div>
                   <button 
-                    onClick={() => startLesson(lessons[0].id)}
+                    onClick={() => {
+                      const lastLesson = getCourseProgress(courseId).lastAccessedLesson;
+                      const target = lessons.find((lesson) => String(lesson.id) === lastLesson) || lessons[0];
+                      if (target) startLesson(target.id);
+                    }}
                     className="w-full py-3 px-4 bg-mckinsey-teal-600 text-white font-medium rounded-lg hover:bg-mckinsey-teal-700 transition-colors shadow-sm hover:shadow-md flex items-center justify-center gap-2"
                   >
                     <PlayCircle className="w-4 h-4" />
-                    Commencer le cours
+                    {completedLessonIds.length ? 'Continuer le cours' : 'Commencer le cours'}
                   </button>
                 </div>
               )}

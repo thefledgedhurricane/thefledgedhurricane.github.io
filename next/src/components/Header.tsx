@@ -17,6 +17,8 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const isHomePage = pathname === '/';
+  const useSolidHeader = scrolled || !isHomePage;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,16 +31,18 @@ export default function Header() {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out flex justify-center ${
-        scrolled ? 'pt-4' : 'pt-6'
+        scrolled ? 'pt-4' : isHomePage ? 'pt-6' : 'pt-0'
       }`}
     >
       <nav 
         className={`
           relative flex items-center justify-between 
           transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]
-          ${scrolled 
+          ${scrolled
             ? 'w-[90%] max-w-5xl bg-white/80 backdrop-blur-xl shadow-lg shadow-black/5 rounded-full px-6 py-3 border border-white/20' 
-            : 'w-full max-w-[1400px] px-6 lg:px-12 py-4 bg-transparent'
+            : isHomePage
+              ? 'w-full max-w-[1400px] px-6 lg:px-12 py-4 bg-transparent'
+              : 'w-full max-w-none px-6 lg:px-12 py-4 bg-white border-b border-mckinsey-gray-200 shadow-sm'
           }
         `}
       >
@@ -46,7 +50,7 @@ export default function Header() {
         <Link 
           href="/" 
           className={`text-base font-medium tracking-tight transition-colors duration-300 ${
-            scrolled ? 'text-mckinsey-navy-900' : 'text-white'
+            useSolidHeader ? 'text-mckinsey-navy-900' : 'text-white'
           } hover:opacity-70`}
         >
           iAnnaki <span className="font-light opacity-80">Edu & Research</span>
@@ -62,7 +66,7 @@ export default function Header() {
                 href={link.href}
                 className={`
                   relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full
-                  ${scrolled 
+                  ${useSolidHeader
                     ? isActive 
                       ? 'text-mckinsey-navy-900 bg-mckinsey-gray-100' 
                       : 'text-mckinsey-gray-600 hover:text-mckinsey-navy-900 hover:bg-gray-50'
@@ -81,7 +85,7 @@ export default function Header() {
         {/* Mobile menu button */}
         <button
           className={`lg:hidden p-2 transition-colors ${
-            scrolled ? 'text-mckinsey-navy-900' : 'text-white'
+            useSolidHeader ? 'text-mckinsey-navy-900' : 'text-white'
           }`}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"

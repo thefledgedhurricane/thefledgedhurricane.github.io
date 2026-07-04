@@ -200,11 +200,12 @@ const prerequisites = [
 export default function LangageCPage() {
   return (
     <CourseOverview
+      courseId="langage-c"
       title="Langage C — Maîtrise Système"
       description="Programmation bas niveau et performance"
       level="Intermédiaire"
       duration="18h"
-      lessonCount={14}
+      lessonCount={lessons.length}
       lessons={lessons}
       objectives={objectives}
       prerequisites={prerequisites}

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { 
   ArrowLeft, 
   ChevronRight, 
@@ -11,9 +11,7 @@ import {
   CheckCircle2, 
   PlayCircle,
   BookOpen,
-  MessageSquare,
   Code,
-  Brain,
   FileText,
   HelpCircle
 } from 'lucide-react';
@@ -57,6 +55,9 @@ interface LessonViewProps {
   onPrev: () => void;
   hasNext: boolean;
   hasPrev: boolean;
+  completedLessonIds: string[];
+  onSelectLesson: (lessonId: string | number) => void;
+  onComplete: (lessonId: string | number, quizScore?: number) => void;
 }
 
 export default function LessonView({
@@ -67,16 +68,36 @@ export default function LessonView({
   onNext,
   onPrev,
   hasNext,
-  hasPrev
+  hasPrev,
+  completedLessonIds,
+  onSelectLesson,
+  onComplete,
 }: LessonViewProps) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'theory' | 'exercises' | 'quiz' | 'cheatsheet'>('theory');
   const [selectedQuizAnswers, setSelectedQuizAnswers] = useState<Record<string, number>>({});
   const [showQuizResults, setShowQuizResults] = useState(false);
   const [expandedSolution, setExpandedSolution] = useState<string | null>(null);
 
+  useEffect(() => {
+    document.body.classList.add('lms-lesson-active');
+
+    return () => {
+      document.body.classList.remove('lms-lesson-active');
+    };
+  }, []);
+
+  const quizScore = lesson.quiz?.length
+    ? Math.round((lesson.quiz.filter(
+      (question) => selectedQuizAnswers[question.id] === question.correctAnswer,
+    ).length / lesson.quiz.length) * 100)
+    : 0;
+
   const handleQuizSubmit = () => {
     setShowQuizResults(true);
+    if (lesson.quiz?.length) {
+      onComplete(lesson.id, quizScore);
+    }
   };
 
   const resetQuiz = () => {
@@ -104,6 +125,18 @@ export default function LessonView({
             <h2 className="text-lg font-light text-white leading-tight">
               {courseTitle}
             </h2>
+            <div className="mt-4" aria-label={`${completedLessonIds.length} leçons terminées sur ${allLessons.length}`}>
+              <div className="flex items-center justify-between text-xs text-gray-400 mb-2">
+                <span>Progression</span>
+                <span>{completedLessonIds.length}/{allLessons.length}</span>
+              </div>
+              <div className="h-1 rounded-full bg-white/10 overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-mckinsey-teal-400 transition-[width] duration-500"
+                  style={{ width: `${allLessons.length ? (completedLessonIds.length / allLessons.length) * 100 : 0}%` }}
+                />
+              </div>
+            </div>
           </div>
 
           <div className="flex-1 overflow-y-auto py-4">
@@ -111,9 +144,10 @@ export default function LessonView({
               <button
                 key={l.id}
                 onClick={() => {
-                  // Logic to switch lesson would go here if we lifted state up further
-                  // For now, we just show the active state
+                  onSelectLesson(l.id);
+                  setIsSidebarOpen(false);
                 }}
+                aria-current={l.id === lesson.id ? 'step' : undefined}
                 className={`w-full px-6 py-4 flex items-start gap-3 text-left transition-colors ${
                   l.id === lesson.id 
                     ? 'bg-mckinsey-teal-900/30 border-l-4 border-mckinsey-teal-500' 
@@ -123,9 +157,11 @@ export default function LessonView({
                 <div className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center text-xs border ${
                   l.id === lesson.id 
                     ? 'border-mckinsey-teal-500 text-mckinsey-teal-500' 
-                    : 'border-gray-600 text-gray-500'
+                    : completedLessonIds.includes(String(l.id))
+                      ? 'bg-green-500 border-green-500 text-white'
+                      : 'border-gray-600 text-gray-500'
                 }`}>
-                  {idx + 1}
+                  {completedLessonIds.includes(String(l.id)) ? <CheckCircle2 className="w-3.5 h-3.5" /> : idx + 1}
                 </div>
                 <div>
                   <div className={`text-sm font-medium ${
@@ -141,14 +177,25 @@ export default function LessonView({
         </div>
       </div>
 
+      {isSidebarOpen && (
+        <button
+          type="button"
+          className="fixed inset-0 z-40 bg-mckinsey-navy-950/50 backdrop-blur-sm lg:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+          aria-label="Fermer le sommaire"
+        />
+      )}
+
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0 bg-gray-50">
         {/* Top Bar */}
-        <header className="bg-white border-b border-gray-200 px-6 py-4 pt-20 lg:pt-4 flex items-center justify-between sticky top-0 z-40">
-          <div className="flex items-center gap-4">
+        <header className="bg-white border-b border-gray-200 px-4 sm:px-6 py-4 flex flex-wrap items-center gap-3 sticky top-0 z-40">
+          <div className="flex min-w-0 flex-1 items-center gap-3">
             <button 
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="lg:hidden p-2 text-gray-500 hover:bg-gray-100 rounded-lg"
+              aria-label="Ouvrir le sommaire"
+              aria-expanded={isSidebarOpen}
             >
               <Menu className="w-6 h-6" />
             </button>
@@ -156,11 +203,21 @@ export default function LessonView({
               {lesson.title}
             </h1>
           </div>
+          <button
+            onClick={() => onComplete(lesson.id)}
+            disabled={completedLessonIds.includes(String(lesson.id))}
+            className="hidden md:inline-flex items-center gap-2 px-3 py-2 mr-3 text-xs font-medium rounded-lg border border-gray-200 text-gray-600 hover:border-mckinsey-teal-300 hover:text-mckinsey-teal-700 disabled:bg-green-50 disabled:text-green-700 disabled:border-green-200 transition-colors"
+          >
+            <CheckCircle2 className="w-4 h-4" />
+            {completedLessonIds.includes(String(lesson.id)) ? 'Terminée' : 'Marquer terminée'}
+          </button>
           
           {/* Tabs Navigation */}
-          <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-lg">
+          <div className="order-3 md:order-none w-full md:w-auto flex items-center justify-center gap-1 bg-gray-100 p-1 rounded-lg" role="tablist" aria-label="Contenu de la leçon">
             <button
               onClick={() => setActiveTab('theory')}
+              role="tab"
+              aria-selected={activeTab === 'theory'}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
                 activeTab === 'theory' 
                   ? 'bg-white text-mckinsey-navy-900 shadow-sm' 
@@ -174,6 +231,8 @@ export default function LessonView({
             </button>
             <button
               onClick={() => setActiveTab('exercises')}
+              role="tab"
+              aria-selected={activeTab === 'exercises'}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
                 activeTab === 'exercises' 
                   ? 'bg-white text-mckinsey-navy-900 shadow-sm' 
@@ -187,6 +246,8 @@ export default function LessonView({
             </button>
             <button
               onClick={() => setActiveTab('quiz')}
+              role="tab"
+              aria-selected={activeTab === 'quiz'}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
                 activeTab === 'quiz' 
                   ? 'bg-white text-mckinsey-navy-900 shadow-sm' 
@@ -200,6 +261,8 @@ export default function LessonView({
             </button>
             <button
               onClick={() => setActiveTab('cheatsheet')}
+              role="tab"
+              aria-selected={activeTab === 'cheatsheet'}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
                 activeTab === 'cheatsheet' 
                   ? 'bg-white text-mckinsey-navy-900 shadow-sm' 
@@ -215,12 +278,12 @@ export default function LessonView({
         </header>
 
         {/* Content Area */}
-        <main className="flex-1 overflow-y-auto p-6 lg:p-12">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-12">
           <div className="max-w-4xl mx-auto">
             <FadeIn>
               {/* Lesson Content */}
               <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden mb-8 min-h-[60vh]">
-                <div className="p-8 lg:p-12">
+                <div className="p-5 sm:p-8 lg:p-12">
                   
                   {activeTab === 'theory' && (
                     <>
@@ -236,9 +299,7 @@ export default function LessonView({
                         {typeof lesson.content === 'object' && 'component' in lesson.content ? (
                           <div>{lesson.content.component()}</div>
                         ) : (
-                          <div className="whitespace-pre-wrap font-light leading-relaxed">
-                            {lesson.content}
-                          </div>
+                          <ReactMarkdown>{lesson.content || ''}</ReactMarkdown>
                         )}
                       </div>
 
@@ -306,6 +367,21 @@ export default function LessonView({
                       <h2 className="text-2xl font-light text-mckinsey-navy-900 mb-6">Quiz de validation</h2>
                       {lesson.quiz && lesson.quiz.length > 0 ? (
                         <div className="space-y-8">
+                          {showQuizResults && (
+                            <div className={`rounded-xl border p-5 ${
+                              quizScore >= 70
+                                ? 'bg-green-50 border-green-200 text-green-800'
+                                : 'bg-amber-50 border-amber-200 text-amber-800'
+                            }`}>
+                              <div className="text-sm font-medium">Résultat du quiz</div>
+                              <div className="text-3xl font-light mt-1">{quizScore}%</div>
+                              <p className="text-sm mt-2">
+                                {quizScore >= 70
+                                  ? 'Objectif atteint — cette leçon est validée.'
+                                  : 'Revoyez les explications puis réessayez. Le seuil de validation est de 70 %.'}
+                              </p>
+                            </div>
+                          )}
                           {lesson.quiz.map((q, qIdx) => (
                             <div key={q.id} className="space-y-4">
                               <h3 className="text-lg font-medium text-mckinsey-navy-900">
@@ -415,7 +491,10 @@ export default function LessonView({
                 </button>
 
                 <button
-                  onClick={onNext}
+                  onClick={() => {
+                    onComplete(lesson.id);
+                    onNext();
+                  }}
                   disabled={!hasNext}
                   className={`flex items-center px-6 py-3 rounded-xl font-medium transition-all shadow-sm hover:shadow-md ${
                     hasNext

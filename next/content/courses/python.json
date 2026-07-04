@@ -1,0 +1,198 @@
+{
+  "courseId": "python",
+  "title": "Python pour la Data Science & l'IA",
+  "subtitle": "Le langage de référence pour l'intelligence artificielle",
+  "description": "Apprenez Python de zéro, des fondamentaux du langage jusqu'à la manipulation de données avec NumPy et Pandas.",
+  "level": "intermediate",
+  "category": "Programmation",
+  "icon": "🐍",
+  "color": "google-blue",
+  "estimatedHours": 20,
+  "prerequisites": [
+    "Connaissances de base en programmation recommandées",
+    "Python 3.x installé",
+    "Un éditeur de code comme VS Code ou PyCharm"
+  ],
+  "learningOutcomes": [
+    "Maîtriser la syntaxe et les concepts fondamentaux de Python",
+    "Utiliser les structures de données avancées",
+    "Écrire des fonctions, modules et programmes orientés objet",
+    "Manipuler des fichiers et gérer les erreurs",
+    "S'initier à l'analyse de données avec NumPy et Pandas"
+  ],
+  "lessons": [
+    {
+      "id": "introduction-python",
+      "title": "Introduction à Python",
+      "description": "Découverte du langage, installation et premier programme.",
+      "estimatedMinutes": 30,
+      "objectives": ["Comprendre les usages de Python", "Installer un environnement", "Exécuter un premier programme"],
+      "sections": [
+        {
+          "id": "why-python",
+          "title": "Pourquoi Python ?",
+          "content": "Python est un langage interprété, multiplateforme et polyvalent. Sa syntaxe lisible en fait un excellent choix pour l'apprentissage, l'automatisation, le web, la data science et l'intelligence artificielle.\n\n- **Lisibilité** : une syntaxe concise et proche du langage naturel.\n- **Écosystème** : des bibliothèques pour presque tous les domaines.\n- **Communauté** : une documentation abondante et une communauté active.",
+          "estimatedMinutes": 10,
+          "keyTakeaways": ["Python privilégie la lisibilité", "Il convient aussi bien aux débutants qu'aux projets avancés"]
+        },
+        {
+          "id": "first-program",
+          "title": "Premier programme",
+          "content": "Créez un fichier `bonjour.py`, puis exécutez-le avec `python bonjour.py`.\n\n```python\nnom = input(\"Quel est votre nom ? \" )\nprint(f\"Bonjour {nom} !\")\n```",
+          "estimatedMinutes": 20,
+          "keyTakeaways": ["Un script Python utilise l'extension .py", "La fonction print affiche une valeur"],
+          "codeExamples": [
+            {
+              "title": "Bonjour interactif",
+              "language": "python",
+              "code": "nom = input(\"Votre nom : \" )\nprint(f\"Bienvenue, {nom} !\")",
+              "explanation": "Le programme lit une valeur puis l'insère dans une chaîne formatée.",
+              "runnable": true
+            }
+          ]
+        }
+      ],
+      "quiz": [
+        {
+          "id": "intro-q1",
+          "question": "Quelle fonction affiche du texte en Python ?",
+          "options": [{"id": "a", "text": "echo()"}, {"id": "b", "text": "print()"}, {"id": "c", "text": "show()"}],
+          "correctOptionId": "b",
+          "explanation": "print() est la fonction d'affichage standard."
+        }
+      ],
+      "practiceExercises": [
+        {
+          "title": "Carte de visite",
+          "description": "Demandez le nom, l'âge et la ville de l'utilisateur, puis affichez une phrase de présentation.",
+          "difficulty": "easy",
+          "hints": ["Utilisez input()", "Employez une f-string"],
+          "solution": "nom = input(\"Nom : \" )\nage = input(\"Âge : \" )\nville = input(\"Ville : \" )\nprint(f\"{nom}, {age} ans, habite à {ville}.\")"
+        }
+      ],
+      "references": [{"title": "Tutoriel Python officiel", "url": "https://docs.python.org/fr/3/tutorial/", "type": "documentation"}]
+    },
+    {
+      "id": "variables-types",
+      "title": "Variables et types de données",
+      "description": "Types numériques, chaînes, booléens et conversions.",
+      "estimatedMinutes": 45,
+      "objectives": ["Identifier les types de base", "Convertir des valeurs", "Nommer correctement les variables"],
+      "sections": [{"id": "types-base", "title": "Les types de base", "content": "Python utilise un typage dynamique et fort. Les types courants sont `int`, `float`, `str`, `bool` et `NoneType`.\n\n```python\nage = 25\nprix = 19.99\nnom = \"Alice\"\nest_etudiant = True\n```\n\nUtilisez `type(valeur)` pour inspecter un type et `int()`, `float()` ou `str()` pour convertir une valeur.", "estimatedMinutes": 45, "keyTakeaways": ["Le type est associé à la valeur", "Une conversion explicite évite les ambiguïtés"]}],
+      "practiceExercises": [{"title": "Convertisseur de température", "description": "Convertissez une température Celsius en Fahrenheit.", "difficulty": "easy", "hints": ["F = C × 9/5 + 32"], "solution": "celsius = float(input(\"Température en °C : \"))\nfahrenheit = celsius * 9 / 5 + 32\nprint(fahrenheit)"}]
+    },
+    {
+      "id": "operateurs-expressions",
+      "title": "Opérateurs et expressions",
+      "description": "Opérateurs arithmétiques, logiques et de comparaison.",
+      "estimatedMinutes": 30,
+      "objectives": ["Composer des expressions", "Comparer des valeurs", "Combiner des conditions"],
+      "sections": [{"id": "operators", "title": "Calculer et comparer", "content": "Python fournit les opérateurs arithmétiques `+`, `-`, `*`, `/`, `//`, `%` et `**`. Les comparaisons utilisent `==`, `!=`, `<`, `>`, `<=` et `>=`. Les opérateurs `and`, `or` et `not` combinent des conditions.\n\n```python\nage = 20\na_permis = True\npeut_conduire = age >= 18 and a_permis\n```", "estimatedMinutes": 30, "keyTakeaways": ["// réalise une division entière", "% retourne le reste d'une division"]}],
+      "practiceExercises": [{"title": "Pair ou impair", "description": "Lisez un entier et indiquez s'il est pair ou impair.", "difficulty": "easy", "hints": ["Utilisez l'opérateur modulo"], "solution": "nombre = int(input(\"Nombre : \"))\nprint(\"pair\" if nombre % 2 == 0 else \"impair\")"}]
+    },
+    {
+      "id": "structures-controle",
+      "title": "Structures de contrôle",
+      "description": "Conditions et boucles pour contrôler l'exécution.",
+      "estimatedMinutes": 50,
+      "objectives": ["Écrire des conditions", "Répéter avec for et while", "Éviter les boucles infinies"],
+      "sections": [{"id": "control-flow", "title": "Conditions et boucles", "content": "L'indentation délimite les blocs Python. `if`, `elif` et `else` sélectionnent une branche ; `for` parcourt une séquence et `while` répète tant qu'une condition reste vraie.\n\n```python\nfor nombre in range(1, 6):\n    if nombre % 2 == 0:\n        print(nombre, \"est pair\")\n```", "estimatedMinutes": 50, "keyTakeaways": ["L'indentation fait partie de la syntaxe", "range exclut sa borne supérieure"]}],
+      "practiceExercises": [{"title": "FizzBuzz", "description": "Affichez les nombres de 1 à 100, Fizz pour les multiples de 3, Buzz pour ceux de 5.", "difficulty": "medium", "hints": ["Testez d'abord les multiples de 15"], "solution": "for n in range(1, 101):\n    if n % 15 == 0: print(\"FizzBuzz\")\n    elif n % 3 == 0: print(\"Fizz\")\n    elif n % 5 == 0: print(\"Buzz\")\n    else: print(n)"}]
+    },
+    {
+      "id": "listes-tuples",
+      "title": "Listes et tuples",
+      "description": "Collections ordonnées, indexation et slicing.",
+      "estimatedMinutes": 60,
+      "objectives": ["Manipuler une liste", "Choisir entre liste et tuple", "Utiliser le slicing"],
+      "sections": [{"id": "sequences", "title": "Séquences ordonnées", "content": "Les listes sont mutables, les tuples sont immuables. Les deux prennent en charge l'indexation et le slicing.\n\n```python\nfruits = [\"pomme\", \"banane\"]\nfruits.append(\"orange\")\npremiers = fruits[:2]\npoint = (10, 20)\n```", "estimatedMinutes": 60, "keyTakeaways": ["Les indices commencent à zéro", "Le slicing ne modifie pas la séquence d'origine"]}],
+      "practiceExercises": [{"title": "Statistiques simples", "description": "Calculez le minimum, le maximum et la moyenne d'une liste de notes.", "difficulty": "easy", "hints": ["Utilisez min, max, sum et len"], "solution": "notes = [12, 17, 9, 15]\nprint(min(notes), max(notes), sum(notes) / len(notes))"}]
+    },
+    {
+      "id": "dictionnaires-ensembles",
+      "title": "Dictionnaires et ensembles",
+      "description": "Paires clé-valeur et collections d'éléments uniques.",
+      "estimatedMinutes": 50,
+      "objectives": ["Modéliser une entité avec un dictionnaire", "Parcourir clés et valeurs", "Éliminer les doublons"],
+      "sections": [{"id": "mappings-sets", "title": "Associer et dédupliquer", "content": "Un dictionnaire associe une clé unique à une valeur. Un ensemble (`set`) contient des valeurs uniques et permet les opérations d'union ou d'intersection.\n\n```python\npersonne = {\"nom\": \"Alice\", \"age\": 25}\npersonne[\"ville\"] = \"Rabat\"\nuniques = set([1, 1, 2, 3])\n```", "estimatedMinutes": 50, "keyTakeaways": ["get permet un accès avec valeur par défaut", "Les ensembles sont utiles pour dédupliquer"]}],
+      "practiceExercises": [{"title": "Fréquence des mots", "description": "Comptez les occurrences de chaque mot dans une phrase.", "difficulty": "medium", "hints": ["Utilisez un dictionnaire et get"], "solution": "frequences = {}\nfor mot in input().lower().split():\n    frequences[mot] = frequences.get(mot, 0) + 1\nprint(frequences)"}]
+    },
+    {
+      "id": "fonctions",
+      "title": "Fonctions",
+      "description": "Paramètres, valeurs de retour et portée.",
+      "estimatedMinutes": 60,
+      "objectives": ["Décomposer un programme", "Utiliser des paramètres", "Documenter une fonction"],
+      "sections": [{"id": "functions", "title": "Créer des blocs réutilisables", "content": "Une fonction est définie avec `def`. Elle peut recevoir des paramètres et renvoyer une valeur avec `return`.\n\n```python\ndef moyenne(notes):\n    \"\"\"Retourne la moyenne ou zéro si la liste est vide.\"\"\"\n    return sum(notes) / len(notes) if notes else 0\n```", "estimatedMinutes": 60, "keyTakeaways": ["Une fonction devrait avoir une responsabilité claire", "return termine l'exécution de la fonction"]}],
+      "practiceExercises": [{"title": "Validateur de mot de passe", "description": "Écrivez une fonction qui valide une longueur minimale et la présence d'un chiffre.", "difficulty": "medium", "hints": ["any et str.isdigit sont utiles"], "solution": "def est_valide(mot_de_passe):\n    return len(mot_de_passe) >= 8 and any(c.isdigit() for c in mot_de_passe)"}]
+    },
+    {
+      "id": "modules-packages",
+      "title": "Modules et packages",
+      "description": "Organisation du code, imports et gestion des dépendances.",
+      "estimatedMinutes": 45,
+      "objectives": ["Importer un module", "Créer un module", "Isoler les dépendances"],
+      "sections": [{"id": "modules", "title": "Organiser un projet", "content": "Un fichier `.py` est un module. Un package regroupe des modules. Utilisez un environnement virtuel pour isoler les dépendances.\n\n```python\nfrom pathlib import Path\n\nchemin = Path(\"donnees\") / \"notes.txt\"\n```", "estimatedMinutes": 45, "keyTakeaways": ["Évitez les imports génériques", "Un environnement virtuel rend le projet reproductible"]}],
+      "practiceExercises": [{"title": "Module de conversions", "description": "Créez un module contenant des fonctions de conversion de distances.", "difficulty": "medium", "hints": ["Placez les fonctions dans conversions.py"], "solution": "# conversions.py\ndef km_vers_miles(km):\n    return km * 0.621371"}]
+    },
+    {
+      "id": "gestion-fichiers",
+      "title": "Gestion des fichiers",
+      "description": "Lecture, écriture et context managers.",
+      "estimatedMinutes": 40,
+      "objectives": ["Lire un fichier texte", "Écrire sans fuite de ressource", "Manipuler des chemins"],
+      "sections": [{"id": "files", "title": "Lire et écrire", "content": "Le context manager `with` ferme automatiquement le fichier, y compris lorsqu'une erreur se produit.\n\n```python\nfrom pathlib import Path\n\nchemin = Path(\"journal.txt\")\nchemin.write_text(\"Bonjour\", encoding=\"utf-8\")\ncontenu = chemin.read_text(encoding=\"utf-8\")\n```", "estimatedMinutes": 40, "keyTakeaways": ["Spécifiez l'encodage UTF-8", "Préférez pathlib pour les chemins"]}],
+      "practiceExercises": [{"title": "Analyseur de fichier", "description": "Comptez les lignes et les mots d'un fichier texte.", "difficulty": "medium", "hints": ["splitlines sépare les lignes"], "solution": "from pathlib import Path\ntexte = Path(\"texte.txt\").read_text(encoding=\"utf-8\")\nprint(len(texte.splitlines()), len(texte.split()))"}]
+    },
+    {
+      "id": "programmation-objet",
+      "title": "Programmation orientée objet",
+      "description": "Classes, objets, encapsulation et héritage.",
+      "estimatedMinutes": 75,
+      "objectives": ["Définir une classe", "Créer des instances", "Choisir la composition ou l'héritage"],
+      "sections": [{"id": "oop", "title": "Modéliser avec des objets", "content": "Une classe décrit l'état et le comportement de ses instances. `__init__` initialise l'objet et `self` désigne l'instance courante.\n\n```python\nclass Etudiant:\n    def __init__(self, nom):\n        self.nom = nom\n        self.notes = []\n\n    def ajouter_note(self, note):\n        self.notes.append(note)\n```", "estimatedMinutes": 75, "keyTakeaways": ["Une instance possède son propre état", "La composition est souvent plus souple que l'héritage"]}],
+      "practiceExercises": [{"title": "Compte bancaire", "description": "Modélisez un compte avec dépôt, retrait contrôlé et consultation du solde.", "difficulty": "medium", "hints": ["Refusez un retrait supérieur au solde"], "solution": "class Compte:\n    def __init__(self, solde=0): self.solde = solde\n    def deposer(self, montant): self.solde += montant\n    def retirer(self, montant):\n        if montant > self.solde: return False\n        self.solde -= montant\n        return True"}]
+    },
+    {
+      "id": "exceptions",
+      "title": "Gestion des exceptions",
+      "description": "try, except, else, finally et exceptions personnalisées.",
+      "estimatedMinutes": 35,
+      "objectives": ["Intercepter une erreur attendue", "Lever une exception pertinente", "Nettoyer les ressources"],
+      "sections": [{"id": "errors", "title": "Traiter les situations exceptionnelles", "content": "Interceptez uniquement les exceptions que vous savez traiter. `else` s'exécute en l'absence d'erreur et `finally` dans tous les cas.\n\n```python\ntry:\n    valeur = int(input(\"Entier : \"))\nexcept ValueError:\n    print(\"Valeur invalide\")\nelse:\n    print(valeur * 2)\n```", "estimatedMinutes": 35, "keyTakeaways": ["Évitez except sans type", "Une erreur silencieuse est difficile à diagnostiquer"]}],
+      "practiceExercises": [{"title": "Division sûre", "description": "Créez une fonction qui traite une valeur non numérique et la division par zéro.", "difficulty": "easy", "hints": ["Interceptez ValueError et ZeroDivisionError"], "solution": "def diviser(a, b):\n    try: return float(a) / float(b)\n    except (ValueError, ZeroDivisionError): return None"}]
+    },
+    {
+      "id": "comprehensions-generateurs",
+      "title": "Compréhensions et générateurs",
+      "description": "Transformations concises et calcul paresseux.",
+      "estimatedMinutes": 45,
+      "objectives": ["Écrire une compréhension lisible", "Créer un générateur", "Réduire l'usage mémoire"],
+      "sections": [{"id": "lazy", "title": "Produire des valeurs à la demande", "content": "Les compréhensions construisent des collections. Une expression génératrice ou une fonction avec `yield` produit les valeurs à la demande.\n\n```python\ncarres_pairs = [n ** 2 for n in range(20) if n % 2 == 0]\n\ndef compteur(limite):\n    for n in range(limite):\n        yield n\n```", "estimatedMinutes": 45, "keyTakeaways": ["Gardez les compréhensions simples", "Les générateurs conviennent aux grands volumes"]}],
+      "practiceExercises": [{"title": "Lecture paresseuse", "description": "Créez un générateur qui produit uniquement les lignes non vides d'un fichier.", "difficulty": "hard", "hints": ["Utilisez yield et strip"], "solution": "def lignes_non_vides(chemin):\n    with open(chemin, encoding=\"utf-8\") as fichier:\n        for ligne in fichier:\n            if ligne.strip():\n                yield ligne.rstrip()"}]
+    },
+    {
+      "id": "numpy-pandas",
+      "title": "Introduction à NumPy & Pandas",
+      "description": "Tableaux numériques, séries et DataFrames.",
+      "estimatedMinutes": 60,
+      "objectives": ["Créer un tableau NumPy", "Filtrer un DataFrame", "Calculer des statistiques descriptives"],
+      "sections": [{"id": "data", "title": "Premiers pas avec les données", "content": "NumPy fournit des tableaux numériques vectorisés. Pandas construit des séries et DataFrames étiquetés au-dessus de NumPy.\n\n```python\nimport numpy as np\nimport pandas as pd\n\nvaleurs = np.array([12, 15, 18])\ntable = pd.DataFrame({\"note\": valeurs})\nprint(table[\"note\"].mean())\n```", "estimatedMinutes": 60, "keyTakeaways": ["Les opérations vectorisées remplacent de nombreuses boucles", "Un DataFrame structure des données tabulaires"]}],
+      "practiceExercises": [{"title": "Analyse de notes", "description": "Créez un DataFrame de notes, filtrez les valeurs supérieures à 10 et calculez la moyenne.", "difficulty": "medium", "hints": ["Utilisez df[df['note'] > 10]"], "solution": "import pandas as pd\ndf = pd.DataFrame({\"note\": [8, 12, 15, 9, 18]})\nreussites = df[df[\"note\"] >= 10]\nprint(reussites[\"note\"].mean())"}]
+    },
+    {
+      "id": "projet-final",
+      "title": "Projet final",
+      "description": "Conception d'une application Python complète.",
+      "estimatedMinutes": 90,
+      "objectives": ["Découper un besoin", "Structurer un projet", "Tester et documenter le résultat"],
+      "sections": [{"id": "project", "title": "Gestionnaire de tâches", "content": "Construisez une application en ligne de commande qui ajoute, liste, termine et supprime des tâches. Les données sont persistées dans un fichier JSON.\n\n## Critères de réussite\n\n- Le code est organisé en fonctions ou classes.\n- Les entrées sont validées.\n- Les erreurs de fichier sont traitées.\n- Un README explique l'installation et l'utilisation.", "estimatedMinutes": 90, "keyTakeaways": ["Commencez par une version minimale fonctionnelle", "Séparez la logique métier des entrées-sorties"]}],
+      "practiceExercises": [{"title": "Gestionnaire de tâches", "description": "Implémentez l'application décrite dans la leçon avec persistance JSON et tests unitaires.", "difficulty": "hard", "hints": ["Commencez par les fonctions charger et sauvegarder", "Testez la logique sur une liste en mémoire"]}]
+    }
+  ],
+  "projectIdeas": [
+    {"title": "Calculatrice interactive", "description": "Une calculatrice en ligne de commande avec historique.", "difficulty": "easy"},
+    {"title": "Analyseur de texte", "description": "Un outil qui calcule les fréquences, longueurs et statistiques d'un texte.", "difficulty": "medium"},
+    {"title": "Explorateur de données", "description": "Une application Pandas qui charge un CSV et produit un rapport synthétique.", "difficulty": "hard"}
+  ]
+}

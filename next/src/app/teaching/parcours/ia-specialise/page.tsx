@@ -1,8 +1,5 @@
-'use client';
-
-import React from 'react';
 import Link from 'next/link';
-import { Brain, CheckCircle2, Circle, Lock } from 'lucide-react';
+import { Brain, CheckCircle2, Clock3, type LucideIcon } from 'lucide-react';
 
 const modules = [
   {
@@ -12,7 +9,7 @@ const modules = [
     description: "Fondements de l'IA, ML vs DL, mathématiques essentielles (algèbre, gradients, probabilités)",
     duration: "8h",
     lessons: 2,
-    status: 'completed' as const,
+    status: 'available' as const,
     topics: ["Histoire de l'IA", "ANI/AGI/ASI", "Test de Turing", "Algèbre linéaire", "Gradient descent", "Théorème de Bayes"],
     prerequisites: []
   },
@@ -23,7 +20,7 @@ const modules = [
     description: "Régression linéaire, MSE, gradient descent, équation normale, régularisation Ridge/Lasso",
     duration: "12h",
     lessons: 1,
-    status: 'completed' as const,
+    status: 'available' as const,
     topics: ["Régression linéaire", "MSE/RMSE", "Gradient descent", "Équation normale", "Ridge & Lasso", "Régression polynomiale"],
     prerequisites: ["Module 1"]
   },
@@ -34,7 +31,7 @@ const modules = [
     description: "Clustering K-Means, PCA, réduction de dimensionnalité, t-SNE",
     duration: "14h",
     lessons: 2,
-    status: 'completed' as const,
+    status: 'available' as const,
     topics: ["K-Means", "K-Means++", "PCA", "Décomposition spectrale", "t-SNE", "DBSCAN"],
     prerequisites: ["Module 1"]
   },
@@ -45,7 +42,7 @@ const modules = [
     description: "MLP, fonctions d'activation, forward pass, backpropagation, loss functions",
     duration: "16h",
     lessons: 1,
-    status: 'completed' as const,
+    status: 'available' as const,
     topics: ["Neurone artificiel", "ReLU/Sigmoid/Tanh", "MLP architecture", "Forward pass", "Universal Approximation", "Loss functions"],
     prerequisites: ["Modules 1-2"]
   },
@@ -56,7 +53,7 @@ const modules = [
     description: "CNN, convolutions, pooling, architectures célèbres (AlexNet, ResNet), transfer learning",
     duration: "18h",
     lessons: 3,
-    status: 'in-progress' as const,
+    status: 'planned' as const,
     topics: ["Convolutions", "Pooling", "CNN architecture", "AlexNet", "VGG", "ResNet", "Transfer learning"],
     prerequisites: ["Module 4"]
   },
@@ -67,7 +64,7 @@ const modules = [
     description: "Word embeddings, RNN, LSTM, attention mechanism, Transformers, BERT",
     duration: "20h",
     lessons: 3,
-    status: 'locked' as const,
+    status: 'planned' as const,
     topics: ["Word2Vec", "GloVe", "RNN/LSTM/GRU", "Attention", "Self-attention", "Transformers", "BERT"],
     prerequisites: ["Module 4"]
   },
@@ -78,7 +75,7 @@ const modules = [
     description: "GANs, VAE, Diffusion Models, Stable Diffusion, génération d'images",
     duration: "18h",
     lessons: 3,
-    status: 'locked' as const,
+    status: 'planned' as const,
     topics: ["GANs", "Generator/Discriminator", "VAE", "DDPM", "Stable Diffusion", "ControlNet"],
     prerequisites: ["Modules 4-5"]
   },
@@ -89,37 +86,31 @@ const modules = [
     description: "Architecture GPT, tokenization, fine-tuning, LoRA, RLHF, prompt engineering",
     duration: "20h",
     lessons: 3,
-    status: 'locked' as const,
+    status: 'planned' as const,
     topics: ["Tokenization", "GPT architecture", "LoRA/QLoRA", "RLHF", "Prompt engineering", "RAG"],
     prerequisites: ["Module 6"]
   }
 ];
 
 const statusConfig = {
-  completed: {
+  available: {
     icon: CheckCircle2,
     color: 'text-green-600 bg-green-50 border-green-200',
-    label: 'Complété',
+    label: 'Disponible',
     textColor: 'text-green-700'
   },
-  'in-progress': {
-    icon: Circle,
+  planned: {
+    icon: Clock3,
     color: 'text-yellow-600 bg-yellow-50 border-yellow-200',
-    label: 'En cours',
+    label: 'En préparation',
     textColor: 'text-yellow-700'
   },
-  locked: {
-    icon: Lock,
-    color: 'text-gray-400 bg-gray-50 border-gray-200',
-    label: 'À venir',
-    textColor: 'text-gray-500'
-  }
 };
 
 export default function IASpecialisePage() {
   const totalDuration = modules.reduce((sum, m) => sum + parseInt(m.duration), 0);
-  const completedModules = modules.filter(m => m.status === 'completed').length;
-  const progressPercentage = (completedModules / modules.length) * 100;
+  const availableModules = modules.filter(m => m.status === 'available').length;
+  const availabilityPercentage = (availableModules / modules.length) * 100;
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
@@ -134,16 +125,16 @@ export default function IASpecialisePage() {
             </div>
           </div>
           
-          {/* Progress Bar */}
+          {/* Publication roadmap */}
           <div className="mt-8">
             <div className="flex justify-between text-sm mb-2">
-              <span>Progression Globale</span>
-              <span className="font-semibold">{completedModules}/{modules.length} modules • {progressPercentage.toFixed(0)}%</span>
+              <span>Modules publiés</span>
+              <span className="font-semibold">{availableModules}/{modules.length} modules disponibles</span>
             </div>
             <div className="w-full bg-white/20 rounded-full h-4 overflow-hidden">
               <div 
-                className="bg-green-400 h-full transition-all duration-500 rounded-full"
-                style={{ width: `${progressPercentage}%` }}
+                className="bg-green-400 h-full transition-[width] duration-500 rounded-full"
+                style={{ width: `${availabilityPercentage}%` }}
               />
             </div>
             <p className="text-sm text-blue-100 mt-2">
@@ -158,7 +149,7 @@ export default function IASpecialisePage() {
         <div className="grid gap-6">
           {modules.map((module, index) => {
             const StatusIcon = statusConfig[module.status].icon;
-            const isAccessible = module.status !== 'locked';
+            const isAccessible = module.status === 'available';
 
             return (
               <div
@@ -231,7 +222,7 @@ export default function IASpecialisePage() {
   );
 }
 
-function ModuleContent({ module, StatusIcon }: { module: typeof modules[0], StatusIcon: any }) {
+function ModuleContent({ module, StatusIcon }: { module: typeof modules[number], StatusIcon: LucideIcon }) {
   const config = statusConfig[module.status];
   
   return (

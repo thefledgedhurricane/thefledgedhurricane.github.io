@@ -810,11 +810,12 @@ function charger() { /* ... */ }`} />
 export default function ProgrammationBasesPage() {
   return (
     <CourseOverview
+      courseId="programmation-fondamentale"
       title="Fondamentaux de la Programmation"
       description="Ce cours est votre point de départ dans le monde du développement logiciel. Il ne s'agit pas d'apprendre un langage spécifique par cœur, mais de comprendre les concepts universels qui régissent tous les langages de programmation. À la fin de ce module, vous aurez acquis la logique nécessaire pour aborder n'importe quel langage (Python, Java, C++, JavaScript) avec confiance."
       level="Débutant"
       duration="12 heures"
-      lessonCount={10}
+      lessonCount={lessons.length}
       lessons={lessons}
       syllabusOnly={false}
       objectives={[

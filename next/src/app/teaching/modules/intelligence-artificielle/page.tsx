@@ -675,11 +675,12 @@ const prerequisites = [
 export default function IntelligenceArtificiellePage() {
   return (
     <CourseOverview
+      courseId="intelligence-artificielle"
       title="Intelligence Artificielle"
       description="Maîtrisez les fondamentaux de l'IA moderne"
       level="Intermédiaire"
       duration="12h de contenu"
-      lessonCount={8}
+      lessonCount={lessons.length}
       lessons={lessons}
       objectives={objectives}
       prerequisites={prerequisites}

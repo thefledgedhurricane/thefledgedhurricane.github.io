@@ -192,11 +192,12 @@ const prerequisites = [
 export default function AlgorithmiquePage() {
   return (
     <CourseOverview
+      courseId="algorithmique"
       title="Algorithmique & Structures de Données"
       description="Maîtrisez les fondamentaux de l'informatique"
       level="Intermédiaire"
       duration="10h"
-      lessonCount={12}
+      lessonCount={lessons.length}
       lessons={lessons}
       objectives={objectives}
       prerequisites={prerequisites}

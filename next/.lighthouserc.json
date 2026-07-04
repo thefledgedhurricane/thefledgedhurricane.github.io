@@ -6,8 +6,8 @@
         "http://localhost:3000/projects/",
         "http://localhost:3000/contact/"
       ],
-      "startServerCommand": "npm start",
-      "startServerReadyPattern": "ready on",
+      "startServerCommand": "pnpm start",
+      "startServerReadyPattern": "Accepting connections",
       "startServerReadyTimeout": 30000,
       "numberOfRuns": 3
     },

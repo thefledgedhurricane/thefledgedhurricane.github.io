@@ -321,11 +321,12 @@ const prerequisites = [
 export default function DeveloppementWebPage() {
   return (
     <CourseOverview
+      courseId="developpement-web"
       title="Développement Web Moderne"
       description="HTML, CSS, JavaScript, React & Next.js"
       level="Débutant"
       duration="14h"
-      lessonCount={12}
+      lessonCount={lessons.length}
       lessons={lessons}
       objectives={objectives}
       prerequisites={prerequisites}

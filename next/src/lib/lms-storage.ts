@@ -119,6 +119,27 @@ export function updateLessonProgress(
   writeProgress(progress);
 }
 
+export function addLessonTimeSpent(courseId: string, lessonId: string, minutes: number) {
+  if (!Number.isFinite(minutes) || minutes <= 0) return;
+
+  const progress = readProgress();
+  const course = progress.courses[courseId] || {
+    lessons: {},
+    startedAt: new Date().toISOString(),
+    totalTimeSpent: 0,
+  };
+  const lesson = course.lessons[lessonId] || { completed: false, timeSpent: 0 };
+
+  course.lessons[lessonId] = {
+    ...lesson,
+    timeSpent: (lesson.timeSpent || 0) + minutes,
+  };
+  course.totalTimeSpent += minutes;
+  course.lastAccessedLesson = lessonId;
+  progress.courses[courseId] = course;
+  writeProgress(progress);
+}
+
 export function getLessonProgress(courseId: string, lessonId: string): LessonProgress | undefined {
   const progress = readProgress();
   return progress.courses[courseId]?.lessons[lessonId];

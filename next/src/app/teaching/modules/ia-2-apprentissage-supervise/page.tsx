@@ -451,11 +451,12 @@ const prerequisites = [
 export default function IAApprentissageSupervise() {
   return (
     <CourseOverview
+      courseId="ia-2-apprentissage-supervise"
       title="Apprentissage Supervisé: Régression"
       description="Mathématiques approfondies de la régression linéaire et non-linéaire"
       level="Intermédiaire"
       duration="12h"
-      lessonCount={1}
+      lessonCount={lessons.length}
       lessons={lessons}
       objectives={objectives}
       prerequisites={prerequisites}

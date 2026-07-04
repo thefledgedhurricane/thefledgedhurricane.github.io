@@ -459,11 +459,12 @@ const prerequisites = [
 export default function IADeepLearningTabular() {
   return (
     <CourseOverview
+      courseId="ia-4-deep-learning-tabular"
       title="Deep Learning: Données Tabulaires"
       description="Réseaux de neurones (MLP) avec mathématiques approfondies et implémentations from scratch"
       level="Avancé"
       duration="16h"
-      lessonCount={1}
+      lessonCount={lessons.length}
       lessons={lessons}
       objectives={objectives}
       prerequisites={prerequisites}

@@ -192,11 +192,12 @@ const prerequisites = [
 export default function IAFondamentauxPage() {
   return (
     <CourseOverview
+      courseId="ia-fondamentaux"
       title="Fondamentaux de l'IA"
       description="Une exploration complète de l'Intelligence Artificielle : de ses origines historiques à ses impacts futurs sur notre société."
       level="Débutant"
       duration="8h de contenu"
-      lessonCount={8}
+      lessonCount={lessons.length}
       lessons={lessons}
       objectives={objectives}
       prerequisites={prerequisites}

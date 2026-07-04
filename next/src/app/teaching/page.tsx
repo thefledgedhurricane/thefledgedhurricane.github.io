@@ -110,7 +110,7 @@ const courses = [
     description: "Apprenez le C : gestion mémoire, pointeurs, structures, fichiers et programmation système pour comprendre le fonctionnement bas niveau.",
     difficulty: 'intermédiaire',
     duration: '12h',
-    lessons: 11,
+    lessons: 14,
     href: '/teaching/modules/langage-c',
     tags: ['Pointeurs', 'Mémoire', 'Système', 'Performance'],
     color: 'from-red-500 to-pink-500'
@@ -130,10 +130,10 @@ const courses = [
 ];
 
 const stats = [
-  { value: 6, label: 'Cours complets', icon: BookOpen },
-  { value: 67, label: 'Leçons détaillées', icon: Layers },
-  { value: 71, label: 'Heures de contenu', icon: Clock },
-  { value: 100, label: '% Interactif', icon: GraduationCap }
+  { value: courses.length, label: 'Cours complets', icon: BookOpen },
+  { value: courses.reduce((total, course) => total + course.lessons, 0), label: 'Leçons détaillées', icon: Layers },
+  { value: courses.reduce((total, course) => total + Number.parseInt(course.duration, 10), 0), label: 'Heures de contenu', icon: Clock },
+  { value: 100, label: '% Accès libre', icon: GraduationCap }
 ];
 
 export default function TeachingPage() {
@@ -160,6 +160,13 @@ export default function TeachingPage() {
               <p className="text-xl text-mckinsey-gray-600 leading-relaxed">
                 Une approche moderne de l'enseignement, combinant théorie rigoureuse et pratique interactive pour former les ingénieurs de demain.
               </p>
+              <Link
+                href="/teaching/parcours"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-mckinsey-navy-900 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-mckinsey-navy-900/10 hover:bg-mckinsey-teal-600 hover:text-white transition-colors"
+              >
+                Choisir un parcours guidé
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
 
             {/* Stats Grid */}

@@ -57,5 +57,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  return staticPages;
+  const teachingPaths = [
+    'teaching/parcours',
+    'teaching/parcours/ia-specialise',
+    'teaching/parcours/intro-ia-fondamentaux',
+    'teaching/parcours/intro-ia-types-ml',
+    'teaching/modules/ia-1-introduction',
+    'teaching/modules/ia-2-apprentissage-supervise',
+    'teaching/modules/ia-3-apprentissage-non-supervise',
+    'teaching/modules/ia-4-deep-learning-tabular',
+    'teaching/modules/intelligence-artificielle',
+    'teaching/modules/programmation-bases',
+    'teaching/modules/algorithmique',
+    'teaching/modules/python',
+    'teaching/modules/langage-c',
+    'teaching/modules/developpement-web',
+  ].map((path) => ({
+    url: `${baseUrl}/${path}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...teachingPaths];
 }

@@ -47,6 +47,14 @@ yarn-error.log*
 # Temporary files
 *.tmp
 *.temp
+.pnpm-home/
+.pnpm-config/
+.pnpm-store/
+.npm-cache/
+.user-profile/
+.tina-verify-*/
+next/tina/__generated__/
+next/public/admin/
 
 # Sanity (archived)
 sanity/

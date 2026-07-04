@@ -5,6 +5,6 @@
   "critical": false,
   "report-type": "summary",
   "allowlist": [],
-  "skip-dev": false,
+  "skip-dev": true,
   "output-format": "text"
 }

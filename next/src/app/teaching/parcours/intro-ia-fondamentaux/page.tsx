@@ -1,7 +1,7 @@
 
 export default function IntroIaFondamentaux() {
   return (
-    <main className="prose mx-auto p-4">
+    <main className="prose prose-lg prose-headings:text-mckinsey-navy-900 prose-a:text-mckinsey-teal-600 mx-auto max-w-4xl px-6 pt-32 pb-24">
       <h1>Qu'est-ce que l'IA ?</h1>
       <p><strong>Définition</strong>: L'intelligence artificielle (IA) regroupe les techniques permettant à une machine d'exécuter des tâches exigeant habituellement des capacités cognitives humaines (raisonner, percevoir, apprendre, planifier).</p>
       <h2>Contexte historique</h2>

@@ -1,0 +1,15 @@
+packages:
+  - .
+
+strictPeerDependencies: false
+autoInstallPeers: true
+
+overrides:
+  postcss: ^8.5.10
+
+allowBuilds:
+  better-sqlite3: true
+  core-js: false
+  esbuild: true
+  sharp: true
+  unrs-resolver: true

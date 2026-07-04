@@ -826,11 +826,12 @@ const prerequisites = [
 export default function IAApprentissageNonSupervise() {
   return (
     <CourseOverview
+      courseId="ia-3-apprentissage-non-supervise"
       title="Apprentissage Non-Supervisé"
       description="Clustering et réduction de dimensionnalité avec mathématiques approfondies"
       level="Intermédiaire"
       duration="14h"
-      lessonCount={2}
+      lessonCount={lessons.length}
       lessons={lessons}
       objectives={objectives}
       prerequisites={prerequisites}

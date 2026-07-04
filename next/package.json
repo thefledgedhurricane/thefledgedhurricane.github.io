@@ -2,11 +2,14 @@
   "name": "portfolio-next",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.5.3",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint ."
+    "dev": "tinacms dev -c \"next dev\"",
+    "build": "tinacms build --local --skip-cloud-checks -c \"next build\"",
+    "start": "serve out -l 3000",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "audit": "audit-ci --config ./audit-ci.json"
   },
   "dependencies": {
     "@portabletext/react": "^3.2.1",
@@ -21,6 +24,7 @@
     "prismjs": "^1.29.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
     "@react-three/fiber": "^9.0.0",
     "@react-three/drei": "^9.120.0",
     "sharp": "^0.33.1",
@@ -29,12 +33,16 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@tinacms/cli": "^2.5.1",
     "@types/node": "^20",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/three": "^0.170.0",
+    "audit-ci": "^7.1.0",
     "eslint": "^9.14.0",
     "eslint-config-next": "^16.0.10",
+    "serve": "^14.2.5",
+    "tinacms": "^3.0.0",
     "typescript": "^5.6.3"
   }
 }

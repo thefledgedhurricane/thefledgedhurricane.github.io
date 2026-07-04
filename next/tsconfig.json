@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2020",
     "lib": [
       "dom",
       "dom.iterable",
@@ -41,6 +41,7 @@
     "src/lib/sanity.ts",
     "src/lib/sanity-types.ts",
     "src/app/sanity-test/**",
-    "src/components/SanityExample.tsx"
+    "src/components/SanityExample.tsx",
+    "tina"
   ]
 }

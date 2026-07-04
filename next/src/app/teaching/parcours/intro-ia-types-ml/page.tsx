@@ -1,7 +1,7 @@
 
 export default function IntroIaTypesML() {
   return (
-    <main className="prose mx-auto p-4">
+    <main className="prose prose-lg prose-headings:text-mckinsey-navy-900 prose-a:text-mckinsey-teal-600 mx-auto max-w-4xl px-6 pt-32 pb-24">
       <h1>Types d'apprentissage automatique</h1>
       <p>L'apprentissage automatique (Machine Learning) se décline en plusieurs paradigmes selon la nature des données d'entrée et l'objectif visé.</p>
       <h2>Apprentissage supervisé</h2>

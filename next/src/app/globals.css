@@ -61,10 +61,19 @@
     text-rendering: optimizeLegibility;
   }
   
-  body {
+body {
     @apply bg-white text-gray-900 dark:bg-white dark:text-gray-900 font-sans antialiased;
     font-feature-settings: "rlig" 1, "calt" 1, "liga" 1;
     letter-spacing: 0.01em;
+  }
+
+  body.lms-lesson-active {
+    overflow: hidden;
+  }
+
+  body.lms-lesson-active > header,
+  body.lms-lesson-active > footer {
+    display: none;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -76,9 +85,6 @@
     @apply text-4xl md:text-5xl lg:text-6xl mb-6 font-medium;
   }
 
-  h2 { 
-    @apply text-3xl md:text-4xl mb-5 font-medium;
-  }
   h2 { 
     @apply text-3xl md:text-4xl mb-5 font-medium;
   }
