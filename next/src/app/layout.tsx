@@ -29,8 +29,8 @@ const cormorant = Cormorant_Garamond({
 });
 
 const siteConfig = {
-  name: process.env.NEXT_PUBLIC_SITE_NAME || 'Portfolio',
-  description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || 'Personal portfolio showcasing projects and skills',
+  name: process.env.NEXT_PUBLIC_SITE_NAME || 'Dr. Annaki — AI & Education',
+  description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || 'Research, teaching, and innovation in Artificial Intelligence, Virtual Reality, and Cognitive Sciences.',
   // Par défaut, pointer vers le domaine GitHub Pages (utile si la variable d'env n'est pas fournie en CI)
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://thefledgedhurricane.github.io',
 };
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: ['portfolio', 'developer', 'projects', 'web development', 'software engineer'],
-  authors: [{ name: 'Portfolio Owner' }],
-  creator: 'Portfolio Owner',
+  keywords: ['artificial intelligence', 'machine learning', 'virtual reality', 'education', 'research', 'Dr. Annaki'],
+  authors: [{ name: 'Dr. Ihababdelbasset Annaki' }],
+  creator: 'Dr. Ihababdelbasset Annaki',
   metadataBase: new URL(siteConfig.url),
   // Laisser chaque page définir sa canonical si nécessaire
   openGraph: {

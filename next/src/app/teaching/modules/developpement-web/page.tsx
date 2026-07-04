@@ -287,8 +287,8 @@ export default async function Page() {
     id: 12, 
     title: "Projet final", 
     duration: "90 min", 
-    content: "Portfolio moderne de A à Z",
-    details: `Création d'un portfolio complet (comme celui-ci !).
+    content: "Site web moderne de A à Z",
+    details: `Création d'un site web complet (comme celui-ci !).
 
 **Étapes :**
 1. Setup Next.js + TypeScript + Tailwind.

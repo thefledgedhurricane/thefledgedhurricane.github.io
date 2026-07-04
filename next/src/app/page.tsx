@@ -7,7 +7,7 @@ import Counter from '@/components/Counter';
 import MagneticButton from '@/components/MagneticButton';
 
 export const metadata: Metadata = {
-  title: 'Dr. Ihababdelbasset Annaki — Portfolio académique',
+  title: 'Dr. Ihababdelbasset Annaki — Recherche & Enseignement en IA',
   description: "Recherche, enseignement et projets en Intelligence Artificielle, Réalité Virtuelle et Neurosciences.",
 };
 

@@ -58,11 +58,18 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-medium mb-8 text-mckinsey-teal-400">Explore</h4>
             <ul className="space-y-4">
-              {['About', 'Research', 'Teaching', 'Projects', 'Contact'].map((item) => (
-                <li key={item}>
-                  <Link href={`/${item.toLowerCase()}`} className="text-white hover:text-mckinsey-teal-400 transition-colors flex items-center gap-2 group font-medium">
+              {[
+                { name: 'About', href: '/about' },
+                { name: 'Research', href: '/publications' },
+                { name: 'Teaching', href: '/teaching' },
+                { name: 'Projects', href: '/projects' },
+                { name: 'Blog', href: '/posts' },
+                { name: 'Contact', href: '/contact' },
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-white hover:text-mckinsey-teal-400 transition-colors flex items-center gap-2 group font-medium">
                     <span className="w-1.5 h-1.5 rounded-full bg-mckinsey-teal-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    {item}
+                    {item.name}
                   </Link>
                 </li>
               ))}

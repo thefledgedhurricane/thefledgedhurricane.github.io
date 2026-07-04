@@ -28,20 +28,20 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: 'portfolio-website',
-    title: 'Portfolio Personnel - Site Web Moderne',
-    description: 'Site portfolio académique et professionnel développé avec Next.js 14, TypeScript et TailwindCSS. Design moderne, performant et accessible.',
+    id: 'academic-website',
+    title: 'Site Académique — Plateforme de Recherche & Enseignement',
+    description: 'Site académique et professionnel développé avec Next.js 14, TypeScript et TailwindCSS. Design moderne, performant et accessible.',
     category: 'Développement Web',
     status: 'Terminé',
     technologies: ['Next.js 14', 'TypeScript', 'TailwindCSS', 'React', 'Vercel'],
     year: '2024',
-    githubUrl: 'https://github.com/thefledgedhurricane/portfolio',
+    githubUrl: 'https://github.com/thefledgedhurricane/thefledgedhurricane.github.io',
     liveUrl: 'https://thefledgedhurricane.github.io',
     featured: true,
     content: () => (
       <>
         <Paragraph>
-          Ce portfolio représente mon identité numérique complète, conçu pour présenter 
+          Ce site représente mon identité numérique complète, conçu pour présenter 
           mes travaux de recherche, mes projets de développement, et mes compétences en 
           tant que développeur full-stack et chercheur en IA.
         </Paragraph>
@@ -91,7 +91,7 @@ module.exports = nextConfig;`}
         <Heading2>Fonctionnalités Clés</Heading2>
         <List items={[
           'Système de blog avec articles techniques',
-          'Portfolio de projets avec descriptions détaillées',
+          'Galerie de projets avec descriptions détaillées',
           'Publications scientifiques avec intégration Scopus',
           'Plateforme d\'enseignement interactive',
           'Mode sombre/clair automatique',
@@ -274,7 +274,7 @@ results = analyzer.analyze(data)`}
     content: () => (
       <>
         <Paragraph>
-          Une plateforme d'apprentissage moderne intégrée à mon portfolio, offrant des 
+           Une plateforme d'apprentissage moderne intégrée à mon site, offrant des 
           cours interactifs en programmation, algorithmique et intelligence artificielle.
         </Paragraph>
 
@@ -322,7 +322,7 @@ export default function ProjectsPage() {
   
   function mapCategory(cat: string): 'web' | 'mobile' | 'desktop' | 'ai' | 'data' | 'other' {
     const c = (cat || '').toLowerCase();
-    if (c.includes('web') || c.includes('développement') || c.includes('portfolio')) return 'web';
+    if (c.includes('web') || c.includes('développement') || c.includes('site')) return 'web';
     if (c.includes('mobile')) return 'mobile';
     if (c.includes('desktop')) return 'desktop';
     if (c.includes('vr') || c.includes('réalité') || c.includes('ia') || c.includes('intelligence') || c.includes('ai')) return 'ai';
