@@ -1,6 +1,5 @@
 'use client';
-import { useState } from 'react';
-import { Metadata } from 'next';
+import { useState, useEffect } from 'react';
 
 interface Publication {
   id: string;
@@ -150,6 +149,10 @@ const publications: Publication[] = [
 ];
 
 export default function PublicationsPage() {
+  useEffect(() => {
+    document.title = 'Publications & Recherche | Dr. Ihababdelbasset ANNAKI';
+  }, []);
+
   const [selectedPublication, setSelectedPublication] = useState<Publication | null>(null);
   const [filterYear, setFilterYear] = useState<string>('all');
   

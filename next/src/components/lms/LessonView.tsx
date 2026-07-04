@@ -204,6 +204,26 @@ export default function LessonView({
     };
   }, []);
 
+  useEffect(() => {
+    const renderMath = () => {
+      // @ts-ignore
+      if (typeof window !== 'undefined' && window.renderMathInElement) {
+        // @ts-ignore
+        window.renderMathInElement(document.body, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+          ],
+          throwOnError: false,
+        });
+      }
+    };
+
+    renderMath();
+    const timer = setTimeout(renderMath, 150);
+    return () => clearTimeout(timer);
+  }, [lesson, activeTab]);
+
   const quizScore = lesson.quiz?.length
     ? Math.round((lesson.quiz.filter(
       (question) => selectedQuizAnswers[question.id] === question.correctAnswer,

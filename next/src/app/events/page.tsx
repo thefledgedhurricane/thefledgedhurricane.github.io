@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface Event {
   id: string;
@@ -124,6 +124,10 @@ const events: Event[] = [
 ];
 
 export default function EventsPage() {
+  useEffect(() => {
+    document.title = 'Événements & Conférences | Dr. Ihababdelbasset ANNAKI';
+  }, []);
+
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [filterType, setFilterType] = useState<string>('all');
   

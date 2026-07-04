@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Formation IA',
-    default: 'Formation IA',
+    template: '%s | Espace Enseignement',
+    default: 'Espace Enseignement — Dr. Ihababdelbasset ANNAKI',
   },
-  description: 'Apprenez l\'Intelligence Artificielle avec des parcours structurés et pédagogiques.',
+  description: 'Apprenez la programmation, l\'algorithmique et l\'intelligence artificielle avec des parcours structurés.',
 };
 
 export default function TeachingLayout({

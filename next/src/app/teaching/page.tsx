@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import FadeIn from '@/components/FadeIn';
 import Counter from '@/components/Counter';
@@ -137,6 +137,10 @@ const stats = [
 ];
 
 export default function TeachingPage() {
+  useEffect(() => {
+    document.title = 'Cours & Enseignement | Dr. Ihababdelbasset ANNAKI';
+  }, []);
+
   return (
     <main className="min-h-screen bg-white selection:bg-mckinsey-teal-100 selection:text-mckinsey-navy-900">
       {/* Hero Section */}

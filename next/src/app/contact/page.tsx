@@ -5,8 +5,8 @@ import ContactForm from '@/components/ContactForm';
 import FadeIn from '@/components/FadeIn';
 
 export const metadata: Metadata = {
-  title: 'Contact | Dr. Ihababdelbasset Annaki',
-  description: 'Get in touch with me for collaborations, questions, or just to say hello.',
+  title: 'Contact | Dr. Ihababdelbasset ANNAKI',
+  description: 'Contactez le Dr. Ihababdelbasset ANNAKI pour des opportunités de recherche, d\'enseignement ou de conseil en IA/VR.',
 };
 
 export default function ContactPage() {

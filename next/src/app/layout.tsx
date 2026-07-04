@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Inter, Playfair_Display, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
@@ -29,21 +30,21 @@ const cormorant = Cormorant_Garamond({
 });
 
 const siteConfig = {
-  name: process.env.NEXT_PUBLIC_SITE_NAME || 'Dr. Annaki — AI & Education',
-  description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || 'Research, teaching, and innovation in Artificial Intelligence, Virtual Reality, and Cognitive Sciences.',
+  name: process.env.NEXT_PUBLIC_SITE_NAME || 'Dr. Ihababdelbasset ANNAKI',
+  description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || 'Recherche, enseignement et projets en Intelligence Artificielle, Réalité Virtuelle et Neurosciences.',
   // Par défaut, pointer vers le domaine GitHub Pages (utile si la variable d'env n'est pas fournie en CI)
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://thefledgedhurricane.github.io',
 };
 
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
+    default: 'Dr. Ihababdelbasset ANNAKI — Enseignement & Recherche en IA',
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: ['artificial intelligence', 'machine learning', 'virtual reality', 'education', 'research', 'Dr. Annaki'],
-  authors: [{ name: 'Dr. Ihababdelbasset Annaki' }],
-  creator: 'Dr. Ihababdelbasset Annaki',
+  keywords: ['artificial intelligence', 'machine learning', 'virtual reality', 'education', 'research', 'Dr. Ihababdelbasset ANNAKI'],
+  authors: [{ name: 'Dr. Ihababdelbasset ANNAKI' }],
+  creator: 'Dr. Ihababdelbasset ANNAKI',
   metadataBase: new URL(siteConfig.url),
   // Laisser chaque page définir sa canonical si nécessaire
   openGraph: {
@@ -100,8 +101,35 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#A4863D" />
+        <link 
+          rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" 
+          integrity="sha384-GMR9m/tUiK3wDFA96qhCFYeA5A14McPk5DX1T5Yuaa4E5C1Wv9Gr1yk6XdeyqB" 
+          crossOrigin="anonymous"
+        />
       </head>
       <body className={`antialiased transition-colors duration-500 font-sans bg-white text-gray-900`}>
+        <Script 
+          src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" 
+          strategy="lazyOnload"
+        />
+        <Script 
+          src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+          strategy="lazyOnload"
+          onLoad={() => {
+            // @ts-ignore
+            if (window.renderMathInElement) {
+              // @ts-ignore
+              window.renderMathInElement(document.body, {
+                delimiters: [
+                  { left: '$$', right: '$$', display: true },
+                  { left: '$', right: '$', display: false },
+                ],
+                throwOnError: false,
+              });
+            }
+          }}
+        />
         {/* 2025 Modern UI Enhancements */}
         <FloatingOrbs />
         <AnimatedMeshGradient />

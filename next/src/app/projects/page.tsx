@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProjectLayout from '@/components/project/ProjectLayout';
 import { 
   Heading2, 
@@ -317,6 +317,10 @@ results = analyzer.analyze(data)`}
 ];
 
 export default function ProjectsPage() {
+  useEffect(() => {
+    document.title = 'Projets & Réalisations | Dr. Ihababdelbasset ANNAKI';
+  }, []);
+
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [filterCategory, setFilterCategory] = useState<string>('all');
   

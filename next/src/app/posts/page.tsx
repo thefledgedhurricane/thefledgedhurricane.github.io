@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import ArticleLayout from '@/components/article/ArticleLayout';
 import { 
@@ -341,6 +341,10 @@ print(df.describe())  # Statistiques descriptives`}
 ];
 
 export default function PostsPage() {
+  useEffect(() => {
+    document.title = 'Blog & Actualités | Dr. Ihababdelbasset ANNAKI';
+  }, []);
+
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
   if (selectedPost) {

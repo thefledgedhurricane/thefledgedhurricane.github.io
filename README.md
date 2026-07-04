@@ -1,4 +1,4 @@
-# Dr. Ihababdelbasset Annaki — Research & Education Platform
+# Dr. Ihababdelbasset ANNAKI — Research & Education Platform
 
 An immersive, high-performance academic platform showcasing research, innovation projects, and a state-of-the-art Learning Management System (LMS) for advanced computer science education.
 

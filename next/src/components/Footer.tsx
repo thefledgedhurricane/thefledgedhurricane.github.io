@@ -94,7 +94,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-mckinsey-navy-900 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-sm text-mckinsey-gray-500">
-            © {year} Dr. Ihababdelbasset Annaki. All rights reserved.
+            © {year} Dr. Ihababdelbasset ANNAKI. All rights reserved.
           </div>
           <div className="flex items-center gap-2 text-sm text-mckinsey-gray-500">
             <span>Designed with</span>

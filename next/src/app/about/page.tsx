@@ -8,8 +8,8 @@ import Counter from '@/components/Counter';
 import { logos } from '@/components/about-logos';
 
 export const metadata: Metadata = {
-  title: 'About | Dr. Ihababdelbasset Annaki',
-  description: 'Academic and professional journey of Dr. Ihababdelbasset Annaki, expert in Artificial Intelligence and advanced development.',
+  title: 'À propos | Dr. Ihababdelbasset ANNAKI',
+  description: 'Parcours académique et professionnel du Dr. Ihababdelbasset ANNAKI, enseignant-chercheur en Intelligence Artificielle et Réalité Virtuelle.',
 };
 
 // Experience data structure
@@ -180,7 +180,7 @@ function HeroSection() {
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
               <Image
                 src="/portrait-academique.jpg"
-                alt="Dr. Ihababdelbasset Annaki"
+                alt="Dr. Ihababdelbasset ANNAKI"
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-700"
                 priority
