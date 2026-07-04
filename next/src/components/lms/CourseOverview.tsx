@@ -12,7 +12,8 @@ import {
   ChevronDown, 
   ChevronUp,
   FileText,
-  Award
+  Award,
+  Lock
 } from 'lucide-react';
 import FadeIn from '@/components/FadeIn';
 import LessonView from './LessonView';
@@ -52,6 +53,7 @@ interface Lesson {
   exercises?: Exercise[];
   quiz?: QuizQuestion[];
   cheatSheet?: string;
+  notebookUrl?: string;
 }
 
 interface CourseOverviewProps {
@@ -265,78 +267,105 @@ export default function CourseOverview({
             <FadeIn>
               {activeTab === 'content' ? (
                 <div className="space-y-4">
-                  {lessons.map((lesson, index) => (
-                    <div 
-                      key={lesson.id} 
-                      className={`group bg-white rounded-xl border transition-all duration-300 overflow-hidden ${
-                        expandedLessonId === lesson.id 
-                          ? 'border-mckinsey-teal-200 shadow-lg ring-1 ring-mckinsey-teal-100' 
-                          : 'border-gray-200 hover:border-mckinsey-teal-200 hover:shadow-md'
-                      }`}
-                    >
+                  {lessons.map((lesson, index) => {
+                    const unlocked = index === 0 || completedLessonIds.includes(String(lessons[index - 1].id));
+                    return (
                       <div 
-                        className="p-5 cursor-pointer flex items-center gap-4"
-                        onClick={() => toggleLesson(lesson.id)}
+                        key={lesson.id} 
+                        className={`group bg-white rounded-xl border transition-all duration-300 overflow-hidden ${
+                          !unlocked
+                            ? 'border-gray-100 opacity-80'
+                            : expandedLessonId === lesson.id 
+                              ? 'border-mckinsey-teal-200 shadow-lg ring-1 ring-mckinsey-teal-100' 
+                              : 'border-gray-200 hover:border-mckinsey-teal-200 hover:shadow-md'
+                        }`}
                       >
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-medium text-sm transition-colors ${
-                          expandedLessonId === lesson.id
-                            ? 'bg-mckinsey-teal-500 text-white'
-                            : 'bg-gray-50 text-gray-500 group-hover:bg-mckinsey-teal-50 group-hover:text-mckinsey-teal-600'
-                        }`}>
-                          {completedLessonIds.includes(String(lesson.id)) ? (
-                            <CheckCircle2 className="w-5 h-5" />
-                          ) : index + 1}
+                        <div 
+                          className="p-5 cursor-pointer flex items-center gap-4"
+                          onClick={() => toggleLesson(lesson.id)}
+                        >
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center font-medium text-sm transition-colors flex-shrink-0 ${
+                            !unlocked
+                              ? 'bg-gray-100 text-gray-400'
+                              : expandedLessonId === lesson.id
+                                ? 'bg-mckinsey-teal-500 text-white'
+                                : 'bg-gray-50 text-gray-500 group-hover:bg-mckinsey-teal-50 group-hover:text-mckinsey-teal-600'
+                          }`}>
+                            {!unlocked ? (
+                              <Lock className="w-4 h-4 text-gray-400" />
+                            ) : completedLessonIds.includes(String(lesson.id)) ? (
+                              <CheckCircle2 className="w-5 h-5 text-white" />
+                            ) : index + 1}
+                          </div>
+                          
+                          <div className="flex-1">
+                            <h3 className={`font-medium text-lg transition-colors ${
+                              !unlocked
+                                ? 'text-gray-500'
+                                : expandedLessonId === lesson.id 
+                                  ? 'text-mckinsey-navy-900' 
+                                  : 'text-gray-900 group-hover:text-mckinsey-teal-700'
+                            }`}>
+                              {lesson.title}
+                            </h3>
+                            <div className="flex items-center gap-4 mt-1 text-sm text-gray-500">
+                              <span className="flex items-center gap-1">
+                                <Clock className="w-3 h-3" />
+                                {lesson.duration}
+                              </span>
+                              <span className="hidden sm:inline-block text-gray-400">• Leçon {index + 1}</span>
+                              {!unlocked && (
+                                <span className="inline-flex items-center gap-1 text-xs text-amber-600 bg-amber-50 px-2 py-0.5 rounded font-medium">
+                                  <Lock className="w-3 h-3" /> Verrouillé
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-3">
+                            {expandedLessonId === lesson.id ? (
+                              <ChevronUp className="w-5 h-5 text-mckinsey-teal-500" />
+                            ) : (
+                              <ChevronDown className="w-5 h-5 text-gray-400 group-hover:text-mckinsey-teal-500" />
+                            )}
+                          </div>
                         </div>
                         
-                        <div className="flex-1">
-                          <h3 className={`font-medium text-lg transition-colors ${
-                            expandedLessonId === lesson.id ? 'text-mckinsey-navy-900' : 'text-gray-900 group-hover:text-mckinsey-teal-700'
-                          }`}>
-                            {lesson.title}
-                          </h3>
-                          <div className="flex items-center gap-4 mt-1 text-sm text-gray-500">
-                            <span className="flex items-center gap-1">
-                              <Clock className="w-3 h-3" />
-                              {lesson.duration}
-                            </span>
-                            <span className="hidden sm:inline-block text-gray-400">• Leçon {index + 1}</span>
+                        {expandedLessonId === lesson.id && (
+                          <div className="px-5 pb-6 pt-2 bg-gray-50/50 border-t border-gray-100">
+                            {lesson.details && (
+                              <div className="prose prose-sm max-w-none prose-headings:text-mckinsey-navy-900 prose-p:text-gray-600 prose-strong:text-mckinsey-navy-800 prose-li:text-gray-600 mb-4">
+                                <div className="whitespace-pre-wrap leading-relaxed">
+                                  {lesson.details}
+                                </div>
+                              </div>
+                            )}
+                            {!syllabusOnly && (
+                              <div className="mt-6 flex justify-end">
+                                {unlocked ? (
+                                  <button 
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      startLesson(lesson.id);
+                                    }}
+                                    className="inline-flex items-center px-4 py-2 bg-mckinsey-navy-900 text-white text-sm font-medium rounded-lg hover:bg-mckinsey-navy-800 transition-colors shadow-sm hover:shadow"
+                                  >
+                                    <PlayCircle className="w-4 h-4 mr-2" />
+                                    Commencer la leçon
+                                  </button>
+                                ) : (
+                                  <div className="inline-flex items-center gap-2 text-sm text-amber-700 bg-amber-50 border border-amber-100 rounded-lg px-4 py-2 font-light">
+                                    <Lock className="w-4 h-4 text-amber-600" />
+                                    Terminez la leçon précédente et son quiz pour déverrouiller ce chapitre.
+                                  </div>
+                                )}
+                              </div>
+                            )}
                           </div>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                          {expandedLessonId === lesson.id ? (
-                            <ChevronUp className="w-5 h-5 text-mckinsey-teal-500" />
-                          ) : (
-                            <ChevronDown className="w-5 h-5 text-gray-400 group-hover:text-mckinsey-teal-500" />
-                          )}
-                        </div>
+                        )}
                       </div>
-                      
-                      {expandedLessonId === lesson.id && lesson.details && (
-                        <div className="px-5 pb-6 pt-2 bg-gray-50/50 border-t border-gray-100">
-                          <div className="prose prose-sm max-w-none prose-headings:text-mckinsey-navy-900 prose-p:text-gray-600 prose-strong:text-mckinsey-navy-800 prose-li:text-gray-600">
-                            <div className="whitespace-pre-wrap leading-relaxed">
-                              {lesson.details}
-                            </div>
-                          </div>
-                          {!syllabusOnly && (
-                            <div className="mt-6 flex justify-end">
-                              <button 
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  startLesson(lesson.id);
-                                }}
-                                className="inline-flex items-center px-4 py-2 bg-mckinsey-navy-900 text-white text-sm font-medium rounded-lg hover:bg-mckinsey-navy-800 transition-colors shadow-sm hover:shadow"
-                              >
-                                <PlayCircle className="w-4 h-4 mr-2" />
-                                Commencer la leçon
-                              </button>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <div className="space-y-8">

@@ -109,6 +109,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
       .flatMap((section) => section.keyTakeaways || [])
       .map((item) => `• ${item}`)
       .join('\n'),
+    notebookUrl: lesson.notebookUrl,
   }));
 
   return (

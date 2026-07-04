@@ -13,10 +13,20 @@ import {
   BookOpen,
   Code,
   FileText,
-  HelpCircle
+  HelpCircle,
+  Lock,
+  Copy,
+  Check
 } from 'lucide-react';
 import FadeIn from '@/components/FadeIn';
 import InteractiveDemo from '@/components/interactive/InteractiveDemo';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-sql';
+import 'prismjs/components/prism-json';
 
 interface Exercise {
   id: string;
@@ -44,6 +54,7 @@ interface Lesson {
   exercises?: Exercise[];
   quiz?: QuizQuestion[];
   cheatSheet?: string;
+  notebookUrl?: string;
 }
 
 interface LessonViewProps {
@@ -59,6 +70,112 @@ interface LessonViewProps {
   onSelectLesson: (lessonId: string | number) => void;
   onComplete: (lessonId: string | number, quizScore?: number) => void;
 }
+
+function MarkdownCodeBlock({ className, children }: { className?: string; children: string }) {
+  const [copied, setCopied] = useState(false);
+  const match = /language-(\w+)/.exec(className || '');
+  const lang = match ? match[1] : '';
+  const codeString = String(children).replace(/\n$/, '');
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(codeString);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  if (!lang) {
+    return (
+      <code className="px-2 py-0.5 bg-gray-100 text-mckinsey-navy-900 rounded font-mono text-sm">
+        {children}
+      </code>
+    );
+  }
+
+  let highlightedHtml = '';
+  try {
+    const grammar = Prism.languages[lang] || Prism.languages.markup;
+    highlightedHtml = Prism.highlight(codeString, grammar, lang);
+  } catch (e) {
+    highlightedHtml = codeString;
+  }
+
+  return (
+    <div className="my-6 rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+      <div className="bg-gray-900 px-4 py-2.5 flex items-center justify-between border-b border-gray-800">
+        <div className="flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
+          <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+          <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
+          <span className="text-xs text-gray-400 font-mono uppercase ml-2">{lang}</span>
+        </div>
+        <button
+          onClick={handleCopy}
+          className="text-gray-400 hover:text-white transition-colors p-1 rounded hover:bg-gray-800"
+          title="Copier le code"
+        >
+          {copied ? (
+            <span className="text-green-400 text-xs flex items-center gap-1">
+              <Check className="w-3.5 h-3.5" /> Copié!
+            </span>
+          ) : (
+            <Copy className="w-3.5 h-3.5" />
+          )}
+        </button>
+      </div>
+      <pre className="bg-gray-950 text-gray-100 p-5 overflow-x-auto m-0">
+        <code 
+          className={`language-${lang} font-mono text-sm block leading-relaxed`}
+          dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+        />
+      </pre>
+    </div>
+  );
+}
+
+function MarkdownImage({ src, alt }: { src?: string; alt?: string }) {
+  return (
+    <figure className="my-8 flex flex-col items-center bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img 
+        src={src} 
+        alt={alt} 
+        className="max-h-[450px] w-auto object-contain rounded-lg transition-transform duration-300 hover:scale-[1.01]" 
+      />
+      {alt && (
+        <figcaption className="mt-3 text-xs text-gray-500 font-light italic text-center max-w-lg border-t border-gray-100 pt-2 w-full">
+          {alt}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
+function MarkdownBlockquote({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="my-6 p-5 bg-blue-50/50 border-l-4 border-mckinsey-teal-500 rounded-r-xl text-mckinsey-navy-900 text-base leading-relaxed">
+      {children}
+    </div>
+  );
+}
+
+const markdownComponents = {
+  code({ node, inline, className, children, ...props }: any) {
+    if (inline) {
+      return (
+        <code className="px-2 py-0.5 bg-gray-100 text-mckinsey-navy-900 rounded font-mono text-sm" {...props}>
+          {children}
+        </code>
+      );
+    }
+    return <MarkdownCodeBlock className={className}>{String(children)}</MarkdownCodeBlock>;
+  },
+  img({ src, alt }: any) {
+    return <MarkdownImage src={src} alt={alt} />;
+  },
+  blockquote({ children }: any) {
+    return <MarkdownBlockquote>{children}</MarkdownBlockquote>;
+  }
+};
 
 export default function LessonView({
   courseTitle,
@@ -294,12 +411,46 @@ export default function LessonView({
                         </span>
                       </div>
 
+                      {/* Colab Notebook Integration */}
+                      {lesson.notebookUrl && (
+                        <div className="mb-8 p-6 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border border-amber-100 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                          <div className="flex items-start gap-3.5">
+                            <div className="p-2.5 bg-amber-100/50 rounded-xl text-amber-700">
+                              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                              </svg>
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-amber-950 text-base">Travaux Pratiques sur Google Colab</h4>
+                              <p className="text-sm text-amber-700/80 mt-0.5">
+                                Pratiquez directement dans votre navigateur avec un notebook interactif clé en main.
+                              </p>
+                            </div>
+                          </div>
+                          <a
+                            href={
+                              lesson.notebookUrl.startsWith('http')
+                                ? lesson.notebookUrl
+                                : `https://colab.research.google.com/github/thefledgedhurricane/thefledgedhurricane.github.io/blob/main/next/public${lesson.notebookUrl}`
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-medium rounded-xl shadow-sm hover:shadow transition-all text-sm flex-shrink-0"
+                          >
+                            <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                              <path d="M12.5 5.5v3.2l3 3.8-3 3.8v3.2c4.14 0 7.5-3.36 7.5-7.5S16.64 5.5 12.5 5.5zM4 12c0 4.14 3.36 7.5 7.5 7.5v-3.2l-3-3.8 3-3.8V5.5C7.36 5.5 4 8.86 4 12z" />
+                            </svg>
+                            Ouvrir dans Colab
+                          </a>
+                        </div>
+                      )}
+
                       {/* Content Rendering */}
                       <div className="prose prose-lg max-w-none prose-headings:text-mckinsey-navy-900 prose-p:text-gray-600 prose-a:text-mckinsey-teal-600">
                         {typeof lesson.content === 'object' && 'component' in lesson.content ? (
                           <div>{lesson.content.component()}</div>
                         ) : (
-                          <ReactMarkdown>{lesson.content || ''}</ReactMarkdown>
+                          <ReactMarkdown components={markdownComponents}>{lesson.content || ''}</ReactMarkdown>
                         )}
                       </div>
 
@@ -492,17 +643,25 @@ export default function LessonView({
 
                 <button
                   onClick={() => {
-                    onComplete(lesson.id);
+                    if (!completedLessonIds.includes(String(lesson.id))) {
+                      onComplete(lesson.id);
+                    }
                     onNext();
                   }}
-                  disabled={!hasNext}
+                  disabled={!hasNext || (lesson.quiz && lesson.quiz.length > 0 && !completedLessonIds.includes(String(lesson.id)))}
                   className={`flex items-center px-6 py-3 rounded-xl font-medium transition-all shadow-sm hover:shadow-md ${
-                    hasNext
+                    hasNext && (!(lesson.quiz && lesson.quiz.length > 0) || completedLessonIds.includes(String(lesson.id)))
                       ? 'bg-mckinsey-navy-900 text-white hover:bg-mckinsey-navy-800'
                       : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                   }`}
                 >
-                  Suivant
+                  {lesson.quiz && lesson.quiz.length > 0 && !completedLessonIds.includes(String(lesson.id)) ? (
+                    <span className="flex items-center gap-1.5">
+                      <Lock className="w-4 h-4" /> Suivant (Quiz requis)
+                    </span>
+                  ) : (
+                    'Suivant'
+                  )}
                   <ChevronRight className="w-5 h-5 ml-2" />
                 </button>
               </div>

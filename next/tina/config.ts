@@ -69,6 +69,7 @@ export default defineConfig({
               { type: 'string', name: 'description', label: 'Description', ui: { component: 'textarea' } },
               { type: 'number', name: 'estimatedMinutes', label: 'Estimated minutes', required: true },
               { type: 'string', name: 'objectives', label: 'Objectives', list: true },
+              { type: 'string', name: 'notebookUrl', label: 'Google Colab Notebook URL' },
               {
                 type: 'object',
                 name: 'sections',

@@ -59,6 +59,7 @@ export type Lesson = {
   objectives: string[];
   sections: LessonSection[];
   quiz?: QuizQuestion[];
+  notebookUrl?: string;
   references?: {
     title: string;
     url: string;

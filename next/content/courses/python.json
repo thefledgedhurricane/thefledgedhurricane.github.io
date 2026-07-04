@@ -27,11 +27,12 @@
       "description": "Découverte du langage, installation et premier programme.",
       "estimatedMinutes": 30,
       "objectives": ["Comprendre les usages de Python", "Installer un environnement", "Exécuter un premier programme"],
+      "notebookUrl": "/notebooks/01_fondamentaux_exercices.ipynb",
       "sections": [
         {
           "id": "why-python",
           "title": "Pourquoi Python ?",
-          "content": "Python est un langage interprété, multiplateforme et polyvalent. Sa syntaxe lisible en fait un excellent choix pour l'apprentissage, l'automatisation, le web, la data science et l'intelligence artificielle.\n\n- **Lisibilité** : une syntaxe concise et proche du langage naturel.\n- **Écosystème** : des bibliothèques pour presque tous les domaines.\n- **Communauté** : une documentation abondante et une communauté active.",
+          "content": "Python est un langage interprété, multiplateforme et polyvalent. Sa syntaxe lisible en fait un excellent choix pour l'apprentissage, l'automatisation, le web, la data science et l'intelligence artificielle.\n\n![Écosystème supervisé et non-supervisé de l'IA](/lms/supervised-unsupervised.svg)\n\n- **Lisibilité** : une syntaxe concise et proche du langage naturel.\n- **Écosystème** : des bibliothèques pour presque tous les domaines.\n- **Communauté** : une documentation abondante et une communauté active.",
           "estimatedMinutes": 10,
           "keyTakeaways": ["Python privilégie la lisibilité", "Il convient aussi bien aux débutants qu'aux projets avancés"]
         },
@@ -78,6 +79,7 @@
       "description": "Types numériques, chaînes, booléens et conversions.",
       "estimatedMinutes": 45,
       "objectives": ["Identifier les types de base", "Convertir des valeurs", "Nommer correctement les variables"],
+      "notebookUrl": "/notebooks/02_types_ml_exercices.ipynb",
       "sections": [{"id": "types-base", "title": "Les types de base", "content": "Python utilise un typage dynamique et fort. Les types courants sont `int`, `float`, `str`, `bool` et `NoneType`.\n\n```python\nage = 25\nprix = 19.99\nnom = \"Alice\"\nest_etudiant = True\n```\n\nUtilisez `type(valeur)` pour inspecter un type et `int()`, `float()` ou `str()` pour convertir une valeur.", "estimatedMinutes": 45, "keyTakeaways": ["Le type est associé à la valeur", "Une conversion explicite évite les ambiguïtés"]}],
       "practiceExercises": [{"title": "Convertisseur de température", "description": "Convertissez une température Celsius en Fahrenheit.", "difficulty": "easy", "hints": ["F = C × 9/5 + 32"], "solution": "celsius = float(input(\"Température en °C : \"))\nfahrenheit = celsius * 9 / 5 + 32\nprint(fahrenheit)"}]
     },
@@ -177,7 +179,8 @@
       "description": "Tableaux numériques, séries et DataFrames.",
       "estimatedMinutes": 60,
       "objectives": ["Créer un tableau NumPy", "Filtrer un DataFrame", "Calculer des statistiques descriptives"],
-      "sections": [{"id": "data", "title": "Premiers pas avec les données", "content": "NumPy fournit des tableaux numériques vectorisés. Pandas construit des séries et DataFrames étiquetés au-dessus de NumPy.\n\n```python\nimport numpy as np\nimport pandas as pd\n\nvaleurs = np.array([12, 15, 18])\ntable = pd.DataFrame({\"note\": valeurs})\nprint(table[\"note\"].mean())\n```", "estimatedMinutes": 60, "keyTakeaways": ["Les opérations vectorisées remplacent de nombreuses boucles", "Un DataFrame structure des données tabulaires"]}],
+      "notebookUrl": "/notebooks/03_recherche_optimisation_exercices.ipynb",
+      "sections": [{"id": "data", "title": "Premiers pas avec les données", "content": "NumPy fournit des tableaux numériques vectorisés. Pandas construit des séries et DataFrames étiquetés au-dessus de NumPy.\n\n![Analyse descriptive des données avec Pandas](/lms/descriptive.svg)\n\n![Distribution des valeurs statistiques avec NumPy](/lms/distribution.svg)\n\n```python\nimport numpy as np\nimport pandas as pd\n\nvaleurs = np.array([12, 15, 18])\ntable = pd.DataFrame({\"note\": valeurs})\nprint(table[\"note\"].mean())\n```", "estimatedMinutes": 60, "keyTakeaways": ["Les opérations vectorisées remplacent de nombreuses boucles", "Un DataFrame structure des données tabulaires"]}],
       "practiceExercises": [{"title": "Analyse de notes", "description": "Créez un DataFrame de notes, filtrez les valeurs supérieures à 10 et calculez la moyenne.", "difficulty": "medium", "hints": ["Utilisez df[df['note'] > 10]"], "solution": "import pandas as pd\ndf = pd.DataFrame({\"note\": [8, 12, 15, 9, 18]})\nreussites = df[df[\"note\"] >= 10]\nprint(reussites[\"note\"].mean())"}]
     },
     {
