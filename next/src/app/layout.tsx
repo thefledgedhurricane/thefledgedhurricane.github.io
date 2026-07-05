@@ -1,73 +1,21 @@
 import type { Metadata } from 'next';
-import { Inter, Playfair_Display, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import CustomCursor from '@/components/CustomCursor';
-import ScrollProgress from '@/components/ScrollProgress';
-import AnimatedMeshGradient from '@/components/AnimatedMeshGradient';
-import FloatingOrbs from '@/components/FloatingOrbs';
 
-const inter = Inter({ 
-  subsets: ['latin'], 
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-const playfair = Playfair_Display({ 
-  subsets: ['latin'], 
-  weight: ['400', '500', '600', '700', '800', '900'],
-  variable: '--font-playfair',
-  display: 'swap',
-});
-
-const cormorant = Cormorant_Garamond({ 
-  subsets: ['latin'], 
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-cormorant',
-  display: 'swap',
-});
-
-const siteConfig = {
-  name: process.env.NEXT_PUBLIC_SITE_NAME || 'Dr. Ihababdelbasset ANNAKI',
-  description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || 'Recherche, enseignement et projets en Intelligence Artificielle, Réalité Virtuelle et Neurosciences.',
-  // Par défaut, pointer vers le domaine GitHub Pages (utile si la variable d'env n'est pas fournie en CI)
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://thefledgedhurricane.github.io',
-};
-
+// Root layout — minimal shell.
+// <html>, <Header>, <Footer> are now provided by [lang]/layout.tsx
+// This root layout only provides the globals.css import and base metadata.
 export const metadata: Metadata = {
   title: {
-    default: 'Dr. Ihababdelbasset ANNAKI — Enseignement & Recherche en IA',
-    template: `%s | ${siteConfig.name}`,
+    default: 'Dr. Ihababdelbasset ANNAKI',
+    template: '%s | Dr. Ihababdelbasset ANNAKI',
   },
-  description: siteConfig.description,
+  description: 'Academic platform — Research, Teaching & AI Projects',
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://thefledgedhurricane.github.io'
+  ),
   keywords: ['artificial intelligence', 'machine learning', 'virtual reality', 'education', 'research', 'Dr. Ihababdelbasset ANNAKI'],
   authors: [{ name: 'Dr. Ihababdelbasset ANNAKI' }],
   creator: 'Dr. Ihababdelbasset ANNAKI',
-  metadataBase: new URL(siteConfig.url),
-  // Laisser chaque page définir sa canonical si nécessaire
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: siteConfig.name,
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: ['/og-image.jpg'],
-  },
   robots: {
     index: true,
     follow: true,
@@ -79,47 +27,10 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
-  },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-
-
-  return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} ${cormorant.variable}`}>
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#A4863D" />
-        <link 
-          rel="stylesheet" 
-          href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" 
-          integrity="sha384-GMR9m/tUiK3wDFA96qhCFYeA5A14McPk5DX1T5Yuaa4E5C1Wv9Gr1yk6XdeyqB" 
-          crossOrigin="anonymous"
-        />
-        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" defer></script>
-      </head>
-      <body className={`antialiased transition-colors duration-500 font-sans bg-white text-gray-900`}>
-        {/* 2025 Modern UI Enhancements */}
-        <FloatingOrbs />
-        <AnimatedMeshGradient />
-        <ScrollProgress />
-        <CustomCursor />
-        
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
-  );
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // The [lang]/layout.tsx handles <html lang> and <body>.
+  // This layout wraps only the root redirect page (/ar).
+  return children;
 }

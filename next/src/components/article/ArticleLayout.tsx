@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ReactNode } from 'react';
+import { useParams } from 'next/navigation';
 
 interface ArticleLayoutProps {
   title: string;
@@ -29,12 +30,15 @@ export default function ArticleLayout({
   heroImage,
   children,
 }: ArticleLayoutProps) {
+  const params = useParams();
+  const lang = params?.lang || 'ar';
+
   return (
     <div className="min-h-screen bg-white dark:bg-white text-gray-900 dark:text-gray-900">
       {/* Back Navigation */}
       <div className="max-w-4xl mx-auto px-6 pt-8 pb-6">
         <Link
-          href="/posts"
+          href={`/${lang}/posts`}
           className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400 hover:text-morocco-red-600 dark:hover:text-morocco-red-400 transition-colors font-medium"
         >
           <svg className="w-4 h-4 mr-3 transform group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
