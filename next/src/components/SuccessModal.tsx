@@ -3,19 +3,14 @@
 import { useEffect } from 'react';
 import { CheckCircle2, X } from 'lucide-react';
 import type { Locale } from '@/lib/dictionaries';
+import type { ContactCopy } from './ContactForm';
 
 interface SuccessModalProps {
   isOpen: boolean;
   onClose: () => void;
   lang: Locale;
+  copy: ContactCopy;
 }
-
-const modalText = {
-  ar: { title: 'تم إرسال الرسالة', message: 'تم استلام رسالتك بنجاح! سأرد عليك في أقرب وقت ممكن.', follow: 'في انتظار ذلك، يمكنك متابعتي على:', close: 'إغلاق' },
-  fr: { title: 'Message envoyé', message: 'Votre message a bien été reçu ! Je vous répondrai dans les plus brefs délais.', follow: "En attendant, n'hésitez pas à me suivre sur :", close: 'Fermer' },
-  en: { title: 'Message sent', message: 'Your message was received successfully! I will reply as soon as possible.', follow: 'In the meantime, feel free to follow me on:', close: 'Close' },
-  es: { title: 'Mensaje enviado', message: '¡Tu mensaje se recibió correctamente! Responderé lo antes posible.', follow: 'Mientras tanto, puedes seguirme en:', close: 'Cerrar' },
-} satisfies Record<Locale, { title: string; message: string; follow: string; close: string }>;
 
 const socialLinks = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ihababdelbasset-annaki/' },
@@ -23,8 +18,8 @@ const socialLinks = [
   { label: 'ResearchGate', href: 'https://www.researchgate.net/profile/Ihababdelbasset-Annaki' },
 ];
 
-export default function SuccessModal({ isOpen, onClose, lang }: SuccessModalProps) {
-  const t = modalText[lang];
+export default function SuccessModal({ isOpen, onClose, lang, copy }: SuccessModalProps) {
+  const t = { title: copy.success_title, message: copy.success_message, follow: copy.success_follow, close: copy.success_close };
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';

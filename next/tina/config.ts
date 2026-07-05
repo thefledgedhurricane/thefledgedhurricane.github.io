@@ -99,7 +99,12 @@ export default defineConfig({
             text('desc', undefined, true), text('email_label'), text('location_label'),
             text('location_value'), text('social_title'), text('form_title'),
             text('form_name'), text('form_email'), text('form_subject'),
-            text('form_message'), text('form_submit'),
+            text('form_message'), text('form_submit'), text('form_name_placeholder'),
+            text('form_email_placeholder'), text('form_subject_placeholder'),
+            text('form_message_placeholder'), text('form_sending'), text('form_error', undefined, true),
+            text('form_name_error'), text('form_email_error'), text('form_subject_error'),
+            text('form_message_error'), text('success_title'), text('success_message', undefined, true),
+            text('success_follow'), text('success_close'),
           ]),
           ...['publications', 'projects', 'posts', 'events'].map((name) =>
             section(name, `${name[0].toUpperCase()}${name.slice(1)} page`, [

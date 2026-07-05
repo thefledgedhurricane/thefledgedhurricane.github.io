@@ -78,7 +78,21 @@
     "form_email": "Email",
     "form_subject": "Asunto",
     "form_message": "Tu mensaje",
-    "form_submit": "Enviar"
+    "form_submit": "Enviar",
+    "form_name_placeholder": "Tu nombre completo",
+    "form_email_placeholder": "tu.correo@ejemplo.com",
+    "form_subject_placeholder": "¿De qué te gustaría hablar?",
+    "form_message_placeholder": "Tu mensaje...",
+    "form_sending": "Enviando...",
+    "form_error": "Se produjo un error. Inténtalo de nuevo o contáctame directamente por correo electrónico.",
+    "form_name_error": "El nombre debe tener al menos 2 caracteres",
+    "form_email_error": "Introduce una dirección de correo válida",
+    "form_subject_error": "El asunto debe tener al menos 5 caracteres",
+    "form_message_error": "El mensaje debe tener al menos 10 caracteres",
+    "success_title": "Mensaje enviado",
+    "success_message": "¡Tu mensaje se recibió correctamente! Responderé lo antes posible.",
+    "success_follow": "Mientras tanto, puedes seguirme en:",
+    "success_close": "Cerrar"
   },
   "publications": {
     "meta_title": "Publicaciones | Dr. Ihababdelbasset ANNAKI",

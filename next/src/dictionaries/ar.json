@@ -78,7 +78,21 @@
     "form_email": "البريد الإلكتروني",
     "form_subject": "الموضوع",
     "form_message": "رسالتك",
-    "form_submit": "إرسال"
+    "form_submit": "إرسال",
+    "form_name_placeholder": "اسمك الكامل",
+    "form_email_placeholder": "بريدك الإلكتروني",
+    "form_subject_placeholder": "ما موضوع رسالتك؟",
+    "form_message_placeholder": "اكتب رسالتك...",
+    "form_sending": "جارٍ الإرسال...",
+    "form_error": "حدث خطأ. يرجى المحاولة مجددًا أو التواصل معي مباشرة عبر البريد الإلكتروني.",
+    "form_name_error": "يجب ألا يقل الاسم عن حرفين",
+    "form_email_error": "يرجى إدخال بريد إلكتروني صحيح",
+    "form_subject_error": "يجب ألا يقل الموضوع عن 5 أحرف",
+    "form_message_error": "يجب ألا تقل الرسالة عن 10 أحرف",
+    "success_title": "تم إرسال الرسالة",
+    "success_message": "تم استلام رسالتك بنجاح! سأرد عليك في أقرب وقت ممكن.",
+    "success_follow": "في انتظار ذلك، يمكنك متابعتي على:",
+    "success_close": "إغلاق"
   },
   "publications": {
     "meta_title": "المنشورات | د. إهاب عبد الباسط أنكي",
