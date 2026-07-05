@@ -1,0 +1,44 @@
+{
+  "courseId": "developpement-web",
+  "title": "Développement Web Moderne",
+  "subtitle": "HTML, CSS, JavaScript & React",
+  "description": "Créez des applications web modernes, responsives et performantes en apprenant les technologies du web.",
+  "level": "beginner",
+  "category": "Software Engineering",
+  "icon": "🌐",
+  "color": "mckinsey-teal-500",
+  "estimatedHours": 14,
+  "prerequisites": [
+    "Aucun prérequis. Ce cours démarre de zéro."
+  ],
+  "learningOutcomes": [
+    "Structurer des pages web sémantiques avec HTML5",
+    "Styler des interfaces avec CSS3 et des designs responsives (Flexbox, Grid)",
+    "Créer de l'interactivité dynamique avec JavaScript moderne (ES6+)",
+    "Bâtir des applications à base de composants réutilisables avec React"
+  ],
+  "lessons": [
+    {
+      "id": "introduction-web",
+      "title": "Le Fonctionnement du Web",
+      "description": "Comprendre le protocole HTTP, le modèle Client-Serveur et le rôle des navigateurs.",
+      "estimatedMinutes": 30,
+      "objectives": [
+        "Comprendre le fonctionnement d'Internet",
+        "Distinguer le Frontend du Backend"
+      ],
+      "type": "text",
+      "sections": [
+        {
+          "id": "client-server",
+          "title": "Le Modèle Client-Serveur",
+          "content": "Le Web fonctionne sur un modèle d'échange de messages :\n- **Le Client** (votre navigateur) envoie une requête HTTP.\n- **Le Serveur** (machine hébergeant le site) traite la demande et renvoie une réponse HTTP (généralement du HTML, CSS, JavaScript et des images).\n\n### Les composants fondamentaux :\n- **HTML** : Gère la structure du document.\n- **CSS** : Gère l'apparence et le design.\n- **JS** : Gère l'interactivité dynamique client-side.",
+          "estimatedMinutes": 15,
+          "keyTakeaways": [
+            "Le navigateur interprète le HTML, CSS et JavaScript pour afficher la page."
+          ]
+        }
+      ]
+    }
+  ]
+}

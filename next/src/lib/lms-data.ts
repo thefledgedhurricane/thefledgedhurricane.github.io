@@ -1,4 +1,10 @@
 import pythonCourseData from '../../content/courses/python.json';
+import algorithmiqueCourseData from '../../content/courses/algorithmique.json';
+import developpementWebCourseData from '../../content/courses/developpement-web.json';
+import langageCCourseData from '../../content/courses/langage-c.json';
+import iaApprentissageCourseData from '../../content/courses/ia-apprentissage.json';
+import sqlDatabasesCourseData from '../../content/courses/sql-databases.json';
+import dataEngineeringCourseData from '../../content/courses/data-engineering.json';
 
 export type DemoType = 'interactive' | 'visualization' | 'code-editor' | 'notebook';
 
@@ -66,6 +72,10 @@ export type Lesson = {
     type: 'documentation' | 'article' | 'video' | 'book';
   }[];
   practiceExercises?: PracticeExercise[];
+  type?: 'text' | 'interactive' | 'quiz' | 'video';
+  interactiveCategory?: 'algorithms' | 'dataStructures' | 'graphs' | 'math' | 'all';
+  interactiveId?: string;
+  cheatSheet?: string;
 };
 
 export type Course = {
@@ -74,7 +84,7 @@ export type Course = {
   subtitle: string;
   description: string;
   level: 'beginner' | 'intermediate' | 'advanced';
-  category: 'Programmation' | 'Web' | 'Intelligence Artificielle' | 'Data Science';
+  category: 'Software Engineering' | 'Data Science' | 'Data Engineering';
   icon: string;
   color: string;
   estimatedHours: number;
@@ -93,7 +103,45 @@ export const pythonFundamentalsCourse = {
   id: pythonCourseData.courseId,
 } as Course;
 
-export const courses: Course[] = [pythonFundamentalsCourse];
+export const algorithmiqueCourse = {
+  ...algorithmiqueCourseData,
+  id: algorithmiqueCourseData.courseId,
+} as Course;
+
+export const developpementWebCourse = {
+  ...developpementWebCourseData,
+  id: developpementWebCourseData.courseId,
+} as Course;
+
+export const langageCCourse = {
+  ...langageCCourseData,
+  id: langageCCourseData.courseId,
+} as Course;
+
+export const iaApprentissageCourse = {
+  ...iaApprentissageCourseData,
+  id: iaApprentissageCourseData.courseId,
+} as Course;
+
+export const sqlDatabasesCourse = {
+  ...sqlDatabasesCourseData,
+  id: sqlDatabasesCourseData.courseId,
+} as Course;
+
+export const dataEngineeringCourse = {
+  ...dataEngineeringCourseData,
+  id: dataEngineeringCourseData.courseId,
+} as Course;
+
+export const courses: Course[] = [
+  algorithmiqueCourse,
+  developpementWebCourse,
+  langageCCourse,
+  pythonFundamentalsCourse,
+  iaApprentissageCourse,
+  sqlDatabasesCourse,
+  dataEngineeringCourse,
+];
 
 export function getCourseById(id: string): Course | undefined {
   return courses.find((course) => course.id === id);

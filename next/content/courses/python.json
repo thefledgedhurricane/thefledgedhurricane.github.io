@@ -4,7 +4,7 @@
   "subtitle": "Le langage de référence pour l'intelligence artificielle",
   "description": "Apprenez Python de zéro, des fondamentaux du langage jusqu'à la manipulation de données avec NumPy et Pandas.",
   "level": "intermediate",
-  "category": "Programmation",
+  "category": "Data Science",
   "icon": "🐍",
   "color": "google-blue",
   "estimatedHours": 20,

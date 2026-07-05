@@ -1,0 +1,45 @@
+{
+  "courseId": "ia-apprentissage",
+  "title": "IA & Apprentissage Automatique",
+  "subtitle": "Du Machine Learning aux Réseaux de Neurones",
+  "description": "Comprenez les fondements théoriques et pratiques de l'IA : apprentissage supervisé et non-supervisé, descente de gradient, réduction de dimensionnalité et réseaux de neurones.",
+  "level": "intermediate",
+  "category": "Data Science",
+  "icon": "🧠",
+  "color": "google-blue",
+  "estimatedHours": 18,
+  "prerequisites": [
+    "Algèbre linéaire de base",
+    "Bases de programmation en Python (NumPy recommandé)"
+  ],
+  "learningOutcomes": [
+    "Maîtriser les concepts fondamentaux de l'apprentissage supervisé (régression, classification)",
+    "Comprendre et appliquer l'apprentissage non-supervisé (Clustering, PCA, t-SNE)",
+    "Optimiser des fonctions avec la descente de gradient",
+    "Concevoir et entraîner un réseau de neurones multicouche (MLP)"
+  ],
+  "lessons": [
+    {
+      "id": "introduction-ia",
+      "title": "Fondements de l'IA & Apprentissage Supervisé",
+      "description": "Introduction aux paradigmes d'apprentissage et régression linéaire.",
+      "estimatedMinutes": 45,
+      "objectives": [
+        "Distinguer l'apprentissage supervisé et non-supervisé",
+        "Implémenter une régression linéaire simple"
+      ],
+      "type": "text",
+      "sections": [
+        {
+          "id": "ia-overview",
+          "title": "Introduction à l'Apprentissage Automatique",
+          "content": "L'apprentissage automatique (Machine Learning) consiste à donner aux ordinateurs la capacité d'apprendre à partir de données sans être explicitement programmés.\n\n### Les trois grandes familles :\n1. **Apprentissage Supervisé** : Les données contiennent les étiquettes cibles (ex: prédire le prix d'une maison).\n2. **Apprentissage Non-Supervisé** : Les données ne sont pas étiquetées (ex: regrouper des clients par comportement).\n3. **Apprentissage par Renforcement** : Apprentissage par essais et erreurs avec système de récompenses.",
+          "estimatedMinutes": 20,
+          "keyTakeaways": [
+            "Le choix de l'algorithme dépend de la nature des données et de l'objectif recherché."
+          ]
+        }
+      ]
+    }
+  ]
+}

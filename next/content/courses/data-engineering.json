@@ -1,0 +1,45 @@
+{
+  "courseId": "data-engineering",
+  "title": "Architectures de Données & Pipelines ETL",
+  "subtitle": "Ingénierie des données à grande échelle",
+  "description": "Découvrez le métier de Data Engineer : stockage distribué, architectures Big Data (Data Lake/Data Warehouse) et pipelines de données avec ETL.",
+  "level": "intermediate",
+  "category": "Data Engineering",
+  "icon": "⚡",
+  "color": "mckinsey-teal-600",
+  "estimatedHours": 10,
+  "prerequisites": [
+    "Bases du langage Python",
+    "Notions de requêtes SQL"
+  ],
+  "learningOutcomes": [
+    "Comprendre le cycle de vie de la donnée (Collecte, Stockage, Transformation, Restitution)",
+    "Concevoir des processus ETL (Extract, Transform, Load)",
+    "Distinguer l'architecture d'un Data Lake d'un Data Warehouse",
+    "S'initier aux technologies Big Data distribuées (Spark, Hadoop)"
+  ],
+  "lessons": [
+    {
+      "id": "introduction-data-engineering",
+      "title": "Le Métier de Data Engineer",
+      "description": "Rôle du Data Engineer et fondamentaux du pipeline de données.",
+      "estimatedMinutes": 30,
+      "objectives": [
+        "Comprendre le rôle du Data Engineer",
+        "Connaître les étapes d'un pipeline ETL"
+      ],
+      "type": "text",
+      "sections": [
+        {
+          "id": "de-role",
+          "title": "Data Engineering vs Data Science",
+          "content": "Alors que le **Data Scientist** analyse les données pour en extraire des modèles prédictifs, le **Data Engineer** conçoit, construit et maintient les infrastructures et les pipelines qui rendent ces données accessibles et fiables.\n\n### Les étapes clés de l'ETL :\n1. **Extract** (Extraire) : Récupérer des données de sources hétérogènes (APIs, bases transactionnelles, fichiers).\n2. **Transform** (Transformer) : Nettoyer, filtrer, anonymiser, agréger ou restructurer les données.\n3. **Load** (Charger) : Sauvegarder la donnée propre dans une destination finale (comme un Data Warehouse ou un Data Lake).",
+          "estimatedMinutes": 15,
+          "keyTakeaways": [
+            "Le Data Engineering garantit la qualité, la disponibilité et la performance des flux de données."
+          ]
+        }
+      ]
+    }
+  ]
+}

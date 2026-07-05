@@ -1,0 +1,44 @@
+{
+  "courseId": "sql-databases",
+  "title": "SQL & Bases de données",
+  "subtitle": "Conception et requêtes de données",
+  "description": "Apprenez à concevoir des bases de données relationnelles, à modéliser vos tables et à écrire des requêtes SQL performantes.",
+  "level": "beginner",
+  "category": "Data Engineering",
+  "icon": "🗄️",
+  "color": "google-blue",
+  "estimatedHours": 8,
+  "prerequisites": [
+    "Aucun prérequis"
+  ],
+  "learningOutcomes": [
+    "Modéliser des schémas relationnels (Entité-Association)",
+    "Écrire des requêtes SQL d'extraction (SELECT, JOIN, GROUP BY)",
+    "Distinguer DDL (Data Definition) et DML (Data Manipulation)",
+    "Optimiser les requêtes avec des index"
+  ],
+  "lessons": [
+    {
+      "id": "introduction-sql",
+      "title": "Introduction au modèle relationnel",
+      "description": "Comprendre les tables, les clés primaires et étrangères.",
+      "estimatedMinutes": 30,
+      "objectives": [
+        "Comprendre le rôle d'un SGBD (Système de Gestion de Bases de Données)",
+        "Identifier les clés primaires et les clés étrangères"
+      ],
+      "type": "text",
+      "sections": [
+        {
+          "id": "relational-model",
+          "title": "Le Modèle Relationnel",
+          "content": "Une base de données relationnelle organise les données sous forme de tables bidimensionnelles (lignes et colonnes).\n\n- **Clé Primaire** : Un identifiant unique pour chaque ligne d'une table.\n- **Clé Étrangère** : Un champ qui référence la clé primaire d'une autre table, établissant ainsi une relation entre les données.\n\n### Les SGBDR populaires :\nPostgreSQL, MySQL, SQLite, et Microsoft SQL Server.",
+          "estimatedMinutes": 15,
+          "keyTakeaways": [
+            "L'intégrité référentielle garantit la cohérence des relations entre vos tables."
+          ]
+        }
+      ]
+    }
+  ]
+}

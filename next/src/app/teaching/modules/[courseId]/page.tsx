@@ -86,7 +86,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
     duration: `${lesson.estimatedMinutes} min`,
     details: lesson.description,
     content: compileLessonContent(lesson),
-    type: 'text' as const,
+    type: (lesson.type || 'text') as any,
+    interactiveCategory: lesson.interactiveCategory,
+    interactiveId: lesson.interactiveId,
     exercises: lesson.practiceExercises?.map((exercise, index) => ({
       id: `${lesson.id}-exercise-${index + 1}`,
       title: exercise.title,
@@ -105,7 +107,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
       ),
       explanation: question.explanation,
     })),
-    cheatSheet: lesson.sections
+    cheatSheet: lesson.cheatSheet || lesson.sections
       .flatMap((section) => section.keyTakeaways || [])
       .map((item) => `• ${item}`)
       .join('\n'),

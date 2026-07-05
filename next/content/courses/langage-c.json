@@ -1,0 +1,44 @@
+{
+  "courseId": "langage-c",
+  "title": "Langage C — Programmation Système",
+  "subtitle": "Gestion de la mémoire et bas niveau",
+  "description": "Comprenez le fonctionnement interne des ordinateurs : gestion manuelle de la mémoire, pointeurs, structures et programmation système.",
+  "level": "advanced",
+  "category": "Software Engineering",
+  "icon": "⚙️",
+  "color": "google-blue",
+  "estimatedHours": 12,
+  "prerequisites": [
+    "Logique de programmation basique"
+  ],
+  "learningOutcomes": [
+    "Maîtriser la compilation avec GCC et l'utilisation de Makefiles",
+    "Comprendre et manipuler les pointeurs et adresses mémoire",
+    "Gérer l'allocation dynamique de la mémoire (malloc, free)",
+    "Créer des structures de données complexes personnalisées"
+  ],
+  "lessons": [
+    {
+      "id": "introduction-c",
+      "title": "Introduction au Langage C",
+      "description": "Structure d'un programme C, types de données et processus de compilation.",
+      "estimatedMinutes": 30,
+      "objectives": [
+        "Écrire un premier programme Hello World en C",
+        "Comprendre le rôle du compilateur"
+      ],
+      "type": "text",
+      "sections": [
+        {
+          "id": "c-compilation",
+          "title": "Pourquoi programmer en C ?",
+          "content": "Le C est un langage compilé, impératif et proche de la machine. Il offre des performances maximales et un contrôle total sur le matériel.\n\n### Les étapes de la compilation :\n1. **Préprocesseur** : Traite les directives (comme `#include`).\n2. **Compilation** : Traduit le code source en langage assembleur.\n3. **Assemblage** : Crée le fichier objet (code machine).\n4. **Édition de liens** : Associe les bibliothèques pour créer l'exécutable.",
+          "estimatedMinutes": 15,
+          "keyTakeaways": [
+            "Le C ne dispose pas de ramasse-miettes (garbage collector) : la mémoire doit être gérée manuellement."
+          ]
+        }
+      ]
+    }
+  ]
+}

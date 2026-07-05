@@ -6,133 +6,24 @@ import FadeIn from '@/components/FadeIn';
 import Counter from '@/components/Counter';
 import { ArrowRight, BookOpen, Clock, Code, GraduationCap, Layers, Terminal, Brain, Globe, Cpu } from 'lucide-react';
 
-const courses = [
-  {
-    id: 'ia-1-introduction',
-    icon: Brain,
-    title: "IA — Introduction & Fondements",
-    description: "Découvrez les fondements de l'IA, le Machine Learning, le Deep Learning et les mathématiques essentielles (algèbre, gradients, probabilités).",
-    difficulty: 'débutant',
-    duration: '8h',
-    lessons: 2,
-    href: '/teaching/modules/ia-1-introduction',
-    tags: ['IA', 'ML', 'Mathématiques', 'Fondamentaux'],
-    color: 'from-purple-500 to-indigo-500'
-  },
-  {
-    id: 'ia-2-apprentissage-supervise',
-    icon: Brain,
-    title: "IA — Apprentissage Supervisé",
-    description: "Régression linéaire approfondie, MSE, gradient descent, équation normale, régularisation Ridge/Lasso avec implémentations complètes.",
-    difficulty: 'intermédiaire',
-    duration: '12h',
-    lessons: 1,
-    href: '/teaching/modules/ia-2-apprentissage-supervise',
-    tags: ['Régression', 'Gradient Descent', 'Régularisation'],
-    color: 'from-blue-500 to-purple-500'
-  },
-  {
-    id: 'ia-3-apprentissage-non-supervise',
-    icon: Brain,
-    title: "IA — Apprentissage Non-Supervisé",
-    description: "Clustering K-Means, K-Means++, PCA avec décomposition spectrale, t-SNE et applications réelles avec code from scratch.",
-    difficulty: 'intermédiaire',
-    duration: '14h',
-    lessons: 2,
-    href: '/teaching/modules/ia-3-apprentissage-non-supervise',
-    tags: ['Clustering', 'PCA', 't-SNE', 'Dimensionnalité'],
-    color: 'from-teal-500 to-cyan-500'
-  },
-  {
-    id: 'ia-4-deep-learning-tabular',
-    icon: Brain,
-    title: "IA — Deep Learning (Tabulaire)",
-    description: "Réseaux de neurones MLP, fonctions d'activation, forward pass, universal approximation theorem et loss functions.",
-    difficulty: 'avancé',
-    duration: '16h',
-    lessons: 1,
-    href: '/teaching/modules/ia-4-deep-learning-tabular',
-    tags: ['Neural Networks', 'MLP', 'Activations', 'Forward Pass'],
-    color: 'from-indigo-500 to-purple-500'
-  },
-  {
-    id: 'intelligence-artificielle',
-    icon: Brain,
-    title: "Intelligence Artificielle (Ancien)",
-    description: "Version originale du cours IA (7 leçons). Les nouveaux modules ci-dessus sont plus approfondis.",
-    difficulty: 'intermédiaire',
-    duration: '12h',
-    lessons: 7,
-    href: '/teaching/modules/intelligence-artificielle',
-    tags: ['Machine Learning', 'Deep Learning', 'Neural Networks', 'Python'],
-    color: 'from-gray-500 to-gray-600'
-  },
-  {
-    id: 'programmation-fondamentale',
-    icon: Terminal,
-    title: "Fondamentaux de la Programmation",
-    description: "Apprenez les bases essentielles : logique, variables, structures de contrôle, fonctions et paradigmes de programmation pour bien débuter.",
-    difficulty: 'débutant',
-    duration: '8h',
-    lessons: 10,
-    href: '/teaching/modules/programmation-bases',
-    tags: ['Logique', 'Variables', 'Fonctions', 'POO'],
-    color: 'from-blue-500 to-cyan-500'
-  },
-  {
-    id: 'algorithmique',
-    icon: Layers,
-    title: "Algorithmique & Structures de Données",
-    description: "Maîtrisez les algorithmes de tri, recherche, graphes et les structures de données essentielles avec visualisations interactives.",
-    difficulty: 'intermédiaire',
-    duration: '10h',
-    lessons: 12,
-    href: '/teaching/modules/algorithmique',
-    tags: ['Tri', 'Recherche', 'Graphes', 'Complexité'],
-    color: 'from-emerald-500 to-teal-500'
-  },
-  {
-    id: 'python',
-    icon: Code,
-    title: "Python — De Zéro à Expert",
-    description: "Cours complet Python : syntaxe, structures de données, POO, modules, data science et projets pratiques avec exercices interactifs.",
-    difficulty: 'débutant',
-    duration: '15h',
-    lessons: 14,
-    href: '/teaching/modules/python',
-    tags: ['Python', 'Data Science', 'Automation', 'Web'],
-    color: 'from-yellow-500 to-orange-500'
-  },
-  {
-    id: 'langage-c',
-    icon: Cpu,
-    title: "Langage C — Programmation Système",
-    description: "Apprenez le C : gestion mémoire, pointeurs, structures, fichiers et programmation système pour comprendre le fonctionnement bas niveau.",
-    difficulty: 'intermédiaire',
-    duration: '12h',
-    lessons: 14,
-    href: '/teaching/modules/langage-c',
-    tags: ['Pointeurs', 'Mémoire', 'Système', 'Performance'],
-    color: 'from-red-500 to-pink-500'
-  },
-  {
-    id: 'developpement-web',
-    icon: Globe,
-    title: "Développement Web Moderne",
-    description: "HTML, CSS, JavaScript, React et Next.js : créez des applications web modernes, responsives et performantes.",
-    difficulty: 'débutant',
-    duration: '14h',
-    lessons: 12,
-    href: '/teaching/modules/developpement-web',
-    tags: ['HTML/CSS', 'JavaScript', 'React', 'Next.js'],
-    color: 'from-cyan-500 to-blue-500'
-  }
-];
+import { courses } from '@/lib/lms-data';
+
+const trackColors = {
+  'Software Engineering': 'from-emerald-500 to-teal-500',
+  'Data Science': 'from-blue-500 to-indigo-500',
+  'Data Engineering': 'from-purple-500 to-pink-500'
+} as const;
+
+const difficultyLabels = {
+  beginner: 'débutant',
+  intermediate: 'intermédiaire',
+  advanced: 'avancé'
+} as const;
 
 const stats = [
   { value: courses.length, label: 'Cours complets', icon: BookOpen },
-  { value: courses.reduce((total, course) => total + course.lessons, 0), label: 'Leçons détaillées', icon: Layers },
-  { value: courses.reduce((total, course) => total + Number.parseInt(course.duration, 10), 0), label: 'Heures de contenu', icon: Clock },
+  { value: courses.reduce((total, course) => total + course.lessons.length, 0), label: 'Leçons détaillées', icon: Layers },
+  { value: courses.reduce((total, course) => total + course.estimatedHours, 0), label: 'Heures de contenu', icon: Clock },
   { value: 100, label: '% Accès libre', icon: GraduationCap }
 ];
 
@@ -197,16 +88,16 @@ export default function TeachingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {courses.map((course, idx) => (
               <FadeIn key={course.id} delay={idx * 100}>
-                <Link href={course.href} className="block h-full">
+                <Link href={`/teaching/modules/${course.id}`} className="block h-full">
                   <div className="group h-full bg-white rounded-2xl border border-gray-100 hover:border-mckinsey-teal-200 hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
-                    <div className={`h-2 bg-gradient-to-r ${course.color}`} />
+                    <div className={`h-2 bg-gradient-to-r ${trackColors[course.category]}`} />
                     <div className="p-8 flex flex-col flex-grow">
                       <div className="flex justify-between items-start mb-6">
-                        <div className="p-3 bg-gray-50 rounded-xl group-hover:bg-mckinsey-teal-50 transition-colors">
-                          <course.icon className="w-8 h-8 text-mckinsey-navy-700 group-hover:text-mckinsey-teal-600 transition-colors" />
+                        <div className="p-2.5 bg-gray-50 rounded-xl group-hover:bg-mckinsey-teal-50 transition-colors flex items-center justify-center min-w-[3rem] min-h-[3rem]">
+                          <span className="text-3xl select-none leading-none">{course.icon}</span>
                         </div>
                         <span className="px-3 py-1 bg-gray-50 rounded-full text-xs font-medium text-gray-600 uppercase tracking-wider">
-                          {course.difficulty}
+                          {difficultyLabels[course.level]}
                         </span>
                       </div>
                       
@@ -219,22 +110,23 @@ export default function TeachingPage() {
                       </p>
                       
                       <div className="flex flex-wrap gap-2 mb-6">
-                        {course.tags.map((tag, tIdx) => (
-                          <span key={tIdx} className="px-2 py-1 bg-gray-50 rounded text-xs text-gray-500">
-                            {tag}
-                          </span>
-                        ))}
+                        <span className="px-2 py-1 bg-gray-50 rounded text-xs text-gray-500 font-medium">
+                          {course.category}
+                        </span>
+                        <span className="px-2 py-1 bg-gray-50 rounded text-xs text-gray-500 font-medium">
+                          {difficultyLabels[course.level]}
+                        </span>
                       </div>
                       
                       <div className="flex items-center justify-between pt-6 border-t border-gray-100">
                         <div className="flex items-center gap-4 text-sm text-gray-500">
                           <span className="flex items-center gap-1">
                             <Clock className="w-4 h-4" />
-                            {course.duration}
+                            {course.estimatedHours}h
                           </span>
                           <span className="flex items-center gap-1">
                             <Layers className="w-4 h-4" />
-                            {course.lessons} leçons
+                            {course.lessons.length} leçons
                           </span>
                         </div>
                         <ArrowRight className="w-5 h-5 text-mckinsey-teal-500 transform group-hover:translate-x-1 transition-transform" />

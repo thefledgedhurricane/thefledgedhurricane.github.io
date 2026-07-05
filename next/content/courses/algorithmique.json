@@ -1,0 +1,82 @@
+{
+  "courseId": "algorithmique",
+  "title": "Algorithmique & Structures de Données",
+  "subtitle": "Résolution de problèmes et optimisation",
+  "description": "Maîtrisez les algorithmes de tri, recherche, graphes et les structures de données essentielles avec des visualisations interactives.",
+  "level": "intermediate",
+  "category": "Software Engineering",
+  "icon": "🥞",
+  "color": "mckinsey-teal-600",
+  "estimatedHours": 10,
+  "prerequisites": [
+    "Bases d'un langage de programmation (Python, C, JavaScript)"
+  ],
+  "learningOutcomes": [
+    "Comprendre la complexité algorithmique (Notation Big-O)",
+    "Implémenter et analyser les algorithmes de tri et recherche",
+    "Manipuler des piles, files, listes et arbres",
+    "Résoudre des problèmes complexes en utilisant des structures adaptées"
+  ],
+  "lessons": [
+    {
+      "id": "introduction-algorithmique",
+      "title": "Introduction à l'algorithmique",
+      "description": "Qu'est-ce qu'un algorithme ? Notion de complexité temporelle et spatiale.",
+      "estimatedMinutes": 30,
+      "objectives": [
+        "Définir un algorithme",
+        "Comprendre la notion d'efficacité et la notation Big-O"
+      ],
+      "type": "text",
+      "sections": [
+        {
+          "id": "algo-definition",
+          "title": "Qu'est-ce qu'un algorithme ?",
+          "content": "Un algorithme est une suite d'instructions précises et finies permettant de résoudre un problème donné.\n\n### Caractéristiques d'un bon algorithme :\n- **Finitude** : Il doit s'arrêter après un nombre fini d'étapes.\n- **Précision** : Chaque étape doit être claire et non ambiguë.\n- **Efficacité** : Il doit résoudre le problème en utilisant le moins de ressources possible.",
+          "estimatedMinutes": 15,
+          "keyTakeaways": [
+            "Un algorithme est indépendant du langage de programmation."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "algorithmes-tri",
+      "title": "Algorithmes de Tri",
+      "description": "Tri à bulles, tri par sélection et tri rapide.",
+      "estimatedMinutes": 45,
+      "objectives": [
+        "Comprendre la logique des différents algorithmes de tri",
+        "Visualiser l'exécution des tris en temps réel"
+      ],
+      "type": "interactive",
+      "interactiveCategory": "algorithms",
+      "interactiveId": "sorting-visualizer",
+      "sections": [
+        {
+          "id": "sorting-intro",
+          "title": "Introduction au Tri",
+          "content": "Le tri consiste à organiser une collection d'éléments dans un ordre déterminé (croissant ou décroissant).\n\nDans la démonstration interactive ci-dessous, vous pouvez observer les comparaisons et les échanges en direct.",
+          "estimatedMinutes": 15,
+          "keyTakeaways": [
+            "Les algorithmes de tri simples ont une complexité de O(N²).",
+            "Les algorithmes plus performants (comme le Tri Rapide ou Fusion) tournent en O(N log N)."
+          ]
+        }
+      ],
+      "quiz": [
+        {
+          "id": "tri-q1",
+          "question": "Quelle est la complexité moyenne du Tri Rapide (QuickSort) ?",
+          "options": [
+            { "id": "a", "text": "O(N)" },
+            { "id": "b", "text": "O(N log N)" },
+            { "id": "c", "text": "O(N²)" }
+          ],
+          "correctOptionId": "b",
+          "explanation": "QuickSort divise le tableau en sous-tableaux autour d'un pivot, ce qui donne une performance moyenne de O(N log N)."
+        }
+      ]
+    }
+  ]
+}
