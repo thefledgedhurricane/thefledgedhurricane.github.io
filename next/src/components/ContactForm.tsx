@@ -2,221 +2,132 @@
 
 import { useState } from 'react';
 import { z } from 'zod';
+import type { Locale } from '@/lib/dictionaries';
 import SuccessModal from './SuccessModal';
 
-// Form validation schema
-const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email address'),
-  subject: z.string().min(5, 'Subject must be at least 5 characters'),
-  message: z.string().min(10, 'Message must be at least 10 characters'),
-  honeypot: z.string().max(0, 'Bot detected') // Honeypot field for spam protection
-});
+const uiText = {
+  ar: {
+    namePlaceholder: 'اسمك الكامل', emailPlaceholder: 'بريدك الإلكتروني', subjectPlaceholder: 'ما موضوع رسالتك؟', messagePlaceholder: 'اكتب رسالتك...',
+    sending: 'جارٍ الإرسال...', error: 'حدث خطأ. يرجى المحاولة مجددًا أو التواصل معي مباشرة عبر البريد الإلكتروني.',
+    nameError: 'يجب ألا يقل الاسم عن حرفين', emailError: 'يرجى إدخال بريد إلكتروني صحيح', subjectError: 'يجب ألا يقل الموضوع عن 5 أحرف', messageError: 'يجب ألا تقل الرسالة عن 10 أحرف',
+  },
+  fr: {
+    namePlaceholder: 'Votre nom complet', emailPlaceholder: 'votre.email@exemple.com', subjectPlaceholder: "De quoi s'agit-il ?", messagePlaceholder: 'Votre message...',
+    sending: 'Envoi en cours...', error: 'Une erreur est survenue. Veuillez réessayer ou me contacter directement par email.',
+    nameError: 'Le nom doit contenir au moins 2 caractères', emailError: 'Veuillez saisir une adresse email valide', subjectError: 'Le sujet doit contenir au moins 5 caractères', messageError: 'Le message doit contenir au moins 10 caractères',
+  },
+  en: {
+    namePlaceholder: 'Your full name', emailPlaceholder: 'your.email@example.com', subjectPlaceholder: 'What would you like to discuss?', messagePlaceholder: 'Your message...',
+    sending: 'Sending...', error: 'Something went wrong. Please try again or contact me directly by email.',
+    nameError: 'Name must be at least 2 characters', emailError: 'Please enter a valid email address', subjectError: 'Subject must be at least 5 characters', messageError: 'Message must be at least 10 characters',
+  },
+  es: {
+    namePlaceholder: 'Tu nombre completo', emailPlaceholder: 'tu.correo@ejemplo.com', subjectPlaceholder: '¿De qué te gustaría hablar?', messagePlaceholder: 'Tu mensaje...',
+    sending: 'Enviando...', error: 'Se produjo un error. Inténtalo de nuevo o contáctame directamente por correo electrónico.',
+    nameError: 'El nombre debe tener al menos 2 caracteres', emailError: 'Introduce una dirección de correo válida', subjectError: 'El asunto debe tener al menos 5 caracteres', messageError: 'El mensaje debe tener al menos 10 caracteres',
+  },
+} satisfies Record<Locale, Record<string, string>>;
 
-type ContactFormData = z.infer<typeof contactSchema>;
-
-export default function ContactForm() {
-  const [formData, setFormData] = useState<ContactFormData>({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-    honeypot: ''
+function schemaFor(lang: Locale) {
+  const t = uiText[lang];
+  return z.object({
+    name: z.string().min(2, t.nameError),
+    email: z.string().email(t.emailError),
+    subject: z.string().min(5, t.subjectError),
+    message: z.string().min(10, t.messageError),
+    honeypot: z.string().max(0, 'Bot detected'),
   });
-  const [errors, setErrors] = useState<Partial<ContactFormData>>({});
+}
+
+type ContactFormData = z.infer<ReturnType<typeof schemaFor>>;
+type ContactCopy = { form_name: string; form_email: string; form_subject: string; form_message: string; form_submit: string };
+
+export default function ContactForm({ lang, copy }: { lang: Locale; copy: ContactCopy }) {
+  const t = uiText[lang];
+  const [formData, setFormData] = useState<ContactFormData>({ name: '', email: '', subject: '', message: '', honeypot: '' });
+  const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitError, setSubmitError] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    
-    // Clear error when user starts typing
-    if (errors[name as keyof ContactFormData]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }));
-    }
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({ ...current, [name]: value }));
+    setErrors((current) => ({ ...current, [name]: undefined }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(false);
     setErrors({});
-    setSubmitStatus('idle');
 
     try {
-      // Validate form data
-      const validatedData = contactSchema.parse(formData);
-
-      // Check honeypot (spam protection)
-      if (validatedData.honeypot) {
-        throw new Error('Spam detected');
-      }
-
+      const validated = schemaFor(lang).parse(formData);
       const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
-      
-      // Debug logging
-      console.log('Formspree endpoint:', endpoint);
-      
-      if (!endpoint) {
-        console.error('NEXT_PUBLIC_FORMSPREE_ENDPOINT is not set');
-        throw new Error('Formspree endpoint not configured. Please set NEXT_PUBLIC_FORMSPREE_ENDPOINT in your environment variables.');
-      }
+      if (!endpoint) throw new Error('Form endpoint is not configured');
 
-      // Submit to Formspree
       const response = await fetch(endpoint, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: validatedData.name,
-          email: validatedData.email,
-          subject: validatedData.subject,
-          message: validatedData.message,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: validated.name, email: validated.email, subject: validated.subject, message: validated.message }),
       });
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Formspree error response:', {
-          status: response.status,
-          statusText: response.statusText,
-          errorText: errorText
-        });
-        throw new Error(`Failed to send message: ${response.status} ${response.statusText}`);
-      }
+      if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
 
-      setSubmitStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '', honeypot: '' });
       setShowSuccessModal(true);
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-        honeypot: ''
-      });
     } catch (error) {
-      console.error('Contact form submission error:', error);
       if (error instanceof z.ZodError) {
-        const fieldErrors: Partial<ContactFormData> = {};
-        error.errors.forEach((err) => {
-          if (err.path[0]) {
-            fieldErrors[err.path[0] as keyof ContactFormData] = err.message;
-          }
-        });
+        const fieldErrors: Partial<Record<keyof ContactFormData, string>> = {};
+        for (const issue of error.issues) {
+          const field = issue.path[0] as keyof ContactFormData;
+          if (field) fieldErrors[field] = issue.message;
+        }
         setErrors(fieldErrors);
       } else {
-        setSubmitStatus('error');
+        setSubmitError(true);
       }
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const fields = [
+    { name: 'name', type: 'text', label: copy.form_name, placeholder: t.namePlaceholder },
+    { name: 'email', type: 'email', label: copy.form_email, placeholder: t.emailPlaceholder },
+    { name: 'subject', type: 'text', label: copy.form_subject, placeholder: t.subjectPlaceholder },
+  ] as const;
+
+  const inputClass = 'w-full bg-transparent border-b border-luxury-charcoal-200 dark:border-luxury-charcoal-700 py-3 text-luxury-charcoal-900 dark:text-white focus:border-luxury-gold-500 focus:outline-none transition-colors duration-300 placeholder-luxury-charcoal-300 dark:placeholder-luxury-charcoal-600';
+  const labelClass = 'block text-xs uppercase tracking-widest text-luxury-charcoal-500 dark:text-luxury-charcoal-400 mb-2';
+
   return (
     <div className="w-full">
       <form onSubmit={handleSubmit} method="POST" className="space-y-8">
-        {/* Honeypot field - hidden from users */}
-        <input
-          type="text"
-          name="honeypot"
-          value={formData.honeypot}
-          onChange={handleChange}
-          style={{ display: 'none' }}
-          tabIndex={-1}
-          autoComplete="off"
-        />
+        <input type="text" name="honeypot" value={formData.honeypot} onChange={handleChange} className="hidden" tabIndex={-1} autoComplete="off" />
+
+        {fields.map((field) => (
+          <div className="group" key={field.name}>
+            <label htmlFor={field.name} className={labelClass}>{field.label}</label>
+            <input type={field.type} id={field.name} name={field.name} value={formData[field.name]} onChange={handleChange} className={inputClass} placeholder={field.placeholder} required />
+            {errors[field.name] && <p className="mt-2 text-xs text-red-500">{errors[field.name]}</p>}
+          </div>
+        ))}
 
         <div className="group">
-          <label htmlFor="name" className="block text-xs uppercase tracking-widest text-luxury-charcoal-500 dark:text-luxury-charcoal-400 mb-2">
-            Nom
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full bg-transparent border-b border-luxury-charcoal-200 dark:border-luxury-charcoal-700 py-3 text-luxury-charcoal-900 dark:text-white focus:border-luxury-gold-500 focus:outline-none transition-colors duration-300 placeholder-luxury-charcoal-300 dark:placeholder-luxury-charcoal-600"
-            placeholder="Votre nom complet"
-            required
-          />
-          {errors.name && <p className="mt-2 text-xs text-red-500">{errors.name}</p>}
-        </div>
-
-        <div className="group">
-          <label htmlFor="email" className="block text-xs uppercase tracking-widest text-luxury-charcoal-500 dark:text-luxury-charcoal-400 mb-2">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full bg-transparent border-b border-luxury-charcoal-200 dark:border-luxury-charcoal-700 py-3 text-luxury-charcoal-900 dark:text-white focus:border-luxury-gold-500 focus:outline-none transition-colors duration-300 placeholder-luxury-charcoal-300 dark:placeholder-luxury-charcoal-600"
-            placeholder="votre.email@exemple.com"
-            required
-          />
-          {errors.email && <p className="mt-2 text-xs text-red-500">{errors.email}</p>}
-        </div>
-
-        <div className="group">
-          <label htmlFor="subject" className="block text-xs uppercase tracking-widest text-luxury-charcoal-500 dark:text-luxury-charcoal-400 mb-2">
-            Sujet
-          </label>
-          <input
-            type="text"
-            id="subject"
-            name="subject"
-            value={formData.subject}
-            onChange={handleChange}
-            className="w-full bg-transparent border-b border-luxury-charcoal-200 dark:border-luxury-charcoal-700 py-3 text-luxury-charcoal-900 dark:text-white focus:border-luxury-gold-500 focus:outline-none transition-colors duration-300 placeholder-luxury-charcoal-300 dark:placeholder-luxury-charcoal-600"
-            placeholder="De quoi s'agit-il ?"
-            required
-          />
-          {errors.subject && <p className="mt-2 text-xs text-red-500">{errors.subject}</p>}
-        </div>
-
-        <div className="group">
-          <label htmlFor="message" className="block text-xs uppercase tracking-widest text-luxury-charcoal-500 dark:text-luxury-charcoal-400 mb-2">
-            Message
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows={4}
-            value={formData.message}
-            onChange={handleChange}
-            className="w-full bg-transparent border-b border-luxury-charcoal-200 dark:border-luxury-charcoal-700 py-3 text-luxury-charcoal-900 dark:text-white focus:border-luxury-gold-500 focus:outline-none transition-colors duration-300 placeholder-luxury-charcoal-300 dark:placeholder-luxury-charcoal-600 resize-none"
-            placeholder="Votre message..."
-            required
-          />
+          <label htmlFor="message" className={labelClass}>{copy.form_message}</label>
+          <textarea id="message" name="message" rows={4} value={formData.message} onChange={handleChange} className={`${inputClass} resize-none`} placeholder={t.messagePlaceholder} required />
           {errors.message && <p className="mt-2 text-xs text-red-500">{errors.message}</p>}
         </div>
 
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full py-4 bg-luxury-charcoal-900 dark:bg-white text-white dark:text-luxury-charcoal-900 text-sm uppercase tracking-widest hover:bg-luxury-gold-600 dark:hover:bg-luxury-gold-500 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'}
+        <button type="submit" disabled={isSubmitting} className="w-full py-4 bg-luxury-charcoal-900 dark:bg-white text-white dark:text-luxury-charcoal-900 text-sm uppercase tracking-widest hover:bg-luxury-gold-600 dark:hover:bg-luxury-gold-500 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+          {isSubmitting ? t.sending : copy.form_submit}
         </button>
 
-        {submitStatus === 'error' && (
-          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
-            <p className="text-red-800 dark:text-red-200 text-sm text-center">
-              Une erreur est survenue. Veuillez réessayer ou me contacter directement par email.
-            </p>
-          </div>
-        )}
+        {submitError && <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800"><p className="text-red-800 dark:text-red-200 text-sm text-center">{t.error}</p></div>}
       </form>
-      
-      <SuccessModal
-        isOpen={showSuccessModal}
-        onClose={() => setShowSuccessModal(false)}
-      />
-     </div>
-   );
- }
+
+      <SuccessModal lang={lang} isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} />
+    </div>
+  );
+}

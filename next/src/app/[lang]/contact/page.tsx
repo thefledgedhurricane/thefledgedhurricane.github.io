@@ -85,7 +85,7 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
               <div className="absolute top-0 right-0 w-32 h-32 bg-mckinsey-teal-50 rounded-bl-full -mr-16 -mt-16 opacity-50" />
               <div className="relative z-10">
                 <h3 className="text-2xl font-light text-mckinsey-navy-900 mb-8">{c.form_title}</h3>
-                <ContactForm />
+                <ContactForm lang={locale} copy={c} />
               </div>
             </div>
           </FadeIn>

@@ -104,6 +104,10 @@ export default function Header({ lang }: HeaderProps) {
     return pathname.replace(`/${lang}`, `/${newLang}`) || `/${newLang}`;
   }
 
+  function rememberLanguage(newLang: Locale) {
+    window.localStorage.setItem('preferred-locale', newLang);
+  }
+
   return (
     <>
       <header
@@ -221,7 +225,10 @@ export default function Header({ lang }: HeaderProps) {
                     <Link
                       key={l}
                       href={switchLang(l)}
-                      onClick={() => setLangMenuOpen(false)}
+                      onClick={() => {
+                        rememberLanguage(l);
+                        setLangMenuOpen(false);
+                      }}
                       className={`
                         flex items-center justify-between px-4 py-2.5 text-sm transition-colors
                         ${l === lang
@@ -377,7 +384,10 @@ export default function Header({ lang }: HeaderProps) {
               <Link
                 key={l}
                 href={switchLang(l)}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => {
+                  rememberLanguage(l);
+                  setMobileMenuOpen(false);
+                }}
                 className={`
                   px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
                   ${l === lang
