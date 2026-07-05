@@ -5,20 +5,21 @@ import ContactForm from '@/components/ContactForm';
 import FadeIn from '@/components/FadeIn';
 import { getDictionary, locales, type Locale } from '@/lib/dictionaries';
 
-export async function generateStaticParams() {
-  return locales.map((lang) => ({ lang }));
-}
 
-export async function generateMetadata({ params }: { params: { lang: Locale } }): Promise<Metadata> {
-  const dict = await getDictionary(params.lang) as any;
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = lang as Locale;
+  const dict = await getDictionary(locale) as any;
   return {
     title: dict.contact?.meta_title || 'Contact',
     description: dict.contact?.meta_desc || '',
   };
 }
 
-export default async function ContactPage({ params }: { params: { lang: Locale } }) {
-  const dict = await getDictionary(params.lang) as any;
+export default async function ContactPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const locale = lang as Locale;
+  const dict = await getDictionary(locale) as any;
   const c = dict.contact;
 
   return (

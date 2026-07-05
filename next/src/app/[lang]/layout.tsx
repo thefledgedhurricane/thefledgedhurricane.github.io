@@ -48,15 +48,16 @@ export const metadata: Metadata = {
   ),
 };
 
-export default function LangLayout({
+export default async function LangLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: Locale };
+  params: Promise<{ lang: string }>;
 }) {
-  const { lang } = params;
-  const dir = isRTL(lang) ? 'rtl' : 'ltr';
+  const { lang } = await params;
+  const locale = lang as Locale;
+  const dir = isRTL(locale) ? 'rtl' : 'ltr';
 
   return (
     <html
@@ -81,9 +82,9 @@ export default function LangLayout({
           dir === 'rtl' ? 'font-arabic' : ''
         }`}
       >
-        <Header lang={lang} />
+        <Header lang={locale} />
         {children}
-        <Footer lang={lang} />
+        <Footer lang={locale} />
       </body>
     </html>
   );

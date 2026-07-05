@@ -2,9 +2,6 @@ import { Metadata } from 'next';
 import { locales, type Locale } from '@/lib/dictionaries';
 import ShowcaseClient from './ShowcaseClient';
 
-export async function generateStaticParams() {
-  return locales.map((lang) => ({ lang }));
-}
 
 const showcaseText = {
   ar: {
@@ -25,16 +22,18 @@ const showcaseText = {
   }
 };
 
-export async function generateMetadata({ params }: { params: { lang: Locale } }): Promise<Metadata> {
-  const t = showcaseText[params.lang] || showcaseText.en;
+export async function generateMetadata({ params }: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const t = showcaseText[lang] || showcaseText.en;
   return {
     title: t.title,
     description: t.desc,
   };
 }
 
-export default async function ShowcasePage({ params }: { params: { lang: Locale } }) {
-  const t = showcaseText[params.lang] || showcaseText.en;
+export default async function ShowcasePage({ params }: { params: Promise<{ lang: Locale }> }) {
+  const { lang } = await params;
+  const t = showcaseText[lang] || showcaseText.en;
 
   return (
     <div className="flex-1 min-h-screen bg-white pt-24">
@@ -46,7 +45,7 @@ export default async function ShowcasePage({ params }: { params: { lang: Locale 
       </section>
 
       <div className="border-t border-gray-100">
-        <ShowcaseClient lang={params.lang} />
+        <ShowcaseClient lang={lang} />
       </div>
     </div>
   );

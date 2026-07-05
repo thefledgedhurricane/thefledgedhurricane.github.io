@@ -2,6 +2,7 @@
 const nextConfig = {
   output: 'export',
   trailingSlash: true,
+  transpilePackages: ['react-markdown', 'vfile', 'unified', 'remark-parse', 'remark-rehype', 'mdast-util-from-markdown', 'mdast-util-to-hast', 'micromark', 'hast-util-to-html'],
   images: {
     unoptimized: true,
     remotePatterns: [

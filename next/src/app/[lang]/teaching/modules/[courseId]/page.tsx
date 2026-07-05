@@ -1,13 +1,12 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import CourseOverview from '@/components/lms/CourseOverview';
+import CoursePageClient from './CoursePageClient';
 import { courses, getCourseById, type Lesson, type LessonSection } from '@/lib/lms-data';
-import { locales, type Locale } from '@/lib/dictionaries';
 
 export const dynamicParams = false;
 
 type CoursePageProps = {
-  params: Promise<{ lang: Locale; courseId: string }>;
+  params: Promise<{ lang: string; courseId: string }>;
 };
 
 const levelLabels = {
@@ -60,12 +59,9 @@ function compileLessonContent(lesson: Lesson): string {
 }
 
 export function generateStaticParams() {
-  return locales.flatMap((lang) =>
-    courses.map((course) => ({
-      lang,
-      courseId: course.id,
-    }))
-  );
+  return courses.map((course) => ({
+    courseId: course.id,
+  }));
 }
 
 export async function generateMetadata({ params }: CoursePageProps): Promise<Metadata> {
@@ -121,7 +117,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
   }));
 
   return (
-    <CourseOverview
+    <CoursePageClient
       courseId={course.id}
       title={course.title}
       description={course.description}

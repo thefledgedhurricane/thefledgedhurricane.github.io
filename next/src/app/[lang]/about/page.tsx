@@ -7,12 +7,11 @@ import Counter from '@/components/Counter';
 import { logos } from '@/components/about-logos';
 import { getDictionary, locales, type Locale } from '@/lib/dictionaries';
 
-export async function generateStaticParams() {
-  return locales.map((lang) => ({ lang }));
-}
 
-export async function generateMetadata({ params }: { params: { lang: Locale } }): Promise<Metadata> {
-  const dict = await getDictionary(params.lang) as any;
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = lang as Locale;
+  const dict = await getDictionary(locale) as any;
   return {
     title: dict.about?.meta_title || 'About',
     description: dict.about?.meta_desc || '',
@@ -42,10 +41,11 @@ const education: Education[] = [
   { id: 'cpge', institution: 'CPGE', degree: 'Preparatory Classes', field: 'Mathematics and Physics', duration: 'Sep 2012 - Jul 2014', description: 'Intensive training in mathematics and physics preparing for engineering school entrance exams.', skills: ['Mathematics', 'Physics', 'Analytical Thinking'] },
 ];
 
-export default async function AboutPage({ params }: { params: { lang: Locale } }) {
-  const dict = await getDictionary(params.lang) as any;
+export default async function AboutPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const locale = lang as Locale;
+  const dict = await getDictionary(locale) as any;
   const a = dict.about;
-  const lang = params.lang;
 
   return (
     <main className="bg-white selection:bg-mckinsey-teal-100 selection:text-mckinsey-navy-900">

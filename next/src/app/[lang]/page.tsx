@@ -7,26 +7,26 @@ import Counter from '@/components/Counter';
 import MagneticButton from '@/components/MagneticButton';
 import { getDictionary, locales, type Locale } from '@/lib/dictionaries';
 
-export async function generateStaticParams() {
-  return locales.map((lang) => ({ lang }));
-}
 
 export async function generateMetadata({
   params,
 }: {
-  params: { lang: Locale };
+  params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
-  const dict = await getDictionary(params.lang) as any;
+  const { lang } = await params;
+  const locale = lang as Locale;
+  const dict = await getDictionary(locale) as any;
   return {
     title: dict.home?.meta_title || 'Dr. Ihababdelbasset ANNAKI',
     description: dict.home?.meta_desc || '',
   };
 }
 
-export default async function HomePage({ params }: { params: { lang: Locale } }) {
-  const dict = await getDictionary(params.lang) as any;
+export default async function HomePage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const locale = lang as Locale;
+  const dict = await getDictionary(locale) as any;
   const h = dict.home;
-  const lang = params.lang;
 
   return (
     <main className="min-h-screen bg-white selection:bg-mckinsey-teal-100 selection:text-mckinsey-navy-900">
