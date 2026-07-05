@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="200" viewBox="0 0 640 200" role="img"><title>K-Fold CV</title><rect width="640" height="200" fill="#f8fafc"/><g>
+<rect x="40" y="60" width="100" height="30" fill="#93c5fd"/><rect x="150" y="60" width="100" height="30" fill="#d1fae5"/><rect x="260" y="60" width="100" height="30" fill="#d1fae5"/><rect x="370" y="60" width="100" height="30" fill="#d1fae5"/><rect x="480" y="60" width="100" height="30" fill="#d1fae5"/>
+</g>
+<g>
+<rect x="40" y="110" width="100" height="30" fill="#d1fae5"/><rect x="150" y="110" width="100" height="30" fill="#93c5fd"/><rect x="260" y="110" width="100" height="30" fill="#d1fae5"/><rect x="370" y="110" width="100" height="30" fill="#d1fae5"/><rect x="480" y="110" width="100" height="30" fill="#d1fae5"/>
+</g>
+<text x="60" y="50" font-size="12">Fold 1 (validation)</text>
+<text x="170" y="50" font-size="12">Fold 2</text>
+<text x="280" y="50" font-size="12">Fold 3</text>
+<text x="390" y="50" font-size="12">Fold 4</text>
+<text x="500" y="50" font-size="12">Fold 5</text>
+</svg>

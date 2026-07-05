@@ -1,0 +1,8 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /*.txt$
+
+Sitemap: https://thefledgedhurricane.github.io/sitemap.xml

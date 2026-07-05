@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[5618,["921","static/chunks/app/%5Blang%5D/showcase/page-2bb46507efcb5e2b.js"],"default"]
+3:I[1838,[],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex-1 min-h-screen bg-white pt-24","children":[["$","section",null,{"className":"mx-auto max-w-7xl px-6 lg:px-8 py-12","children":[["$","h1",null,{"className":"text-3xl sm:text-4xl font-normal tracking-tight mb-3 text-mckinsey-navy-900","children":"الغرفة الصفية الغامرة (واقع افتراضي)"}],["$","p",null,{"className":"text-gray-600 dark:text-gray-400 max-w-2xl","children":"ادخل إلى صف ثلاثي الأبعاد/واقع افتراضي: اضبط الإضاءة، غير لون الجدران وتنقّل بالانتقال الآني."}]]}],["$","div",null,{"className":"border-t border-gray-100","children":["$","$L2",null,{"lang":"ar"}]}]]}],null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"qqajZKenhDh9c9MQ24Pkc"}
+5:null
