@@ -1,0 +1,20 @@
+{
+  "locale": "fr",
+  "translationKey": "icoa-2022",
+  "eventId": "icoa-2022",
+  "title": "ICOA 2022 - Optimization and Applications",
+  "description": "Conférence sur les algorithmes d'optimisation et applications. Discussion sur l'utilisation de DBSCAN pour l'analyse de navigation spatiale.",
+  "startsAt": "2022-04-20T00:00:00.000Z",
+  "endsAt": "2022-04-21T23:59:59.000Z",
+  "location": "Oujda, Maroc",
+  "eventType": "Conférence",
+  "organizer": "Université Mohammed Premier",
+  "isVirtual": false,
+  "featured": true,
+  "details": [
+    "Présentation: \"Computational Analysis Using DBSCAN\"",
+    "Session spéciale sur l'IA en neuropsychologie",
+    "Networking avec chercheurs internationaux",
+    "Prix de la meilleure présentation étudiante"
+  ]
+}

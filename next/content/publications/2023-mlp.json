@@ -1,0 +1,30 @@
+{
+  "locale": "en",
+  "translationKey": "2023-mlp",
+  "publicationId": "2023-mlp",
+  "title": "Evaluating the Efficiency of Multilayer Perceptron Neural Network Architecture in Classifying Cognitive Impairments Related to Human Bipedal Spatial Navigation",
+  "authors": [
+    "Annaki I.",
+    "Rahmoune M.",
+    "Bourhaleb M.",
+    "Zaoui M.",
+    "Castilla A.",
+    "Berthoz A.",
+    "Cohen B."
+  ],
+  "venue": "Lecture Notes in Networks and Systems, Vol. 668",
+  "year": "2023",
+  "abstract": "In this study, We evaluated the efficiency of Multilayer perceptron for classification tasks related to cognitive impairments assessed in a virtual reality environment and on spatial data, \"The VR Magic carpet\". We used multilayer perceptron (MLP) architectures to benefit from using layers for feature extraction on velocity time series and solve our classification problem. The experimental results of the model in this study provide an enhancement because it can distinguish with more accuracy between healthy individuals and patients.",
+  "doi": "10.1007/978-3-031-29857-8_6",
+  "url": "https://www.scopus.com/inward/record.uri?eid=2-s2.0-85161400308&doi=10.1007%2f978-3-031-29857-8_6&partnerID=40",
+  "tags": [
+    "Artificial Intelligence",
+    "Cognitive Impairments",
+    "Deep-Learning",
+    "Multilayer perceptron",
+    "Neuropsychological assessments",
+    "Virtual Reality"
+  ],
+  "citedBy": 0,
+  "publicationType": "Conference paper"
+}

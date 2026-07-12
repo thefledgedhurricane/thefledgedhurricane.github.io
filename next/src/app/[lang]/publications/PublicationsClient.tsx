@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-interface Publication {
+export interface Publication {
   id: string;
   title: string;
   authors: string;
@@ -16,144 +16,12 @@ interface Publication {
   link: string;
 }
 
-const publications: Publication[] = [
-  {
-    id: '2025-ant-colony',
-    title: 'Computational Analysis of Human Locomotor Patterns in Virtual Carpet Paradigm™ Using Ant Colony Algorithm',
-    authors: 'Annaki I.; Rahmoune M.',
-    year: '2025',
-    journal: 'Lecture Notes in Networks and Systems, Vol. 1397',
-    doi: '10.1007/978-3-031-90921-4_40',
-    citedBy: 0,
-    type: 'Conference paper',
-    abstract: 'In this paper, we study human locomotor patterns using the Virtual Carpet Paradigm™, a neuropsychological assessment in virtual reality. This setup captures participants\' movements as raw spatial data, which we analyze using kinematic methods. By applying the Ant Colony Optimization algorithm, we identify 3 distinct clusters of navigation behaviors. The algorithm distinguishes between individuals with cognitive spatial impairments and healthy participants. These findings highlight key behavioral differences and support earlier research.',
-    keywords: ['Ant colony optimization', 'Cognitive impairments', 'Kinematic analysis', 'Spatial memory assessment', 'Virtual reality navigation'],
-    link: 'https://www.scopus.com/inward/record.uri?eid=2-s2.0-105007526886&doi=10.1007%2f978-3-031-90921-4_40&partnerID=40'
-  },
-  {
-    id: '2024-data-augmentation',
-    title: 'Overview of Data Augmentation Techniques in Time Series Analysis',
-    authors: 'Annaki I.; Rahmoune M.; Bourhaleb M.',
-    year: '2024',
-    journal: 'International Journal of Advanced Computer Science and Applications, Vol. 15(1)',
-    doi: '10.14569/IJACSA.2024.01501118',
-    citedBy: 7,
-    type: 'Article',
-    abstract: 'Time series data analysis is vital in numerous fields, driven by advancements in deep learning and machine learning. This paper presents a comprehensive overview of data augmentation techniques in time series analysis, with a specific focus on their applications within deep learning and machine learning. We commence with a systematic methodology for literature selection, curating 757 articles from prominent databases. Subsequent sections delve into various data augmentation techniques, encompassing traditional approaches like interpolation and advanced methods like Synthetic Data Generation, Generative Adversarial Networks (GANs), and Variational Autoencoders (VAEs).',
-    keywords: ['data augmentation', 'deep learning', 'machine learning', 'synthetic data generation', 'Time series'],
-    link: 'https://www.scopus.com/inward/record.uri?eid=2-s2.0-85184990793&doi=10.14569%2fIJACSA.2024.01501118&partnerID=40'
-  },
-  {
-    id: '2023-joint-unsupervised',
-    title: 'Joint Unsupervised Deep Temporal Clustering for Modeling Human Behavior in Vestibular Dysfunction: A Study of Navigation Pattern',
-    authors: 'Annaki I.; Rahmoune M.; Bourhaleb M.; Rahmoun N.; Zaoui M.; Castilla A.; Berthoz A.; Cohen B.',
-    year: '2023',
-    journal: 'Lecture Notes in Networks and Systems, Vol. 669',
-    doi: '10.1007/978-3-031-29860-8_96',
-    citedBy: 0,
-    type: 'Conference paper',
-    abstract: 'Human behavior modeling aims to extract and understand patterns of behavior in one\'s daily life. Our proposed method utilizes deep time series clustering architectures, in which we employ auto-encoders to extract features and then cluster our data using unsupervised machine learning techniques. This approach will provide us with initial insights into human navigation patterns and meaningful clustering. Our developed framework combines unsupervised learning with a dataset obtained from a neuropsychological evaluation in a virtual reality setting called "The VR Magic Carpet".',
-    keywords: ['Artificial Intelligence', 'Cognitive Impairments', 'Deep time-series clustering', 'Deep-Learning', 'Neuropsychological assessments', 'Virtual Reality'],
-    link: 'https://www.scopus.com/inward/record.uri?eid=2-s2.0-85161441625&doi=10.1007%2f978-3-031-29860-8_96&partnerID=40'
-  },
-  {
-    id: '2023-spatiotemporal',
-    title: 'Spatiotemporal Clustering of Human Locomotion Neuropsychological Assessment in Virtual Reality Using Multi-step Model',
-    authors: 'Annaki I.; Rahmoune M.; Bourhaleb M.; Zaoui M.; Castilla A.; Berthoz A.; Cohen B.',
-    year: '2023',
-    journal: 'Lecture Notes in Networks and Systems, Vol. 669',
-    doi: '10.1007/978-3-031-29860-8_98',
-    citedBy: 0,
-    type: 'Conference paper',
-    abstract: 'In this study, We implemented a spatiotemporal clustering approach to analyze the outcome of a virtual reality human navigation neuropsychological assessment (the VR Magic Carpet). Our main objective was to establish a clustering of participants using a deep multi-step clustering model on velocity signals extracted during clinical trials. We used a multi-step neural network architecture to analyze the feature extraction and the clustering stage separately. This method enabled us to comprehend, to a certain extent, the clustering results.',
-    keywords: ['Artificial Intelligence', 'Cognitive Impairments', 'Deep time-series clustering', 'Deep-Learning', 'Neuropsychological assessments', 'Virtual Reality'],
-    link: 'https://www.scopus.com/inward/record.uri?eid=2-s2.0-85161421059&doi=10.1007%2f978-3-031-29860-8_98&partnerID=40'
-  },
-  {
-    id: '2023-kmeans',
-    title: 'Computational Analysis of Human Navigation Trajectories in the VR Magic Carpet ™ Using K-Means',
-    authors: 'Annaki I.; Rahmoune M.; Bourhaleb M.',
-    year: '2023',
-    journal: 'Lecture Notes in Electrical Engineering, Vol. 954',
-    doi: '10.1007/978-981-19-6223-3_9',
-    citedBy: 1,
-    type: 'Conference paper',
-    abstract: 'In this research, we use unsupervised machine learning clustering techniques, notably K-means, to explore human navigation using the VR Magic Carpet. This is a variant of the Corsi Block Tapping task (CBT) that was carried out within the experimental framework of virtual reality. Our previous research found three distinct groups. However, the classification remained unclear. Based on this premise, we used K-means to distinguish patients\' navigation behavior from that of healthy people, highlighting the most significant differences.',
-    keywords: ['Artificial intelligence', 'Cognitive impairments', 'Machine learning', 'Neuropsychological assessments', 'Virtual reality'],
-    link: 'https://www.scopus.com/inward/record.uri?eid=2-s2.0-85159466173&doi=10.1007%2f978-981-19-6223-3_9&partnerID=40'
-  },
-  {
-    id: '2023-mlp',
-    title: 'Evaluating the Efficiency of Multilayer Perceptron Neural Network Architecture in Classifying Cognitive Impairments Related to Human Bipedal Spatial Navigation',
-    authors: 'Annaki I.; Rahmoune M.; Bourhaleb M.; Zaoui M.; Castilla A.; Berthoz A.; Cohen B.',
-    year: '2023',
-    journal: 'Lecture Notes in Networks and Systems, Vol. 668',
-    doi: '10.1007/978-3-031-29857-8_6',
-    citedBy: 0,
-    type: 'Conference paper',
-    abstract: 'In this study, We evaluated the efficiency of Multilayer perceptron for classification tasks related to cognitive impairments assessed in a virtual reality environment and on spatial data, "The VR Magic carpet". We used multilayer perceptron (MLP) architectures to benefit from using layers for feature extraction on velocity time series and solve our classification problem. The experimental results of the model in this study provide an enhancement because it can distinguish with more accuracy between healthy individuals and patients.',
-    keywords: ['Artificial Intelligence', 'Cognitive Impairments', 'Deep-Learning', 'Multilayer perceptron', 'Neuropsychological assessments', 'Virtual Reality'],
-    link: 'https://www.scopus.com/inward/record.uri?eid=2-s2.0-85161400308&doi=10.1007%2f978-3-031-29857-8_6&partnerID=40'
-  },
-  {
-    id: '2023-residual',
-    title: 'Residual Neural Network Architecture for Identifying Vestibular Disease Based on Head Kinematic Characteristics (Velocity)',
-    authors: 'Annaki I.; Rahmoune M.; Bourhaleb M.; Zaoui M.; Castilla A.; Berthoz A.; Cohen B.',
-    year: '2023',
-    journal: 'Lecture Notes in Networks and Systems, Vol. 669',
-    doi: '10.1007/978-3-031-29860-8_94',
-    citedBy: 0,
-    type: 'Conference paper',
-    abstract: 'In this paper, we assess human navigation in a virtual reality neuropsychological test named the VR magic carpet. We used residual neural network topologies, with layers used for feature extraction and classification, to establish an identification model for vestibular dysfunction. The experimental results of the model in this study demonstrate an improvement since they more accurately distinguish between healthy and patients.',
-    keywords: ['Artificial Intelligence', 'Cognitive Impairments', 'Deep-Learning', 'Neuropsychological assessments', 'Residual neural network', 'Virtual Reality'],
-    link: 'https://www.scopus.com/inward/record.uri?eid=2-s2.0-85161427925&doi=10.1007%2f978-3-031-29860-8_94&partnerID=40'
-  },
-  {
-    id: '2022-clustering',
-    title: 'Clustering analysis of human navigation trajectories in a visuospatial memory locomotor task using K-Means and hierarchical agglomerative clustering',
-    authors: 'Annaki I.; Rahmoune M.; Bourhaleb M.; Berrich J.; Zaoui M.; Castilla A.; Berthoz A.; Cohen B.',
-    year: '2022',
-    journal: 'E3S Web of Conferences, Vol. 351',
-    doi: '10.1051/e3sconf/202235101042',
-    citedBy: 31,
-    type: 'Conference paper',
-    abstract: 'Throughout this study, we employed unsupervised machine learning clustering algorithms, namely K-Means and hierarchical agglomerative clustering (HAC), to explore human locomotion and wayfinding using a VR Magic Carpet (VMC), a table test version known as the Corsi Block Tapping task (CBT). The participants were required to memorize a sequence of target positions projected on the rug and walk to each target figuring in the displayed sequence. We utilized K-Means and HAC to distinguish the navigation behavior of patients from normal individuals.',
-    keywords: ['Machine Learning', 'Clustering', 'Virtual Reality', 'Navigation', 'Cognitive Assessment'],
-    link: 'https://www.scopus.com/inward/record.uri?eid=2-s2.0-85144673002&doi=10.1051%2fe3sconf%2f202235101042&partnerID=40'
-  },
-  {
-    id: '2022-dbscan',
-    title: 'Computational Analysis of Human Navigation in a VR Spatial Memory Locomotor Assessment Using Density-Based Clustering Algorithm of Applications with Noise DBSCAN',
-    authors: 'Annaki I.; Rahmoune M.; Bourhaleb M.; Rahmoun N.; Zaoui M.; Castilla A.; Berthoz A.; Cohen B.',
-    year: '2022',
-    journal: 'Lecture Notes in Networks and Systems, Vol. 455',
-    doi: '10.1007/978-3-031-02447-4_20',
-    citedBy: 10,
-    type: 'Conference paper',
-    abstract: 'In this study, we explore human navigation as evaluated by the VR Magic Carpet TM (VMC), a variation of the Corsi Block Tapping task (CBT), employing Density-based spatial clustering of applications with noise (DBSCAN). We utilized DBSCAN to compare patients\' navigation behavior to healthy individuals, highlighting the most notable differences and assessing our existing classifiers. Our research aims to produce insights that may help clinicians and neuroscientists adopt machine learning, especially clustering algorithms, to identify cognitive impairments.',
-    keywords: ['Artificial intelligence', 'Cognitive impairments', 'DBSCAN', 'Human navigation', 'Machine-learning', 'Neuropsychological assessments', 'Virtual reality'],
-    link: 'https://www.scopus.com/inward/record.uri?eid=2-s2.0-85130378102&doi=10.1007%2f978-3-031-02447-4_20&partnerID=40'
-  },
-  {
-    id: '2021-computational',
-    title: 'Computational Analysis of Human Navigation Trajectories in a Spatial Memory Locomotor Task',
-    authors: 'Annaki I.; Rahmoune M.; Bourhaleb M.; Berrich J.; Zaoui M.; Ferro A.C.; Berthoz A.',
-    year: '2021',
-    journal: 'Lecture Notes in Networks and Systems, Vol. 211',
-    doi: '10.1007/978-3-030-73882-2_22',
-    citedBy: 9,
-    type: 'Conference paper',
-    abstract: 'In this paper, we use computational tools to explore human navigation through an example of a visuomotor spatial memory locomotor task, the Walking Corsi task (WCT) variant from a well-known table test known as the Corsi Block Tapping task (CBT). This variant was performed using the "Virtual Carpet" ™ experimental setup. Generic tools that computational data analytics provides and through computer simulations by replicating visually this data allowed categorization of the different features of the behavior of the subjects providing a new powerful tool for both normal and pathological behavior characterization.',
-    keywords: ['Artificial intelligence', 'Computer simulation', 'Corsi block tapping test', 'Data analytics', 'Human navigation', 'Virtual reality'],
-    link: 'https://www.scopus.com/inward/record.uri?eid=2-s2.0-85111265202&doi=10.1007%2f978-3-030-73882-2_22&partnerID=40'
-  }
-];
-
 interface PublicationsClientProps {
-  dict: any;
+  dict: { publications?: Record<string, string> };
+  publications: Publication[];
 }
 
-export default function PublicationsClient({ dict }: PublicationsClientProps) {
+export default function PublicationsClient({ dict, publications }: PublicationsClientProps) {
   const p = dict.publications || {};
   
   const [selectedPublication, setSelectedPublication] = useState<Publication | null>(null);
@@ -296,7 +164,7 @@ export default function PublicationsClient({ dict }: PublicationsClientProps) {
                 {years.length - 1}
               </div>
               <div className="text-xs tracking-normal text-mckinsey-teal-500">
-                {p.years_stat || 'Années'}
+                {p.years_stat || 'AnnÃ©es'}
               </div>
             </div>
           </div>
@@ -389,3 +257,5 @@ export default function PublicationsClient({ dict }: PublicationsClientProps) {
     </div>
   );
 }
+
+

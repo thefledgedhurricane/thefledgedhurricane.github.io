@@ -19,6 +19,16 @@ export interface PostContent {
   body: string;
 }
 
+export interface EventContent {
+  locale: Locale; translationKey: string; eventId: string; title: string;
+  description: string; startsAt: string; endsAt?: string; location: string;
+  eventType: string; organizer: string; isVirtual: boolean; featured: boolean; details: string[];
+}
+export interface PublicationContent {
+  publicationId: string; title: string; authors: string[]; venue: string; year: string;
+  abstract: string; doi: string; url: string; tags: string[]; citedBy: number; publicationType: string;
+}
+
 const contentRoot = path.join(process.cwd(), 'content');
 
 function scalar(value: string): string | boolean | number | string[] {
@@ -69,4 +79,19 @@ export function getPosts(locale: Locale): PostContent[] {
 
 export function getPost(locale: Locale, slug: string) {
   return getPosts(locale).find((post) => post.slug === slug);
+}
+
+export function getEvents(locale: Locale): EventContent[] {
+  const directory = path.join(contentRoot, 'events', locale);
+  if (!fs.existsSync(directory)) return [];
+  return fs.readdirSync(directory).filter((file) => file.endsWith('.json')).map((file) =>
+    JSON.parse(fs.readFileSync(path.join(directory, file), 'utf8')) as EventContent
+  ).sort((a, b) => Date.parse(b.startsAt) - Date.parse(a.startsAt));
+}
+export function getPublications(): PublicationContent[] {
+  const directory = path.join(contentRoot, 'publications');
+  if (!fs.existsSync(directory)) return [];
+  return fs.readdirSync(directory).filter((file) => file.endsWith('.json')).map((file) =>
+    JSON.parse(fs.readFileSync(path.join(directory, file), 'utf8')) as PublicationContent
+  ).sort((a, b) => Number(b.year) - Number(a.year));
 }

@@ -1,0 +1,19 @@
+{
+  "locale": "fr",
+  "translationKey": "workshop-ml-2024",
+  "eventId": "workshop-ml-2024",
+  "title": "Workshop Machine Learning pour Débutants",
+  "description": "Atelier pratique d'introduction au Machine Learning avec Python, Scikit-learn et PyTorch.",
+  "startsAt": "2024-03-15T00:00:00.000Z",
+  "location": "ENSA Oujda, Maroc",
+  "eventType": "Workshop",
+  "organizer": "LARSA Lab",
+  "isVirtual": false,
+  "featured": false,
+  "details": [
+    "Introduction aux concepts fondamentaux du ML",
+    "TP pratiques avec Jupyter Notebooks",
+    "Projet fil rouge: prédiction et classification",
+    "50+ étudiants participants"
+  ]
+}

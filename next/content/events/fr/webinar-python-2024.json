@@ -1,0 +1,19 @@
+{
+  "locale": "fr",
+  "translationKey": "webinar-python-2024",
+  "eventId": "webinar-python-2024",
+  "title": "Webinar: Python pour la Data Science",
+  "description": "Séminaire en ligne gratuit sur l'utilisation de Python pour l'analyse de données.",
+  "startsAt": "2024-11-10T00:00:00.000Z",
+  "location": "En ligne",
+  "eventType": "Webinar",
+  "organizer": "Dr. Annaki",
+  "isVirtual": true,
+  "featured": false,
+  "details": [
+    "Pandas et NumPy pour la manipulation de données",
+    "Visualisation avec Matplotlib et Seaborn",
+    "Introduction au Machine Learning avec Scikit-learn",
+    "Session Q&A interactive"
+  ]
+}

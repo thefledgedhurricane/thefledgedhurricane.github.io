@@ -1,0 +1,20 @@
+{
+  "locale": "fr",
+  "translationKey": "icdta-2023",
+  "eventId": "icdta-2023",
+  "title": "ICDTA 2023 - Digital Technologies and Applications",
+  "description": "Conférence internationale sur les technologies numériques et leurs applications. Présentation de mes travaux sur le clustering temporal pour la modélisation du comportement humain.",
+  "startsAt": "2023-01-27T00:00:00.000Z",
+  "endsAt": "2023-01-28T23:59:59.000Z",
+  "location": "Fès, Maroc",
+  "eventType": "Conférence",
+  "organizer": "IEEE",
+  "isVirtual": false,
+  "featured": true,
+  "details": [
+    "Présentation: \"Joint Unsupervised Deep Temporal Clustering for Modeling Human Behavior\"",
+    "Session: AI & Machine Learning Track",
+    "Publication dans Lecture Notes in Networks and Systems",
+    "Plus de 200 participants internationaux"
+  ]
+}

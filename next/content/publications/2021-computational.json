@@ -1,0 +1,30 @@
+{
+  "locale": "en",
+  "translationKey": "2021-computational",
+  "publicationId": "2021-computational",
+  "title": "Computational Analysis of Human Navigation Trajectories in a Spatial Memory Locomotor Task",
+  "authors": [
+    "Annaki I.",
+    "Rahmoune M.",
+    "Bourhaleb M.",
+    "Berrich J.",
+    "Zaoui M.",
+    "Ferro A.C.",
+    "Berthoz A."
+  ],
+  "venue": "Lecture Notes in Networks and Systems, Vol. 211",
+  "year": "2021",
+  "abstract": "In this paper, we use computational tools to explore human navigation through an example of a visuomotor spatial memory locomotor task, the Walking Corsi task (WCT) variant from a well-known table test known as the Corsi Block Tapping task (CBT). This variant was performed using the \"Virtual Carpet\" ™ experimental setup. Generic tools that computational data analytics provides and through computer simulations by replicating visually this data allowed categorization of the different features of the behavior of the subjects providing a new powerful tool for both normal and pathological behavior characterization.",
+  "doi": "10.1007/978-3-030-73882-2_22",
+  "url": "https://www.scopus.com/inward/record.uri?eid=2-s2.0-85111265202&doi=10.1007%2f978-3-030-73882-2_22&partnerID=40",
+  "tags": [
+    "Artificial intelligence",
+    "Computer simulation",
+    "Corsi block tapping test",
+    "Data analytics",
+    "Human navigation",
+    "Virtual reality"
+  ],
+  "citedBy": 9,
+  "publicationType": "Conference paper"
+}

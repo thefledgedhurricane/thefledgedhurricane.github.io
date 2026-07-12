@@ -46,6 +46,19 @@ pnpm dev
 *   **LMS Website**: `http://localhost:3000`
 *   **TinaCMS Visual Editor**: `http://localhost:3000/admin/index.html`
 
+### Editing content with TinaCMS locally
+
+1. Run `pnpm dev` from the `next` directory and wait for both TinaCMS and Next.js to finish starting.
+2. Open `http://localhost:3000/admin/index.html` in your browser. Local mode does not require a Tina Cloud account.
+3. Choose a collection such as **Blog posts**, **Events**, **Publications**, **Projects**, or **Courses**.
+4. Save your edits in Tina. In local mode, Tina writes directly to files under `next/content/` or `next/src/dictionaries/`.
+5. Review the website at `http://localhost:3000`, then run `pnpm typecheck` and `pnpm build`.
+6. Commit and push the changed content files. The deployed static website only changes after those files are built and deployed.
+
+Do not edit files inside `next/tina/__generated__/` manually. They are regenerated from `next/tina/config.ts` by TinaCMS.
+
+If port 3000 is already in use, stop the other process before starting Tina so the admin panel connects to the correct local API.
+
 ### 3. Build & Static Export
 To compile the TypeScript project and generate the static production build (`/next/out`):
 ```bash

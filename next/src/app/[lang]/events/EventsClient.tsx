@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Locale } from '@/lib/dictionaries';
 
-interface Event {
+export interface Event {
   id: string;
   title: string;
   description: string;
@@ -17,120 +17,13 @@ interface Event {
   details: string[];
 }
 
-const events: Event[] = [
-  {
-    id: 'icdta-2023',
-    title: 'ICDTA 2023 - Digital Technologies and Applications',
-    description: 'Conférence internationale sur les technologies numériques et leurs applications. Présentation de mes travaux sur le clustering temporal pour la modélisation du comportement humain.',
-    startDate: '2023-01-27',
-    endDate: '2023-01-28',
-    type: 'Conférence',
-    location: 'Fès, Maroc',
-    isVirtual: false,
-    organizer: 'IEEE',
-    featured: true,
-    details: [
-      'Présentation: "Joint Unsupervised Deep Temporal Clustering for Modeling Human Behavior"',
-      'Session: AI & Machine Learning Track',
-      'Publication dans Lecture Notes in Networks and Systems',
-      'Plus de 200 participants internationaux'
-    ]
-  },
-  {
-    id: 'icoa-2022',
-    title: 'ICOA 2022 - Optimization and Applications',
-    description: 'Conférence sur les algorithmes d\'optimisation et applications. Discussion sur l\'utilisation de DBSCAN pour l\'analyse de navigation spatiale.',
-    startDate: '2022-04-20',
-    endDate: '2022-04-21',
-    type: 'Conférence',
-    location: 'Oujda, Maroc',
-    isVirtual: false,
-    organizer: 'Université Mohammed Premier',
-    featured: true,
-    details: [
-      'Présentation: "Computational Analysis Using DBSCAN"',
-      'Session spéciale sur l\'IA en neuropsychologie',
-      'Networking avec chercheurs internationaux',
-      'Prix de la meilleure présentation étudiante'
-    ]
-  },
-  {
-    id: 'icdta-2021',
-    title: 'ICDTA 2021 - Digital Technologies and Applications',
-    description: 'Première présentation publique du VR Magic Carpet et analyse computationnelle des trajectoires de navigation humaine.',
-    startDate: '2021-01-29',
-    endDate: '2021-01-30',
-    type: 'Conférence',
-    location: 'Fès, Maroc',
-    isVirtual: false,
-    organizer: 'IEEE',
-    featured: true,
-    details: [
-      'Présentation: "Computational Analysis of Human Navigation Trajectories"',
-      'Démonstration live du système VR',
-      '9 citations à ce jour',
-      'Session interactive avec retours d\'experts'
-    ]
-  },
-  {
-    id: 'workshop-ml-2024',
-    title: 'Workshop Machine Learning pour Débutants',
-    description: 'Atelier pratique d\'introduction au Machine Learning avec Python, Scikit-learn et PyTorch.',
-    startDate: '2024-03-15',
-    type: 'Workshop',
-    location: 'ENSA Oujda, Maroc',
-    isVirtual: false,
-    organizer: 'LARSA Lab',
-    featured: false,
-    details: [
-      'Introduction aux concepts fondamentaux du ML',
-      'TP pratiques avec Jupyter Notebooks',
-      'Projet fil rouge: prédiction et classification',
-      '50+ étudiants participants'
-    ]
-  },
-  {
-    id: 'seminaire-vr-2024',
-    title: 'Séminaire: VR en Neuropsychologie',
-    description: 'Séminaire de recherche sur l\'utilisation de la réalité virtuelle pour l\'évaluation neuropsychologique.',
-    startDate: '2024-05-20',
-    type: 'Séminaire',
-    location: 'Université Mohammed Premier',
-    isVirtual: false,
-    organizer: 'Faculté des Sciences',
-    featured: true,
-    details: [
-      'Présentation du VR Magic Carpet',
-      'Résultats de 3 ans de recherche',
-      'Discussion avec professeurs et doctorants',
-      'Perspectives de collaboration'
-    ]
-  },
-  {
-    id: 'webinar-python-2024',
-    title: 'Webinar: Python pour la Data Science',
-    description: 'Séminaire en ligne gratuit sur l\'utilisation de Python pour l\'analyse de données.',
-    startDate: '2024-11-10',
-    type: 'Webinar',
-    location: 'En ligne',
-    isVirtual: true,
-    organizer: 'Dr. Annaki',
-    featured: false,
-    details: [
-      'Pandas et NumPy pour la manipulation de données',
-      'Visualisation avec Matplotlib et Seaborn',
-      'Introduction au Machine Learning avec Scikit-learn',
-      'Session Q&A interactive'
-    ]
-  }
-];
-
 interface EventsClientProps {
-  dict: any;
+  dict: { events?: Record<string, string> };
   lang: Locale;
+  events: Event[];
 }
 
-export default function EventsClient({ dict, lang }: EventsClientProps) {
+export default function EventsClient({ dict, lang, events }: EventsClientProps) {
   const eDict = dict.events || {};
   
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
@@ -175,7 +68,7 @@ export default function EventsClient({ dict, lang }: EventsClientProps) {
             <svg className="w-4 h-4 mr-2 rotate-180 group-hover:-translate-x-1 rtl:rotate-0 rtl:group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
             </svg>
-            {eDict.back_to_list || 'Retour aux événements'}
+            {eDict.back_to_list || 'Retour aux Ã©vÃ©nements'}
           </button>
 
           <div className="bg-mckinsey-gray-50 border border-white/5 p-12">
@@ -190,7 +83,7 @@ export default function EventsClient({ dict, lang }: EventsClientProps) {
               )}
               {selectedEvent.featured && (
                 <span className="px-3 py-1 bg-mckinsey-teal-500/10 text-mckinsey-teal-400 text-xs tracking-wider rounded border border-mckinsey-teal-500/20">
-                  {eDict.featured || '⭐ En vedette'}
+                  {eDict.featured || 'â­ En vedette'}
                 </span>
               )}
             </div>
@@ -223,7 +116,7 @@ export default function EventsClient({ dict, lang }: EventsClientProps) {
             </p>
 
             <div className="bg-white border border-white/5 p-8 mb-8">
-              <h2 className="text-xl font-sans font-medium text-mckinsey-navy-800 mb-6">{eDict.details_label || 'Détails'}</h2>
+              <h2 className="text-xl font-sans font-medium text-mckinsey-navy-800 mb-6">{eDict.details_label || 'DÃ©tails'}</h2>
               <ul className="space-y-4">
                 {selectedEvent.details.map((detail, index) => (
                   <li key={index} className="flex items-start gap-4 text-mckinsey-gray-600 font-normal">
@@ -238,7 +131,7 @@ export default function EventsClient({ dict, lang }: EventsClientProps) {
 
             <div className="pt-8 border-t border-white/5">
               <p className="text-sm text-mckinsey-gray-700 tracking-wider">
-                <span className="text-mckinsey-teal-500">{eDict.organized_by || 'Organisé par :'}</span> {selectedEvent.organizer}
+                <span className="text-mckinsey-teal-500">{eDict.organized_by || 'OrganisÃ© par :'}</span> {selectedEvent.organizer}
               </p>
             </div>
           </div>
@@ -257,10 +150,10 @@ export default function EventsClient({ dict, lang }: EventsClientProps) {
             {eDict.badge || 'Agenda'}
           </div>
           <h1 className="text-5xl md:text-7xl font-sans font-medium text-mckinsey-navy-800 mb-8">
-            {eDict.title || 'Événements'} <span className="text-mckinsey-teal-500 italic">&amp;</span> {eDict.title_gradient || 'Conférences'}
+            {eDict.title || 'Ã‰vÃ©nements'} <span className="text-mckinsey-teal-500 italic">&amp;</span> {eDict.title_gradient || 'ConfÃ©rences'}
           </h1>
           <p className="text-xl text-mckinsey-gray-600 max-w-3xl mx-auto font-normal leading-relaxed">
-            {eDict.desc || 'Conférences, workshops et séminaires'}
+            {eDict.desc || 'ConfÃ©rences, workshops et sÃ©minaires'}
           </p>
           
           {/* Filter */}
@@ -286,7 +179,7 @@ export default function EventsClient({ dict, lang }: EventsClientProps) {
           <section className="mb-20">
             <h2 className="text-3xl font-sans font-medium text-mckinsey-navy-800 mb-10 flex items-center gap-4">
               <span className="w-8 h-px bg-mckinsey-teal-500"></span>
-              {eDict.upcoming || 'À venir'} ({upcomingEvents.length})
+              {eDict.upcoming || 'Ã€ venir'} ({upcomingEvents.length})
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {upcomingEvents.map((event) => (
@@ -299,7 +192,7 @@ export default function EventsClient({ dict, lang }: EventsClientProps) {
                   
                   <div className="flex items-center gap-3 mb-6 relative">
                     <span className="px-3 py-1 bg-mckinsey-teal-500 text-mckinsey-navy-800 text-xs tracking-wider font-medium">
-                      {eDict.upcoming || 'À venir'}
+                      {eDict.upcoming || 'Ã€ venir'}
                     </span>
                     <span className="px-3 py-1 bg-mckinsey-gray-100 text-mckinsey-teal-500 text-xs tracking-wider border border-mckinsey-teal-500/20">
                       {event.type}
@@ -338,7 +231,7 @@ export default function EventsClient({ dict, lang }: EventsClientProps) {
         <section>
           <h2 className="text-3xl font-sans font-medium text-mckinsey-navy-800 mb-10 flex items-center gap-4">
             <span className="w-8 h-px bg-mckinsey-gray-200"></span>
-            {eDict.past || 'Événements passés'} ({pastEvents.length})
+            {eDict.past || 'Ã‰vÃ©nements passÃ©s'} ({pastEvents.length})
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {pastEvents.map((event) => (
@@ -353,7 +246,7 @@ export default function EventsClient({ dict, lang }: EventsClientProps) {
                   </span>
                   {event.featured && (
                     <span className="text-mckinsey-teal-500 text-xs">
-                      ⭐
+                      â­
                     </span>
                   )}
                 </div>
@@ -377,3 +270,4 @@ export default function EventsClient({ dict, lang }: EventsClientProps) {
     </div>
   );
 }
+
