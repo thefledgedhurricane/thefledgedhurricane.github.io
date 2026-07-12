@@ -1,0 +1,19 @@
+{
+  "locale": "fr",
+  "translationKey": "seminaire-vr-2024",
+  "eventId": "seminaire-vr-2024",
+  "title": "Séminaire: VR en Neuropsychologie",
+  "description": "Séminaire de recherche sur l'utilisation de la réalité virtuelle pour l'évaluation neuropsychologique.",
+  "startsAt": "2024-05-20T00:00:00.000Z",
+  "location": "Université Mohammed Premier",
+  "eventType": "Séminaire",
+  "organizer": "Faculté des Sciences",
+  "isVirtual": false,
+  "featured": true,
+  "details": [
+    "Présentation du VR Magic Carpet",
+    "Résultats de 3 ans de recherche",
+    "Discussion avec professeurs et doctorants",
+    "Perspectives de collaboration"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "locale": "en",
+  "translationKey": "2022-dbscan",
+  "publicationId": "2022-dbscan",
+  "title": "Computational Analysis of Human Navigation in a VR Spatial Memory Locomotor Assessment Using Density-Based Clustering Algorithm of Applications with Noise DBSCAN",
+  "authors": [
+    "Annaki I.",
+    "Rahmoune M.",
+    "Bourhaleb M.",
+    "Rahmoun N.",
+    "Zaoui M.",
+    "Castilla A.",
+    "Berthoz A.",
+    "Cohen B."
+  ],
+  "venue": "Lecture Notes in Networks and Systems, Vol. 455",
+  "year": "2022",
+  "abstract": "In this study, we explore human navigation as evaluated by the VR Magic Carpet TM (VMC), a variation of the Corsi Block Tapping task (CBT), employing Density-based spatial clustering of applications with noise (DBSCAN). We utilized DBSCAN to compare patients' navigation behavior to healthy individuals, highlighting the most notable differences and assessing our existing classifiers. Our research aims to produce insights that may help clinicians and neuroscientists adopt machine learning, especially clustering algorithms, to identify cognitive impairments.",
+  "doi": "10.1007/978-3-031-02447-4_20",
+  "url": "https://www.scopus.com/inward/record.uri?eid=2-s2.0-85130378102&doi=10.1007%2f978-3-031-02447-4_20&partnerID=40",
+  "tags": [
+    "Artificial intelligence",
+    "Cognitive impairments",
+    "DBSCAN",
+    "Human navigation",
+    "Machine-learning",
+    "Neuropsychological assessments",
+    "Virtual reality"
+  ],
+  "citedBy": 10,
+  "publicationType": "Conference paper"
+}

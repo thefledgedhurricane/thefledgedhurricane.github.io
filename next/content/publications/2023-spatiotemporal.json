@@ -1,0 +1,30 @@
+{
+  "locale": "en",
+  "translationKey": "2023-spatiotemporal",
+  "publicationId": "2023-spatiotemporal",
+  "title": "Spatiotemporal Clustering of Human Locomotion Neuropsychological Assessment in Virtual Reality Using Multi-step Model",
+  "authors": [
+    "Annaki I.",
+    "Rahmoune M.",
+    "Bourhaleb M.",
+    "Zaoui M.",
+    "Castilla A.",
+    "Berthoz A.",
+    "Cohen B."
+  ],
+  "venue": "Lecture Notes in Networks and Systems, Vol. 669",
+  "year": "2023",
+  "abstract": "In this study, We implemented a spatiotemporal clustering approach to analyze the outcome of a virtual reality human navigation neuropsychological assessment (the VR Magic Carpet). Our main objective was to establish a clustering of participants using a deep multi-step clustering model on velocity signals extracted during clinical trials. We used a multi-step neural network architecture to analyze the feature extraction and the clustering stage separately. This method enabled us to comprehend, to a certain extent, the clustering results.",
+  "doi": "10.1007/978-3-031-29860-8_98",
+  "url": "https://www.scopus.com/inward/record.uri?eid=2-s2.0-85161421059&doi=10.1007%2f978-3-031-29860-8_98&partnerID=40",
+  "tags": [
+    "Artificial Intelligence",
+    "Cognitive Impairments",
+    "Deep time-series clustering",
+    "Deep-Learning",
+    "Neuropsychological assessments",
+    "Virtual Reality"
+  ],
+  "citedBy": 0,
+  "publicationType": "Conference paper"
+}

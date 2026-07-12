@@ -1,0 +1,25 @@
+{
+  "locale": "en",
+  "translationKey": "2024-data-augmentation",
+  "publicationId": "2024-data-augmentation",
+  "title": "Overview of Data Augmentation Techniques in Time Series Analysis",
+  "authors": [
+    "Annaki I.",
+    "Rahmoune M.",
+    "Bourhaleb M."
+  ],
+  "venue": "International Journal of Advanced Computer Science and Applications, Vol. 15(1)",
+  "year": "2024",
+  "abstract": "Time series data analysis is vital in numerous fields, driven by advancements in deep learning and machine learning. This paper presents a comprehensive overview of data augmentation techniques in time series analysis, with a specific focus on their applications within deep learning and machine learning. We commence with a systematic methodology for literature selection, curating 757 articles from prominent databases. Subsequent sections delve into various data augmentation techniques, encompassing traditional approaches like interpolation and advanced methods like Synthetic Data Generation, Generative Adversarial Networks (GANs), and Variational Autoencoders (VAEs).",
+  "doi": "10.14569/IJACSA.2024.01501118",
+  "url": "https://www.scopus.com/inward/record.uri?eid=2-s2.0-85184990793&doi=10.14569%2fIJACSA.2024.01501118&partnerID=40",
+  "tags": [
+    "data augmentation",
+    "deep learning",
+    "machine learning",
+    "synthetic data generation",
+    "Time series"
+  ],
+  "citedBy": 7,
+  "publicationType": "Article"
+}

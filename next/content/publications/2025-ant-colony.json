@@ -1,0 +1,24 @@
+{
+  "locale": "en",
+  "translationKey": "2025-ant-colony",
+  "publicationId": "2025-ant-colony",
+  "title": "Computational Analysis of Human Locomotor Patterns in Virtual Carpet Paradigm™ Using Ant Colony Algorithm",
+  "authors": [
+    "Annaki I.",
+    "Rahmoune M."
+  ],
+  "venue": "Lecture Notes in Networks and Systems, Vol. 1397",
+  "year": "2025",
+  "abstract": "In this paper, we study human locomotor patterns using the Virtual Carpet Paradigm™, a neuropsychological assessment in virtual reality. This setup captures participants' movements as raw spatial data, which we analyze using kinematic methods. By applying the Ant Colony Optimization algorithm, we identify 3 distinct clusters of navigation behaviors. The algorithm distinguishes between individuals with cognitive spatial impairments and healthy participants. These findings highlight key behavioral differences and support earlier research.",
+  "doi": "10.1007/978-3-031-90921-4_40",
+  "url": "https://www.scopus.com/inward/record.uri?eid=2-s2.0-105007526886&doi=10.1007%2f978-3-031-90921-4_40&partnerID=40",
+  "tags": [
+    "Ant colony optimization",
+    "Cognitive impairments",
+    "Kinematic analysis",
+    "Spatial memory assessment",
+    "Virtual reality navigation"
+  ],
+  "citedBy": 0,
+  "publicationType": "Conference paper"
+}

@@ -1,0 +1,20 @@
+{
+  "locale": "fr",
+  "translationKey": "icdta-2021",
+  "eventId": "icdta-2021",
+  "title": "ICDTA 2021 - Digital Technologies and Applications",
+  "description": "Première présentation publique du VR Magic Carpet et analyse computationnelle des trajectoires de navigation humaine.",
+  "startsAt": "2021-01-29T00:00:00.000Z",
+  "endsAt": "2021-01-30T23:59:59.000Z",
+  "location": "Fès, Maroc",
+  "eventType": "Conférence",
+  "organizer": "IEEE",
+  "isVirtual": false,
+  "featured": true,
+  "details": [
+    "Présentation: \"Computational Analysis of Human Navigation Trajectories\"",
+    "Démonstration live du système VR",
+    "9 citations à ce jour",
+    "Session interactive avec retours d'experts"
+  ]
+}

@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { locales } from '../lib/dictionaries';
 import { courses } from '../lib/lms-data';
+import { getPosts } from '../lib/content';
 
 export const dynamic = 'force-static';
 
@@ -36,6 +37,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         changeFrequency: page === 'about' || page === 'contact' || page === 'showcase' ? 'monthly' : 'weekly',
         priority: 0.8,
+      });
+    }
+
+    for (const post of getPosts(lang)) {
+      sitemapEntries.push({
+        url: `${baseUrl}/${lang}/posts/${post.slug}`,
+        lastModified: new Date(post.publishedAt),
+        changeFrequency: 'monthly',
+        priority: 0.7,
       });
     }
 

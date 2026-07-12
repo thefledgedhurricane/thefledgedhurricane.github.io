@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
-import { getDictionary, locales, type Locale } from '@/lib/dictionaries';
+import { getDictionary, type Locale } from '@/lib/dictionaries';
+import { getPublications } from '@/lib/content';
 import PublicationsClient from './PublicationsClient';
 
 
@@ -10,7 +11,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params;
   const locale = lang as Locale;
-  const dict = await getDictionary(locale) as any;
+  const dict = await getDictionary(locale) as { publications?: Record<string, string> };
   return {
     title: dict.publications?.meta_title || 'Publications & Recherche',
     description: dict.publications?.meta_desc || '',
@@ -25,5 +26,9 @@ export default async function PublicationsPage({
   const { lang } = await params;
   const locale = lang as Locale;
   const dict = await getDictionary(locale);
-  return <PublicationsClient dict={dict} />;
+  const publications = getPublications().map((item) => ({ id: item.publicationId, title: item.title,
+    authors: item.authors.join('; '), year: item.year, journal: item.venue, doi: item.doi,
+    citedBy: item.citedBy, type: item.publicationType, abstract: item.abstract,
+    keywords: item.tags, link: item.url }));
+  return <PublicationsClient dict={dict} publications={publications} />;
 }
