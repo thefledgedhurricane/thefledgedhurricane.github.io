@@ -55,6 +55,9 @@ jobs:
           GITHUB_SHA: ${{ github.sha }}
         run: pnpm build
 
+      - name: Ajouter le portfolio français statique
+        run: mkdir -p ./next/out/fr && cp -R ./fr/. ./next/out/fr/
+
       - name: Disable Jekyll
         working-directory: ./next/out
         run: touch .nojekyll
