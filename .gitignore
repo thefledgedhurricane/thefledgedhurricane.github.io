@@ -69,3 +69,9 @@ out/
 
 # Local development
 .env.local
+
+# Firebase local configuration
+firebase-config.js
+.firebaserc
+.firebase/
+firebase-debug.log
