@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="figures.css">
+	<link rel="stylesheet" href="detail.css">
+	<title>Détail d’axe de recherche — Ihababdelbasset Annaki</title>
+	<link rel="canonical" href="https://thefledgedhurricane.github.io/fr/research-detail.html">
+	<meta name="robots" content="index,follow,max-image-preview:large">
+	<meta property="og:locale" content="fr_FR">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Détail d’axe de recherche — Ihababdelbasset Annaki">
+	<meta property="og:description" content="Fiche détaillée d’un axe de recherche avec problématique, méthodes, données, résultats attendus et publications associées.">
+	<meta property="og:url" content="https://thefledgedhurricane.github.io/fr/research-detail.html">
+	<meta property="og:site_name" content="Ihababdelbasset Annaki — Portfolio académique">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Détail d’axe de recherche — Ihababdelbasset Annaki">
+	<meta name="twitter:description" content="Fiche détaillée d’un axe de recherche avec problématique, méthodes, données, résultats attendus et publications associées.">
+</head>
+<body>
+	<header class="site-header"><a class="brand" href="index.html"><span class="brand-mark">IA</span><span class="brand-text">I. Annaki</span></a><nav class="nav"><a href="profile.html">Profil</a><a href="research.html">Recherche</a><a href="publications.html">Publications</a><a href="teaching.html">Enseignement</a><a href="formations.html">Formations</a><a href="projects.html">Projets</a><a href="notes.html">Notes</a><a href="rendez-vous.html">Rendez-vous</a><a href="contact.html">Contact</a></nav><span class="lang">FR</span></header>
+	<main class="article-shell">
+		<a class="back-link" href="research.html">← Retour à la recherche</a>
+		<p class="eyebrow" id="axis-kicker">Axe de recherche</p>
+		<h1 class="section-title" id="axis-title">Axe</h1>
+		<div class="tag-row" id="axis-tags"></div>
+		<div class="article-body"><h2>Contexte</h2><p id="axis-context"></p><h2>Problématique</h2><p id="axis-problem"></p><h2>Questions de recherche</h2><ul class="focus-list" id="axis-questions"></ul><h2>Méthodes</h2><ul class="focus-list" id="axis-methods"></ul><h2>Données et indicateurs</h2><ul class="focus-list" id="axis-data"></ul><h2>Résultats attendus</h2><ul class="focus-list" id="axis-outcomes"></ul><h2>Publications associées</h2><p id="axis-publications"></p></div>
+	</main>
+	<footer class="site-footer"><span>© 2026 Ihababdelbasset Annaki</span><span><a href="privacy-policy.html">Confidentialité</a> · <a href="sitemap.xml">Sitemap</a></span></footer>
+	<script>
+		const axes = {
+	"vr-cognition": {
+		"title": "Tapis magique en réalité virtuelle & évaluation neuropsychologique",
+		"tags": [
+			"réalité virtuelle",
+			"Cognition",
+			"Navigation",
+			"Corsi",
+			"Neuropsychologie"
+		],
+		"context": "Cet axe étudie l'usage d'environnements immersifs pour observer la navigation spatiale, la mémoire de travail et les comportements locomoteurs. Il s'appuie sur le Tapis magique en réalité virtuelle, une adaptation en réalité virtuelle du test de Corsi, dans laquelle les participants mémorisent et reproduisent des séquences spatiales en se déplaçant.",
+		"problem": "Les évaluations classiques de la cognition spatiale donnent souvent des scores globaux, mais elles capturent moins finement la manière dont une personne se déplace, hésite, corrige sa trajectoire ou organise sa stratégie. L'enjeu est de transformer des traces de mouvement en marqueurs interprétables pour les chercheurs et les cliniciens.",
+		"questions": [
+			"Comment transformer des trajectoires réalité virtuelle en indicateurs cognitifs ?",
+			"Quels comportements différencient sujets sains et patients ?",
+			"Comment exploiter les erreurs, vitesses et stratégies de déplacement ?",
+			"Comment rendre l'évaluation utile sans perdre l'interprétabilité clinique ?"
+		],
+		"methods": [
+			"Capture de trajectoires en environnement immersif",
+			"Nettoyage et reconstruction des positions 3D",
+			"Analyse cinématique : distance, vitesse, séquence, erreurs et régularité",
+			"Comparaison de groupes par regroupement automatique et classification",
+			"Validation interprétative avec les connaissances neuropsychologiques"
+		],
+		"data": [
+			"Trajectoires de tête ou de position dans l'espace",
+			"Séries temporelles de vitesse et déplacement",
+			"Séquences de cibles mémorisées et reproduites",
+			"Indicateurs d'erreur, d'hésitation et de stratégie",
+			"Métadonnées expérimentales liées aux groupes étudiés"
+		],
+		"outcomes": [
+			"Identification de profils de navigation",
+			"Meilleure lecture des stratégies spatiales",
+			"Marqueurs potentiels de troubles cognitifs ou vestibulaires",
+			"Base expérimentale pour futures études cliniques",
+			"Pont entre réalité virtuelle, neurosciences et apprentissage automatique"
+		],
+		"publications": "Publications Scopus associées : analyse computationnelle des trajectoires de navigation humaine, travaux K-Means, DBSCAN, regroupement automatique hiérarchique, algorithme de colonies de fourmis et Tapis magique en réalité virtuelle."
+	},
+	"deep-temporal-clustering": {
+		"title": "Regroupement temporel profond",
+		"tags": [
+			"apprentissage profond",
+			"séries temporelles",
+			"autoencodeurs",
+			"regroupement automatique"
+		],
+		"context": "Cet axe modélise les comportements humains sous forme de séries temporelles. Les trajectoires ou signaux de vitesse ne sont pas seulement des points isolés : leur ordre, leur dynamique et leurs transitions portent une information importante sur la stratégie du participant.",
+		"problem": "Les méthodes classiques reposent souvent sur des caractéristiques construites manuellement. Elles peuvent manquer des motifs temporels subtils. Le regroupement temporel profond cherche à apprendre automatiquement des représentations utiles avant de regrouper les comportements.",
+		"questions": [
+			"Quelles représentations temporelles extraire ?",
+			"Comment regrouper des comportements sans annotations complètes ?",
+			"Comment interpréter les groupes obtenus ?",
+			"Comment séparer extraction de caractéristiques et regroupement automatique pour mieux comprendre le modèle ?"
+		],
+		"methods": [
+			"autoencodeurs 1D pour séries temporelles",
+			"regroupement automatique profond joint ou multi-étapes",
+			"Représentations latentes des signaux de vitesse",
+			"Combinaison de similarités temporelles et de couches de regroupement automatique",
+			"Analyse comparative avec méthodes non supervisées classiques"
+		],
+		"data": [
+			"Séries temporelles issues des trajectoires de navigation",
+			"Signaux de vitesse et caractéristiques cinématiques",
+			"Données expérimentales de tâches de mémoire spatiale",
+			"Groupes, probabilités d'appartenance et représentations latentes"
+		],
+		"outcomes": [
+			"Groupes plus expressifs pour les comportements temporels",
+			"Meilleure détection de motifs non visibles dans les caractéristiques simples",
+			"Architecture d'analyse réutilisable pour données comportementales",
+			"Interprétation plus fine des stratégies de navigation"
+		],
+		"publications": "Travaux Scopus : regroupement temporel profond non supervisé pour modéliser le comportement humain en dysfonction vestibulaire, et regroupement spatiotemporel de la locomotion humaine pour l'évaluation neuropsychologique en réalité virtuelle."
+	},
+	"trajectory-analysis": {
+		"title": "Analyse computationnelle des trajectoires",
+		"tags": [
+			"K-Means",
+			"DBSCAN",
+			"HAC",
+			"ACO",
+			"Trajectoires"
+		],
+		"context": "L'analyse computationnelle transforme les traces spatiales en trajectoires, profils de mouvement et groupes comportementaux. Elle permet de passer d'une observation visuelle à une analyse mesurable.",
+		"problem": "Deux participants peuvent obtenir des résultats proches tout en utilisant des stratégies très différentes. L'enjeu est donc d'analyser la forme du déplacement, la dynamique, les détours et les regroupements de comportements, pas uniquement le score final.",
+		"questions": [
+			"Quels algorithmes décrivent le mieux les trajectoires ?",
+			"Comment comparer des stratégies de navigation ?",
+			"Quels paramètres cinématiques sont robustes ?",
+			"Comment distinguer bruit, stratégie individuelle et signal clinique ?"
+		],
+		"methods": [
+			"K-Means pour des regroupements globaux",
+			"DBSCAN pour détecter densités et points atypiques",
+			"regroupement automatique hiérarchique pour explorer les structures de groupes",
+			"optimisation par colonies de fourmis pour explorer des patterns de locomotion",
+			"Visualisation des trajectoires et comparaison des groupes"
+		],
+		"data": [
+			"Coordonnées spatiales et trajectoires reconstruites",
+			"Distances parcourues, vitesses et changements de direction",
+			"Indicateurs de performance et d'erreur",
+			"Groupes obtenus par regroupement automatique",
+			"Comparaison entre participants sains et patients"
+		],
+		"outcomes": [
+			"Typologie de stratégies de navigation",
+			"Validation de caractéristiques cinématiques pertinentes",
+			"Comparaison entre plusieurs algorithmes non supervisés",
+			"Figures et indicateurs exploitables dans les publications"
+		],
+		"publications": "Publications associées : analyse computationnelle 2021, K-Means et HAC 2022, DBSCAN 2022, K-Means 2023 et algorithme de colonies de fourmis 2025."
+	},
+	"neural-architectures": {
+		"title": "Architectures neuronales",
+		"tags": [
+			"MLP",
+			"ResNet",
+			"Kinematics",
+			"Classification",
+			"Vestibular Disease"
+		],
+		"context": "Cet axe évalue l'apprentissage profond pour classifier ou identifier des troubles à partir de données cinématiques extraites de la navigation. Il complète les approches non supervisées par des modèles supervisés lorsque des labels sont disponibles.",
+		"problem": "Les données cliniques ou expérimentales sont souvent limitées, bruitées et sensibles. Il faut donc concevoir des modèles capables d'apprendre des signaux utiles sans sacrifier l'interprétabilité, la robustesse et la prudence méthodologique.",
+		"questions": [
+			"Quels modèles restent interprétables ?",
+			"Comment gérer de petits jeux de données cliniques ?",
+			"Quelles métriques sont pertinentes pour l'évaluation ?",
+			"Comment exploiter les signaux de vitesse sans perdre leur structure temporelle ?"
+		],
+		"methods": [
+			"perceptron multicouche pour la classification de caractéristiques",
+			"Réseaux résiduels pour signaux cinématiques",
+			"Séparation entraînement/test et suivi des métriques",
+			"Analyse des performances selon les groupes",
+			"Comparaison avec méthodes classiques de apprentissage automatique"
+		],
+		"data": [
+			"Caractéristiques cinématiques globales",
+			"Séries temporelles de vitesse de tête",
+			"Labels expérimentaux ou cliniques",
+			"Métriques de classification",
+			"Matrices de confusion et résultats par groupe"
+		],
+		"outcomes": [
+			"Modèles de classification pour troubles cognitifs ou vestibulaires",
+			"Évaluation des architectures MLP et résiduelles",
+			"Meilleure compréhension des signaux utiles",
+			"Base pour des modèles plus robustes et explicables"
+		],
+		"publications": "Travaux Scopus : évaluation de l’efficacité d’une architecture de perceptron multicouche et architecture neuronale résiduelle pour identifier la maladie vestibulaire à partir de la cinématique de la tête."
+	},
+	"time-series-augmentation": {
+		"title": "augmentation de données pour séries temporelles",
+		"tags": [
+			"augmentation de données",
+			"Synthetic Data",
+			"séries temporelles",
+			"apprentissage profond"
+		],
+		"context": "La rareté des données séquentielles impose des stratégies d'augmentation adaptées. Les séries temporelles ne peuvent pas être augmentées comme de simples images ou tableaux, car leur ordre et leur dynamique sont essentiels.",
+		"problem": "Augmenter une série temporelle peut améliorer la généralisation, mais peut aussi produire des exemples irréalistes, introduire du bruit non contrôlé ou masquer un sur-apprentissage. L'enjeu est de comprendre les méthodes, leurs bénéfices et leurs limites.",
+		"questions": [
+			"Quelles méthodes préservent la structure temporelle ?",
+			"Comment éviter la génération d'exemples non réalistes ?",
+			"Quel impact sur la généralisation des modèles ?",
+			"Quand utiliser interpolation, perturbation, GAN, VAE ou génération synthétique ?"
+		],
+		"methods": [
+			"Revue systématique de la littérature",
+			"Classification des familles de méthodes",
+			"Analyse des techniques traditionnelles et avancées",
+			"Discussion des risques de coût, sur-apprentissage et réalisme",
+			"Synthèse orientée applications apprentissage profond et apprentissage automatique"
+		],
+		"data": [
+			"Corpus bibliographique",
+			"Techniques d'augmentation traditionnelles",
+			"Méthodes génératives : GAN, VAE, synthetic data generation",
+			"Critères d'applicabilité et limites",
+			"Domaines d'usage des séries temporelles"
+		],
+		"outcomes": [
+			"Cartographie des techniques d'augmentation",
+			"Guide de choix selon le contexte",
+			"Analyse équilibrée des avantages et limites",
+			"Contribution utile aux chercheurs en séries temporelles et apprentissage profond"
+		],
+		"publications": "Article Scopus 2024 : Panorama des techniques d’augmentation de données pour l’analyse des séries temporelles, International Journal of Advanced Computer Science and Applications."
+	},
+	"edtech-ai": {
+		"title": "Éducation et technologies avancées",
+		"tags": [
+			"technologies éducatives",
+			"enseignement de l’IA",
+			"web",
+			"Pédagogie",
+			"Projets"
+		],
+		"context": "Cet axe relie enseignement, intelligence artificielle, développement avancé et plateformes pédagogiques. Il vise à créer des ressources qui aident les étudiants à apprendre par la pratique et à comprendre les technologies au-delà de la théorie.",
+		"problem": "L'enseignement de l'IA, du développement et de la science des données exige des supports clairs, interactifs et actualisés. Les étudiants doivent manipuler, visualiser, tester et documenter leurs résultats pour construire une compréhension durable.",
+		"questions": [
+			"Comment enseigner l'IA par projet ?",
+			"Comment intégrer visualisations et exercices ?",
+			"Comment évaluer les livrables étudiants ?",
+			"Comment relier cours, recherche et applications concrètes ?"
+		],
+		"methods": [
+			"Conception de modules progressifs",
+			"Exercices guidés et mini-projets",
+			"Visualisations interactives pour concepts abstraits",
+			"Rubriques d'évaluation et livrables documentés",
+			"Actualisation des contenus selon les pratiques du domaine"
+		],
+		"data": [
+			"Supports de cours",
+			"Carnet Jupyters et exercices",
+			"Projets étudiants",
+			"Critères d'évaluation",
+			"Retours pédagogiques"
+		],
+		"outcomes": [
+			"Cours plus lisibles et réutilisables",
+			"Apprentissage plus actif",
+			"Meilleure articulation entre théorie et pratique",
+			"Production de livrables évaluables",
+			"Renforcement de la visibilité pédagogique du portfolio"
+		],
+		"publications": "Axe complémentaire aux activités d'enseignement, aux projets de plateforme pédagogique et aux contenus de vulgarisation publiés dans les notes."
+	}
+};
+		const slug = new URLSearchParams(window.location.search).get("slug") || "vr-cognition";
+		const axis = axes[slug] || axes["vr-cognition"];
+		document.title = `${axis.title} — Ihababdelbasset Annaki`;
+		document.getElementById("axis-title").textContent = axis.title;
+		document.getElementById("axis-tags").innerHTML = axis.tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
+		document.getElementById("axis-context").textContent = axis.context;
+		document.getElementById("axis-problem").textContent = axis.problem;
+		const renderList = (id, items) => {
+			document.getElementById(id).innerHTML = (items || []).map((item) => `<li>${item}</li>`).join("");
+		};
+		renderList("axis-questions", axis.questions);
+		renderList("axis-methods", axis.methods);
+		renderList("axis-data", axis.data);
+		renderList("axis-outcomes", axis.outcomes);
+		document.getElementById("axis-publications").textContent = axis.publications;
+	</script>
+</body>
+</html>
