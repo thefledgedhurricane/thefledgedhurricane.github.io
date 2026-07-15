@@ -1,0 +1,19 @@
+{
+  "hosting": {
+    "site": "iannakiedu",
+    "public": "fr",
+    "ignore": [
+      "firebase.json",
+      "firestore.rules",
+      "firebase.indexes.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firebase.indexes.json"
+  }
+}

@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="figures.css">
+	<link rel="stylesheet" href="detail.css">
+	<title>Détail de projet — Ihababdelbasset Annaki</title>
+	<link rel="canonical" href="https://thefledgedhurricane.github.io/fr/project-detail.html">
+	<meta name="robots" content="index,follow,max-image-preview:large">
+	<meta property="og:locale" content="fr_FR">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Détail de projet — Ihababdelbasset Annaki">
+	<meta property="og:description" content="Fiche détaillée de projet avec objectifs, méthode, composants, livrables, risques et impact.">
+	<meta property="og:url" content="https://thefledgedhurricane.github.io/fr/project-detail.html">
+	<meta property="og:site_name" content="Ihababdelbasset Annaki — Portfolio académique">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Détail de projet — Ihababdelbasset Annaki">
+	<meta name="twitter:description" content="Fiche détaillée de projet avec objectifs, méthode, composants, livrables, risques et impact.">
+</head>
+<body>
+	<header class="site-header"><a class="brand" href="index.html"><span class="brand-mark">IA</span><span class="brand-text">I. Annaki</span></a><nav class="nav"><a href="profile.html">Profil</a><a href="research.html">Recherche</a><a href="publications.html">Publications</a><a href="teaching.html">Enseignement</a><a href="formations.html">Formations</a><a href="projects.html">Projets</a><a href="articles.html">Articles</a><a href="rendez-vous.html">Rendez-vous</a><a href="contact.html">Contact</a></nav><span class="lang">FR</span></header>
+	<main class="article-shell">
+		<a class="back-link" href="projects.html">← Retour aux projets</a>
+		<p class="eyebrow" id="project-category">Projet</p>
+		<h1 class="section-title" id="project-title">Projet</h1>
+		<div class="article-meta"><span id="project-period"></span><span id="project-status"></span></div>
+		<div class="tag-row" id="project-stack"></div>
+		<div class="article-body"><h2>Présentation</h2><p id="project-desc"></p><h2>Objectifs</h2><ul class="focus-list" id="project-goals"></ul><h2>Fonctionnalités / composants</h2><ul class="focus-list" id="project-features"></ul><h2>Méthodologie</h2><ul class="focus-list" id="project-methodology"></ul><h2>Livrables</h2><ul class="focus-list" id="project-deliverables"></ul><h2>Risques et points d'attention</h2><ul class="focus-list" id="project-risks"></ul><h2>Impact</h2><p id="project-impact"></p></div>
+	</main>
+	<footer class="site-footer"><span>© 2026 Ihababdelbasset Annaki</span><span><a href="privacy-policy.html">Confidentialité</a> · <a href="sitemap.xml">Sitemap</a></span></footer>
+	<script>
+		const projects = {
+	"academic-platform": {
+		"title": "Site académique — plateforme de recherche et d’enseignement",
+		"category": "Développement web",
+		"period": "2024",
+		"status": "Terminé",
+		"stack": [
+			"Next.js 14",
+			"TypeScript",
+			"TailwindCSS",
+			"Contenu académique",
+			"référencement"
+		],
+		"desc": "Plateforme académique et professionnelle conçue pour valoriser un profil de recherche, des cours, des projets, des notes pédagogiques et des publications. Le projet organise l'identité scientifique autour d'une navigation claire : profil, recherche, publications Scopus, enseignement, projets, notes et contact.",
+		"goals": [
+			"Centraliser les contenus académiques dans une seule plateforme cohérente",
+			"Mettre en avant les publications avec DOI, citations, source, résumé et lien Scopus",
+			"Créer une navigation directe entre axes de recherche, cours, projets et articles",
+			"Faciliter la prise de contact via courriel, LinkedIn et profils scientifiques",
+			"Rendre le contenu maintenable sans dépendre d'un style lourd ou d'une logique complexe"
+		],
+		"features": [
+			"Pages principales pour profil, recherche, publications, enseignement, projets, notes et contact",
+			"Pages de détail dédiées aux publications, cours, projets, axes de recherche et articles",
+			"Intégration des métriques Scopus et des liens directs vers les enregistrements de publication",
+			"Structure française claire, prête à évoluer vers une version multilingue contrôlée",
+			"Contenu académique orienté chercheur, enseignant et collaborateur institutionnel"
+		],
+		"methodology": [
+			"Audit de l'ancien site et extraction du contenu utile sans reprendre le style d'origine",
+			"Normalisation des informations personnelles, scientifiques et pédagogiques",
+			"Création d'un modèle de contenu par type de page : publication, cours, projet, article, axe",
+			"Enrichissement des publications à partir du CSV Scopus et des données auteur à jour",
+			"Vérification progressive des liens et de la cohérence des pages"
+		],
+		"deliverables": [
+			"Architecture complète de site statique",
+			"Pages de listes et pages de détail connectées",
+			"Fiches publications Scopus complètes",
+			"Fiches cours avec objectifs, prérequis, compétences, déroulé et ressources",
+			"Fiches projets et axes de recherche détaillées"
+		],
+		"risks": [
+			"Les métriques bibliométriques peuvent évoluer et doivent être rafraîchies régulièrement",
+			"Les liens Scopus peuvent nécessiter un accès institutionnel pour certaines vues",
+			"La version anglaise doit être synchronisée avec la version française si elle est activée",
+			"Les contenus pédagogiques doivent être mis à jour à chaque nouvelle session de cours"
+		],
+		"impact": "La plateforme sert de point d'entrée institutionnel, pédagogique et scientifique. Elle facilite la découverte du profil, la consultation des travaux indexés, la lecture des axes de recherche et la prise de contact professionnelle."
+	},
+	"vr-magic-carpet": {
+		"title": "Tapis magique en réalité virtuelle - évaluation neuropsychologique",
+		"category": "Réalité virtuelle & IA",
+		"period": "2021-2025",
+		"status": "En recherche",
+		"stack": [
+			"Unity",
+			"C#",
+			"Python",
+			"apprentissage automatique",
+			"séries temporelles",
+			"regroupement automatique"
+		],
+		"desc": "Plateforme de réalité virtuelle utilisée pour l'évaluation de la navigation spatiale, de la mémoire de travail et de comportements locomoteurs. Le dispositif adapte le test de Corsi dans un environnement immersif où les trajectoires des participants deviennent des données analysables.",
+		"goals": [
+			"Capturer des trajectoires de navigation en contexte de tâche spatiale",
+			"Transformer les traces 3D en indicateurs cinématiques et comportementaux",
+			"Comparer les stratégies de navigation entre sujets sains et patients",
+			"Tester des algorithmes de regroupement automatique et de classification sur les signaux de mouvement",
+			"Construire des marqueurs utiles pour l'évaluation cognitive et vestibulaire"
+		],
+		"features": [
+			"Environnement réalité virtuelle inspiré du test de Corsi",
+			"Collecte de positions, vitesses, trajectoires et séquences de déplacement",
+			"Prétraitement des signaux temporels et extraction de caractéristiques cinématiques",
+			"Analyses K-Means, DBSCAN, regroupement automatique hiérarchique et optimisation par colonies de fourmis",
+			"Extensions apprentissage profond avec autoencodeurs, MLP et architectures résiduelles"
+		],
+		"methodology": [
+			"Collecter les données de navigation pendant les essais cliniques ou expérimentaux",
+			"Nettoyer les trajectoires et reconstruire les séries temporelles exploitables",
+			"Extraire des indicateurs comme vitesse, distance, forme de trajectoire et erreurs",
+			"Comparer les groupes par méthodes non supervisées puis supervisées",
+			"Interpréter les groupes avec les experts en neurosciences et neuropsychologie"
+		],
+		"deliverables": [
+			"Jeux de données de trajectoires structurés",
+			"Scripts Python d'analyse et de visualisation",
+			"Articles Scopus sur K-Means, DBSCAN, regroupement temporel profond, MLP, ResNet et ACO",
+			"Figures de trajectoires, groupes et indicateurs cinématiques",
+			"Base méthodologique pour des applications cliniques futures"
+		],
+		"risks": [
+			"Taille des jeux de données cliniques souvent limitée",
+			"Besoin d'interprétabilité pour éviter des résultats difficiles à expliquer",
+			"Variabilité inter-individuelle importante dans les stratégies de navigation",
+			"Nécessité de protéger les données sensibles et les métadonnées cliniques"
+		],
+		"impact": "Le projet relie neurosciences, réalité virtuelle, apprentissage automatique et analyse de séries temporelles. Il fournit un cadre expérimental pour mieux comprendre la navigation humaine et soutenir l'identification de troubles cognitifs ou vestibulaires."
+	},
+	"ml-toolkit": {
+		"title": "Boîte à outils de recherche en apprentissage automatique",
+		"category": "Science des données et apprentissage automatique",
+		"period": "2023-2024",
+		"status": "Libre et ouvert",
+		"stack": [
+			"Python",
+			"PyTorch",
+			"Scikit-learn",
+			"Pandas",
+			"Matplotlib"
+		],
+		"desc": "Bibliothèque de recherche pour prétraitement, augmentation de données, regroupement automatique, classification et visualisation de séries temporelles. L'objectif est de standardiser les analyses expérimentales et de rendre les résultats plus reproductibles.",
+		"goals": [
+			"Standardiser les traitements expérimentaux",
+			"Accélérer les analyses de trajectoires et séries temporelles",
+			"Réduire les erreurs de manipulation entre carnets Jupyter",
+			"Comparer plusieurs algorithmes avec les mêmes métriques",
+			"Faciliter la génération de figures et tableaux pour publication"
+		],
+		"features": [
+			"Chargement et validation de jeux de données",
+			"Prétraitement : normalisation, filtrage, segmentation et agrégation",
+			"augmentation de données pour séries temporelles",
+			"regroupement automatique avec K-Means, DBSCAN, HAC et méthodes profondes",
+			"Évaluation, visualisation et export de résultats"
+		],
+		"methodology": [
+			"Décomposer chaque expérimentation en étapes reproductibles",
+			"Isoler les paramètres afin de comparer les modèles proprement",
+			"Utiliser des métriques adaptées au contexte : classification, regroupement automatique ou reconstruction",
+			"Documenter les hypothèses et limites de chaque chaîne de traitement",
+			"Produire des sorties prêtes pour rapport, article ou support pédagogique"
+		],
+		"deliverables": [
+			"Carnet Jupyters d'analyse",
+			"Modules Python réutilisables",
+			"Modèles de visualisation",
+			"Rapports expérimentaux",
+			"Tableaux de métriques et exports CSV"
+		],
+		"risks": [
+			"Risque de fuite de données si la séparation entraînement/test est mal contrôlée",
+			"Sur-apprentissage avec de petits jeux de données",
+			"Dépendances Python à maintenir",
+			"Besoin de documenter les paramètres pour assurer la reproductibilité"
+		],
+		"impact": "L'outillage soutient les travaux de recherche en apprentissage automatique appliqué aux données complexes, en particulier les trajectoires et séries temporelles issues d'expérimentations réalité virtuelle."
+	},
+	"teaching-platform": {
+		"title": "Plateforme d’enseignement interactive",
+		"category": "Éducation et technologie",
+		"period": "2024",
+		"status": "Terminé",
+		"stack": [
+			"Next.js",
+			"TypeScript",
+			"React",
+			"Visualisations",
+			"Pédagogie active"
+		],
+		"desc": "Système de gestion de cours avec visualisations, exercices, ressources pédagogiques et suivi de progression. Le projet vise à relier la théorie, la pratique et les livrables étudiants dans une expérience plus claire.",
+		"goals": [
+			"Rendre les contenus plus accessibles",
+			"Faciliter l'apprentissage actif",
+			"Relier cours, exercices, projets et ressources",
+			"Aider les étudiants à suivre leur progression",
+			"Créer des supports réutilisables pour plusieurs modules"
+		],
+		"features": [
+			"Modules de cours organisés par niveau et thématique",
+			"Visualisations pour algorithmique, données et apprentissage automatique",
+			"Exercices guidés avec consignes et attendus",
+			"Fiches de projet et grilles d'évaluation",
+			"Navigation simple entre concepts, pratique et livrables"
+		],
+		"methodology": [
+			"Identifier les difficultés récurrentes des étudiants",
+			"Transformer les notions abstraites en manipulations visibles",
+			"Construire des exercices progressifs",
+			"Associer chaque module à un livrable concret",
+			"Réviser les contenus selon les retours de cours"
+		],
+		"deliverables": [
+			"Pages de cours",
+			"Exercices pratiques",
+			"Visualisations pédagogiques",
+			"Guides de mini-projets",
+			"Rubriques d'évaluation"
+		],
+		"risks": [
+			"Maintenir les contenus à jour demande un suivi continu",
+			"Les visualisations doivent rester utiles et pas seulement décoratives",
+			"La plateforme doit rester simple pour ne pas distraire l'apprenant",
+			"Les consignes doivent être suffisamment précises pour éviter l'ambiguïté"
+		],
+		"impact": "Le projet structure une pédagogie plus claire, interactive et orientée livrables. Il aide à passer d'un cours reçu passivement à une progression plus active, mesurable et documentée."
+	}
+};
+		const slug = new URLSearchParams(window.location.search).get("slug") || "academic-platform";
+		const project = projects[slug] || projects["academic-platform"];
+		document.title = `${project.title} — Ihababdelbasset Annaki`;
+		document.getElementById("project-category").textContent = project.category;
+		document.getElementById("project-title").textContent = project.title;
+		document.getElementById("project-period").textContent = project.period;
+		document.getElementById("project-status").textContent = project.status;
+		document.getElementById("project-desc").textContent = project.desc;
+		document.getElementById("project-impact").textContent = project.impact;
+		document.getElementById("project-stack").innerHTML = project.stack.map((item) => `<span class="tag">${item}</span>`).join("");
+		const renderList = (id, items) => {
+			document.getElementById(id).innerHTML = (items || []).map((item) => `<li>${item}</li>`).join("");
+		};
+		renderList("project-goals", project.goals);
+		renderList("project-features", project.features);
+		renderList("project-methodology", project.methodology);
+		renderList("project-deliverables", project.deliverables);
+		renderList("project-risks", project.risks);
+	</script>
+</body>
+</html>
