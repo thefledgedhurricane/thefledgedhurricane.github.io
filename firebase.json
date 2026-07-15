@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "iannakiedu",
     "public": "fr",
     "ignore": [
       "firebase.json",
